@@ -1,51 +1,42 @@
 package Persistencia;
 
-
 import java.sql.SQLException;
-import java.util.Calendar;
 
-public class Usuario {
 
+public class Tiene_perfil {
+
+	
 	private int id_usuario;
-	private String passAdmin;
-	private String sqlFecha;
+	private String tipo;
 	private Conexion pruebaConn = Conexion.getInstancia();
 	
-	public Usuario(String pass){
+	public Tiene_perfil(int id, String tipo){
 		
-		this.passAdmin = pass;	
+		this.id_usuario = id;
+		this.tipo = tipo;	
 	}
 	
-    public Usuario(int id){
+	
+public Tiene_perfil(int id){
 		
-		this.id_usuario = id;	
+		this.id_usuario = id;
+		
 	}
 	
+	/* Metodo de ingreso de datos a la base */
 	
 	public void InsertRow(){
 		
-		
-		Calendar fecha = Calendar.getInstance();
-		int anio = fecha.get(Calendar.YEAR);
-		int mes = fecha.get(Calendar.MONTH) + 1;
-		int dia = fecha.get(Calendar.DAY_OF_MONTH);
-		
-		if (mes < 10){
-			this.sqlFecha = (anio+"-0"+mes+"-"+dia);
 			
-		}
-		else
-			this.sqlFecha = (anio+"-"+mes+"-"+dia);
-		
 		if (pruebaConn!=null){
 			try{
 				java.sql.Statement stm = pruebaConn.getConexion().createStatement();
-				stm.execute("Insert into Usuario (pass_admin, fecha_alta) values ('"+passAdmin+"','"+sqlFecha+"')");
+				stm.execute("Insert into Tiene_perfil values ('"+id_usuario+"','"+tipo+"')");
 			}
 			catch (Exception e){
 				
 			}
-		//	pruebaConn.closeConextion();
+			//pruebaConn.closeConextion();
 		}else{
 			System.out.println("Desconectado");
 		}
@@ -55,7 +46,7 @@ public class Usuario {
 	
 	public java.sql.ResultSet Select_tabla() throws SQLException{
 		
-		String seleccion = "Select * from Usuario";
+		String seleccion = "Select * from Tiene_perfil";
 		
 		java.sql.Statement ps = pruebaConn.getConexion().createStatement();
 		java.sql.ResultSet rs = ps.executeQuery(seleccion);
@@ -69,7 +60,7 @@ public class Usuario {
 	
 public java.sql.ResultSet Select_fila(int id) throws SQLException{
 		
-		String seleccion = "Select * from Usuario where id_usuario ='"+id+"'";
+		String seleccion = "Select * from Tiene_perfil where id_usuario ='"+id+"'";
 		
 		java.sql.Statement ps = pruebaConn.getConexion().createStatement();
 		java.sql.ResultSet rs = ps.executeQuery(seleccion);
@@ -81,5 +72,7 @@ public java.sql.ResultSet Select_fila(int id) throws SQLException{
 	}
 	
 	
+	
 }
+
 

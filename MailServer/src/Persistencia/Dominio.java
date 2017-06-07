@@ -1,7 +1,7 @@
 package Persistencia;
 
 import java.sql.SQLException;
-import java.util.Calendar;
+
 
 public class Dominio {
 
@@ -21,7 +21,7 @@ public class Dominio {
 		if (pruebaConn!=null){
 			try{
 				java.sql.Statement stm = pruebaConn.getConexion().createStatement();
-				stm.execute("Insert into Dominio (nom_dominio) values ('"+nom_dominio+"')");
+				stm.execute("Insert into Dominio values ('"+nom_dominio+"')");
 				
 			}
 			catch (Exception e){

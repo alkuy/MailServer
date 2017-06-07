@@ -1,49 +1,31 @@
 package Persistencia;
 
-
 import java.sql.SQLException;
-import java.util.Calendar;
 
-public class Usuario {
 
-	private int id_usuario;
-	private String passAdmin;
-	private String sqlFecha;
+public class Perfil {
+
+	
+	private String tipo;
 	private Conexion pruebaConn = Conexion.getInstancia();
 	
-	public Usuario(String pass){
-		
-		this.passAdmin = pass;	
+	public Perfil(String tipo){
+				
+		this.tipo = tipo;	
 	}
 	
-    public Usuario(int id){
-		
-		this.id_usuario = id;	
-	}
-	
-	
+   
 	public void InsertRow(){
 		
-		
-		Calendar fecha = Calendar.getInstance();
-		int anio = fecha.get(Calendar.YEAR);
-		int mes = fecha.get(Calendar.MONTH) + 1;
-		int dia = fecha.get(Calendar.DAY_OF_MONTH);
-		
-		if (mes < 10){
-			this.sqlFecha = (anio+"-0"+mes+"-"+dia);
-			
-		}
-		else
-			this.sqlFecha = (anio+"-"+mes+"-"+dia);
 		
 		if (pruebaConn!=null){
 			try{
 				java.sql.Statement stm = pruebaConn.getConexion().createStatement();
-				stm.execute("Insert into Usuario (pass_admin, fecha_alta) values ('"+passAdmin+"','"+sqlFecha+"')");
+				stm.execute("Insert into Perfil values ('"+tipo+"')");
+				
 			}
 			catch (Exception e){
-				
+				System.out.println("aca la cago");
 			}
 		//	pruebaConn.closeConextion();
 		}else{
@@ -55,7 +37,7 @@ public class Usuario {
 	
 	public java.sql.ResultSet Select_tabla() throws SQLException{
 		
-		String seleccion = "Select * from Usuario";
+		String seleccion = "Select * from Perfil";
 		
 		java.sql.Statement ps = pruebaConn.getConexion().createStatement();
 		java.sql.ResultSet rs = ps.executeQuery(seleccion);
@@ -67,9 +49,9 @@ public class Usuario {
 	
 	/* metodo para cargar un resulset con lo datos de un registro seleccionado */
 	
-public java.sql.ResultSet Select_fila(int id) throws SQLException{
+public java.sql.ResultSet Select_fila(String tipo) throws SQLException{
 		
-		String seleccion = "Select * from Usuario where id_usuario ='"+id+"'";
+		String seleccion = "Select * from Perfil where tipo ='"+tipo+"'";
 		
 		java.sql.Statement ps = pruebaConn.getConexion().createStatement();
 		java.sql.ResultSet rs = ps.executeQuery(seleccion);
@@ -82,4 +64,5 @@ public java.sql.ResultSet Select_fila(int id) throws SQLException{
 	
 	
 }
+
 

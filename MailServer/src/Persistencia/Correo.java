@@ -13,13 +13,14 @@ public class Correo{
 	private int id_usuario_receptor;
 	private String asunto;
 	private String texto;
+	private int id_conversacion;
 	
 	
 	private Conexion pruebaConn = Conexion.getInstancia();
 	
 	// Contructor general para cargar todos los datos de un correo
 	
-	public Correo(String nom_us1, String nom_dom1, String nom_us2, String nom_dom2, String fecha, int id1, int id2, String asunto, String texto){
+	public Correo(String nom_us1, String nom_dom1, String nom_us2, String nom_dom2, String fecha, int id1, int id2, String asunto, String texto, int id){
 		
 		this.id_usuario_emisor = id1;
 		this.id_usuario_receptor = id2;
@@ -30,6 +31,7 @@ public class Correo{
 		this.fecha = fecha;
 		this.asunto = asunto;
 		this.texto = texto;
+		this.id_conversacion = id;
 	}
 	
 	// contructor para consultas por lo que solo le paso las claves
@@ -42,6 +44,7 @@ public class Correo{
 		this.nom_dominio_receptor = nom_dom2;
 		this.fecha = fecha;
 		
+		
 	}
 	
 	
@@ -53,7 +56,7 @@ public class Correo{
 		if (pruebaConn!=null){
 			try{
 				java.sql.Statement stm = pruebaConn.getConexion().createStatement();
-				stm.execute("Insert into Correo values ('"+nom_usuario_emisor+"','"+nom_dominio_emisor+"','"+nom_usuario_receptor+"','"+nom_dominio_receptor+"','"+fecha+"','"+id_usuario_emisor+"','"+id_usuario_receptor+"','"+asunto+"','"+texto+"')");
+				stm.execute("Insert into Correo values ('"+nom_usuario_emisor+"','"+nom_dominio_emisor+"','"+nom_usuario_receptor+"','"+nom_dominio_receptor+"','"+fecha+"','"+id_usuario_emisor+"','"+id_usuario_receptor+"','"+asunto+"','"+texto+"','"+id_conversacion+"')");
 			}
 			catch (Exception e){
 				System.out.println("aca la cago");

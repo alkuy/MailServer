@@ -1,8 +1,8 @@
 package Persistencia;
 
-import java.sql.Connection;
+
 import java.sql.SQLException;
-import java.util.Calendar;
+
 
 public class Persona {
 
@@ -11,14 +11,21 @@ public class Persona {
 	private int ci;
 	private String nombre;
 	private String apellido;
+	private String calle;
+	private String nro_puerta;
+	private String apto;
+	
 	private Conexion pruebaConn = Conexion.getInstancia();
 	
-	public Persona(int id, int ced, String nom, String ap){
+	public Persona(int id, int ced, String nom, String apellido, String calle, String nro, String apto){
 		
 		this.id_usuario = id;
 		this.ci = ced;
 		this.nombre = nom;
-		this.apellido = ap;
+		this.apellido = apellido;
+		this.calle = calle;
+		this.nro_puerta = nro;
+		this.apto = apto;
 	}
 	
 	// contructor para consultas
@@ -38,7 +45,7 @@ public class Persona {
 		if (pruebaConn!=null){
 			try{
 				java.sql.Statement stm = pruebaConn.getConexion().createStatement();
-				stm.execute("Insert into Persona values ('"+id_usuario+"','"+ci+"','"+nombre+"','"+apellido+"')");
+				stm.execute("Insert into Persona values ('"+id_usuario+"','"+ci+"','"+nombre+"','"+apellido+"', '"+calle+"', '"+nro_puerta+"','"+apto+"')");
 			}
 			catch (Exception e){
 				
