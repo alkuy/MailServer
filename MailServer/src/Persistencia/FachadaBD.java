@@ -66,6 +66,15 @@ public class FachadaBD {
 		return rs;
 	}
 	
+	// Metodo que devuelve un resulset con el ultimo id de usuario generado
+	
+	public java.sql.ResultSet ConUltimoID() throws SQLException{
+		java.sql.ResultSet rs;
+		this.NuevoUS2(1);// si busco un id debo tener cargado por lo menos uno
+		rs = this.user.Select_ultimo_id();
+		return rs;
+	}
+	
 	
 	
 	/* METODOS PARA LA CLASE PERSONA */

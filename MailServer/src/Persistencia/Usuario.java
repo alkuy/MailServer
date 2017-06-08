@@ -79,6 +79,22 @@ public java.sql.ResultSet Select_fila(int id) throws SQLException{
 		return rs;
 		
 	}
+
+
+   /* metodo para cargar un resulset con el ultimo id_usuario generado */
+
+public java.sql.ResultSet Select_ultimo_id() throws SQLException{
+	
+	String seleccion = "SELECT MAX(id_usuario) FROM Usuario";
+	
+	java.sql.Statement ps = pruebaConn.getConexion().createStatement();
+	java.sql.ResultSet rs = ps.executeQuery(seleccion);
+	
+	//pruebaConn.closeConextion();
+	
+	return rs;
+	
+}
 	
 	
 }
