@@ -31,7 +31,7 @@ public class Fachada {
 	}
 	
 	public void bajaUsu(Usuario usuario){
-		hUsu.delete(usuario.getNom_usuario());
+///		hUsu.delete(usuario.getNom_usuario());
 	}
 	
 	public void mofifUsu(Usuario usuario){

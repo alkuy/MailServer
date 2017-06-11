@@ -37,17 +37,17 @@ public class Usuarios {
 	 * <BR><b>Precondición</b>: el usuario es miembro del diccionario.</BR>
 	 * @param nom_usuario Nombre de usuario perteneciente al usuario a retornar.
 	 * @return El usuario con dicho nombre de usuario. */
-	public Usuario find(int id_usuario){
-		return this.hUsu.get(nom_usuario);
-	}
+/*	public Usuario find(int id_usuario){
+//		return this.hUsu.get(nom_usuario);
+	}*/
 	
 	/** Método que sustituye el viejo usuario en el diccionario por el nuevo usuario.
 	 * <b>Precondición</b>: el usuario es miembro del diccionario.
 	 * @param usu usuario a modificar en la colección Usuarios.
 	 * @return No retorna nada. */
 	public void modify(Usuario usu){
-		delete(usu.getNom_usuario());
-		this.hUsu.put(usu.getNom_usuario(), usu);
+//		delete(usu.getNom_usuario());
+//		this.hUsu.put(usu.getNom_usuario(), usu);
 	}
 	
 	/** Método que dado nombre de usuario de un usuario lo dada de baja del diccionario.
