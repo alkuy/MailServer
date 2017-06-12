@@ -2,6 +2,8 @@ package grafica;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
+import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 import java.awt.Color;
 import java.awt.Toolkit;
@@ -12,6 +14,8 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
@@ -29,8 +33,6 @@ public class principal extends JFrame {
 	 */
 	public principal() {
      	setResizable(false);
-
-     	
 		/**
 		 * Panel Principal*/
      	setTitle("Admisnitrador");
@@ -79,9 +81,89 @@ public class principal extends JFrame {
 		/*Termina MENU ARRIBA*/
 		/*······························*/
 		
+		ImagenLogo = new JLabel(new ImageIcon(principal.class.getResource("/imagenes/logo-mail.png")));
+		ImagenLogo.setBounds(499, 81, 362, 248);
+		contentPane.add(ImagenLogo);
+		
+			JLabel lblCorreoPintituciones = new JLabel("Correo Para Instituciones Educativas");
+			lblCorreoPintituciones.setHorizontalAlignment(SwingConstants.CENTER);
+			lblCorreoPintituciones.setFont(new Font("Goudy Old Style", Font.PLAIN, 13));
+			lblCorreoPintituciones.setBounds(576, 443, 250, 30);
+			contentPane.add(lblCorreoPintituciones);
+		
+		JLabel lblVersion = new JLabel("Version 1.0");
+		lblVersion.setHorizontalAlignment(SwingConstants.CENTER);
+		lblVersion.setFont(new Font("Goudy Old Style", Font.PLAIN, 13));
+		lblVersion.setBounds(576, 470, 250, 30);
+		contentPane.add(lblVersion);
+		
+		JLabel lblCreadoEnInet = new JLabel("Creado en INET");
+		lblCreadoEnInet.setHorizontalAlignment(SwingConstants.CENTER);
+		lblCreadoEnInet.setFont(new Font("Goudy Old Style", Font.PLAIN, 13));
+		lblCreadoEnInet.setBounds(576, 499, 250, 30);
+		contentPane.add(lblCreadoEnInet);
+		
+		/*...............................*/
+		/*########  LOGIN    ############*/
+
+		
+		
+		
+		JTextField txtLOGusuario = new JTextField();
+		txtLOGusuario.setBounds(140, 180, 200, 30);
+		contentPane.add(txtLOGusuario);
+		txtLOGusuario.setColumns(10);
+		
+		JPasswordField passwordField = new JPasswordField();
+		passwordField.setBounds(140, 230, 200, 30);
+		contentPane.add(passwordField);
+		
+		JLabel ImgUserLog = new JLabel(new ImageIcon(principal.class.getResource("/imagenes/userLog.png")));
+		ImgUserLog.setBounds(90, 180, 30, 30);
+		contentPane.add(ImgUserLog);
+		
+		JLabel ImgKeyLog = new JLabel(new ImageIcon(principal.class.getResource("/imagenes/keyLog.png")));
+		ImgKeyLog.setBounds(90, 230, 30, 30);
+		contentPane.add(ImgKeyLog);
+		
+		JLabel lblLogin = new JLabel("LogIn");
+		lblLogin.setBounds(120, 100, 208, 30);
+		contentPane.add(lblLogin);
+		lblLogin.setHorizontalAlignment(SwingConstants.CENTER);
+		lblLogin.setFont(new Font("Goudy Old Style", Font.BOLD, 28));
+		
+		
+		JButton btnNewButton = new JButton("INGRESAR");
+		btnNewButton.setBounds(90, 300, 250, 40);
+		contentPane.add(btnNewButton);
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ImgUserLog.setVisible(false);
+				ImgKeyLog.setVisible(false);
+				txtLOGusuario.setVisible(false);
+				passwordField.setVisible(false);
+				btnNewButton.setVisible(false);
+				lblLogin.setVisible(false);
+				menuBar.setVisible(true);
+					
+			}
+		});
+
+		
+		/*############  FIN LOGIN ######################################*/
+		
 		/*···························*/
 		/*Formulario Nuevo Usuario*/
 		/*······························*/
+		
+
+		
+		
+		
+		
+		
+		
+		
 		FrmNuevoUsuario frmusuario = new FrmNuevoUsuario();
 		frmusuario.setBounds(20, 60, 450, 500);
 		contentPane.add(frmusuario);
@@ -107,27 +189,6 @@ public class principal extends JFrame {
 		
 		
 		/*GAFICOS COSTADO*/
-		ImagenLogo = new JLabel(new ImageIcon(principal.class.getResource("/imagenes/logo-mail.png")));
-		ImagenLogo.setBounds(499, 81, 362, 248);
-		contentPane.add(ImagenLogo);
-	
-		JLabel lblCorreoPintituciones = new JLabel("Correo Para Instituciones Educativas");
-		lblCorreoPintituciones.setHorizontalAlignment(SwingConstants.CENTER);
-		lblCorreoPintituciones.setFont(new Font("Goudy Old Style", Font.PLAIN, 13));
-		lblCorreoPintituciones.setBounds(576, 443, 250, 30);
-		contentPane.add(lblCorreoPintituciones);
-		
-		JLabel lblVersion = new JLabel("Version 1.0");
-		lblVersion.setHorizontalAlignment(SwingConstants.CENTER);
-		lblVersion.setFont(new Font("Goudy Old Style", Font.PLAIN, 13));
-		lblVersion.setBounds(576, 470, 250, 30);
-		contentPane.add(lblVersion);
-		
-		JLabel lblCreadoEnInet = new JLabel("Creado en INET");
-		lblCreadoEnInet.setHorizontalAlignment(SwingConstants.CENTER);
-		lblCreadoEnInet.setFont(new Font("Goudy Old Style", Font.PLAIN, 13));
-		lblCreadoEnInet.setBounds(576, 499, 250, 30);
-		contentPane.add(lblCreadoEnInet);
 		
 			
 		
@@ -135,7 +196,7 @@ public class principal extends JFrame {
 		 /* Paneles no visibles Hasta ser llamados */
 		/*############################################*/
 		
-	//	menuBar.setVisible(false);
+		menuBar.setVisible(false);
 		frmusuario.setVisible(false);
 		frmcuenta.setVisible(false);
 		frmdominionuevo.setVisible(false);
