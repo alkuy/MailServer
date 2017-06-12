@@ -12,7 +12,7 @@ public class Correo {
 	
 	private Cuenta emisor;
 	private Cuenta receptor;
-	private String asunto
+	private String asunto;
 	private Date fecha;
 	private Date hora;
 	private boolean flag_respuesta;
