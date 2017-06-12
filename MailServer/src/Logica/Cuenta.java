@@ -17,7 +17,7 @@ public class Cuenta {
 	public Cuenta(String contraseña_cuenta, Dominio dominio, Correos correos) {
 		this.contraseña_cuenta = contraseña_cuenta;
 		this.dominio = dominio;
-		this.correos = correos;
+		this.correos = new Correos();
 	}
 	
 	/** Método que retorna la contraseña de la cuenta de usuario.

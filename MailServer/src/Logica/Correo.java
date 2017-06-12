@@ -10,8 +10,8 @@ import java.util.Date;
 
 public class Correo {
 	
-	private Usuario emisor;
-	private Usuario receptor;
+	private Cuenta emisor;
+	private Cuenta receptor;
 	private String asunto;
 	private Date fecha;
 	private Date hora;
@@ -25,7 +25,7 @@ public class Correo {
 	 * @param hora Hora del correo.
 	 * @param flag_respuesta Indica si es respuesta 
 	 * 			a un correo con el mismo asunto. */
-	public Correo(Usuario emisor, Usuario receptor, String asunto,
+	public Correo(Cuenta emisor, Cuenta receptor, String asunto,
 			Date fecha, Date hora, boolean flag_respuesta) {
 		this.emisor = emisor;
 		this.receptor = receptor;
@@ -43,7 +43,7 @@ public class Correo {
 	
 	/** Método que retorna el emisor del correo.
 	 * @return Emisor del correo. */
-	public Usuario getEmisor() {
+	public Cuenta getEmisor() {
 		return emisor;
 	}
 	
@@ -61,7 +61,7 @@ public class Correo {
 	
 	/** Método que retorna el receptor del correo.
 	 * @return Receptor del correo. */
-	public Usuario getReceptor() {
+	public Cuenta getReceptor() {
 		return receptor;
 	}
 	
