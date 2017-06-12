@@ -11,8 +11,8 @@ import java.util.Date;
 public class Correo {
 	
 	private Cuenta emisor;
-	private Cuenta receptor;
 	private String asunto;
+	private Cuenta receptor;	
 	private Date fecha;
 	private Date hora;
 	private boolean flag_respuesta;

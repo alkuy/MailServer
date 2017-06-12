@@ -10,8 +10,9 @@ public class Cuenta {
 	
 	
 	private String contraseña_cuenta;
-	private Dominio dominio;
 	private Correos correos;
+	private Dominio dominio;
+
 	
 	/** Método constructor de la clase. */
 	public Cuenta(String contraseña_cuenta, Dominio dominio, Correos correos) {
