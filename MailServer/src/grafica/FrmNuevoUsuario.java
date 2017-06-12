@@ -1,13 +1,20 @@
 package grafica;
 
+import java.awt.Color;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
+import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JSeparator;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
+import javax.swing.border.Border;
+import javax.swing.JRadioButton;
+import javax.swing.ButtonGroup;
 
 public class FrmNuevoUsuario extends JPanel {
 
@@ -23,6 +30,7 @@ public class FrmNuevoUsuario extends JPanel {
 	private JTextField txtUNapto;
 	private JTextField txtUNtelefono1;
 	private JTextField txtUNtelefono2;
+	private final ButtonGroup rdbtnTipoUsuario = new ButtonGroup();
 	/**
 	 * Create the panel.
 	 */
@@ -127,13 +135,78 @@ public class FrmNuevoUsuario extends JPanel {
 		lblUNtelefono2.setBounds(28, 361, 100, 30);
 		add(lblUNtelefono2);
 		
+		/*Etiqueta que avisa el error de campos faltantes*/
+		JLabel lblFaltanCampos = new JLabel("* Faltan campos obligatorios");
+		lblFaltanCampos.setFont(new Font("Tahoma", Font.BOLD, 15));
+		lblFaltanCampos.setBounds(168, 196, 220, 21);
+		add(lblFaltanCampos);
+		lblFaltanCampos.setVisible(false);
+		
 		JButton btnAgregarUsuario = new JButton("Agregar");
-		btnAgregarUsuario.setBounds(138, 431, 246, 30);
+		btnAgregarUsuario.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				String nombre = txtUNnombre.getText();
+				String apellido = txtUNapellido.getText();
+				String documento = txtUNdocumento.getText();
+				String calle = txtUNcalle.getText();
+				String nroPuerta = txtUNnroPuerta.getText();
+				
+				System.out.println(nombre);
+				if(verifica(nombre, apellido, documento)){
+				
+				}else{
+					lblFaltanCampos.setVisible(true);
+				}	
+			}
+		});
+		btnAgregarUsuario.setBounds(142, 459, 246, 30);
 		add(btnAgregarUsuario);
 		
 		JSeparator separator = new JSeparator();
-		separator.setBounds(38, 206, 388, 21);
+		separator.setBounds(38, 196, 388, 21);
 		add(separator);
+		
+		JRadioButton rdbtnConCuenta = new JRadioButton("Con cuenta");
+		rdbtnTipoUsuario.add(rdbtnConCuenta);
+		rdbtnConCuenta.setBounds(145, 409, 94, 23);
+		add(rdbtnConCuenta);
+		
+		JRadioButton rdbtnAdministrador = new JRadioButton("Administrador");
+		rdbtnTipoUsuario.add(rdbtnAdministrador);
+		rdbtnAdministrador.setBounds(244, 409, 109, 23);
+		add(rdbtnAdministrador);
+		
+		
 
+	}
+	/**Metodo que verifica si los campos obligatorios fueron cargados
+	 * @param campo_nombre, campo_apellido, campo_documento.
+	 * @return true si fueron cargados los tres
+	 */
+	public boolean verifica(String nom, String ape, String docu){
+		boolean verificacion = true;
+		/*Declaro dos bordes, uno para indicar cuando el campo falta, el tro para volverlo a su estado inicial*/
+		Border bordeROJO = BorderFactory.createLineBorder(Color.RED, 2);
+		Border bordeCOMUN = BorderFactory.createLineBorder(Color.BLACK, 1);
+		if (nom.isEmpty()){
+			verificacion = false;
+			this.txtUNnombre.setBorder(bordeROJO);
+		}else{
+			this.txtUNnombre.setBorder(bordeCOMUN);
+		}
+		if (ape.isEmpty()){
+			verificacion = false;
+			this.txtUNapellido.setBorder(bordeROJO);
+		}else{
+			this.txtUNapellido.setBorder(bordeCOMUN);
+		}
+		if (docu.isEmpty()){
+			verificacion = false;
+			this.txtUNdocumento.setBorder(bordeROJO);
+		}else{
+			this.txtUNdocumento.setBorder(bordeCOMUN);
+		}
+		return verificacion;
+		
 	}
 }

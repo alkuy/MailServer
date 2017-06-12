@@ -99,7 +99,11 @@ public class principal extends JFrame {
 		frmmuestracuentas.setBounds(20, 60, 450, 500);
 		contentPane.add(frmmuestracuentas);
 		
-		
+		/*#########   EL DE INICIO DE LOGIN   ################*/
+		/*FrmLogin LOGIN = new FrmLogin();
+		LOGIN.setBounds(20, 60, 500, 200);
+		contentPane.add(LOGIN);*/
+		/*##################################################3*/
 		
 		
 		/*GAFICOS COSTADO*/
@@ -131,10 +135,12 @@ public class principal extends JFrame {
 		 /* Paneles no visibles Hasta ser llamados */
 		/*############################################*/
 		
+	//	menuBar.setVisible(false);
 		frmusuario.setVisible(false);
 		frmcuenta.setVisible(false);
 		frmdominionuevo.setVisible(false);
 		frmmuestracuentas.setVisible(false);
+		
 		
 
 	
