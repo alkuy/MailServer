@@ -28,7 +28,7 @@ public class Conexion {
 			//System.out.println("conexion exitosa");
 		} catch (Exception e) {
 			Conn=null;
-			System.out.println("Error al conectar");
+			System.out.println("Error al conectar puta madre");
 		}
 		
 		return Conn;

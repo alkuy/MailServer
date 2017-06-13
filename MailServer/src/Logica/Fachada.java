@@ -31,10 +31,11 @@ public class Fachada {
 	}
 	
 	public void altaUsu(String doc, String nom, String ape, String calle, String nro_puerta, String apto) throws SQLException{
-		Usuario usu = new Usuario();
-		int i= usu.DevuelveUsuario();
-		Usuario NU = new Usuario(i, doc, nom, ape, calle,  nro_puerta, apto);
-		hUsu.insert(NU);
+		//Usuario usu = new Usuario();
+		int id= 2;
+		Usuario NU = new Usuario(id, doc, nom, ape, calle,  nro_puerta, apto);
+		//hUsu.insert(NU);
+		//System.out.println(i);
 
 	}
 	

@@ -81,7 +81,7 @@ public class Usuario {
 	}
 	
 	public int DevuelveUsuario() throws SQLException{
-		BD.NuevoUS(null);
+		//BD.InserUS(null);
 		java.sql.ResultSet rs = BD.ConUltimoID();
 		rs.next();
 		return rs.getInt(id_usuario);
