@@ -15,9 +15,6 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.Border;
 
-import Logica.Fachada;
-import Logica.Usuarios;
-
 import javax.swing.JRadioButton;
 import javax.swing.ButtonGroup;
 
@@ -160,7 +157,7 @@ public class FrmNuevoUsuario extends JPanel {
 				String nroPuerta = txtUNnroPuerta.getText();
 				String apto = txtUNapto.getText();
 				
-				System.out.println(nombre);
+		
 				if(verifica(nombre, apellido, documento)){
 					try {
 						FCLogica.altaUsu(documento, nombre, apellido, calle, nroPuerta, apto);

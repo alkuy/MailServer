@@ -80,11 +80,13 @@ public class Usuario {
 		this.prefiles = new Perfiles();
 	}
 	
-	public int DevuelveUsuario() throws SQLException{
-		//BD.InserUS(null);
+	public int InstertaUserDevuelveIdCargaPersona() throws SQLException{
+		BD.InserUS(null);
 		java.sql.ResultSet rs = BD.ConUltimoID();
 		rs.next();
-		return rs.getInt(id_usuario);
+		int id = rs.getInt(1);
+		return id;
+		//return 7;
 	}
 	
 	/** Método que retorna el identificador del usuario.
@@ -203,4 +205,8 @@ public class Usuario {
 		this.prefiles = prefiles;
 	}
 
+	
+	public void autentica(String usuario, String pass){
+		
+	}
 }
