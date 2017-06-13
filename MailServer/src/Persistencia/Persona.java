@@ -8,7 +8,7 @@ public class Persona {
 
 	
 	private int id_usuario;
-	private int ci;
+	private String ci;
 	private String nombre;
 	private String apellido;
 	private String calle;
@@ -17,7 +17,7 @@ public class Persona {
 	
 	private Conexion pruebaConn = Conexion.getInstancia();
 	
-	public Persona(int id, int ced, String nom, String apellido, String calle, String nro, String apto){
+	public Persona(int id, String ced, String nom, String apellido, String calle, String nro, String apto){
 		
 		this.id_usuario = id;
 		this.ci = ced;
@@ -35,10 +35,23 @@ public class Persona {
 		this.id_usuario = id;
 		
 	}
+    
+// contructor para consultas
 	
-	
+    public Persona(){}
+    
+    	
 	/* Metodo de ingreso de datos a la base */
 	
+	public int getId_usuario() {
+		return id_usuario;
+	}
+
+	public void setId_usuario(int id_usuario) {
+		this.id_usuario = id_usuario;
+	}
+	
+
 	public void InsertRow(){
 		
 			
@@ -65,6 +78,24 @@ public class Persona {
 		java.sql.Statement ps = pruebaConn.getConexion().createStatement();
 		java.sql.ResultSet rs = ps.executeQuery(seleccion);
 		//pruebaConn.closeConextion();
+		
+		return rs;
+		
+	}
+	
+	
+/* metodo para devolver el id de usuario en base a la cedula ingresada */
+	
+	public java.sql.ResultSet Dev_id(String ced) throws SQLException{
+		
+		String seleccion = "Select id_usuario from Persona where cedula ='"+ced+"'";
+	//	System.out.println(seleccion);
+		
+		java.sql.Statement ps = pruebaConn.getConexion().createStatement();
+		java.sql.ResultSet rs = ps.executeQuery(seleccion);
+		//rs.next();
+		//int id = rs.getInt(1);*
+		//pruebaConn.closeConextion();*/
 		
 		return rs;
 		
