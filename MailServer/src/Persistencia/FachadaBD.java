@@ -40,6 +40,9 @@ public class FachadaBD {
 		this.user = new Usuario(id);
 	}
 	
+
+
+	
 	//Metodo para ingresar un registro en la tabla Usuario
 	
 	public void InserUS (String pass){
@@ -93,6 +96,23 @@ public class FachadaBD {
 		this.persona = new Persona(id);
 	}
 		
+     
+     public void Nueva_Persona3 (){
+ 		
+ 		this.persona = new Persona();
+ 	}
+ 	//Metodo que devuelve un entero con el id segun la cedula de usuario ingresada
+ 	
+ 	public java.sql.ResultSet Devolver_id(String ci) throws SQLException{
+ 		
+ 		java.sql.ResultSet rs;
+ 	    Nueva_Persona3();
+ 		rs = this.persona.Dev_id(ci);
+ 		
+ 		return rs;
+ 	}
+     
+     
 	//Metodo para ingresar un registro en la tabla Persona
 	
 	public void InsertPer (int id, String ced, String nom, String ap, String calle, String nro, String apto){
