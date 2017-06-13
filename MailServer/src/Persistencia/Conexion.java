@@ -24,7 +24,7 @@ public class Conexion {
 	public Connection getConexion() {
 		try {
 			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-			Conn=DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=Servidor_Mail", "DC", "diego2");
+			Conn=DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=Servidor_Mail", "AM", "adrian");
 			//System.out.println("conexion exitosa");
 		} catch (Exception e) {
 			Conn=null;

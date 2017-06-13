@@ -8,7 +8,7 @@ public class Persona {
 
 	
 	private int id_usuario;
-	private int ci;
+	private String ci;
 	private String nombre;
 	private String apellido;
 	private String calle;
@@ -17,7 +17,7 @@ public class Persona {
 	
 	private Conexion pruebaConn = Conexion.getInstancia();
 	
-	public Persona(int id, int ced, String nom, String apellido, String calle, String nro, String apto){
+	public Persona(int id, String ced, String nom, String apellido, String calle, String nro, String apto){
 		
 		this.id_usuario = id;
 		this.ci = ced;

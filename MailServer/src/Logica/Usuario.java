@@ -1,5 +1,7 @@
 package Logica;
+import java.sql.SQLException;
 
+import Persistencia.FachadaBD;
 /** Clase de ejemplo que muestra la sintaxis
  * elemental de un programa en java
  * @author 
@@ -8,9 +10,10 @@ package Logica;
 
 public class Usuario {
 	
+//	private Date fecha_alta;
 	private int id_usuario;
 	private String pass_admin;
-	private int ci;
+	private String ci;
 	private String nombre;
 	private String apellido;
 	private String calle;
@@ -20,6 +23,12 @@ public class Usuario {
 	private Cuentas cuentas;
 	private Perfiles prefiles;
 	
+	FachadaBD BD = FachadaBD.getInstancia();
+	
+	public Usuario(){
+		
+	}
+	
 	/** Método constructor de la clase para usuario <u><b>común</b></u>.
 	 * @param id_usuario Identificador del usuario.
 	 * @param ci Cedula del usuario.
@@ -28,9 +37,9 @@ public class Usuario {
 	 * @param calle Nombre de calle de la dirección del usuario.
 	 * @param nro_puerta Número de puerta de la dirección del usuario.
 	 * @param apto Número de apartamento de la dirección del usuario.  */
-	public Usuario(int id_usuario, int ci, String nombre, String apellido, 
+	public Usuario(int id, String ci, String nombre, String apellido, 
 			String calle, String nro_puerta, String apto) {
-		this.id_usuario = id_usuario;
+		this.id_usuario = id;
 		this.ci = ci;
 		this.nombre = nombre;
 		this.apellido = apellido;
@@ -39,7 +48,9 @@ public class Usuario {
 		this.apto = apto;
 		this.cuentas = new Cuentas();
 		this.prefiles = new Perfiles();
+		BD.InsertPer(id, ci, nombre, apellido, calle, nro_puerta, apto);
 	}
+	
 	
 	/** Método constructor de la clase para usuario <u><b>oficina</b></u>.
 	 * @param id_usuario Identificador del usuario.
@@ -55,7 +66,7 @@ public class Usuario {
 	 * @param nom_usuario nombre de usuario administrador.
 	 * @param contraseña_admin contraseña de usuario administrador.
 	 * @param ci cedula del usuario. */
-	public Usuario(int id_usuario, String pass_admin, int ci, String nombre, 
+	public Usuario(int id_usuario, String pass_admin, String ci, String nombre, 
 			String apellido, String calle, String nro_puerta, String apto) {
 		this.id_usuario = id_usuario;
 		this.pass_admin = pass_admin;
@@ -67,6 +78,13 @@ public class Usuario {
 		this.apto = apto;
 		this.cuentas = new Cuentas();
 		this.prefiles = new Perfiles();
+	}
+	
+	public int DevuelveUsuario() throws SQLException{
+		BD.NuevoUS(null);
+		java.sql.ResultSet rs = BD.ConUltimoID();
+		rs.next();
+		return rs.getInt(id_usuario);
 	}
 	
 	/** Método que retorna el identificador del usuario.
@@ -83,7 +101,7 @@ public class Usuario {
 	
 	/** Método que retorna la cédula del usuario.
 	 * @return Cédula de un usuario. */
-	public long getCi() {
+	public String getCi() {
 		return ci;
 	}
 	

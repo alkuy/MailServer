@@ -21,6 +21,20 @@ public class Usuario {
 		this.id_usuario = id;	
 	}
 	
+ /*   public void nuevoUserVacio(){
+    	if (pruebaConn!=null){
+			try{
+				java.sql.Statement stm = pruebaConn.getConexion().createStatement();
+				stm.execute("insert into Usuario(fecha_alta)values(current_timestamp )");
+			}
+			catch (Exception e){
+				
+			}
+		//	pruebaConn.closeConextion();
+		}else{
+			System.out.println("Desconectado");
+		}
+    }*/
 	
 	public void InsertRow(){
 		

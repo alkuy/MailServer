@@ -1,9 +1,10 @@
 package grafica;
-
+import Logica.Fachada;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -13,6 +14,10 @@ import javax.swing.JSeparator;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.Border;
+
+import Logica.Fachada;
+import Logica.Usuarios;
+
 import javax.swing.JRadioButton;
 import javax.swing.ButtonGroup;
 
@@ -34,6 +39,9 @@ public class FrmNuevoUsuario extends JPanel {
 	/**
 	 * Create the panel.
 	 */
+	
+	Fachada FCLogica = Fachada.getInstancia();
+	
 	public FrmNuevoUsuario() {
 		
 		setBounds(20, 60, 450, 500);
@@ -150,10 +158,16 @@ public class FrmNuevoUsuario extends JPanel {
 				String documento = txtUNdocumento.getText();
 				String calle = txtUNcalle.getText();
 				String nroPuerta = txtUNnroPuerta.getText();
+				String apto = txtUNapto.getText();
 				
 				System.out.println(nombre);
 				if(verifica(nombre, apellido, documento)){
-				
+					try {
+						FCLogica.altaUsu(documento, nombre, apellido, calle, nroPuerta, apto);
+					} catch (SQLException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 				}else{
 					lblFaltanCampos.setVisible(true);
 				}	

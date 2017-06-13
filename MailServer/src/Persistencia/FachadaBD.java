@@ -82,7 +82,7 @@ public class FachadaBD {
 	
 	//Metodo que crea un objeto persona en la tabla Persona
 	
-	public void Nueva_Persona (int id, int ced, String nom, String ap, String calle, String nro, String apto){
+	public void Nueva_Persona (int id, String ced, String nom, String ap, String calle, String nro, String apto){
 		
 		this.persona = new Persona(id,ced,nom,ap, calle, nro, apto);
 	}
@@ -95,7 +95,7 @@ public class FachadaBD {
 		
 	//Metodo para ingresar un registro en la tabla Persona
 	
-	public void InsertPer (int id, int ced, String nom, String ap, String calle, String nro, String apto){
+	public void InsertPer (int id, String ced, String nom, String ap, String calle, String nro, String apto){
 		this.Nueva_Persona(id,ced,nom,ap, calle, nro, apto);
 		this.persona.InsertRow();
 	}

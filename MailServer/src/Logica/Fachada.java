@@ -1,5 +1,9 @@
 package Logica;
 
+import java.sql.SQLException;
+
+import Persistencia.FachadaBD;
+
 /** Clase de ejemplo que muestra la sintaxis
  * elemental de un programa en java
  * @author 
@@ -26,8 +30,12 @@ public class Fachada {
 		return hUsu;
 	}
 	
-	public void altaUsu(Usuario usuario){
-		hUsu.insert(usuario);
+	public void altaUsu(String doc, String nom, String ape, String calle, String nro_puerta, String apto) throws SQLException{
+		Usuario usu = new Usuario();
+		int i= usu.DevuelveUsuario();
+		Usuario NU = new Usuario(i, doc, nom, ape, calle,  nro_puerta, apto);
+		hUsu.insert(NU);
+
 	}
 	
 	public void bajaUsu(Usuario usuario){
