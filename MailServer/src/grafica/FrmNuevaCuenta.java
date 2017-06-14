@@ -13,13 +13,27 @@ import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
+import Logica.Fachada;
+
 public class FrmNuevaCuenta extends JPanel {
 	
 	private JTextField txtCNnombre;
-	private JTextField txtCNdocumento;
+	private static JTextField txtCNdocumento;
 	private JButton btnCNingresar;
 	private final ButtonGroup grpbtnSelectTipoCuenta = new ButtonGroup();
+	
+	/*Instancio la fachada*/
+	private Fachada FCLogica = Fachada.getInstancia();
 
+	/*El campo de documento que en algun caso lo traigo de Nuevo Usuario*/
+	public static JTextField getInstancia() {
+		if(txtCNdocumento == null)
+			txtCNdocumento = new JTextField();
+		
+		return txtCNdocumento;
+	}
+	
+	
 	/**
 	 * 
 	 */
@@ -80,13 +94,6 @@ public class FrmNuevaCuenta extends JPanel {
 		lblCNdocumento.setFont(new Font("Goudy Old Style", Font.PLAIN, 18));
 		add(lblCNdocumento);
 		
-		
-		txtCNdocumento = new JTextField();
-		txtCNdocumento.setBounds(150, 74, 250, 30);
-		txtCNdocumento.setColumns(10);
-		add(txtCNdocumento);
-		txtCNdocumento.setEditable(false);
-		
 		JLabel lblCNtipo = new JLabel("Tipo de cuenta");
 		lblCNtipo.setHorizontalAlignment(SwingConstants.RIGHT);
 		lblCNtipo.setFont(new Font("Goudy Old Style", Font.PLAIN, 18));
@@ -108,10 +115,32 @@ public class FrmNuevaCuenta extends JPanel {
 			}
 		});
 		
+		JTextField txtCNdocumento = FrmNuevaCuenta.getInstancia();
+		if(txtCNdocumento.getText().isEmpty()){
+			rdbtnCNpersona.setSelected(true);
+			txtCNdocumento.setEditable(false);
+		}
+		txtCNdocumento.setBounds(150, 74, 250, 30);
+		txtCNdocumento.setColumns(10);
+		add(txtCNdocumento);
+		
+		
 		
 		btnCNingresar = new JButton("INGRESAR");
+		btnCNingresar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				String documento = txtCNdocumento.getText();
+				String nom_usuario = txtCNnombre.getText();
+				//System.out.println(documento);
+				
+				txtCNdocumento.setText(null);
+				setVisible(false);
+			}
+		});
 		btnCNingresar.setBounds(150, 248, 250, 30);
 		add(btnCNingresar);
+		
+		
 		
 	}
 

@@ -37,8 +37,7 @@ public class FrmNuevoUsuario extends JPanel {
 	 * Create the panel.
 	 */
 	
-	Fachada FCLogica = Fachada.getInstancia();
-	
+	private Fachada FCLogica = Fachada.getInstancia();
 	public FrmNuevoUsuario() {
 		
 		setBounds(20, 60, 450, 500);
@@ -140,12 +139,30 @@ public class FrmNuevoUsuario extends JPanel {
 		lblUNtelefono2.setBounds(28, 361, 100, 30);
 		add(lblUNtelefono2);
 		
+		JSeparator separator = new JSeparator();
+		separator.setBounds(38, 196, 388, 21);
+		add(separator);
+		
+		JRadioButton rdbtnConCuenta = new JRadioButton("Con cuenta");
+		rdbtnTipoUsuario.add(rdbtnConCuenta);
+		rdbtnConCuenta.setBounds(145, 409, 94, 23);
+		add(rdbtnConCuenta);
+		
+		JRadioButton rdbtnAdministrador = new JRadioButton("Administrador");
+		rdbtnTipoUsuario.add(rdbtnAdministrador);
+		rdbtnAdministrador.setBounds(244, 409, 109, 23);
+		add(rdbtnAdministrador);
+		
+		
 		/*Etiqueta que avisa el error de campos faltantes*/
 		JLabel lblFaltanCampos = new JLabel("* Faltan campos obligatorios");
 		lblFaltanCampos.setFont(new Font("Tahoma", Font.BOLD, 15));
-		lblFaltanCampos.setBounds(168, 196, 220, 21);
+		lblFaltanCampos.setBounds(168, 439, 220, 21);
 		add(lblFaltanCampos);
 		lblFaltanCampos.setVisible(false);
+		
+		/*INSTANCIO txt documento para pasarle a nueva cuenta*/
+		JTextField txtCNdocumento = FrmNuevaCuenta.getInstancia();
 		
 		JButton btnAgregarUsuario = new JButton("Agregar");
 		btnAgregarUsuario.addActionListener(new ActionListener() {
@@ -161,6 +178,30 @@ public class FrmNuevoUsuario extends JPanel {
 				if(verifica(nombre, apellido, documento)){
 					try {
 						FCLogica.altaUsu(documento, nombre, apellido, calle, nroPuerta, apto);
+						/*Cierro Ventana*/
+						setVisible(false);
+						/*Levanto la de cuenta*/
+						
+						/*Debo ver que tipo de cuenta va a crear*/
+						if (rdbtnConCuenta.isSelected()){
+							JPanel pan = principal.getInstancia();
+							FrmNuevaCuenta cuenta = new FrmNuevaCuenta();
+							/*Paso el numero de documento*/
+							txtCNdocumento.setText(documento);
+							txtCNdocumento.setBounds(150, 74, 250, 30);
+							pan.add(cuenta);
+							cuenta.add(txtCNdocumento);
+						}
+						
+						if (rdbtnAdministrador.isSelected()){
+							JPanel pan = principal.getInstancia();
+					
+							/*txtCNdocumento.setText(documento);
+							txtCNdocumento.setBounds(150, 74, 250, 30);
+							pan.add(cuenta);
+							cuenta.add(txtCNdocumento);*/
+						}
+						
 					} catch (SQLException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
@@ -172,21 +213,6 @@ public class FrmNuevoUsuario extends JPanel {
 		});
 		btnAgregarUsuario.setBounds(142, 459, 246, 30);
 		add(btnAgregarUsuario);
-		
-		JSeparator separator = new JSeparator();
-		separator.setBounds(38, 196, 388, 21);
-		add(separator);
-		
-		JRadioButton rdbtnConCuenta = new JRadioButton("Con cuenta");
-		rdbtnTipoUsuario.add(rdbtnConCuenta);
-		rdbtnConCuenta.setBounds(145, 409, 94, 23);
-		add(rdbtnConCuenta);
-		
-		JRadioButton rdbtnAdministrador = new JRadioButton("Administrador");
-		rdbtnTipoUsuario.add(rdbtnAdministrador);
-		rdbtnAdministrador.setBounds(244, 409, 109, 23);
-		add(rdbtnAdministrador);
-		
 		
 
 	}
@@ -216,6 +242,10 @@ public class FrmNuevoUsuario extends JPanel {
 			this.txtUNdocumento.setBorder(bordeROJO);
 		}else{
 			this.txtUNdocumento.setBorder(bordeCOMUN);
+		}
+		if(rdbtnTipoUsuario.isSelected(null)){
+			verificacion = false;
+			System.out.println("FALTA RDBTN");
 		}
 		return verificacion;
 		

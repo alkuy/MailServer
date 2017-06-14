@@ -5,6 +5,7 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
+
 import java.awt.Color;
 import java.awt.Toolkit;
 import javax.swing.JLabel;
@@ -25,8 +26,15 @@ public class principal extends JFrame {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private JPanel contentPane;
+	private static JPanel VPrincipal;
 	private JLabel ImagenLogo = null;
+	
+	public static JPanel getInstancia() {
+		if(VPrincipal == null)
+			VPrincipal = new JPanel();
+		
+		return VPrincipal;
+	}
 
 	/**
 	 * Create the frame.
@@ -40,18 +48,18 @@ public class principal extends JFrame {
      	setBackground(new Color(0, 128, 128));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 900, 600);
-		contentPane = new JPanel();
-		contentPane.setBackground(new Color(0, 128, 128));
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		setContentPane(contentPane);
-		contentPane.setLayout(null);
+		VPrincipal = new JPanel();
+		VPrincipal.setBackground(new Color(0, 128, 128));
+		VPrincipal.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(VPrincipal);
+		VPrincipal.setLayout(null);
 		
 		/*······························*/
 		/*MENU ARRIBA PRINCIPAL*/
 		/*······························*/
 		JMenuBar menuBar = new JMenuBar();
 		menuBar.setBounds(0, 0, 894, 21);
-		contentPane.add(menuBar);
+		VPrincipal.add(menuBar);
 		
 		JMenu mnCuenta = new JMenu("Cuentas");
 		menuBar.add(mnCuenta);
@@ -83,59 +91,56 @@ public class principal extends JFrame {
 		
 		ImagenLogo = new JLabel(new ImageIcon(principal.class.getResource("/imagenes/logo-mail.png")));
 		ImagenLogo.setBounds(499, 81, 362, 248);
-		contentPane.add(ImagenLogo);
+		VPrincipal.add(ImagenLogo);
 		
 			JLabel lblCorreoPintituciones = new JLabel("Correo Para Instituciones Educativas");
 			lblCorreoPintituciones.setHorizontalAlignment(SwingConstants.CENTER);
 			lblCorreoPintituciones.setFont(new Font("Goudy Old Style", Font.PLAIN, 13));
 			lblCorreoPintituciones.setBounds(576, 443, 250, 30);
-			contentPane.add(lblCorreoPintituciones);
+			VPrincipal.add(lblCorreoPintituciones);
 		
 		JLabel lblVersion = new JLabel("Version 1.0");
 		lblVersion.setHorizontalAlignment(SwingConstants.CENTER);
 		lblVersion.setFont(new Font("Goudy Old Style", Font.PLAIN, 13));
 		lblVersion.setBounds(576, 470, 250, 30);
-		contentPane.add(lblVersion);
+		VPrincipal.add(lblVersion);
 		
 		JLabel lblCreadoEnInet = new JLabel("Creado en INET");
 		lblCreadoEnInet.setHorizontalAlignment(SwingConstants.CENTER);
 		lblCreadoEnInet.setFont(new Font("Goudy Old Style", Font.PLAIN, 13));
 		lblCreadoEnInet.setBounds(576, 499, 250, 30);
-		contentPane.add(lblCreadoEnInet);
+		VPrincipal.add(lblCreadoEnInet);
 		
 		/*...............................*/
 		/*########  LOGIN    ############*/
 
-		
-		
-		
 		JTextField txtLOGusuario = new JTextField();
 		txtLOGusuario.setBounds(140, 180, 200, 30);
-		contentPane.add(txtLOGusuario);
+		VPrincipal.add(txtLOGusuario);
 		txtLOGusuario.setColumns(10);
 		
 		JPasswordField passwordField = new JPasswordField();
 		passwordField.setBounds(140, 230, 200, 30);
-		contentPane.add(passwordField);
+		VPrincipal.add(passwordField);
 		
 		JLabel ImgUserLog = new JLabel(new ImageIcon(principal.class.getResource("/imagenes/userLog.png")));
 		ImgUserLog.setBounds(90, 180, 30, 30);
-		contentPane.add(ImgUserLog);
+		VPrincipal.add(ImgUserLog);
 		
 		JLabel ImgKeyLog = new JLabel(new ImageIcon(principal.class.getResource("/imagenes/keyLog.png")));
 		ImgKeyLog.setBounds(90, 230, 30, 30);
-		contentPane.add(ImgKeyLog);
+		VPrincipal.add(ImgKeyLog);
 		
 		JLabel lblLogin = new JLabel("LogIn");
 		lblLogin.setBounds(120, 100, 208, 30);
-		contentPane.add(lblLogin);
+		VPrincipal.add(lblLogin);
 		lblLogin.setHorizontalAlignment(SwingConstants.CENTER);
 		lblLogin.setFont(new Font("Goudy Old Style", Font.BOLD, 28));
 		
 		
 		JButton btnNewButton = new JButton("INGRESAR");
 		btnNewButton.setBounds(90, 300, 250, 40);
-		contentPane.add(btnNewButton);
+		VPrincipal.add(btnNewButton);
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				ImgUserLog.setVisible(false);
@@ -156,30 +161,22 @@ public class principal extends JFrame {
 		/*Formulario Nuevo Usuario*/
 		/*······························*/
 		
-
-		
-		
-		
-		
-		
-		
-		
 		FrmNuevoUsuario frmusuario = new FrmNuevoUsuario();
 		frmusuario.setBounds(20, 60, 450, 500);
-		contentPane.add(frmusuario);
+		VPrincipal.add(frmusuario);
 		
 		/*Formulario Nueva Cuenta*/
 		FrmNuevaCuenta frmcuenta = new FrmNuevaCuenta();
 		frmcuenta.setBounds(20, 60, 450, 300);
-		contentPane.add(frmcuenta);
+		VPrincipal.add(frmcuenta);
 		
 		FrmNuevoDominio frmdominionuevo = new FrmNuevoDominio();
 		frmdominionuevo.setBounds(20, 60, 450, 300);
-		contentPane.add(frmdominionuevo);
+		VPrincipal.add(frmdominionuevo);
 		
 		FrmMuestraCuentas frmmuestracuentas = new FrmMuestraCuentas();
 		frmmuestracuentas.setBounds(20, 60, 450, 500);
-		contentPane.add(frmmuestracuentas);
+		VPrincipal.add(frmmuestracuentas);
 		
 		/*#########   EL DE INICIO DE LOGIN   ################*/
 		/*FrmLogin LOGIN = new FrmLogin();
