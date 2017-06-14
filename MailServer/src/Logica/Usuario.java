@@ -20,8 +20,8 @@ public class Usuario {
 	private String nro_puerta;
 	private String apto;
 	
-	private Cuentas cuentas;
 	private Perfiles prefiles;
+	private Cuentas cuentas;
 	
 	FachadaBD BD = FachadaBD.getInstancia();
 	
