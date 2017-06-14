@@ -22,7 +22,7 @@ public class Usuario {
 	
 	private Cuentas cuentas;
 	private Perfiles prefiles;
-	//prueba commit
+	//prueba commit2
 	
 	FachadaBD BD = FachadaBD.getInstancia();
 	
