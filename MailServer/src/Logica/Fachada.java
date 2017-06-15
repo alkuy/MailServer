@@ -16,7 +16,6 @@ public class Fachada {
 	private Fachada() {
 		this.hUsu = new Usuarios();
 	}
-	
 	public static Fachada getInstancia() {
 		if(instancia == null)
 			instancia = new Fachada();

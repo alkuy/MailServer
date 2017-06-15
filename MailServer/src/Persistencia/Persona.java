@@ -89,17 +89,24 @@ public class Persona {
 	public java.sql.ResultSet Dev_id(String ced) throws SQLException{
 		
 		String seleccion = "Select id_usuario from Persona where cedula ='"+ced+"'";
-	//	System.out.println(seleccion);
-		
 		java.sql.Statement ps = pruebaConn.getConexion().createStatement();
-		java.sql.ResultSet rs = ps.executeQuery(seleccion);
-		//rs.next();
-		//int id = rs.getInt(1);*
-		//pruebaConn.closeConextion();*/
-		
+		java.sql.ResultSet rs = ps.executeQuery(seleccion);				
 		return rs;
 		
 	}
+	
+	
+/* metodo para devolver la c.i de usuario en base a su id */
+	
+	public java.sql.ResultSet Dev_ci(int id) throws SQLException{
+		
+		String seleccion = "Select cedula from Persona where id_usuario ='"+id+"'";		
+		java.sql.Statement ps = pruebaConn.getConexion().createStatement();
+		java.sql.ResultSet rs = ps.executeQuery(seleccion);		
+		return rs;
+		
+	}
+	
 	
 	
 	/* metodo para cargar un resulset con lo datos de un registro seleccionado */

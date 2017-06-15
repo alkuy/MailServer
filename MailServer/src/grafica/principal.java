@@ -164,7 +164,7 @@ public class principal extends JFrame {
 		FrmNuevoUsuario frmusuario = new FrmNuevoUsuario();
 		frmusuario.setBounds(20, 60, 450, 500);
 		VPrincipal.add(frmusuario);
-		
+
 		/*Formulario Nueva Cuenta*/
 		FrmNuevaCuenta frmcuenta = new FrmNuevaCuenta();
 		frmcuenta.setBounds(20, 60, 450, 300);

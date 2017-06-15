@@ -21,20 +21,7 @@ public class Usuario {
 		this.id_usuario = id;	
 	}
 	
- /*   public void nuevoUserVacio(){
-    	if (pruebaConn!=null){
-			try{
-				java.sql.Statement stm = pruebaConn.getConexion().createStatement();
-				stm.execute("insert into Usuario(fecha_alta)values(current_timestamp )");
-			}
-			catch (Exception e){
-				
-			}
-		//	pruebaConn.closeConextion();
-		}else{
-			System.out.println("Desconectado");
-		}
-    }*/
+
 	
 	public void InsertRow(){
 		
@@ -106,6 +93,18 @@ public java.sql.ResultSet Select_ultimo_id() throws SQLException{
 	
 	//pruebaConn.closeConextion();
 	
+	return rs;
+	
+}
+
+
+/* metodo para devolver el pass de un usuario en base a su id */
+
+public java.sql.ResultSet Dev_pass(int id) throws SQLException{
+	
+	String seleccion = "Select pass_admin from Usuario where id_usuario ='"+id+"'";		
+	java.sql.Statement ps = pruebaConn.getConexion().createStatement();
+	java.sql.ResultSet rs = ps.executeQuery(seleccion);		
 	return rs;
 	
 }
