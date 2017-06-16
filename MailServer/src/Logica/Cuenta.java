@@ -1,21 +1,24 @@
 package Logica;
 
-/** Clase de ejemplo que muestra la sintaxis
- * elemental de un programa en java
- * @author 
- * @version 1.0
-*/ 
+import Persistencia.FachadaBD;
 
 public class Cuenta {
 	
+	FachadaBD BD = FachadaBD.getInstancia();
 	
+	private String nom_u; // Solo agregue esto aca. No se por que no se pudo de entrada, por eso no lo puse en el contructor
 	private String contraseña_cuenta;
 	private Correos correos;
-	private Dominio dominio;
+	private String dominio;
+	//private Dominio dominio; // Por que es del tipo dominios ?????
+	
+	public Cuenta(){
+		
+	}
 
 	
 	/** Método constructor de la clase. */
-	public Cuenta(String contraseña_cuenta, Dominio dominio, Correos correos) {
+	public Cuenta(String contraseña_cuenta, String dominio, Correos correos) {
 		this.contraseña_cuenta = contraseña_cuenta;
 		this.dominio = dominio;
 		this.correos = new Correos();
@@ -27,7 +30,7 @@ public class Cuenta {
 		return contraseña_cuenta;
 	}
 	
-	public Dominio getDominio() {
+	public String getDominio() {
 		return dominio;
 	}
 	
@@ -42,12 +45,17 @@ public class Cuenta {
 		this.contraseña_cuenta = contraseña_cuenta;
 	}
 	
-	public void setDominio(Dominio dominio) {
+	public void setDominio(String dominio) {
 		this.dominio = dominio;
 	}
 	
 	public void setCorreos(Correos correos) {
 		this.correos = correos;
+	}
+	
+	/*Agregado por Adrian*/
+	public void setNomU(String nombre){
+		this.nom_u = nombre;
 	}
 
 }

@@ -1,6 +1,10 @@
 package Logica;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
+
+import Persistencia.FachadaBD;
 
 /** Clase de ejemplo que muestra la sintaxis
  * elemental de un programa en java
@@ -9,6 +13,8 @@ import java.util.ArrayList;
 */ 
 
 public class Cuentas {
+	
+	FachadaBD BD = FachadaBD.getInstancia();
 	
 	private ArrayList<Cuenta> setCuentas;
 	
@@ -56,8 +62,31 @@ public class Cuentas {
 	/** Método que retorna la coleccion Set de Cuentas.
 	 * <BR><b>Precondición</b>: la colección no debe ser vacía.</BR>
 	 * @return Retorna el set de Cuentas. */
-	public ArrayList<Cuenta> getsetCuentas() {
+	public ArrayList<Cuenta> getsetCuentas(){
 		return setCuentas;
+	}
+	
+	/**
+	 * Metodo que carga cuentas desde la base en arrayList
+	 * @return ArrayList con cuentas
+	 */
+	public ArrayList<Cuenta> cargaCuentasdesdeBD(){
+		Cuenta c = new Cuenta();
+		ResultSet rs = null;
+		try {
+			rs = BD.ConTablaCuenta();
+			String nom_u = rs.getString("nom_usuario");
+			String nom_d = rs.getString("nom_dominio");
+			c.setNomU(nom_u);
+			c.setDominio(nom_d);
+			this.setCuentas.add(c);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return setCuentas;
+		
 	}
 
 }

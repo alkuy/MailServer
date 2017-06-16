@@ -11,7 +11,7 @@ public class FachadaBD {
 	private Persona persona;
 	private Correo correo;
 	private Dominio dominio = new Dominio();
-	private Cuenta cuenta;
+	private Cuenta cuenta = new Cuenta();
 	private Telefono telefono;
 	private Oficina oficina;
 	private Perfil perfil;
@@ -261,9 +261,8 @@ public class FachadaBD {
 	
 	//Metodo que devuelve el Resulset con los datos de la tabla Cuenta cargados
 	
-	public java.sql.ResultSet ConTablaCuenta(int id, String nom_us, String nom_dom) throws SQLException{
+	public java.sql.ResultSet ConTablaCuenta() throws SQLException{
 		java.sql.ResultSet rs;
-		this.Nueva_Cuenta2(id, nom_us, nom_dom);
 		rs = this.cuenta.Select_Tabla();
 		return rs;
 	}

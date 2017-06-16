@@ -178,6 +178,10 @@ public class principal extends JFrame {
 		frmmuestracuentas.setBounds(20, 60, 450, 500);
 		VPrincipal.add(frmmuestracuentas);
 		
+		FrmMuestraDominios frmmuestradominios = new FrmMuestraDominios();
+		frmmuestradominios.setBounds(20, 60, 450, 500);
+		VPrincipal.add(frmmuestradominios);
+		
 		/*#########   EL DE INICIO DE LOGIN   ################*/
 		/*FrmLogin LOGIN = new FrmLogin();
 		LOGIN.setBounds(20, 60, 500, 200);
@@ -198,6 +202,7 @@ public class principal extends JFrame {
 		frmcuenta.setVisible(false);
 		frmdominionuevo.setVisible(false);
 		frmmuestracuentas.setVisible(false);
+		frmmuestradominios.setVisible(false);
 		
 		
 
@@ -213,6 +218,7 @@ public class principal extends JFrame {
 		
 		mntmNuevoCuenta.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				frmmuestradominios.setVisible(false);
 				frmusuario.setVisible(false);
 				frmcuenta.setVisible(true);
 				frmdominionuevo.setVisible(false);
@@ -223,6 +229,7 @@ public class principal extends JFrame {
 		
 		mntmNuevoUsuario.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				frmmuestradominios.setVisible(false);
 				frmusuario.setVisible(true);
 				frmcuenta.setVisible(false);
 				frmdominionuevo.setVisible(false);
@@ -233,6 +240,7 @@ public class principal extends JFrame {
 		
 		mntmVerCuentas.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				frmmuestradominios.setVisible(false);
 				frmusuario.setVisible(false);
 				frmcuenta.setVisible(false);
 				frmdominionuevo.setVisible(false);
@@ -242,6 +250,7 @@ public class principal extends JFrame {
 		
 		mntmAgregarDominio.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				frmmuestradominios.setVisible(false);
 				frmusuario.setVisible(false);
 				frmcuenta.setVisible(false);
 				frmmuestracuentas.setVisible(false);
@@ -249,6 +258,17 @@ public class principal extends JFrame {
 	
 			
 				
+			}
+		});
+		
+		
+		mntmDominios.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				frmmuestradominios.setVisible(true);
+				frmusuario.setVisible(false);
+				frmcuenta.setVisible(false);
+				frmmuestracuentas.setVisible(false);
+				frmdominionuevo.setVisible(false);
 			}
 		});
 		

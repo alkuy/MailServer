@@ -4,6 +4,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import javax.swing.JTable;
+import javax.swing.ListSelectionModel;
+import javax.swing.table.DefaultTableModel;
+
 import Persistencia.FachadaBD;
 
 /** Clase de ejemplo que muestra la sintaxis
@@ -50,6 +54,7 @@ public class Dominio {
 	public void setPrioridad(int prioridad) {
 		this.prioridad = prioridad;
 	}
+	
 
 	/** Método que retoena un array con los dominios cargados en la base 
 	 * @return ArrayList con dominios y prioridades 
@@ -75,6 +80,40 @@ public class Dominio {
 		return dominios;
 		
 	}
+	
+	
+	public DefaultTableModel DevTablaDom() throws SQLException{
+		
+		JTable tblMDominios;			
+		String col[] = {"Dominio","Prioridad"};
+		DefaultTableModel modelo = new DefaultTableModel(col,0);
+						
+		tblMDominios = new JTable(modelo);
+		tblMDominios.setRowSelectionAllowed(false);
+		tblMDominios.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		
+		
+			
+			java.sql.ResultSet rs;
+			rs = BD.ConTablaDom();
+			// Bucle para cada resultado en la consulta
+			while (rs.next())
+			{
+			   // Se crea un array que ser una de las filas de la tabla.
+			   Object [] fila = new Object[2]; // Hay dos columnas en la tabla
+
+			   // Se rellena cada posicion del array con una de las columnas de la tabla en base de datos.
+			   for (int i=0;i<2;i++)
+			      fila[i] = rs.getObject(i+1); // El primer indice en rs es el 1, no el cero, por eso se suma 1.
+
+			   // Se anade al modelo la fila completa.
+			   modelo.addRow(fila);
+			}
+						
+		
+		return modelo;
+	}
+
 	
 /*-----------------------------------------------------------------*/
 }

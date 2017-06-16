@@ -15,6 +15,10 @@ public class Cuenta {
 	
 	private Conexion pruebaConn = Conexion.getInstancia();
 	
+	public Cuenta(){
+		
+	}
+	
 	public Cuenta(int id, String nom_us, String nom_dom, String pass, int es_lista){
 		
 		this.id_usuario = id;
