@@ -3,6 +3,8 @@ package grafica;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.Iterator;
 
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
@@ -13,6 +15,7 @@ import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
+import Logica.Dominio;
 import Logica.Fachada;
 
 public class FrmNuevaCuenta extends JPanel {
@@ -52,8 +55,21 @@ public class FrmNuevaCuenta extends JPanel {
 		lblNuevaCuenta.setFont(new Font("Goudy Old Style", Font.BOLD, 21));
 		add(lblNuevaCuenta);
 		
+		/**
+		 * ComboBox con dominios
+		 */
 		JComboBox cboNCdominio = new JComboBox();
 		cboNCdominio.setBounds(150, 207, 250, 30);
+		
+		Dominio dom = new Dominio();
+		ArrayList<Dominio> dominios = new ArrayList<Dominio>();
+		dominios = FCLogica.carga_dominios();
+		Iterator it = dominios.iterator();
+		while(it.hasNext()){  
+            dom =(Dominio)it.next();
+            cboNCdominio.addItem(dom.getNombre_dominio());
+            
+        } 
 		add(cboNCdominio);
 		
 		JLabel lblCNNombreUsuario = new JLabel("Nombre Usuario");
@@ -128,10 +144,17 @@ public class FrmNuevaCuenta extends JPanel {
 		
 		btnCNingresar = new JButton("INGRESAR");
 		btnCNingresar.addActionListener(new ActionListener() {
+			/**
+			 * Ingresa la nueva cuenta
+			 * Concatena usuario con dominio
+			 */
 			public void actionPerformed(ActionEvent arg0) {
 				String documento = txtCNdocumento.getText();
 				String nom_usuario = txtCNnombre.getText();
-				//System.out.println(documento);
+				String dominio = cboNCdominio.getSelectedItem().toString();
+				String cuenta = nom_usuario+"@"+dominio;
+				
+				//System.out.println(cuenta);
 				
 				txtCNdocumento.setText(null);
 				setVisible(false);

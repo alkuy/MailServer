@@ -14,6 +14,9 @@ public class Dominio {
 		this.nom_dominio = nom_dominio;	
 	}
 	
+	public Dominio(){
+		
+	}
    
 	public void InsertRow(){
 		

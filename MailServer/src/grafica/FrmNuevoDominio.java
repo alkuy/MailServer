@@ -10,15 +10,13 @@ import javax.swing.SwingConstants;
 
 public class FrmNuevoDominio extends JPanel {
 
-	/**
+	/** Formulario para ingresar nuevo dominio
 	 * 
 	 */
 	private JTextField txtADdominio;
 	private static final long serialVersionUID = 1L;
 
-	/**
-	 * Create the panel.
-	 */
+	
 	public FrmNuevoDominio() {
 		setBounds(20, 60, 450, 300);
 		setLayout(null);

@@ -18,11 +18,12 @@ import javax.swing.border.Border;
 import javax.swing.JRadioButton;
 import javax.swing.ButtonGroup;
 
+/**Clase que ingresa Nuevo usuario
+ * 
+ */
 public class FrmNuevoUsuario extends JPanel {
 
-	/**
-	 * 
-	 */
+	
 	private static final long serialVersionUID = 1L;
 	private JTextField txtUNnombre;
 	private JTextField txtUNapellido;
@@ -217,8 +218,8 @@ public class FrmNuevoUsuario extends JPanel {
 
 	}
 	/**Metodo que verifica si los campos obligatorios fueron cargados
-	 * @param campo_nombre, campo_apellido, campo_documento.
-	 * @return true si fueron cargados los tres
+	 * @param campo_nombre, campo_apellido, campo_documento. radiobutton tipo
+	 * @return true si fueron cargados los cuatro
 	 */
 	public boolean verifica(String nom, String ape, String docu){
 		boolean verificacion = true;

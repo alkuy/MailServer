@@ -1,6 +1,8 @@
 package Logica;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Iterator;
 
 /** Clase de ejemplo que muestra la sintaxis
  * elemental de un programa en java
@@ -40,6 +42,18 @@ public class Fachada {
 	}
 	
 	public void mofifUsu(Usuario usuario){
+		
+	}
+	
+	/**
+	 * Metodo que carga ArrayList de dominios
+	 * @return ArrayList con dominios y prioridades
+	 */
+	public ArrayList<Dominio> carga_dominios(){
+		ArrayList<Dominio> dominios = new ArrayList<Dominio>();
+		Dominio dom = new Dominio();
+		dominios = dom.carga_dominios();
+		return dominios;
 		
 	}
 	

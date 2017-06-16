@@ -8,7 +8,8 @@ import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.JButton;
-
+/*
+ * */
 public class FrmMuestraCuentas extends JPanel {
 
 	private JTable tblMuestraCuentas;

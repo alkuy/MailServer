@@ -10,7 +10,7 @@ public class FachadaBD {
 	private Usuario user;
 	private Persona persona;
 	private Correo correo;
-	private Dominio dominio;
+	private Dominio dominio = new Dominio();
 	private Cuenta cuenta;
 	private Telefono telefono;
 	private Oficina oficina;
@@ -216,14 +216,13 @@ public class FachadaBD {
 	}
 	
 	//Metodo que devuelve el Resulset con todos los datos de la tabla Dominio cargados
-	
-	public java.sql.ResultSet ConTablaDom(String dom) throws SQLException{
+	/*METE MANO ADRIAN*/
+	public java.sql.ResultSet ConTablaDom() throws SQLException{
 		java.sql.ResultSet rs;
-		this.NuevoDom(dom);
-		rs = this.dominio.Select_tabla();
+		rs = dominio.Select_tabla();
 		return rs;
 	}
-	
+	/*----------------------------------------------------------------------*/
 	
 	//Metodo que devuelve el Resulset con los datos de la fila de la tabla Dominio que se elija
 	
