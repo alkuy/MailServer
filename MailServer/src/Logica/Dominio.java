@@ -81,6 +81,30 @@ public class Dominio {
 		
 	}
 	
+/**
+ * Método que solo trae nombres de dominios para comboBox	
+ * @return ArrayList<String>
+ */
+	public ArrayList<String> carga_nom_dom(){
+		ArrayList<String> dominios = new ArrayList<String>();
+		ResultSet rs = null;
+		
+		try {
+			rs=BD.ConTablaDom();
+			while(rs.next()){
+				String dom_nom = rs.getString("nom_dominio");
+				dominios.add(dom_nom);
+			
+			} 
+		}catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+			
+		return dominios;
+		
+	}
+	
 	
 	public DefaultTableModel DevTablaDom() throws SQLException{
 		

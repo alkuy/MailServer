@@ -175,8 +175,9 @@ public class FrmNuevoUsuario extends JPanel {
 				String nroPuerta = txtUNnroPuerta.getText();
 				String apto = txtUNapto.getText();
 				
-		
-				if(verifica(nombre, apellido, documento)){
+				/*Instancio la clase verificacion*/
+				Verificaciones verifica = new Verificaciones();
+				if(verifica.campo_vacio(txtUNnombre) && verifica.campo_vacio(txtUNapellido) && verifica.documento(txtUNdocumento)){
 					try {
 						FCLogica.altaUsu(documento, nombre, apellido, calle, nroPuerta, apto);
 						/*Cierro Ventana*/
@@ -192,15 +193,12 @@ public class FrmNuevoUsuario extends JPanel {
 							txtCNdocumento.setBounds(150, 74, 250, 30);
 							pan.add(cuenta);
 							cuenta.add(txtCNdocumento);
+							limpiaCampos();
 						}
 						
 						if (rdbtnAdministrador.isSelected()){
-							JPanel pan = principal.getInstancia();
+							//JPanel pan = principal.getInstancia();
 					
-							/*txtCNdocumento.setText(documento);
-							txtCNdocumento.setBounds(150, 74, 250, 30);
-							pan.add(cuenta);
-							cuenta.add(txtCNdocumento);*/
 						}
 						
 					} catch (SQLException e) {
@@ -209,7 +207,7 @@ public class FrmNuevoUsuario extends JPanel {
 					}
 				}else{
 					lblFaltanCampos.setVisible(true);
-				}	
+				}
 			}
 		});
 		btnAgregarUsuario.setBounds(142, 459, 246, 30);
@@ -217,38 +215,19 @@ public class FrmNuevoUsuario extends JPanel {
 		
 
 	}
-	/**Metodo que verifica si los campos obligatorios fueron cargados
-	 * @param campo_nombre, campo_apellido, campo_documento. radiobutton tipo
-	 * @return true si fueron cargados los cuatro
-	 */
-	public boolean verifica(String nom, String ape, String docu){
-		boolean verificacion = true;
-		/*Declaro dos bordes, uno para indicar cuando el campo falta, el tro para volverlo a su estado inicial*/
-		Border bordeROJO = BorderFactory.createLineBorder(Color.RED, 2);
-		Border bordeCOMUN = BorderFactory.createLineBorder(Color.BLACK, 1);
-		if (nom.isEmpty()){
-			verificacion = false;
-			this.txtUNnombre.setBorder(bordeROJO);
-		}else{
-			this.txtUNnombre.setBorder(bordeCOMUN);
-		}
-		if (ape.isEmpty()){
-			verificacion = false;
-			this.txtUNapellido.setBorder(bordeROJO);
-		}else{
-			this.txtUNapellido.setBorder(bordeCOMUN);
-		}
-		if (docu.isEmpty()){
-			verificacion = false;
-			this.txtUNdocumento.setBorder(bordeROJO);
-		}else{
-			this.txtUNdocumento.setBorder(bordeCOMUN);
-		}
-		if(rdbtnTipoUsuario.isSelected(null)){
-			verificacion = false;
-			System.out.println("FALTA RDBTN");
-		}
-		return verificacion;
-		
+	
+/**
+ * Limpia todos los textField del fomrulario despues de insertar	
+ */
+public void limpiaCampos(){
+	txtUNnombre.setText(null);
+	txtUNapellido.setText(null);
+	txtUNdocumento.setText(null);
+	txtUNcalle.setText(null);
+	txtUNnroPuerta.setText(null);
+	txtUNapto.setText(null);
+	txtUNtelefono1.setText(null);
+	txtUNtelefono2.setText(null);
+	//rdbtn
 	}
 }

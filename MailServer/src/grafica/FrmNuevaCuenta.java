@@ -15,8 +15,11 @@ import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
+
 import Logica.Dominio;
 import Logica.Fachada;
+
+
 
 public class FrmNuevaCuenta extends JPanel {
 	
@@ -46,6 +49,11 @@ public class FrmNuevaCuenta extends JPanel {
 	 * Create the panel.
 	 */
 	public FrmNuevaCuenta() {
+		/**
+		 * Instancio clase de Verificaciones
+		 */
+		Verificaciones verifica = new Verificaciones();
+		
 		setBounds(20, 60, 450, 300);
 		setLayout(null);
 		
@@ -58,18 +66,18 @@ public class FrmNuevaCuenta extends JPanel {
 		/**
 		 * ComboBox con dominios
 		 */
+		
+		
 		JComboBox cboNCdominio = new JComboBox();
 		cboNCdominio.setBounds(150, 207, 250, 30);
 		
-		Dominio dom = new Dominio();
-		ArrayList<Dominio> dominios = new ArrayList<Dominio>();
-		dominios = FCLogica.carga_dominios();
-		Iterator it = dominios.iterator();
-		while(it.hasNext()){  
-            dom =(Dominio)it.next();
-            cboNCdominio.addItem(dom.getNombre_dominio());
-            
-        } 
+
+		ArrayList<String> dominios = new ArrayList<String>();
+		dominios = (ArrayList<String>) FCLogica.carga_dominios();
+		for (int i = 0; i< dominios.size(); i++){
+			cboNCdominio.addItem(dominios.get(i));
+		}
+		
 		add(cboNCdominio);
 		
 		JLabel lblCNNombreUsuario = new JLabel("Nombre Usuario");
@@ -78,7 +86,7 @@ public class FrmNuevaCuenta extends JPanel {
 		lblCNNombreUsuario.setBounds(10, 166, 136, 30);
 		add(lblCNNombreUsuario);
 		
-		txtCNnombre = new JTextField();
+		JTextField txtCNnombre = new JTextField();
 		txtCNnombre.setColumns(10);
 		txtCNnombre.setBounds(150, 166, 250, 30);
 		add(txtCNnombre);
@@ -89,9 +97,10 @@ public class FrmNuevaCuenta extends JPanel {
 		lblCNdominio.setBounds(46, 207, 100, 30);
 		add(lblCNdominio);
 		
-		JLabel lblNombreApellidoO = new JLabel("Nombre Apellido o No existe");
-		lblNombreApellidoO.setBounds(150, 105, 250, 30);
-		add(lblNombreApellidoO);
+		JLabel lblNoExiste = new JLabel("El documento no existe, ingrese usuario nuevo");
+		lblNoExiste.setBounds(150, 105, 250, 30);
+		add(lblNoExiste);
+		lblNoExiste.setVisible(false);
 		
 		JRadioButton rdbtnGrupoUOficina = new JRadioButton("Grupo u Oficina");
 		grpbtnSelectTipoCuenta.add(rdbtnGrupoUOficina);
@@ -134,10 +143,10 @@ public class FrmNuevaCuenta extends JPanel {
 		JTextField txtCNdocumento = FrmNuevaCuenta.getInstancia();
 		if(txtCNdocumento.getText().isEmpty()){
 			rdbtnCNpersona.setSelected(true);
-			txtCNdocumento.setEditable(false);
+			//txtCNdocumento.setEditable(false);
 		}
 		txtCNdocumento.setBounds(150, 74, 250, 30);
-		txtCNdocumento.setColumns(10);
+		txtCNdocumento.setColumns(8);
 		add(txtCNdocumento);
 		
 		
@@ -149,21 +158,35 @@ public class FrmNuevaCuenta extends JPanel {
 			 * Concatena usuario con dominio
 			 */
 			public void actionPerformed(ActionEvent arg0) {
-				String documento = txtCNdocumento.getText();
-				String nom_usuario = txtCNnombre.getText();
-				String dominio = cboNCdominio.getSelectedItem().toString();
-				String cuenta = nom_usuario+"@"+dominio;
+				if (verifica.documento(txtCNdocumento) && verifica.campo_vacio(txtCNnombre)){
+					String documento = txtCNdocumento.getText();
+					String nom_usuario = txtCNnombre.getText();
+					String dominio = cboNCdominio.getSelectedItem().toString();
+					String cedula = txtCNdocumento.getText();
+					boolean existe = FCLogica.VerificaCuenta(nom_usuario, dominio);
 				
-				//System.out.println(cuenta);
+					if (existe){
+						System.out.println("La cuenta ya existe");
+					}else{
+						FCLogica.altaCuentaPersonal(cedula, nom_usuario, dominio);
+					}
 				
-				txtCNdocumento.setText(null);
-				setVisible(false);
+					txtCNdocumento.setText(null);
+					setVisible(false);
+				}else{
+					System.out.println("Faltan campos");
+				}
 			}
 		});
 		btnCNingresar.setBounds(150, 248, 250, 30);
 		add(btnCNingresar);
 		
+	
 		
+		
+	}
+	
+	public void limpiaCampos(){
 		
 	}
 

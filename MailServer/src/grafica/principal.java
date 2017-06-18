@@ -174,13 +174,13 @@ public class principal extends JFrame {
 		frmdominionuevo.setBounds(20, 60, 450, 300);
 		VPrincipal.add(frmdominionuevo);
 		
-		FrmMuestraCuentas frmmuestracuentas = new FrmMuestraCuentas();
-		frmmuestracuentas.setBounds(20, 60, 450, 500);
-		VPrincipal.add(frmmuestracuentas);
-		
 		FrmMuestraDominios frmmuestradominios = new FrmMuestraDominios();
 		frmmuestradominios.setBounds(20, 60, 450, 500);
 		VPrincipal.add(frmmuestradominios);
+		
+		FrmMuestraCuentas frmmuestracuentas = new FrmMuestraCuentas();
+		frmmuestracuentas.setBounds(20, 60, 450, 500);
+		VPrincipal.add(frmmuestracuentas);
 		
 		/*#########   EL DE INICIO DE LOGIN   ################*/
 		/*FrmLogin LOGIN = new FrmLogin();
@@ -240,11 +240,13 @@ public class principal extends JFrame {
 		
 		mntmVerCuentas.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				frmmuestracuentas.SetTable();
+				frmmuestracuentas.setVisible(true);
+				
 				frmmuestradominios.setVisible(false);
 				frmusuario.setVisible(false);
 				frmcuenta.setVisible(false);
 				frmdominionuevo.setVisible(false);
-				frmmuestracuentas.setVisible(true);
 			}
 		});
 		

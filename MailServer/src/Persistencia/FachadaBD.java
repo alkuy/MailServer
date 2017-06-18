@@ -114,13 +114,24 @@ public class FachadaBD {
      
      //Metodo que devuelve un entero con el id segun la cedula de usuario ingresada
  	
- 	public java.sql.ResultSet Devolver_id(String ci) throws SQLException{
+ /*	public java.sql.ResultSet Devolver_id(String ci) throws SQLException{
  		
  		java.sql.ResultSet rs;
  	    Nueva_Persona3();
  		rs = this.persona.Dev_id(ci);
  		
  		return rs;
+ 	}*/
+ 	
+ 	public int Devolver_id(String ci) throws SQLException{
+ 		int id=0;
+ 		java.sql.ResultSet rs;
+ 	    Nueva_Persona3();
+ 		rs = this.persona.Dev_id(ci);
+ 		while (rs.next()){
+ 			id = rs.getInt(1);
+ 		}
+ 		return id;
  	}
      
  	

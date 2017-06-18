@@ -1,12 +1,15 @@
 package grafica;
 import java.awt.BorderLayout;
-
+import java.sql.SQLException;
 
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
+
+import Logica.Fachada;
+
 import javax.swing.JButton;
 /*
  * */
@@ -14,6 +17,8 @@ public class FrmMuestraCuentas extends JPanel {
 
 	private JTable tblMuestraCuentas;
 	private static final long serialVersionUID = 1L;
+	
+	private Fachada FCLogica = Fachada.getInstancia();
 	/**
 	 * Create the panel.
 	 */
@@ -21,15 +26,7 @@ public class FrmMuestraCuentas extends JPanel {
 		setBounds(20, 60, 450, 500);
 		setLayout(null);
 		
-		String col[] = {"id-usuario","Cuenta"};
-
-		DefaultTableModel TablaForma = new DefaultTableModel(col, 0);
-
-		tblMuestraCuentas = new JTable(TablaForma);
-		tblMuestraCuentas.setRowSelectionAllowed(false);
-		tblMuestraCuentas.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		/*Para Cargar Array list aqui*/
-		TablaForma.addRow(col);
+		this.SetTable();
 		/*#############################*/
 		
 		JScrollPane scrlMCMostrarCuentas = new JScrollPane(tblMuestraCuentas);
@@ -43,5 +40,19 @@ public class FrmMuestraCuentas extends JPanel {
 		btnEditar.setBounds(33, 453, 89, 23);
 		add(btnEditar);
 
+	}
+	
+	public void SetTable(){
+		String col[] = {"id-usuario","Cuenta"};
+		DefaultTableModel modelo = new DefaultTableModel(col,0);
+		try{
+			modelo = FCLogica.DevCuentasCompleto();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		tblMuestraCuentas = new JTable(modelo);
+		tblMuestraCuentas.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		
 	}
 }
