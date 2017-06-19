@@ -33,6 +33,9 @@ public class FrmNuevoUsuario extends JPanel {
 	private JTextField txtUNapto;
 	private JTextField txtUNtelefono1;
 	private JTextField txtUNtelefono2;
+	private JRadioButton rdbtnConCuenta;
+	private JRadioButton rdbtnAdministrador;
+	private JLabel lblFaltanCampos;
 	private final ButtonGroup rdbtnTipoUsuario = new ButtonGroup();
 	/**
 	 * Create the panel.
@@ -144,6 +147,7 @@ public class FrmNuevoUsuario extends JPanel {
 		separator.setBounds(38, 196, 388, 21);
 		add(separator);
 		
+		
 		JRadioButton rdbtnConCuenta = new JRadioButton("Con cuenta");
 		rdbtnTipoUsuario.add(rdbtnConCuenta);
 		rdbtnConCuenta.setBounds(145, 409, 94, 23);
@@ -228,6 +232,7 @@ public void limpiaCampos(){
 	txtUNapto.setText(null);
 	txtUNtelefono1.setText(null);
 	txtUNtelefono2.setText(null);
-	//rdbtn
+	rdbtnTipoUsuario.clearSelection();
+	lblFaltanCampos.setVisible(false);
 	}
 }

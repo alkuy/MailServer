@@ -10,6 +10,7 @@ import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
@@ -158,23 +159,26 @@ public class FrmNuevaCuenta extends JPanel {
 			 * Concatena usuario con dominio
 			 */
 			public void actionPerformed(ActionEvent arg0) {
+				
 				if (verifica.documento(txtCNdocumento) && verifica.campo_vacio(txtCNnombre)){
 					String documento = txtCNdocumento.getText();
+					
 					String nom_usuario = txtCNnombre.getText();
 					String dominio = cboNCdominio.getSelectedItem().toString();
 					String cedula = txtCNdocumento.getText();
+					
 					boolean existe = FCLogica.VerificaCuenta(nom_usuario, dominio);
-				
 					if (existe){
-						System.out.println("La cuenta ya existe");
+						JOptionPane.showMessageDialog(new JPanel(), "La cuenta ya existe, debe elegir otro nombre");
 					}else{
 						FCLogica.altaCuentaPersonal(cedula, nom_usuario, dominio);
+						limpiaCampos();
+						setVisible(false);
 					}
 				
-					txtCNdocumento.setText(null);
-					setVisible(false);
+					
 				}else{
-					System.out.println("Faltan campos");
+					//System.out.println("Faltan campos");
 				}
 			}
 		});
@@ -187,7 +191,9 @@ public class FrmNuevaCuenta extends JPanel {
 	}
 	
 	public void limpiaCampos(){
-		
+		txtCNnombre.setText(null);
+		txtCNdocumento.setText(null);
+		grpbtnSelectTipoCuenta.clearSelection();
 	}
 
 }

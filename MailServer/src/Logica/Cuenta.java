@@ -82,13 +82,10 @@ public class Cuenta {
 	 * A partir de la cedula devuelve el id del usuario, para poder asociarlo a la cuenta
 	 * */
 	public void setIdUsuario(String cedula){
-		
 		try {
 			int id = BD.Devolver_id(cedula);
-			System.out.println(id);
 			this.id_usuario = id;
 		} catch (SQLException e) {
-			
 			e.printStackTrace();
 		}
 		

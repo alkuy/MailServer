@@ -31,7 +31,7 @@ public class Fachada {
 	}
 	
 	Cuenta cuenta = Cuenta.getInstancia();
-	Cuentas c = Cuentas.getInstancia();
+	Cuentas cuentas = Cuentas.getInstancia();
 	
 	public Usuarios gethUsu() {
 		return hUsu;
@@ -98,9 +98,9 @@ public class Fachada {
 		cadena2 = usuario+dominio;
 		/*Paso a minuscula porque sino del commbobox lo trae en mayuscula*/
 		cadena2 = cadena2.toLowerCase();
-		for (int i = 0; i < c.getsetCuentas().size(); i++){
-			usu = c.getsetCuentas().get(i).getNom_u().toString();
-			dom = c.getsetCuentas().get(i).getDominio().toString();
+		for (int i = 0; i < cuentas.getsetCuentas().size(); i++){
+			usu = cuentas.getsetCuentas().get(i).getNom_u().toString();
+			dom = cuentas.getsetCuentas().get(i).getDominio().toString();
 			cadena1 = usu+dom;
 			/*comparo lo ingresado con lo existente en el arraylist*/
 			
@@ -125,7 +125,7 @@ public class Fachada {
 		cuenta.setDominio(dominio);
 		cuenta.setContraseña_cuenta(cedula);
 		cuenta.setEs_lista(0);		
-		c.Insertar(cuenta);
+		cuentas.Insertar(cuenta);
 		cuenta.LimpiaCuenta();
 		
 	}
@@ -141,5 +141,11 @@ public class Fachada {
 		modelo = cuentas.DevTablaCuenta();
 		return modelo;
 	}
+	
+/*	public boolean ExisteUsuario(String cedula){
+		Usuarios usuarios = new Usuarios();
+		ArrayList<Usuario> users = usuarios. 
+		return false;
+	}*/
 	
 }

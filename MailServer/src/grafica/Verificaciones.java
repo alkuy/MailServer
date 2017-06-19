@@ -26,14 +26,14 @@ public class Verificaciones {
                     // Si se puede convertir en entero, está bien
 					Integer.parseInt(texto);
 					if(texto.length() > 8 || texto.length() < 6){
-						JOptionPane.showMessageDialog(campo, "Ingreso mal su documento");
+						JOptionPane.showMessageDialog(campo, "Ingreso mal el documento");
 						return false;
 					}else{
 						return true;
 					}	
 				}catch (Exception e)
 					{
-					JOptionPane.showMessageDialog(campo, "Ingreso mal su documento");
+					JOptionPane.showMessageDialog(campo, "Ingreso mal el documento");
 					return false;
 					}
 			}
@@ -59,4 +59,25 @@ public class Verificaciones {
 		}
 		return false;
 	}
+	
+	/*public boolean telefonos(JComponent campo){
+		if (campo instanceof JTextField){
+				String texto = ((JTextField)campo).getText();
+				try
+					{
+                    // Si se puede convertir en entero, está bien
+					Integer.parseInt(texto);
+					if(texto.length() > 10 || texto.length() < 8){
+						JOptionPane.showMessageDialog(campo, "Ingreso mal el teléfono");
+						return false;
+					}else{
+						return true;
+					}	
+				}catch (Exception e)
+					{
+					JOptionPane.showMessageDialog(campo, "Ingreso mal el teléfono");
+					return false;
+					}
+
+}*/
 }

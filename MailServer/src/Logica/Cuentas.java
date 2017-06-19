@@ -115,16 +115,11 @@ public class Cuentas {
 	 * @return TableModel
 	 * @throws SQLException
 	 */
-	public DefaultTableModel DevTablaCuenta() throws SQLException{
-		
-		JTable tblMCuentas;			
+	public DefaultTableModel DevTablaCuenta(){
+				
 		String col[] = {"Id_Usuario","Cuenta"};
 		DefaultTableModel modelo = new DefaultTableModel(col,0);
-						
-		tblMCuentas = new JTable(modelo);
-		tblMCuentas.setRowSelectionAllowed(false);
-		tblMCuentas.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		
+
 		for (int i=0; i < setCuentas.size(); i++){
 			String id, cuenta;
 			int id_user;

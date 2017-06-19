@@ -10,6 +10,7 @@ public class Cuenta {
 	private String nom_usuario;
 	private String nom_dominio;
 	private String password;
+	private String fecha_creacion; 
 	private int es_lista;
 	
 	
@@ -47,7 +48,8 @@ public class Cuenta {
 		if (pruebaConn!=null){
 			try{
 				java.sql.Statement stm = pruebaConn.getConexion().createStatement();
-				stm.execute("Insert into Cuenta values ('"+id_usuario+"','"+nom_usuario+"','"+nom_dominio+"','"+password+"', '"+es_lista+"')");
+				stm.execute("Insert into Cuenta values ('"+id_usuario+"','"+nom_usuario+"','"+nom_dominio+"','"+password+"', '"+es_lista+"' ,CURRENT_TIMESTAMP )");
+				
 			}
 			catch (Exception e){
 				
