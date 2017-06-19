@@ -22,7 +22,8 @@ public class Usuario {
 	
 	private Cuentas cuentas;
 	private Perfiles prefiles;
-	//prueba commit2
+	
+	private Telefonos tels;
 	
 	FachadaBD BD = FachadaBD.getInstancia();
 	
@@ -49,6 +50,7 @@ public class Usuario {
 		this.apto = apto;
 		this.cuentas = new Cuentas();
 		this.prefiles = new Perfiles();
+		this.tels = new Telefonos();
 		BD.InsertPer(id, ci, nombre, apellido, calle, nro_puerta, apto);
 	}
 	
