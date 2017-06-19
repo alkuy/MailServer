@@ -178,12 +178,13 @@ public class FrmNuevoUsuario extends JPanel {
 				String calle = txtUNcalle.getText();
 				String nroPuerta = txtUNnroPuerta.getText();
 				String apto = txtUNapto.getText();
+				String numTel = txtUNtelefono1.getText();
 				
 				/*Instancio la clase verificacion*/
 				Verificaciones verifica = new Verificaciones();
 				if(verifica.campo_vacio(txtUNnombre) && verifica.campo_vacio(txtUNapellido) && verifica.documento(txtUNdocumento)){
 					try {
-						FCLogica.altaUsu(documento, nombre, apellido, calle, nroPuerta, apto);
+						FCLogica.altaUsu(documento, nombre, apellido, calle, nroPuerta, apto, numTel);
 						/*Cierro Ventana*/
 						setVisible(false);
 						/*Levanto la de cuenta*/

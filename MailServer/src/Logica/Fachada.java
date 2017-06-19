@@ -37,12 +37,19 @@ public class Fachada {
 		return hUsu;
 	}
 	
-	public void altaUsu(String doc, String nom, String ape, String calle, String nro_puerta, String apto) throws SQLException{
+	public void altaUsu(String doc, String nom, String ape, String calle, String nro_puerta, String apto, String numTel) throws SQLException{
 		Usuario usu = new Usuario();
 		int id= usu.InstertaUserDevuelveIdCargaPersona();
 		Usuario NU = new Usuario(id, doc, nom, ape, calle,  nro_puerta, apto);
 		hUsu.insert(NU);
-
+		
+		this.altaTel(id, numTel);
+	}
+	
+	public void altaTel(int idUsu, String numTel){
+		Telefonos auxTels = new Telefonos();
+		Telefono auxTel = new Telefono(idUsu, numTel);
+		auxTels.Insertar(auxTel);
 	}
 	
 	public void bajaUsu(Usuario usuario){
