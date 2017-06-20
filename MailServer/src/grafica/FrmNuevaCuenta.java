@@ -3,6 +3,7 @@ package grafica;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -28,7 +29,7 @@ public class FrmNuevaCuenta extends JPanel {
 	private static JTextField txtCNdocumento;
 	private JButton btnCNingresar;
 	private final ButtonGroup grpbtnSelectTipoCuenta = new ButtonGroup();
-	
+	private JLabel lblFaltanCampos;
 	/*Instancio la fachada*/
 	private Fachada FCLogica = Fachada.getInstancia();
 
@@ -66,9 +67,8 @@ public class FrmNuevaCuenta extends JPanel {
 		
 		/**
 		 * ComboBox con dominios
+		 * 
 		 */
-		
-		
 		JComboBox cboNCdominio = new JComboBox();
 		cboNCdominio.setBounds(150, 207, 250, 30);
 		
@@ -87,8 +87,7 @@ public class FrmNuevaCuenta extends JPanel {
 		lblCNNombreUsuario.setBounds(10, 166, 136, 30);
 		add(lblCNNombreUsuario);
 		
-		JTextField txtCNnombre = new JTextField();
-		txtCNnombre.setColumns(10);
+		txtCNnombre = new JTextField();
 		txtCNnombre.setBounds(150, 166, 250, 30);
 		add(txtCNnombre);
 		
@@ -97,11 +96,6 @@ public class FrmNuevaCuenta extends JPanel {
 		lblCNdominio.setFont(new Font("Goudy Old Style", Font.PLAIN, 18));
 		lblCNdominio.setBounds(46, 207, 100, 30);
 		add(lblCNdominio);
-		
-		JLabel lblNoExiste = new JLabel("El documento no existe, ingrese usuario nuevo");
-		lblNoExiste.setBounds(150, 105, 250, 30);
-		add(lblNoExiste);
-		lblNoExiste.setVisible(false);
 		
 		JRadioButton rdbtnGrupoUOficina = new JRadioButton("Grupo u Oficina");
 		grpbtnSelectTipoCuenta.add(rdbtnGrupoUOficina);
@@ -151,6 +145,11 @@ public class FrmNuevaCuenta extends JPanel {
 		add(txtCNdocumento);
 		
 		
+		lblFaltanCampos = new JLabel("*Faltan campos obligatorios");
+		lblFaltanCampos.setBounds(150, 105, 250, 30);
+		add(lblFaltanCampos);
+		lblFaltanCampos.setVisible(false);
+		
 		
 		btnCNingresar = new JButton("INGRESAR");
 		btnCNingresar.addActionListener(new ActionListener() {
@@ -159,28 +158,64 @@ public class FrmNuevaCuenta extends JPanel {
 			 * Concatena usuario con dominio
 			 */
 			public void actionPerformed(ActionEvent arg0) {
+				/**
+				 * PAra Cuenta Personal
+				 */
+				if (rdbtnCNpersona.isSelected()){ 
+					if (verifica.documento(txtCNdocumento) && verifica.campo_vacio(txtCNnombre)){ //Verificaciones de campos
+						//Variables con datos a cargar
+						String documento = txtCNdocumento.getText();
+						String nom_usuario = txtCNnombre.getText();
+						String dominio = cboNCdominio.getSelectedItem().toString();
+						String cedula = txtCNdocumento.getText();
+						//Verificamos la existencia de la cuenta
+						boolean existe = FCLogica.VerificaCuenta(nom_usuario, dominio);
+							if (existe){
+								JOptionPane.showMessageDialog(new JPanel(), "La cuenta ya existe, debe elegir otro nombre");
+							}else{
+								FCLogica.altaCuentaPersonal(cedula, nom_usuario, dominio);//Damos de alta
+								JOptionPane.showMessageDialog(new JPanel(), "La cuenta se ha ingresado con exito");
+								limpiaCampos(); //Limpiamos los Textboxes
+							}
 				
-				if (verifica.documento(txtCNdocumento) && verifica.campo_vacio(txtCNnombre)){
-					String documento = txtCNdocumento.getText();
-					
-					String nom_usuario = txtCNnombre.getText();
-					String dominio = cboNCdominio.getSelectedItem().toString();
-					String cedula = txtCNdocumento.getText();
-					
-					boolean existe = FCLogica.VerificaCuenta(nom_usuario, dominio);
-					if (existe){
-						JOptionPane.showMessageDialog(new JPanel(), "La cuenta ya existe, debe elegir otro nombre");
 					}else{
-						FCLogica.altaCuentaPersonal(cedula, nom_usuario, dominio);
-						limpiaCampos();
-						setVisible(false);
+						lblFaltanCampos.setVisible(true);
 					}
-				
 					
-				}else{
-					//System.out.println("Faltan campos");
 				}
-			}
+				
+				/**
+				 * PAra cuenta Grupal
+				 */
+				if (rdbtnGrupoUOficina.isSelected()){// Si seleccionamos cuenta de grupo
+					if(verifica.campo_vacio(txtCNnombre)){
+						String nom_usuario = txtCNnombre.getText();
+						String dominio = cboNCdominio.getSelectedItem().toString();
+						boolean existe = FCLogica.VerificaCuenta(nom_usuario, dominio);
+						if (existe){
+							JOptionPane.showMessageDialog(new JPanel(), "La cuenta ya existe, debe elegir otro nombre");
+						}else{
+							try {
+								/**
+								 * Efectivamente se realiza el alta
+								 */
+								int id=FCLogica.altaUsuGrupo(nom_usuario);
+								FCLogica.altaCuentaGrupo(id, nom_usuario, dominio);
+								JOptionPane.showMessageDialog(new JPanel(), "La cuenta se ha ingresado con exito");
+								limpiaCampos(); //Limpiamos los Textboxes
+							} catch (SQLException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
+						}	
+					}else{
+						lblFaltanCampos.setVisible(true);
+					}
+				}
+						
+			}	
+				
+				
 		});
 		btnCNingresar.setBounds(150, 248, 250, 30);
 		add(btnCNingresar);
@@ -191,9 +226,11 @@ public class FrmNuevaCuenta extends JPanel {
 	}
 	
 	public void limpiaCampos(){
-		txtCNnombre.setText(null);
+		
 		txtCNdocumento.setText(null);
+		txtCNnombre.setText(null);
 		grpbtnSelectTipoCuenta.clearSelection();
+		lblFaltanCampos.setVisible(false);
 	}
 
 }

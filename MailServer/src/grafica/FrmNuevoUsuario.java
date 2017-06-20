@@ -160,7 +160,7 @@ public class FrmNuevoUsuario extends JPanel {
 		
 		
 		/*Etiqueta que avisa el error de campos faltantes*/
-		JLabel lblFaltanCampos = new JLabel("* Faltan campos obligatorios");
+		lblFaltanCampos = new JLabel("* Faltan campos obligatorios");
 		lblFaltanCampos.setFont(new Font("Tahoma", Font.BOLD, 15));
 		lblFaltanCampos.setBounds(168, 439, 220, 21);
 		add(lblFaltanCampos);

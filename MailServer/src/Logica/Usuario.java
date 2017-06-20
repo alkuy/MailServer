@@ -32,6 +32,7 @@ public class Usuario {
 	}
 	
 	/** Método constructor de la clase para usuario <u><b>común</b></u>.
+	 * Carga el usuario persona en la Base de Datos
 	 * @param id_usuario Identificador del usuario.
 	 * @param ci Cedula del usuario.
 	 * @param nombre Nombre del usuario.
@@ -56,6 +57,7 @@ public class Usuario {
 	
 	
 	/** Método constructor de la clase para usuario <u><b>oficina</b></u>.
+	 * Carga el usuario Grupo u Oficina en la Base de datos
 	 * @param id_usuario Identificador del usuario.
 	 * @param nombre Nombre del usuario.  */
 	public Usuario(int id_usuario, String nombre) {
@@ -63,6 +65,7 @@ public class Usuario {
 		this.nombre = nombre;
 		this.cuentas = new Cuentas();
 		this.prefiles = new Perfiles();
+		BD.InsertOfi(id_usuario, nombre);
 	}
 	
 	/** Método constructor de la clase para usuario <u><b>administrador</b></u>.
@@ -83,7 +86,13 @@ public class Usuario {
 		this.prefiles = new Perfiles();
 	}
 	
-	public int InstertaUserDevuelveIdCargaPersona() throws SQLException{
+	/**
+	 * Metodo que genera en la tabla usuario un registro vacio y devuelve el ID para poder ingresar 
+	 * el usuario en la tabla correspondiente, ejempo persona, grupo o administrador
+	 * @return id (int) Ultimo id cargado en tabla Usuario
+	 * @throws SQLException
+	 */
+	public int InstertaUserDevuelveId() throws SQLException{
 		BD.InserUS(null);
 		java.sql.ResultSet rs = BD.ConUltimoID();
 		rs.next();

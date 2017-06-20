@@ -2,7 +2,7 @@ package Logica;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
-
+import java.util.Calendar;
 
 import javax.swing.table.DefaultTableModel;
 
@@ -39,7 +39,7 @@ public class Fachada {
 	
 	public void altaUsu(String doc, String nom, String ape, String calle, String nro_puerta, String apto, String numTel) throws SQLException{
 		Usuario usu = new Usuario();
-		int id= usu.InstertaUserDevuelveIdCargaPersona();
+		int id= usu.InstertaUserDevuelveId();
 		Usuario NU = new Usuario(id, doc, nom, ape, calle,  nro_puerta, apto);
 		hUsu.insert(NU);
 		
@@ -52,6 +52,14 @@ public class Fachada {
 		auxTels.Insertar(auxTel);
 	}
 	
+	public int altaUsuGrupo(String nom) throws SQLException{
+		Usuario usu = new Usuario();
+		int id= usu.InstertaUserDevuelveId();
+		Usuario NU = new Usuario(id, nom);
+		hUsu.insert(NU);
+		return id;
+	}
+	
 	public void bajaUsu(Usuario usuario){
 ///		hUsu.delete(usuario.getNom_usuario());
 	}
@@ -59,8 +67,6 @@ public class Fachada {
 	public void mofifUsu(Usuario usuario){
 		
 	}
-
-
 	/**
 	 * Metodo que carga ArrayList de dominios. Lo usoa para cargar combobox en Nueva Cuenta
 	 * @return ArrayList<String> con dominios
@@ -122,6 +128,9 @@ public class Fachada {
 	/**
 	 * Funcion que ingresa sobre la base todos los datos de la cuenta
 	 * Los carga al array de cuentas y limpia los datos del objeto.
+	 * @param cedula
+	 * @param nomU
+	 * @param dominio
 	 */
 	public void altaCuentaPersonal(String cedula, String nomU, String dominio){
 		nomU = nomU.toLowerCase();
@@ -136,10 +145,30 @@ public class Fachada {
 		cuenta.LimpiaCuenta();
 		
 	}
+	/**
+	 * Funcion que le da alta a una cuenta grupal o de oficina
+	 * @param id
+	 * @param nomU
+	 * @param dominio
+	 * Password dominio+año
+	 */
+	public void altaCuentaGrupo(int id, String nomU, String dominio){
+		nomU = nomU.toLowerCase();
+		dominio = dominio.toLowerCase();
+		cuenta.setIdUsuario(id);
+		cuenta.setNomU(nomU);
+		cuenta.setDominio(dominio);
+		Calendar fecha = Calendar.getInstance();
+		int anio = fecha.get(Calendar.YEAR);
+		cuenta.setContraseña_cuenta(dominio+anio);
+		cuenta.setEs_lista(0);		
+		cuentas.Insertar(cuenta);
+		cuenta.LimpiaCuenta();
+	}
 	
 	/**
 	 * Trae la tabla de Cuentas
-	 * @return
+	 * @return TableModel
 	 * @throws SQLException
 	 */
 	public DefaultTableModel DevCuentasCompleto() throws SQLException{
