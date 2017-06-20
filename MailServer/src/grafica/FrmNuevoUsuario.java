@@ -171,14 +171,15 @@ public class FrmNuevoUsuario extends JPanel {
 		
 		JButton btnAgregarUsuario = new JButton("Agregar");
 		btnAgregarUsuario.addActionListener(new ActionListener() {
+			Verificaciones verifica = new Verificaciones();
 			public void actionPerformed(ActionEvent arg0) {
-				String nombre = txtUNnombre.getText();
-				String apellido = txtUNapellido.getText();
-				String documento = txtUNdocumento.getText();
-				String calle = txtUNcalle.getText();
-				String nroPuerta = txtUNnroPuerta.getText();
-				String apto = txtUNapto.getText();
-				String numTel = txtUNtelefono1.getText();
+				String nombre = verifica.remplazoCaracteres(txtUNnombre.getText());
+				String apellido = verifica.remplazoCaracteres(txtUNapellido.getText());
+				String documento = verifica.remplazoCaracteres(txtUNdocumento.getText());
+				String calle = verifica.remplazoCaracteres(txtUNcalle.getText());
+				String nroPuerta = verifica.remplazoCaracteres(txtUNnroPuerta.getText());
+				String apto = verifica.remplazoCaracteres(txtUNapto.getText());
+				String numTel = verifica.remplazoCaracteres(txtUNtelefono1.getText());
 				
 				/*Instancio la clase verificacion*/
 				Verificaciones verifica = new Verificaciones();
