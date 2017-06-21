@@ -11,7 +11,7 @@ public class Usuario {
 	private String sqlFecha;
 	private Conexion pruebaConn = Conexion.getInstancia();
 	
-	public Usuario(String pass){
+	/*public Usuario(String pass){
 		
 		this.passAdmin = pass;	
 	}
@@ -19,7 +19,7 @@ public class Usuario {
     public Usuario(int id){
 		
 		this.id_usuario = id;	
-	}
+	}*/
 	
 
 	

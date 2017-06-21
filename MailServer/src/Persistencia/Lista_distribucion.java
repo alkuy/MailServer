@@ -16,6 +16,9 @@ package Persistencia;
 			
 		private Conexion pruebaConn = Conexion.getInstancia();
 		
+		
+		public Lista_distribucion(){}	
+		
 		// Contructor general para cargar todos los datos de una lista de distribucion
 		
 		public Lista_distribucion(String nom_lis, String nom_dom_lis, String nom_res, String nom_dom_res, int id_lis, int id_res){

@@ -9,6 +9,9 @@ public class Perfil {
 	private String tipo;
 	private Conexion pruebaConn = Conexion.getInstancia();
 	
+	
+	public Perfil(){}	
+	
 	public Perfil(String tipo){
 				
 		this.tipo = tipo;	

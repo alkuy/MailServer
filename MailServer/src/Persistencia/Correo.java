@@ -20,6 +20,8 @@ public class Correo{
 	
 	// Contructor general para cargar todos los datos de un correo
 	
+	public Correo (){}
+	
 	public Correo(String nom_us1, String nom_dom1, String nom_us2, String nom_dom2, String fecha, int id1, int id2, String asunto, String texto, int id){
 		
 		this.id_usuario_emisor = id1;

@@ -7,16 +7,16 @@ import java.sql.SQLException;
 public class FachadaBD {
 
 	private static FachadaBD instancia;	
-	private Usuario user;
-	private Persona persona;
-	private Correo correo;
+	private Usuario user = new Usuario();
+	private Persona persona = new Persona();
+	private Correo correo = new Correo();
 	private Dominio dominio = new Dominio();
 	private Cuenta cuenta = new Cuenta();
-	private Telefono telefono;
-	private Oficina oficina;
-	private Perfil perfil;
-	private Tiene_perfil tiene_perfil;
-	private Lista_distribucion lista_dist;
+	private Telefono telefono = new Telefono();
+	private Oficina oficina = new Oficina();
+	private Perfil perfil = new Perfil();
+	private Tiene_perfil tiene_perfil = new Tiene_perfil();
+	private Lista_distribucion lista_dist = new Lista_distribucion();
 	
 	private FachadaBD(){
 	}
@@ -32,19 +32,10 @@ public class FachadaBD {
 	
 /* METODOS PARA LA CLASE USUARIO */
 	
-	public void NuevoUS (String pass){
-		this.user = new Usuario(pass);
-	}
-	
-	public void NuevoUS2 (int id){
-		this.user = new Usuario(id);
-	}
-	
 	
 	//Metodo para ingresar un registro en la tabla Usuario
 	
 	public void InserUS (String pass){
-		this.NuevoUS(pass);
 		this.user.InsertRow();
 	}
 	
@@ -52,7 +43,6 @@ public class FachadaBD {
 	
 	public java.sql.ResultSet ConTablaUS(int idUsu) throws SQLException{
 		java.sql.ResultSet rs;
-		this.NuevoUS2(idUsu);
 		rs = this.user.Select_tabla();
 		return rs;
 	}
@@ -62,7 +52,6 @@ public class FachadaBD {
 	
 	public java.sql.ResultSet ConFilaUS(int idUsu) throws SQLException{
 		java.sql.ResultSet rs;
-		this.NuevoUS2(idUsu);
 		rs = this.user.Select_fila(idUsu);
 		return rs;
 	}
@@ -71,8 +60,7 @@ public class FachadaBD {
 	
 	public java.sql.ResultSet ConUltimoID() throws SQLException{
 		java.sql.ResultSet rs;
-		this.NuevoUS2(1);// si busco un id debo tener cargado por lo menos uno
-		rs = this.user.Select_ultimo_id();
+	    rs = this.user.Select_ultimo_id();
 		return rs;
 	}
 	
@@ -82,8 +70,7 @@ public class FachadaBD {
   	public java.sql.ResultSet Devolver_pass(int id) throws SQLException{
   		
   		java.sql.ResultSet rs;
-  	    Nueva_Persona3();
-  		rs = this.user.Dev_pass(id);  		
+  	    rs = this.user.Dev_pass(id);  		
   		return rs;
   	}
 	
@@ -100,34 +87,14 @@ public class FachadaBD {
 	}
 	
 	
-     public void Nueva_Persona2 (int id){
-		
-		this.persona = new Persona(id);
-	}
-		
-     
-     public void Nueva_Persona3 (){
- 		
- 		this.persona = new Persona();
- 	}
- 	
+   	
      
      //Metodo que devuelve un entero con el id segun la cedula de usuario ingresada
  	
- /*	public java.sql.ResultSet Devolver_id(String ci) throws SQLException{
- 		
- 		java.sql.ResultSet rs;
- 	    Nueva_Persona3();
- 		rs = this.persona.Dev_id(ci);
- 		
- 		return rs;
- 	}*/
- 	
- 	public int Devolver_id(String ci) throws SQLException{
+  	public int Devolver_id(String ci) throws SQLException{
  		int id=0;
  		java.sql.ResultSet rs;
- 	    Nueva_Persona3();
- 		rs = this.persona.Dev_id(ci);
+ 	    rs = this.persona.Dev_id(ci);
  		while (rs.next()){
  			id = rs.getInt(1);
  		}
@@ -140,8 +107,7 @@ public class FachadaBD {
   	public java.sql.ResultSet Devolver_ci(int id) throws SQLException{
   		
   		java.sql.ResultSet rs;
-  	    Nueva_Persona3();
-  		rs = this.persona.Dev_ci(id);  		
+  	   	rs = this.persona.Dev_ci(id);  		
   		return rs;
   	}
      
@@ -152,13 +118,11 @@ public class FachadaBD {
 		this.persona.InsertRow();
 	}
 	
-	
-	
+		
 	//Metodo que devuelve el Resulset con los datos de la tabla Persona cargados
 	
 	public java.sql.ResultSet ConTablaPer(int idUsu) throws SQLException{
 		java.sql.ResultSet rs;
-		this.Nueva_Persona2(idUsu);
 		rs = this.persona.Select_Tabla();
 		return rs;
 	}
@@ -168,7 +132,6 @@ public class FachadaBD {
 	
 	public java.sql.ResultSet ConFilaPer(int idUsu) throws SQLException{
 		java.sql.ResultSet rs;
-		this.Nueva_Persona2(idUsu);
 		rs = this.persona.Select_fila(idUsu);
 		return rs;
 	}
@@ -181,10 +144,7 @@ public class FachadaBD {
 		this.correo = new Correo(nom_us1,nom_dom1, nom_us2, nom_dom2,fecha, id1, id2, asunto,texto, id);
 	}
 	
-	public void NuevoCorreo2 (String nom_us1,String nom_dom1, String nom_us2, String nom_dom2, String fecha){
-		this.correo = new Correo(nom_us1,nom_dom1, nom_us2, nom_dom2, fecha);
-	}
-	
+		
 	//Metodo para ingresar un registro en la tabla Correo
 	
 	public void InsertCorreo (String nom_us1, String nom_dom1, String nom_us2, String nom_dom2, String fecha, int id1, int id2, String asunto, String texto, int id){
@@ -196,7 +156,6 @@ public class FachadaBD {
 	
 	public java.sql.ResultSet ConTablaCorreo(String nom_us1,String nom_dom1, String nom_us2, String nom_dom2, String fecha) throws SQLException{
 		java.sql.ResultSet rs;
-		this.NuevoCorreo2(nom_us1,nom_dom1, nom_us2, nom_dom2, fecha);
 		rs = this.correo.Select_tabla();
 		return rs;
 	}
@@ -206,7 +165,6 @@ public class FachadaBD {
 	
 	public java.sql.ResultSet ConFilaCorreo(String nom_us1,String nom_dom1, String nom_us2, String nom_dom2, String fecha) throws SQLException{
 		java.sql.ResultSet rs;
-		this.NuevoCorreo2(nom_us1,nom_dom1,nom_us2, nom_dom2,fecha);
 		rs = this.correo.Select_fila(nom_us1,nom_dom1,nom_us2, nom_dom2,fecha);
 		return rs;
 	}
@@ -256,11 +214,7 @@ public class FachadaBD {
 	}
 	
 	
-     public void Nueva_Cuenta2 (int id, String nom_us, String nom_dom){
-		
-		this.cuenta = new Cuenta(id, nom_us, nom_dom);
-	}
-		
+     	
 	//Metodo para ingresar un registro en la tabla Cuenta
 	
 	public void InsertCuenta (int id, String nom_us, String nom_dom, String pass, int es_lista){
@@ -283,7 +237,6 @@ public class FachadaBD {
 	
 	public java.sql.ResultSet ConFilaCuenta(int id, String nom_us, String nom_dom) throws SQLException{
 		java.sql.ResultSet rs;
-		this.Nueva_Cuenta2(id, nom_us, nom_dom);
 		rs = this.cuenta.Select_fila(id, nom_us, nom_dom);
 		return rs;
 	}
@@ -297,11 +250,6 @@ public class FachadaBD {
 	}
 	
 	
-	public void NuevoTel2 (int id){
-		this.telefono = new Telefono(id);
-		
-	}
-		
 	//Metodo para ingresar un registro en la tabla Telefono
 	
 	public void InsertTel (int id, String tel){
@@ -313,7 +261,6 @@ public class FachadaBD {
 	
 	public java.sql.ResultSet ConTablaTel(int id) throws SQLException{
 		java.sql.ResultSet rs;
-		this.NuevoTel2(id);
 		rs = this.telefono.Select_tabla();
 		return rs;
 	}
@@ -323,7 +270,6 @@ public class FachadaBD {
 	
 	public java.sql.ResultSet ConFilaTel(int id) throws SQLException{
 		java.sql.ResultSet rs;
-		this.NuevoTel2(id);
 		rs = this.telefono.Select_fila(id);
 		return rs;
 	}
@@ -337,11 +283,6 @@ public class FachadaBD {
 	}
 	
 	
-	public void NuevaOfi2 (int id){
-		this.oficina = new Oficina(id);
-		
-	}
-		
 	//Metodo para ingresar un registro en la tabla Telefono
 	
 	public void InsertOfi (int id, String nom){
@@ -353,7 +294,6 @@ public class FachadaBD {
 	
 	public java.sql.ResultSet ConTablaOfi(int id) throws SQLException{
 		java.sql.ResultSet rs;
-		this.NuevaOfi2(id);
 		rs = this.oficina.Select_tabla();
 		return rs;
 	}
@@ -363,7 +303,6 @@ public class FachadaBD {
 	
 	public java.sql.ResultSet ConFilaOfi(int id) throws SQLException{
 		java.sql.ResultSet rs;
-		this.NuevaOfi2(id);
 		rs = this.oficina.Select_fila(id);
 		return rs;
 	}
@@ -410,12 +349,6 @@ public class FachadaBD {
 		
 	}
 	
-	
-	public void Nuevo_TPerfil2 (int id){
-		this.tiene_perfil = new Tiene_perfil(id);
-		
-	}
-		
 	//Metodo para ingresar un registro en la tabla Tiene Perfil
 	
 	public void Insert_TPerfil (int id, String tipo){
@@ -427,7 +360,6 @@ public class FachadaBD {
 	
 	public java.sql.ResultSet ConTabla_TPerfil(int id) throws SQLException{
 		java.sql.ResultSet rs;
-		this.Nuevo_TPerfil2(id);
 		rs = this.tiene_perfil.Select_tabla();
 		return rs;
 	}
@@ -437,7 +369,6 @@ public class FachadaBD {
 	
 	public java.sql.ResultSet ConFila_TPerfil(int id) throws SQLException{
 		java.sql.ResultSet rs;
-		this.Nuevo_TPerfil2(id);
 		rs = this.tiene_perfil.Select_fila(id);
 		return rs;
 	}
@@ -452,9 +383,6 @@ public void NuevaLista (String nom_lis, String nom_dom_lis, String nom_res, Stri
 	this.lista_dist = new Lista_distribucion(nom_lis, nom_dom_lis, nom_res, nom_dom_res, id_lis, id_res);
 }
 
-public void NuevaLista2 (String nom_lis, String nom_dom_lis, String nom_res, String nom_dom_res){
-	this.lista_dist = new Lista_distribucion(nom_lis, nom_dom_lis, nom_res, nom_dom_res);
-}
 
 //Metodo para ingresar un registro en la tabla Lista Distribucion
 
@@ -467,7 +395,6 @@ public void InsertLista (String nom_lis, String nom_dom_lis, String nom_res, Str
 
 public java.sql.ResultSet ConTablaLista(String nom_lis, String nom_dom_lis, String nom_res, String nom_dom_res) throws SQLException{
 	java.sql.ResultSet rs;
-	this.NuevaLista2(nom_lis, nom_dom_lis, nom_res, nom_dom_res);
 	rs = this.lista_dist.Select_tabla();
 	return rs;
 }
@@ -477,7 +404,6 @@ public java.sql.ResultSet ConTablaLista(String nom_lis, String nom_dom_lis, Stri
 
 public java.sql.ResultSet ConFilaLista(String nom_lis, String nom_dom_lis, String nom_res, String nom_dom_res) throws SQLException{
 	java.sql.ResultSet rs;
-	this.NuevaLista2(nom_lis, nom_dom_lis, nom_res, nom_dom_res);
 	rs = this.lista_dist.Select_fila(nom_lis, nom_dom_lis, nom_res, nom_dom_res);
 	return rs;
 }

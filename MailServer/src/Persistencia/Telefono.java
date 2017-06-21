@@ -17,6 +17,9 @@ public class Telefono {
 		this.telefono = tel;	
 	}
 	
+/* Contructor vacio*/
+	public Telefono (){};
+	
 	
 public Telefono(int id){
 		

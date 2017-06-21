@@ -18,6 +18,8 @@ public class Oficina {
 	}
 	
 	
+	public Oficina(){}					
+	
     public Oficina(int id){
 		
 		this.id_usuario = id;

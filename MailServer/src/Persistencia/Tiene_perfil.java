@@ -10,6 +10,9 @@ public class Tiene_perfil {
 	private String tipo;
 	private Conexion pruebaConn = Conexion.getInstancia();
 	
+	
+	public Tiene_perfil(){}	
+	
 	public Tiene_perfil(int id, String tipo){
 		
 		this.id_usuario = id;
