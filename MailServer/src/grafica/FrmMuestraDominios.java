@@ -1,32 +1,31 @@
 package grafica;
 
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
-import javax.swing.JLabel;
+import java.awt.EventQueue;
 import java.awt.Font;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.Vector;
 
+import javax.swing.JInternalFrame;
+import javax.swing.JLabel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableModel;
 
-
 import Logica.Fachada;
 
-public class FrmMuestraDominios extends JPanel {
+public class FrmMuestraDominios extends JInternalFrame {
 	private JTable tblMDominios;
 	private Fachada FCLogica = Fachada.getInstancia();
+	
 	/**
-	 * Create the panel.
+	 * Create the frame.
 	 */
 	public FrmMuestraDominios() {
+		setBounds(20, 60, 450, 360);
 		setLayout(null);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(53, 76, 343, 217);
+		scrollPane.setBounds(53, 76, 343, 220);
 		add(scrollPane);
 		
 		String col[] = {"Dominio","Prioridad"};
@@ -49,4 +48,5 @@ public class FrmMuestraDominios extends JPanel {
 		add(lblDominios);
 
 	}
+
 }

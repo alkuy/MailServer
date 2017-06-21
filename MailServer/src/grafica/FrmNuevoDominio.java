@@ -1,22 +1,22 @@
 package grafica;
 
+import java.awt.EventQueue;
 import java.awt.Font;
 
 import javax.swing.JButton;
+import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
-public class FrmNuevoDominio extends JPanel {
+public class FrmNuevoDominio extends JInternalFrame {
 
-	/** Formulario para ingresar nuevo dominio
-	 * 
-	 */
 	private JTextField txtADdominio;
 	private static final long serialVersionUID = 1L;
 
-	
+	/**
+	 * Create the frame.
+	 */
 	public FrmNuevoDominio() {
 		setBounds(20, 60, 450, 300);
 		setLayout(null);
@@ -41,6 +41,7 @@ public class FrmNuevoDominio extends JPanel {
 		JButton btnADagregar = new JButton("Agregar");
 		btnADagregar.setBounds(75, 177, 319, 30);
 		add(btnADagregar);
+
 	}
 
 }

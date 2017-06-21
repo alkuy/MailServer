@@ -1,10 +1,14 @@
 package grafica;
 
 import javax.swing.JFrame;
+import javax.swing.JInternalFrame;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
+import javax.swing.JRootPane;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
+import javax.swing.plaf.basic.BasicInternalFrameTitlePane;
+import javax.swing.plaf.basic.BasicInternalFrameUI;
 
 import java.awt.Color;
 import java.awt.Toolkit;
@@ -26,14 +30,21 @@ public class principal extends JFrame {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private static JPanel VPrincipal;
+	private static JPanel VentPrincipal;
 	private JLabel ImagenLogo = null;
 	
+	
+	private FrmMuestraDominios frmmuestradominios;
+	private FrmMuestraCuentas frmmuestracuentas;
+	private FrmNuevaCuenta frmcuenta; 
+	private FrmNuevoUsuario frmusuario;
+	private FrmNuevoDominio frmdominionuevo;
+	
 	public static JPanel getInstancia() {
-		if(VPrincipal == null)
-			VPrincipal = new JPanel();
+		if(VentPrincipal == null)
+			VentPrincipal = new JPanel();
 		
-		return VPrincipal;
+		return VentPrincipal;
 	}
 
 	/**
@@ -48,18 +59,18 @@ public class principal extends JFrame {
      	setBackground(new Color(0, 128, 128));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 900, 600);
-		VPrincipal = new JPanel();
-		VPrincipal.setBackground(new Color(0, 128, 128));
-		VPrincipal.setBorder(new EmptyBorder(5, 5, 5, 5));
-		setContentPane(VPrincipal);
-		VPrincipal.setLayout(null);
+		VentPrincipal = new JPanel();
+		VentPrincipal.setBackground(new Color(0, 128, 128));
+		VentPrincipal.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(VentPrincipal);
+		VentPrincipal.setLayout(null);
 		
 		/*······························*/
 		/*MENU ARRIBA PRINCIPAL*/
 		/*······························*/
 		JMenuBar menuBar = new JMenuBar();
 		menuBar.setBounds(0, 0, 894, 21);
-		VPrincipal.add(menuBar);
+		VentPrincipal.add(menuBar);
 		
 		JMenu mnCuenta = new JMenu("Cuentas");
 		menuBar.add(mnCuenta);
@@ -91,56 +102,56 @@ public class principal extends JFrame {
 		
 		ImagenLogo = new JLabel(new ImageIcon(principal.class.getResource("/imagenes/logo-mail.png")));
 		ImagenLogo.setBounds(499, 81, 362, 248);
-		VPrincipal.add(ImagenLogo);
+		VentPrincipal.add(ImagenLogo);
 		
 			JLabel lblCorreoPintituciones = new JLabel("Correo Para Instituciones Educativas");
 			lblCorreoPintituciones.setHorizontalAlignment(SwingConstants.CENTER);
 			lblCorreoPintituciones.setFont(new Font("Goudy Old Style", Font.PLAIN, 13));
 			lblCorreoPintituciones.setBounds(576, 443, 250, 30);
-			VPrincipal.add(lblCorreoPintituciones);
+			VentPrincipal.add(lblCorreoPintituciones);
 		
 		JLabel lblVersion = new JLabel("Version 1.0");
 		lblVersion.setHorizontalAlignment(SwingConstants.CENTER);
 		lblVersion.setFont(new Font("Goudy Old Style", Font.PLAIN, 13));
 		lblVersion.setBounds(576, 470, 250, 30);
-		VPrincipal.add(lblVersion);
+		VentPrincipal.add(lblVersion);
 		
 		JLabel lblCreadoEnInet = new JLabel("Creado en INET");
 		lblCreadoEnInet.setHorizontalAlignment(SwingConstants.CENTER);
 		lblCreadoEnInet.setFont(new Font("Goudy Old Style", Font.PLAIN, 13));
 		lblCreadoEnInet.setBounds(576, 499, 250, 30);
-		VPrincipal.add(lblCreadoEnInet);
+		VentPrincipal.add(lblCreadoEnInet);
 		
 		/*...............................*/
 		/*########  LOGIN    ############*/
 
 		JTextField txtLOGusuario = new JTextField();
 		txtLOGusuario.setBounds(140, 180, 200, 30);
-		VPrincipal.add(txtLOGusuario);
+		VentPrincipal.add(txtLOGusuario);
 		txtLOGusuario.setColumns(10);
 		
 		JPasswordField passwordField = new JPasswordField();
 		passwordField.setBounds(140, 230, 200, 30);
-		VPrincipal.add(passwordField);
+		VentPrincipal.add(passwordField);
 		
 		JLabel ImgUserLog = new JLabel(new ImageIcon(principal.class.getResource("/imagenes/userLog.png")));
 		ImgUserLog.setBounds(90, 180, 30, 30);
-		VPrincipal.add(ImgUserLog);
+		VentPrincipal.add(ImgUserLog);
 		
 		JLabel ImgKeyLog = new JLabel(new ImageIcon(principal.class.getResource("/imagenes/keyLog.png")));
 		ImgKeyLog.setBounds(90, 230, 30, 30);
-		VPrincipal.add(ImgKeyLog);
+		VentPrincipal.add(ImgKeyLog);
 		
 		JLabel lblLogin = new JLabel("LogIn");
 		lblLogin.setBounds(120, 100, 208, 30);
-		VPrincipal.add(lblLogin);
+		VentPrincipal.add(lblLogin);
 		lblLogin.setHorizontalAlignment(SwingConstants.CENTER);
 		lblLogin.setFont(new Font("Goudy Old Style", Font.BOLD, 28));
 		
 		
 		JButton btnNewButton = new JButton("INGRESAR");
 		btnNewButton.setBounds(90, 300, 250, 40);
-		VPrincipal.add(btnNewButton);
+		VentPrincipal.add(btnNewButton);
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				ImgUserLog.setVisible(false);
@@ -160,35 +171,10 @@ public class principal extends JFrame {
 		/*···························*/
 		/*Formulario Nuevo Usuario*/
 		/*······························*/
-		
-		FrmNuevoUsuario frmusuario = new FrmNuevoUsuario();
-		frmusuario.setBounds(20, 60, 450, 500);
-		VPrincipal.add(frmusuario);
 
-		/*Formulario Nueva Cuenta*/
-		FrmNuevaCuenta frmcuenta = new FrmNuevaCuenta();
-		frmcuenta.setBounds(20, 60, 450, 300);
-		VPrincipal.add(frmcuenta);
-		
-		FrmNuevoDominio frmdominionuevo = new FrmNuevoDominio();
-		frmdominionuevo.setBounds(20, 60, 450, 300);
-		VPrincipal.add(frmdominionuevo);
-		
-		FrmMuestraDominios frmmuestradominios = new FrmMuestraDominios();
-		frmmuestradominios.setBounds(20, 60, 450, 500);
-		VPrincipal.add(frmmuestradominios);
-		
-		FrmMuestraCuentas frmmuestracuentas = new FrmMuestraCuentas();
-		frmmuestracuentas.setBounds(20, 60, 450, 500);
-		VPrincipal.add(frmmuestracuentas);
-		
-		/*#########   EL DE INICIO DE LOGIN   ################*/
-		/*FrmLogin LOGIN = new FrmLogin();
-		LOGIN.setBounds(20, 60, 500, 200);
-		contentPane.add(LOGIN);*/
-		/*##################################################3*/
-		
-		
+	
+
+
 		/*GAFICOS COSTADO*/
 		
 			
@@ -198,14 +184,6 @@ public class principal extends JFrame {
 		/*############################################*/
 		
 		menuBar.setVisible(false);
-		frmusuario.setVisible(false);
-		frmcuenta.setVisible(false);
-		frmdominionuevo.setVisible(false);
-		frmmuestracuentas.setVisible(false);
-		frmmuestradominios.setVisible(false);
-		
-		
-
 	
 		/*#######################################*/
 		/*#########     ACCIONES    #############*/
@@ -218,64 +196,85 @@ public class principal extends JFrame {
 		
 		mntmNuevoCuenta.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				frmmuestradominios.setVisible(false);
-				frmusuario.setVisible(false);
-				frmcuenta.setVisible(true);
-				frmdominionuevo.setVisible(false);
-				frmmuestracuentas.setVisible(false);
+				frmcuenta = new FrmNuevaCuenta();
+				abreVentana(frmcuenta);
+			
+				cierraVentana(frmmuestracuentas);
+				cierraVentana(frmusuario);
+				cierraVentana(frmdominionuevo);
+				cierraVentana(frmmuestradominios);
 			
 			}
 		});
 		
 		mntmNuevoUsuario.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				frmmuestradominios.setVisible(false);
-				frmusuario.setVisible(true);
-				frmcuenta.setVisible(false);
-				frmdominionuevo.setVisible(false);
-				frmmuestracuentas.setVisible(false);
-	
+				frmusuario = new FrmNuevoUsuario();
+				abreVentana(frmusuario);
+				
+				cierraVentana(frmmuestracuentas);
+				cierraVentana(frmcuenta);
+				cierraVentana(frmdominionuevo);
+				cierraVentana(frmmuestradominios);
 			}
 		});
 		
 		mntmVerCuentas.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				frmmuestracuentas.SetTable();
-				frmmuestracuentas.setVisible(true);
+				frmmuestracuentas = new FrmMuestraCuentas();
+				abreVentana(frmmuestracuentas);
 				
-				frmmuestradominios.setVisible(false);
-				frmusuario.setVisible(false);
-				frmcuenta.setVisible(false);
-				frmdominionuevo.setVisible(false);
+				cierraVentana(frmusuario);
+				cierraVentana(frmcuenta);
+				cierraVentana(frmdominionuevo);
+				cierraVentana(frmmuestradominios);
 			}
 		});
 		
 		mntmAgregarDominio.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				frmmuestradominios.setVisible(false);
-				frmusuario.setVisible(false);
-				frmcuenta.setVisible(false);
-				frmmuestracuentas.setVisible(false);
-				frmdominionuevo.setVisible(true);
-	
-			
+				frmdominionuevo = new FrmNuevoDominio();
+				abreVentana(frmdominionuevo);
 				
+				cierraVentana(frmusuario);
+				cierraVentana(frmcuenta);
+				cierraVentana(frmmuestracuentas);
+				cierraVentana(frmmuestradominios);
+		
 			}
 		});
 		
 		
 		mntmDominios.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				frmmuestradominios.setVisible(true);
-				frmusuario.setVisible(false);
-				frmcuenta.setVisible(false);
-				frmmuestracuentas.setVisible(false);
-				frmdominionuevo.setVisible(false);
+				frmmuestradominios = new FrmMuestraDominios();
+				abreVentana(frmmuestradominios);
+				
+				cierraVentana(frmusuario);
+				cierraVentana(frmcuenta);
+				cierraVentana(frmmuestracuentas);
+				cierraVentana(frmdominionuevo);
+		
 			}
 		});
 		
 		/*################   FIN  -   BOTONES D BARRA DE MENU  ###############################*/
 		/*####################################################################################*/
 		
+		
+	}
+	public void abreVentana(JInternalFrame panel){
+		VentPrincipal.add(panel);
+		BasicInternalFrameTitlePane titlePane =
+			      (BasicInternalFrameTitlePane) ((BasicInternalFrameUI) panel.getUI()).
+			      getNorthPane();
+		panel.remove(titlePane);
+		panel.setVisible(true);
+	}
+	
+	public void cierraVentana(JInternalFrame panel){
+		if (panel !=null){
+			panel.dispose();
+		}
 	}
 }

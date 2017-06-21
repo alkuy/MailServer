@@ -1,19 +1,22 @@
 package grafica;
 
-import javax.swing.JPanel;
+import java.awt.EventQueue;
+
+import javax.swing.JInternalFrame;
+import javax.swing.JLabel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
-import javax.swing.JLabel;
-import java.awt.Font;
 import javax.swing.SwingConstants;
 
-public class FrmMuestraUsuarios extends JPanel {
-	private JTable tblMUsuarios;
+public class FrmMuestraUsuarios extends JInternalFrame {
 
+	private JTable tblMUsuarios; 
 	/**
-	 * Create the panel.
+	 * Create the frame.
 	 */
 	public FrmMuestraUsuarios() {
+		setBounds(20, 60, 450, 300);
+		
 		setLayout(null);
 		
 		JScrollPane scrollPane = new JScrollPane();
@@ -25,9 +28,9 @@ public class FrmMuestraUsuarios extends JPanel {
 		
 		JLabel lblUsuarios = new JLabel("Usuarios");
 		lblUsuarios.setHorizontalAlignment(SwingConstants.CENTER);
-		lblUsuarios.setFont(new Font("Goudy Old Style", Font.BOLD, 24));
 		lblUsuarios.setBounds(133, 31, 164, 34);
 		add(lblUsuarios);
 
 	}
+
 }
