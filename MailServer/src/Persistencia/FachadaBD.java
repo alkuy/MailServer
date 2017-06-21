@@ -13,8 +13,8 @@ public class FachadaBD {
 	private Dominio dominio = new Dominio();
 	private Cuenta cuenta = new Cuenta();
 	private Telefono telefono = new Telefono();
-	private Oficina oficina = new Oficina();
 	private Perfil perfil = new Perfil();
+	private Oficina oficina = new Oficina();	
 	private Tiene_perfil tiene_perfil = new Tiene_perfil();
 	private Lista_distribucion lista_dist = new Lista_distribucion();
 	
