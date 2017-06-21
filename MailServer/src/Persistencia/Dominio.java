@@ -30,7 +30,6 @@ public class Dominio {
 			catch (Exception e){
 				//System.out.println("aca la cago");
 			}
-		//	pruebaConn.closeConextion();
 		}else{
 			System.out.println("Desconectado");
 		}
@@ -64,6 +63,22 @@ public java.sql.ResultSet Select_fila(String nom_dominio) throws SQLException{
 		return rs;
 		
 	}
+
+/*Metodo para modificar la prioridad de un dominio*/
+
+public void cambiar_prioridad(String nom, int prioridad) {
+	
+	
+	try{
+		java.sql.Statement stm = pruebaConn.getConexion().createStatement();
+		stm.execute("UPDATE Dominio SET prioridad = '"+prioridad+"'" + "where nom_dominio = '"+nom+"';");
+  }
+	catch (Exception e){
+		System.out.println("no se pudo modificar la prioridad del dominio");
+	}
+	
+	
+}
 	
 	
 }

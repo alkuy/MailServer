@@ -36,19 +36,6 @@ public class Correo{
 		this.id_conversacion = id;
 	}
 	
-	// contructor para consultas por lo que solo le paso las claves
-	
-    public Correo(String nom_us1,String nom_dom1, String nom_us2, String nom_dom2, String fecha){
-		
-    	this.nom_usuario_emisor = nom_us1;
-		this.nom_usuario_receptor = nom_us2;
-		this.nom_dominio_emisor = nom_dom1;
-		this.nom_dominio_receptor = nom_dom2;
-		this.fecha = fecha;
-		
-		
-	}
-	
 	
 	/* Metodo de ingreso de datos a la base */
 	
@@ -63,7 +50,6 @@ public class Correo{
 			catch (Exception e){
 				System.out.println("aca la cago");
 			}
-			//pruebaConn.closeConextion();
 		}else{
 			System.out.println("Desconectado");
 		}
@@ -77,8 +63,6 @@ public class Correo{
 		
 		java.sql.Statement ps = pruebaConn.getConexion().createStatement();
 		java.sql.ResultSet rs = ps.executeQuery(seleccion);
-		//pruebaConn.closeConextion();
-		
 		return rs;
 		
 	}
@@ -92,12 +76,12 @@ public java.sql.ResultSet Select_fila(String nom_us1,String nom_dom1, String nom
 		
 		java.sql.Statement ps = pruebaConn.getConexion().createStatement();
 		java.sql.ResultSet rs = ps.executeQuery(seleccion);
-	//	pruebaConn.closeConextion();
-		
 		return rs;
 		
 	}
 	
+
+
 	
 }
 

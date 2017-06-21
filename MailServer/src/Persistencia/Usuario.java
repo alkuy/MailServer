@@ -108,6 +108,22 @@ public java.sql.ResultSet Dev_pass(int id) throws SQLException{
 	return rs;
 	
 }
+
+/* metodo para modificar el passwor del administrador en la base */
+
+public void cambiar_passwd(int id, String passwd) {
+	
+	
+	try{
+		java.sql.Statement stm = pruebaConn.getConexion().createStatement();
+		stm.execute("UPDATE Usuario SET pass_admin = '"+passwd+"'" + "where id_usuario = '"+id+"';");
+  }
+	catch (Exception e){
+		System.out.println("no se pudo modificar el passwd");
+	}
+	
+	
+}
 	
 	
 }

@@ -39,6 +39,12 @@ public class FachadaBD {
 		this.user.InsertRow();
 	}
 	
+	//Metodo para modificar el pasword de un usuario administrador
+	
+		public void ModificaPS (int id, String pass){
+			this.user.cambiar_passwd(id, pass);
+		}
+	
 	//Metodo que devuelve el Resulset con los datos de la tabla Usuarios cargados
 	
 	public java.sql.ResultSet ConTablaUS(int idUsu) throws SQLException{
@@ -87,7 +93,12 @@ public class FachadaBD {
 	}
 	
 	
-   	
+	//Metodo para modificar los datos personales (a partir de la ceduala)
+	
+	public void Modifica_datos_per (String ci, String nombre, String apellido,String calle, String nro, String apto){
+		this.persona.cambiar_datos_personales(ci, nombre, apellido, calle, nro, apto);
+	}
+
      
      //Metodo que devuelve un entero con el id segun la cedula de usuario ingresada
  	
@@ -184,6 +195,14 @@ public class FachadaBD {
 		this.dominio.InsertRow();
 	}
 	
+	
+	/*Metodo para modificar la prioridad de un dominio*/
+	
+		public void Modifica_prioridad (String nom, int prioridad){
+			this.dominio.cambiar_prioridad(nom, prioridad);
+		}
+
+	
 	//Metodo que devuelve el Resulset con todos los datos de la tabla Dominio cargados
 	/*METE MANO ADRIAN*/
 	public java.sql.ResultSet ConTablaDom() throws SQLException{
@@ -222,6 +241,12 @@ public class FachadaBD {
 		this.cuenta.InsertRow();
 	}
 	
+	
+	//Metodo para modificar el pasword de una cuenta
+	
+			public void Modifica_cuentaPS (int id, String nom_us, String nom_dom,String pass){
+				this.cuenta.cambiar_passwd(id,nom_us,nom_dom, pass);
+			}
 	
 	
 	//Metodo que devuelve el Resulset con los datos de la tabla Cuenta cargados
@@ -288,6 +313,13 @@ public class FachadaBD {
 	public void InsertOfi (int id, String nom){
 		this.NuevaOfi(id, nom);
 		this.oficina.InsertRow();
+	}
+	
+	
+	//Metodo para modificar el nombre de la oficina
+	
+	public void Modifica_nom_ofi(int id, String nom){
+		this.oficina.cambiar_nom_ofi(id,nom);
 	}
 	
 	//Metodo que devuelve el Resulset con todos los datos de la tabla Telefono cargados

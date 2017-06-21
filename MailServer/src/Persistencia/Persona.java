@@ -28,18 +28,9 @@ public class Persona {
 		this.apto = apto;
 	}
 	
-	// contructor para consultas
-	
-    public Persona(int id){
-		
-		this.id_usuario = id;
-		
-	}
-    
-// contructor para consultas
 	
     public Persona(){}
-    
+	
     	
 	/* Metodo de ingreso de datos a la base */
 	
@@ -63,7 +54,7 @@ public class Persona {
 			catch (Exception e){
 				
 			}
-			//pruebaConn.closeConextion();
+		
 		}else{
 			System.out.println("Desconectado");
 		}
@@ -77,8 +68,6 @@ public class Persona {
 		
 		java.sql.Statement ps = pruebaConn.getConexion().createStatement();
 		java.sql.ResultSet rs = ps.executeQuery(seleccion);
-		//pruebaConn.closeConextion();
-		
 		return rs;
 		
 	}
@@ -117,11 +106,23 @@ public java.sql.ResultSet Select_fila(int id) throws SQLException{
 		
 		java.sql.Statement ps = pruebaConn.getConexion().createStatement();
 		java.sql.ResultSet rs = ps.executeQuery(seleccion);
-	//	pruebaConn.closeConextion();
-		
 		return rs;
 		
 	}
+
+// Metodo que permite modificar los datos personales de la persona en la base de datos.
+   public void cambiar_datos_personales(String ci, String nom, String ap, String calle, String nro, String apart) {
+	
+	
+	try{
+		java.sql.Statement stm = pruebaConn.getConexion().createStatement();
+		stm.execute("UPDATE Persona SET nombre = '"+nom+"', apellido = '"+ap+"', calle = '"+calle+"', nro_puerta = '"+nro+"', apto = '"+apart+"'" + "where cedula = '"+ci+"';");
+  }
+	catch (Exception e){
+		System.out.println("no se pudo modificar el passwd");
+	}	
+	
+  }
 	
 	
 }
