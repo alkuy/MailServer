@@ -30,18 +30,126 @@ public class Persona {
 	
 	
     public Persona(){}
-	
+    
+    
+    
     	
-	/* Metodo de ingreso de datos a la base */
+	/**
+	 * @return the ci
+	 */
+	public String getCi() {
+		return ci;
+	}
+
+
+	/**
+	 * @param ci the ci to set
+	 */
+	public void setCi(String ci) {
+		this.ci = ci;
+	}
+
+
+	/**
+	 * @return the nombre
+	 */
+	public String getNombre() {
+		return nombre;
+	}
+
+
+	/**
+	 * @param nombre the nombre to set
+	 */
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+
+
+	/**
+	 * @return the apellido
+	 */
+	public String getApellido() {
+		return apellido;
+	}
+
+
+	/**
+	 * @param apellido the apellido to set
+	 */
+	public void setApellido(String apellido) {
+		this.apellido = apellido;
+	}
+
+
+	/**
+	 * @return the calle
+	 */
+	public String getCalle() {
+		return calle;
+	}
+
+
+	/**
+	 * @param calle the calle to set
+	 */
+	public void setCalle(String calle) {
+		this.calle = calle;
+	}
+
+
+	/**
+	 * @return the nro_puerta
+	 */
+	public String getNro_puerta() {
+		return nro_puerta;
+	}
+
+
+	/**
+	 * @param nro_puerta the nro_puerta to set
+	 */
+	public void setNro_puerta(String nro_puerta) {
+		this.nro_puerta = nro_puerta;
+	}
+
+
+	/**
+	 * @return the apto
+	 */
+	public String getApto() {
+		return apto;
+	}
+
+
+	/**
+	 * @param apto the apto to set
+	 */
+	public void setApto(String apto) {
+		this.apto = apto;
+	}
 	
+	/**
+	 * @return the id_usuario
+	 */
 	public int getId_usuario() {
 		return id_usuario;
 	}
 
+
+	/**
+	 * @param id_usuario the id_usuario to set
+	 */
 	public void setId_usuario(int id_usuario) {
 		this.id_usuario = id_usuario;
 	}
+
+
 	
+	/* Metodo de ingreso de datos a la base */
+
+	
+
 
 	public void InsertRow(){
 		

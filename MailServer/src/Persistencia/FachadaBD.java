@@ -94,10 +94,17 @@ public class FachadaBD {
 	
 	
 	//Metodo para modificar los datos personales (a partir de la ceduala)
-	
+
 	public void Modifica_datos_per (String ci, String nombre, String apellido,String calle, String nro, String apto){
 		this.persona.cambiar_datos_personales(ci, nombre, apellido, calle, nro, apto);
 	}
+
+	
+	//Metodo para modificar los datos personales (a partir de la ceduala)
+	
+	/*	public void Modifica_datos_per (Persona pers){
+			this.persona.cambiar_datos_personales(pers.getCi(),pers.getNombre(),pers.getApellido(),pers.getCalle(),pers.getNro_puerta(),pers.getApto());
+		}*/
 
      
      //Metodo que devuelve un entero con el id segun la cedula de usuario ingresada
@@ -282,6 +289,13 @@ public class FachadaBD {
 		this.telefono.InsertRow();
 	}
 	
+	
+	
+	//Metodo para modificar un telefono de una persona segun su id 
+
+	public void Modifica_tel (int id, String tel){
+		this.telefono.cambiar_telefonos(id,tel);
+	}
 	//Metodo que devuelve el Resulset con todos los datos de la tabla Telefono cargados
 	
 	public java.sql.ResultSet ConTablaTel(int id) throws SQLException{
