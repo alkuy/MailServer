@@ -29,6 +29,7 @@ public class FrmNuevaCuenta extends JInternalFrame {
 	private JLabel lblFaltanCampos;
 	/*Instancio la fachada*/
 	private Fachada FCLogica = Fachada.getInstancia();
+	private Verificaciones verifica = new Verificaciones();
 
 	/*El campo de documento que en algun caso lo traigo de Nuevo Usuario*/
 	public static JTextField getInstancia() {
@@ -48,7 +49,7 @@ public class FrmNuevaCuenta extends JInternalFrame {
 	 * Create the frame.
 	 */
 	public FrmNuevaCuenta() {
-Verificaciones verifica = new Verificaciones();
+
 		
 		setBounds(20, 60, 450, 330);
 		getContentPane().setLayout(null);
@@ -158,12 +159,11 @@ Verificaciones verifica = new Verificaciones();
 				if (rdbtnCNpersona.isSelected()){ 
 					if (verifica.documento(txtCNdocumento) && verifica.campo_vacio(txtCNnombre)){ //Verificaciones de campos
 						//Variables con datos a cargar
-						String documento = txtCNdocumento.getText();
-						String nom_usuario = txtCNnombre.getText();
+						String nom_usuario = verifica.remplazoCaracteres(txtCNnombre.getText());
 						String dominio = cboNCdominio.getSelectedItem().toString();
-						String cedula = txtCNdocumento.getText();
+						String cedula = verifica.remplazoCaracteres(txtCNdocumento.getText());
 						//Verificamos la existencia de la cuenta
-						System.out.println(nom_usuario+"@"+dominio);
+					
 						boolean existe = FCLogica.VerificaCuenta(nom_usuario, dominio);
 							if (existe){
 								JOptionPane.showMessageDialog(new JPanel(), "La cuenta ya existe, debe elegir otro nombre");

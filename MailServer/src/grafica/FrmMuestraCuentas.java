@@ -15,6 +15,8 @@ import javax.swing.table.DefaultTableModel;
 import Logica.Fachada;
 import javax.swing.border.EmptyBorder;
 import java.awt.Color;
+import javax.swing.JLabel;
+import java.awt.Font;
 
 public class FrmMuestraCuentas extends JInternalFrame {
 
@@ -38,14 +40,19 @@ public class FrmMuestraCuentas extends JInternalFrame {
 		
 		JScrollPane scrlMCMostrarCuentas = new JScrollPane(tblMuestraCuentas);
 		scrlMCMostrarCuentas.setEnabled(false);
-		scrlMCMostrarCuentas.setSize(430, 330);
+		scrlMCMostrarCuentas.setSize(430, 347);
 		scrlMCMostrarCuentas.setLocation(10, 57);
 		//Agregamos el JScrollPane al contenedor
 		getContentPane().add(scrlMCMostrarCuentas, BorderLayout.CENTER);
 		
 		JButton btnEditar = new JButton("Editar");
-		btnEditar.setBounds(10, 409, 89, 23);
+		btnEditar.setBounds(10, 415, 430, 47);
 		getContentPane().add(btnEditar);
+		
+		JLabel lblCuentas = new JLabel("CUENTAS");
+		lblCuentas.setFont(new Font("Goudy Old Style", Font.BOLD, 18));
+		lblCuentas.setBounds(180, 11, 89, 23);
+		getContentPane().add(lblCuentas);
 
 	}
 	
@@ -57,13 +64,9 @@ public class FrmMuestraCuentas extends JInternalFrame {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
 		tblMuestraCuentas = new JTable(modelo);
 		tblMuestraCuentas.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		
 
 	}
-	
-	
-
 }

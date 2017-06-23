@@ -41,6 +41,7 @@ public class FrmNuevoUsuario extends JInternalFrame {
 	
 	private Fachada FCLogica = Fachada.getInstancia(); 
 	private JPanel VentPrincipal = principal.getInstancia();
+	private Verificaciones verifica = new Verificaciones();
 	/**
 	 * Create the frame.
 	 */
@@ -172,7 +173,7 @@ public class FrmNuevoUsuario extends JInternalFrame {
 		
 		JButton btnAgregarUsuario = new JButton("Agregar");
 		btnAgregarUsuario.addActionListener(new ActionListener() {
-			Verificaciones verifica = new Verificaciones();
+			
 			public void actionPerformed(ActionEvent arg0) {
 				String nombre = verifica.remplazoCaracteres(txtUNnombre.getText());
 				String apellido = verifica.remplazoCaracteres(txtUNapellido.getText());

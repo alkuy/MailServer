@@ -111,8 +111,9 @@ public class Fachada {
 		cadena2 = usuario+dominio;
 		/*Paso a minuscula porque sino del commbobox lo trae en mayuscula*/
 		cadena2 = cadena2.toLowerCase();
-		for (int i = 0; i < cuentas.getsetCuentas().size(); i++){
+		for (int i = 0; i < cuentas.getsetCuentas().size()-1; i++){ //Problema con segunda recorrida Ver lo de -1
 			usu = cuentas.getsetCuentas().get(i).getNom_u().toString();
+			System.out.println(usu);
 			dom = cuentas.getsetCuentas().get(i).getDominio().toString();
 			cadena1 = usu+dom;
 			/*comparo lo ingresado con lo existente en el arraylist*/
