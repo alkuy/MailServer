@@ -83,8 +83,6 @@ public class Verificaciones {
 	
 	public String remplazoCaracteres(String cadena){
 		cadena = cadena.replace("'", "''");
-		cadena = cadena.replace("@", "");
-		cadena = cadena.replace("#", "");
 		return cadena;
 	}
 }

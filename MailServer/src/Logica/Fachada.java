@@ -37,18 +37,20 @@ public class Fachada {
 		return hUsu;
 	}
 	
-	public void altaUsu(String doc, String nom, String ape, String calle, String nro_puerta, String apto, String numTel) throws SQLException{
+	public void altaUsu(String doc, String nom, String ape, String calle, String nro_puerta, String apto, String numTel1, String numTel2) throws SQLException{
 		Usuario usu = new Usuario();
 		int id= usu.InstertaUserDevuelveId();
 		Usuario NU = new Usuario(id, doc, nom, ape, calle,  nro_puerta, apto);
 		hUsu.insert(NU);
 		
-		this.altaTel(id, numTel);
+		this.altaTel(id, numTel1);
+		this.altaTel(id, numTel2);
 	}
 	
 	public void altaTel(int idUsu, String numTel){
 		Telefonos auxTels = new Telefonos();
 		Telefono auxTel = new Telefono(idUsu, numTel);
+		auxTel.InsertTel(idUsu, numTel);
 		auxTels.Insertar(auxTel);
 	}
 	
@@ -111,9 +113,8 @@ public class Fachada {
 		cadena2 = usuario+dominio;
 		/*Paso a minuscula porque sino del commbobox lo trae en mayuscula*/
 		cadena2 = cadena2.toLowerCase();
-		for (int i = 0; i < cuentas.getsetCuentas().size()-1; i++){ //Problema con segunda recorrida Ver lo de -1
+		for (int i = 0; i < cuentas.getsetCuentas().size(); i++){
 			usu = cuentas.getsetCuentas().get(i).getNom_u().toString();
-			System.out.println(usu);
 			dom = cuentas.getsetCuentas().get(i).getDominio().toString();
 			cadena1 = usu+dom;
 			/*comparo lo ingresado con lo existente en el arraylist*/

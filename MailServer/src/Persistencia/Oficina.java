@@ -11,21 +11,16 @@ public class Oficina {
 	private String nombre;
 	private Conexion pruebaConn = Conexion.getInstancia();
 	
+	
+	public Oficina(){}		
+	
 	public Oficina(int id, String nom){
-		
-		this.id_usuario = id;
-		this.nombre = nom;	
-	}
 	
+	this.id_usuario = id;
+	this.nombre = nom;	
+    }
 	
-	public Oficina(){}					
-	
-    public Oficina(int id){
-		
-		this.id_usuario = id;
-		
-	}
-	
+  	
 	/* Metodo de ingreso de datos a la base */
 	
 	public void InsertRow(){
@@ -75,6 +70,22 @@ public java.sql.ResultSet Select_fila(int id) throws SQLException{
 	}
 	
 	
+/* metodo para modificar el nombre del grupo (oficina) */
+
+public void cambiar_nom_ofi(int id, String nombre) {
+	
+	
+	try{
+		java.sql.Statement stm = pruebaConn.getConexion().createStatement();
+		stm.execute("UPDATE Oficina SET nombre = '"+nombre+"'" + "where id_usuario = '"+id+"';");
+  }
+	catch (Exception e){
+		System.out.println("no se pudo modificar el nombre");
+	}
+	
+	
+}
+
 	
 }
 

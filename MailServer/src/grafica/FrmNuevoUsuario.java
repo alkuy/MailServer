@@ -41,7 +41,6 @@ public class FrmNuevoUsuario extends JInternalFrame {
 	
 	private Fachada FCLogica = Fachada.getInstancia(); 
 	private JPanel VentPrincipal = principal.getInstancia();
-	private Verificaciones verifica = new Verificaciones();
 	/**
 	 * Create the frame.
 	 */
@@ -173,7 +172,7 @@ public class FrmNuevoUsuario extends JInternalFrame {
 		
 		JButton btnAgregarUsuario = new JButton("Agregar");
 		btnAgregarUsuario.addActionListener(new ActionListener() {
-			
+			Verificaciones verifica = new Verificaciones();
 			public void actionPerformed(ActionEvent arg0) {
 				String nombre = verifica.remplazoCaracteres(txtUNnombre.getText());
 				String apellido = verifica.remplazoCaracteres(txtUNapellido.getText());
@@ -181,13 +180,14 @@ public class FrmNuevoUsuario extends JInternalFrame {
 				String calle = verifica.remplazoCaracteres(txtUNcalle.getText());
 				String nroPuerta = verifica.remplazoCaracteres(txtUNnroPuerta.getText());
 				String apto = verifica.remplazoCaracteres(txtUNapto.getText());
-				String numTel = verifica.remplazoCaracteres(txtUNtelefono1.getText());
+				String numTel1 = verifica.remplazoCaracteres(txtUNtelefono1.getText());
+				String numTel2 = verifica.remplazoCaracteres(txtUNtelefono2.getText());
 				
 				/*Instancio la clase verificacion*/
 				Verificaciones verifica = new Verificaciones();
 				if(verifica.campo_vacio(txtUNnombre) && verifica.campo_vacio(txtUNapellido) && verifica.documento(txtUNdocumento)){
 					try {
-						FCLogica.altaUsu(documento, nombre, apellido, calle, nroPuerta, apto, numTel);
+						FCLogica.altaUsu(documento, nombre, apellido, calle, nroPuerta, apto, numTel1, numTel2);
 						/*Cierro Ventana*/
 						setVisible(false);
 						/*Levanto la de cuenta*/

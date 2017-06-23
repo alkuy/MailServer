@@ -29,7 +29,7 @@ public class Cuenta {
 		this.es_lista = es_lista;
 	}
 	
-	// contructor para consultas
+/*	// contructor para consultas
 	
     public Cuenta(int id,String nom_us, String nom_dom ){
 		
@@ -37,7 +37,7 @@ public class Cuenta {
 		this.nom_usuario = nom_us;
 		this.nom_dominio = nom_dom;
 		
-	}
+	}*/
 	
 	
 	/* Metodo de ingreso de datos a la base */
@@ -88,6 +88,23 @@ public java.sql.ResultSet Select_fila(int id, String nom_us, String nom_dom ) th
 		return rs;
 		
 	}
+
+
+/* metodo para modificar el passwor de ingreso a la base en la base */
+
+public void cambiar_passwd(int id, String nom_us, String nom_dom, String passwd) {
+	
+	
+	try{
+		java.sql.Statement stm = pruebaConn.getConexion().createStatement();
+		stm.execute("UPDATE Cuenta SET password = '"+passwd+"'" + "where id_usuario = '"+id+"' AND nom_usuario = '"+nom_us+"' AND nom_dominio = '"+nom_dom+"'");
+  }
+	catch (Exception e){
+		System.out.println("no se pudo modificar el passwd");
+	}
+	
+	
+}
 	
 	
 }
