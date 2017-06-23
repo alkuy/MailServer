@@ -180,13 +180,14 @@ public class FrmNuevoUsuario extends JInternalFrame {
 				String calle = verifica.remplazoCaracteres(txtUNcalle.getText());
 				String nroPuerta = verifica.remplazoCaracteres(txtUNnroPuerta.getText());
 				String apto = verifica.remplazoCaracteres(txtUNapto.getText());
-				String numTel = verifica.remplazoCaracteres(txtUNtelefono1.getText());
+				String numTel1 = verifica.remplazoCaracteres(txtUNtelefono1.getText());
+				String numTel2 = verifica.remplazoCaracteres(txtUNtelefono2.getText());
 				
 				/*Instancio la clase verificacion*/
 				Verificaciones verifica = new Verificaciones();
 				if(verifica.campo_vacio(txtUNnombre) && verifica.campo_vacio(txtUNapellido) && verifica.documento(txtUNdocumento)){
 					try {
-						FCLogica.altaUsu(documento, nombre, apellido, calle, nroPuerta, apto, numTel);
+						FCLogica.altaUsu(documento, nombre, apellido, calle, nroPuerta, apto, numTel1, numTel2);
 						/*Cierro Ventana*/
 						setVisible(false);
 						/*Levanto la de cuenta*/
