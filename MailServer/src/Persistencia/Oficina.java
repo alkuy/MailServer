@@ -86,6 +86,24 @@ public void cambiar_nom_ofi(int id, String nombre) {
 	
 }
 
+
+/* Metodo para eliminar un registro de la tabla Oficina*/
+
+
+public void eliminar_oficina(int id) {
+	
+	
+	try{
+		java.sql.Statement stm = pruebaConn.getConexion().createStatement();
+		stm.execute("DELETE from Oficina where id_usuario = '"+id+"';");
+  }
+	catch (Exception e){
+		System.out.println("no se pudo eliminar el registro");
+	}
+	
+	
+}
+
 	
 }
 

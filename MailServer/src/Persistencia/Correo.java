@@ -81,7 +81,22 @@ public java.sql.ResultSet Select_fila(String nom_us1,String nom_dom1, String nom
 	}
 	
 
+/* Metodo para eliminar un registro de la tabla Correo*/
 
+
+public void eliminar_correo(String nom_us1,String nom_dom1, String nom_us2, String nom_dom2, String fecha) {
+	
+	
+	try{
+		java.sql.Statement stm = pruebaConn.getConexion().createStatement();
+		stm.execute("DELETE from Correo where nom_usuario_emisor = '"+nom_us1+"' and nom_dominio_emisor = '"+nom_dom1+"' and nom_usuario_receptor = '"+nom_us2+"' and nom_dominio_receptor = '"+nom_dom2+"' and fecha ='"+fecha+"'");
+  }
+	catch (Exception e){
+		System.out.println("no se pudo eliminar el registro");
+	}
+	
+	
+}
 	
 }
 

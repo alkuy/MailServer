@@ -124,6 +124,23 @@ public void cambiar_passwd(int id, String passwd) {
 	
 	
 }
+
+/* Metodo para eliminar un registro de la tabla Usuarios*/
+
+
+public void eliminar_us(int id) {
+	
+	
+	try{
+		java.sql.Statement stm = pruebaConn.getConexion().createStatement();
+		stm.execute("DELETE from Usuario where id_usuario = '"+id+"';");
+  }
+	catch (Exception e){
+		System.out.println("no se pudo eliminar el usuario");
+	}
+	
+	
+}
 	
 	
 }

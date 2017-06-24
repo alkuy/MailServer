@@ -29,15 +29,6 @@ public class Cuenta {
 		this.es_lista = es_lista;
 	}
 	
-/*	// contructor para consultas
-	
-    public Cuenta(int id,String nom_us, String nom_dom ){
-		
-		this.id_usuario = id;
-		this.nom_usuario = nom_us;
-		this.nom_dominio = nom_dom;
-		
-	}*/
 	
 	
 	/* Metodo de ingreso de datos a la base */
@@ -101,6 +92,23 @@ public void cambiar_passwd(int id, String nom_us, String nom_dom, String passwd)
   }
 	catch (Exception e){
 		System.out.println("no se pudo modificar el passwd");
+	}
+	
+}
+
+
+/* Metodo para eliminar un registro de la tabla Usuarios*/
+
+
+public void eliminar_cuenta(int id) {
+	
+	
+	try{
+		java.sql.Statement stm = pruebaConn.getConexion().createStatement();
+		stm.execute("DELETE from Cuenta where id_usuario = '"+id+"';");
+  }
+	catch (Exception e){
+		System.out.println("no se pudo eliminar el registro");
 	}
 	
 	

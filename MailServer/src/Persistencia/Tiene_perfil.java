@@ -74,7 +74,24 @@ public java.sql.ResultSet Select_fila(int id) throws SQLException{
 		
 	}
 	
+
+
+/* Metodo para eliminar un registro de la tabla Tiene_Perfil*/
+
+
+public void eliminar_tipo_perfil(int id) {
 	
+	
+	try{
+		java.sql.Statement stm = pruebaConn.getConexion().createStatement();
+		stm.execute("DELETE from Tiene_perfil where id_usuario = '"+id+"';");
+  }
+	catch (Exception e){
+		System.out.println("no se pudo eliminar");
+	}
+	
+	
+}
 	
 }
 

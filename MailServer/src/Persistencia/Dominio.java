@@ -7,11 +7,13 @@ public class Dominio {
 
 	
 	private String nom_dominio;
+	private int prioridad;
 	private Conexion pruebaConn = Conexion.getInstancia();
 	
-	public Dominio(String nom_dominio){
+	public Dominio(String nom_dominio, int prioridad){
 				
 		this.nom_dominio = nom_dominio;	
+		this.prioridad = prioridad;
 	}
 	
 	public Dominio(){
@@ -24,11 +26,12 @@ public class Dominio {
 		if (pruebaConn!=null){
 			try{
 				java.sql.Statement stm = pruebaConn.getConexion().createStatement();
-				stm.execute("Insert into Dominio values ('"+nom_dominio+"')");
+				stm.execute("Insert into Dominio (nom_dominio, prioridad) values ('"+nom_dominio+"', '"+prioridad+"')");
 				
+						
 			}
 			catch (Exception e){
-				//System.out.println("aca la cago");
+				
 			}
 		}else{
 			System.out.println("Desconectado");
@@ -75,6 +78,24 @@ public void cambiar_prioridad(String nom, int prioridad) {
   }
 	catch (Exception e){
 		System.out.println("no se pudo modificar la prioridad del dominio");
+	}
+	
+	
+}
+
+
+/* Metodo para eliminar un registro de la tabla Dominio*/
+
+
+public void eliminar_dominio(String nombre) {
+	
+	
+	try{
+		java.sql.Statement stm = pruebaConn.getConexion().createStatement();
+		stm.execute("DELETE from Doinio where nom_dominio = '"+nombre+"';");
+  }
+	catch (Exception e){
+		System.out.println("no se pudo eliminar el registro");
 	}
 	
 	

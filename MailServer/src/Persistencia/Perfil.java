@@ -64,7 +64,23 @@ public java.sql.ResultSet Select_fila(String tipo) throws SQLException{
 		return rs;
 		
 	}
-	
+
+
+/* Metodo para eliminar un registro de la tabla Perfil */
+
+
+	public void Eliminar_perfil(String tipo) {
+		
+		try{
+			java.sql.Statement stm = pruebaConn.getConexion().createStatement();
+			stm.execute("DELETE from Perfil where tipo = '"+tipo+"';");
+	  }
+		catch (Exception e){
+			System.out.println("no se pudo eliminar el registro");
+		}
+		
+		
+	}
 	
 }
 

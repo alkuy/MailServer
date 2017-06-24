@@ -92,6 +92,24 @@ package Persistencia;
 			return rs;
 			
 		}
+	
+	
+	/* Metodo para eliminar un registro de la tabla Lista Distribucion*/
+
+
+	public void eliminar_lista(String nom_us_lis, String nom_dom_lis, String nom_us_res, String nom_dom_res) {
+		
+		
+		try{
+			java.sql.Statement stm = pruebaConn.getConexion().createStatement();
+			stm.execute("DELETE from Lista_distribucion where nom_usuario_lista = '"+nom_us_lis+"' AND nom_dominio_lista = '"+nom_dom_lis+"' AND nom_usuario_receptor = '"+nom_us_res+"' AND nom_dominio_receptor = '"+nom_dom_res+"';");
+	  }
+		catch (Exception e){
+			System.out.println("no se pudo eliminar el registro");
+		}
+		
+		
+	}
 		
 		
 	}

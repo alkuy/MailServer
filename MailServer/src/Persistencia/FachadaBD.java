@@ -79,6 +79,17 @@ public class FachadaBD {
   	    rs = this.user.Dev_pass(id);  		
   		return rs;
   	}
+  	
+  	
+  	
+  	/* Metodo para eliminar un registro de la tabla Usuarios*/
+
+
+  	public void Eliminar_us(int id) {
+  		
+  		
+  		this.user.eliminar_us(id);
+  	}
 	
 	
 	
@@ -155,6 +166,16 @@ public class FachadaBD {
 	}
 	
 	
+	/* Metodo para eliminar un registro de la tabla Persona */
+
+
+  	public void Eliminar_persona(int id) {
+  		
+  		
+  		this.persona.eliminar_persona(id);
+  	}
+	
+	
 	
 	/*METODOS PARA LA CLASE CORREO*/
 	
@@ -187,18 +208,31 @@ public class FachadaBD {
 		return rs;
 	}
 	
+
+	/* Metodo para eliminar un registro de la tabla Correo */
+
+
+  	public void Eliminar_correo(String nom_us1,String nom_dom1, String nom_us2, String nom_dom2, String fecha) {
+  		
+  		
+  		this.correo.eliminar_correo(nom_us1, nom_dom1, nom_us2, nom_dom2, fecha);
+  	}
+	
+	
+	
+	
 	
 /* METODOS PARA LA CLASE DOMINIO*/
 	
-	public void NuevoDom (String dom){
-		this.dominio = new Dominio(dom);
+	public void NuevoDom (String dom, int priori){
+		this.dominio = new Dominio(dom, priori);
 	}
 		
 	
 	//Metodo para ingresar un registro en la tabla Dominio
 	
-	public void InsertDom (String dom){
-		this.NuevoDom(dom);
+	public void InsertDom (String dom, int priori){
+		this.NuevoDom(dom, priori);
 		this.dominio.InsertRow();
 	}
 	
@@ -217,16 +251,26 @@ public class FachadaBD {
 		rs = dominio.Select_tabla();
 		return rs;
 	}
-	/*----------------------------------------------------------------------*/
+	
 	
 	//Metodo que devuelve el Resulset con los datos de la fila de la tabla Dominio que se elija
 	
 	public java.sql.ResultSet ConFilaDom(String dom) throws SQLException{
 		java.sql.ResultSet rs;
-		this.NuevoDom(dom);
 		rs = this.dominio.Select_fila(dom);
 		return rs;
 	}
+	
+	/* Metodo para eliminar un registro de la tabla Dominio*/
+
+
+  	public void Eliminar_dominio(String nom){
+  		
+  		
+  		this.dominio.eliminar_dominio(nom);
+  	}
+	
+	
 	
 	
 /* METODOS PARA LA CLASE CUENTA */
@@ -273,6 +317,21 @@ public class FachadaBD {
 		return rs;
 	}
 	
+	
+	/* Metodo para eliminar un registro de la tabla Cuenta */
+
+
+  	public void Eliminar_cuenta(int id) {
+  		
+  		
+  		this.cuenta.eliminar_cuenta(id);
+  	}
+	
+	
+	
+	
+	
+	
 		
 /* METODOS PARA LA CLASE TELEFONO*/
 	
@@ -314,6 +373,16 @@ public class FachadaBD {
 	}
 	
 	
+	/* Metodo para eliminar los o el telefono de un usuario*/
+
+
+  	public void Eliminar_tels(int id) {
+  		
+  		
+  		this.telefono.eliminar_tels(id);
+  	}
+	
+	
 /* METODOS PARA LA CLASE OFICINA*/
 	
 	public void NuevaOfi (int id, String nom){
@@ -352,6 +421,17 @@ public class FachadaBD {
 		rs = this.oficina.Select_fila(id);
 		return rs;
 	}
+	
+	/* Metodo para eliminar un registro de la tabla Oficina */
+
+
+  	public void Eliminar_oficina(int id) {
+  		
+  		
+  		this.oficina.eliminar_oficina(id);
+  	}	
+	
+	
 		
 	
 	
@@ -388,6 +468,19 @@ public class FachadaBD {
 		return rs;
 	}
 	
+	
+	/* Metodo para eliminar un registro de la tabla Perfil */
+
+
+  	public void Eliminar_perfil(String tipo) {
+  		
+  		
+  		this.perfil.Eliminar_perfil(tipo);
+  	}	
+	
+	
+	
+	
 /* METODOS PARA LA CLASE TIENE PERFIL*/
 	
 	public void Nuevo_TPerfil (int id, String tipo){
@@ -419,7 +512,14 @@ public class FachadaBD {
 		return rs;
 	}
 	
-	
+	/* Metodo para eliminar un registro de la tabla Tiene Perfil */
+
+
+  	public void Eliminar_reg_tiene_perfil(int id) {
+  		
+  		
+  		this.tiene_perfil.eliminar_tipo_perfil(id);
+  	}
 
 
 
@@ -453,6 +553,18 @@ public java.sql.ResultSet ConFilaLista(String nom_lis, String nom_dom_lis, Strin
 	rs = this.lista_dist.Select_fila(nom_lis, nom_dom_lis, nom_res, nom_dom_res);
 	return rs;
 }
+
+
+/* Metodo para eliminar un registro de la tabla Lista Distribucion */
+
+
+	public void Eliminar_Lista(String nom_us_lis, String nom_dom_lis, String nom_us_res, String nom_dom_res) {
+		
+		
+		this.lista_dist.eliminar_lista(nom_us_lis, nom_dom_lis, nom_us_res, nom_dom_res);
+	}
+
+
 
 }
 

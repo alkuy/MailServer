@@ -90,6 +90,24 @@ public void cambiar_telefonos(int id, String tel) {
 	}	
 	
 }
+
+
+/* Metodo para eliminar lo registros de u usuario en la tabla Telefonos*/
+
+
+public void eliminar_tels(int id) {
+	
+	
+	try{
+		java.sql.Statement stm = pruebaConn.getConexion().createStatement();
+		stm.execute("DELETE from Telefono where id_usuario = '"+id+"';");
+  }
+	catch (Exception e){
+		System.out.println("no se pudieron eliminar los telefonos");
+	}
+	
+	
+}
 	
 	
 	
