@@ -52,7 +52,9 @@ public class Usuario {
 		this.cuentas = new Cuentas();
 		this.prefiles = new Perfiles();
 		this.tels = new Telefonos();
+		String tipo = "usuario";
 		BD.InsertPer(id, ci, nombre, apellido, calle, nro_puerta, apto);
+		BD.Insert_TPerfil(id, tipo); // VER si lo hacemos asi
 	}
 	
 	
@@ -63,9 +65,10 @@ public class Usuario {
 	public Usuario(int id_usuario, String nombre) {
 		this.id_usuario = id_usuario;
 		this.nombre = nombre;
-		this.cuentas = new Cuentas();
-		this.prefiles = new Perfiles();
+		//this.cuentas = new Cuentas(); // No comprendo bien que hacemos aca
+		//this.prefiles = new Perfiles(); // No entiendo para que una coleccion de perfiles dentro de usuario //ADRIAN
 		BD.InsertOfi(id_usuario, nombre);
+		BD.Insert_TPerfil(id_usuario, "usuario"); // VER si lo hacemos asi
 	}
 	
 	/** Método constructor de la clase para usuario <u><b>administrador</b></u>.
@@ -82,8 +85,11 @@ public class Usuario {
 		this.calle = calle;
 		this.nro_puerta = nro_puerta;
 		this.apto = apto;
-		this.cuentas = new Cuentas();
-		this.prefiles = new Perfiles();
+		//this.cuentas = new Cuentas(); //No comprendo de que nos sirve esto
+		//this.prefiles = new Perfiles();  // No entiendo para que una coleccion de perfiles dentro de usuario //ADRIAN
+		//BD.InserUS(pass_admin);
+		BD.InsertPer(id_usuario, ci, nombre, apellido, calle, nro_puerta, apto);
+		
 	}
 	
 	/**
@@ -92,8 +98,8 @@ public class Usuario {
 	 * @return id (int) Ultimo id cargado en tabla Usuario
 	 * @throws SQLException
 	 */
-	public int InstertaUserDevuelveId() throws SQLException{
-		BD.InserUS(null);
+	public int InstertaUserDevuelveId(String pass) throws SQLException{
+		BD.InserUS(pass);
 		java.sql.ResultSet rs = BD.ConUltimoID();
 		rs.next();
 		int id = rs.getInt(1);

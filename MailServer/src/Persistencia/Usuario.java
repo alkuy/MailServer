@@ -23,7 +23,7 @@ public class Usuario {
 	
 
 	
-	public void InsertRow(){
+	public void InsertRow(String pass){
 		
 		
 		Calendar fecha = Calendar.getInstance();
@@ -41,7 +41,7 @@ public class Usuario {
 		if (pruebaConn!=null){
 			try{
 				java.sql.Statement stm = pruebaConn.getConexion().createStatement();
-				stm.execute("Insert into Usuario (pass_admin, fecha_alta) values ('"+passAdmin+"','"+sqlFecha+"')");
+				stm.execute("Insert into Usuario (pass_admin, fecha_alta) values ('"+pass+"','"+sqlFecha+"')");
 			}
 			catch (Exception e){
 				

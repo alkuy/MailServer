@@ -39,7 +39,7 @@ public class Fachada {
 	
 	public void altaUsu(String doc, String nom, String ape, String calle, String nro_puerta, String apto, String numTel1, String numTel2) throws SQLException{
 		Usuario usu = new Usuario();
-		int id= usu.InstertaUserDevuelveId();
+		int id= usu.InstertaUserDevuelveId(null);
 		Usuario NU = new Usuario(id, doc, nom, ape, calle,  nro_puerta, apto);
 		hUsu.insert(NU);
 		
@@ -56,7 +56,7 @@ public class Fachada {
 	
 	public int altaUsuGrupo(String nom) throws SQLException{
 		Usuario usu = new Usuario();
-		int id= usu.InstertaUserDevuelveId();
+		int id= usu.InstertaUserDevuelveId(null);
 		Usuario NU = new Usuario(id, nom);
 		hUsu.insert(NU);
 		return id;
@@ -113,7 +113,7 @@ public class Fachada {
 		cadena2 = usuario+dominio;
 		/*Paso a minuscula porque sino del commbobox lo trae en mayuscula*/
 		cadena2 = cadena2.toLowerCase();
-		for (int i = 0; i < cuentas.getsetCuentas().size(); i++){
+		for (int i = 0; i < cuentas.getsetCuentas().size()-1; i++){ // sigo sin resolver bien esto
 			usu = cuentas.getsetCuentas().get(i).getNom_u().toString();
 			dom = cuentas.getsetCuentas().get(i).getDominio().toString();
 			cadena1 = usu+dom;
@@ -180,6 +180,16 @@ public class Fachada {
 		return modelo;
 	}
 	
+	
+	public void altaUsuarioAdmin(String doc, String nom, String ape, String pass_admin, String calle, String nro_puerta, String apto, String numTel1, String numTel2) throws SQLException{
+		Usuario usu = new Usuario();
+		int id= usu.InstertaUserDevuelveId(pass_admin);
+		Usuario NU = new Usuario(id, pass_admin, doc, nom, ape,calle, nro_puerta, apto);
+		hUsu.insert(NU);
+		
+		this.altaTel(id, numTel1);
+		this.altaTel(id, numTel2);
+	}
 /*	public boolean ExisteUsuario(String cedula){
 		Usuarios usuarios = new Usuarios();
 		ArrayList<Usuario> users = usuarios. 

@@ -21,9 +21,20 @@ import javax.swing.plaf.basic.BasicInternalFrameUI;
 
 import Logica.Fachada;
 
+
 public class FrmNuevoUsuario extends JInternalFrame {
 
+	public static String documento = new String();
+	public static String nombre = new String();
+	public static String apellido = new String();
+	public static String calle  = new String();
+	public static String nroPuerta  = new String();
+	public static String apto  = new String();
+	public static String numTel1   = new String();
+	public static String numTel2  = new String();
+	public static int cuentazero = 0;
 	private static final long serialVersionUID = 1L;
+	
 	private JTextField txtUNnombre;
 	private JTextField txtUNapellido;
 	private JTextField txtUNdocumento;
@@ -41,181 +52,217 @@ public class FrmNuevoUsuario extends JInternalFrame {
 	
 	private Fachada FCLogica = Fachada.getInstancia(); 
 	private JPanel VentPrincipal = principal.getInstancia();
+	private JTextField txtPassAdmin;
 	/**
 	 * Create the frame.
 	 */
 	public FrmNuevoUsuario() {
-		setBounds(20, 30, 450, 530);
+		setBounds(20, 30, 450, 515);
 		getContentPane().setLayout(null);
 		
 		JLabel lblNuevoUsuario = new JLabel("Nuevo Usuario");
 		lblNuevoUsuario.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNuevoUsuario.setFont(new Font("Goudy Old Style", Font.BOLD, 21));
-		lblNuevoUsuario.setBounds(136, 11, 166, 46);
+		lblNuevoUsuario.setBounds(138, -14, 166, 46);
 		getContentPane().add(lblNuevoUsuario);
 		
 		/*Nombre*/
 		JLabel lblUNnombre = new JLabel("Nombre");
 		lblUNnombre.setHorizontalAlignment(SwingConstants.RIGHT);
 		lblUNnombre.setFont(new Font("Goudy Old Style", Font.PLAIN, 18));
-		lblUNnombre.setBounds(28, 70, 100, 30);
+		lblUNnombre.setBounds(28, 32, 100, 30);
 		getContentPane().add(lblUNnombre);
 		
 		txtUNnombre = new JTextField();
-		txtUNnombre.setBounds(138, 70, 250, 30);
+		txtUNnombre.setBounds(138, 32, 250, 30);
 		getContentPane().add(txtUNnombre);
 		txtUNnombre.setColumns(10);
 		
 		JLabel lblUNapellido = new JLabel("Apellido");
 		lblUNapellido.setHorizontalAlignment(SwingConstants.RIGHT);
 		lblUNapellido.setFont(new Font("Goudy Old Style", Font.PLAIN, 18));
-		lblUNapellido.setBounds(28, 111, 100, 30);
+		lblUNapellido.setBounds(28, 73, 100, 30);
 		getContentPane().add(lblUNapellido);
 		
 	
 		txtUNapellido = new JTextField();
-		txtUNapellido.setBounds(138, 111, 250, 30);
+		txtUNapellido.setBounds(138, 73, 250, 30);
 		getContentPane().add(txtUNapellido);
 		txtUNapellido.setColumns(10);
 		
 		JLabel lblUNdocumento = new JLabel("Documento");
 		lblUNdocumento.setHorizontalAlignment(SwingConstants.RIGHT);
 		lblUNdocumento.setFont(new Font("Goudy Old Style", Font.PLAIN, 18));
-		lblUNdocumento.setBounds(28, 155, 100, 30);
+		lblUNdocumento.setBounds(28, 117, 100, 30);
 		getContentPane().add(lblUNdocumento);
 				
 		txtUNdocumento = new JTextField();
 		txtUNdocumento.setColumns(10);
-		txtUNdocumento.setBounds(138, 155, 250, 30);
+		txtUNdocumento.setBounds(138, 117, 250, 30);
 		getContentPane().add(txtUNdocumento);
 		
 		txtUNcalle = new JTextField();
 		txtUNcalle.setColumns(10);
-		txtUNcalle.setBounds(138, 238, 250, 30);
+		txtUNcalle.setBounds(138, 197, 250, 30);
 		getContentPane().add(txtUNcalle);
 		
 		JLabel lblUNcalle = new JLabel("Calle");
 		lblUNcalle.setHorizontalAlignment(SwingConstants.RIGHT);
 		lblUNcalle.setFont(new Font("Goudy Old Style", Font.PLAIN, 18));
-		lblUNcalle.setBounds(28, 238, 100, 30);
+		lblUNcalle.setBounds(28, 197, 100, 30);
 		getContentPane().add(lblUNcalle);
 		
 		txtUNnroPuerta = new JTextField();
 		txtUNnroPuerta.setColumns(10);
-		txtUNnroPuerta.setBounds(138, 279, 94, 30);
+		txtUNnroPuerta.setBounds(138, 238, 94, 30);
 		getContentPane().add(txtUNnroPuerta);
 		
 		JLabel lblUNnroPuerta = new JLabel("Nro Puerta");
 		lblUNnroPuerta.setHorizontalAlignment(SwingConstants.RIGHT);
 		lblUNnroPuerta.setFont(new Font("Goudy Old Style", Font.PLAIN, 18));
-		lblUNnroPuerta.setBounds(28, 279, 100, 30);
+		lblUNnroPuerta.setBounds(28, 238, 100, 30);
 		getContentPane().add(lblUNnroPuerta);
 		
 		JLabel lblUNapto = new JLabel("Apto");
 		lblUNapto.setHorizontalAlignment(SwingConstants.RIGHT);
 		lblUNapto.setFont(new Font("Goudy Old Style", Font.PLAIN, 18));
-		lblUNapto.setBounds(264, 279, 48, 30);
+		lblUNapto.setBounds(264, 238, 48, 30);
 		getContentPane().add(lblUNapto);
 		
 		txtUNapto = new JTextField();
 		txtUNapto.setColumns(10);
-		txtUNapto.setBounds(322, 279, 67, 30);
+		txtUNapto.setBounds(322, 238, 67, 30);
 		getContentPane().add(txtUNapto);
 		
 		txtUNtelefono1 = new JTextField();
 		txtUNtelefono1.setColumns(10);
-		txtUNtelefono1.setBounds(138, 320, 250, 30);
+		txtUNtelefono1.setBounds(138, 279, 250, 30);
 		getContentPane().add(txtUNtelefono1);
 		
 		JLabel lblUNtelefono1 = new JLabel("Tel\u00E9fono");
 		lblUNtelefono1.setHorizontalAlignment(SwingConstants.RIGHT);
 		lblUNtelefono1.setFont(new Font("Goudy Old Style", Font.PLAIN, 18));
-		lblUNtelefono1.setBounds(28, 320, 100, 30);
+		lblUNtelefono1.setBounds(28, 279, 100, 30);
 		getContentPane().add(lblUNtelefono1);
 		
 		txtUNtelefono2 = new JTextField();
 		txtUNtelefono2.setColumns(10);
-		txtUNtelefono2.setBounds(138, 361, 250, 30);
+		txtUNtelefono2.setBounds(138, 320, 250, 30);
 		getContentPane().add(txtUNtelefono2);
 		
 		JLabel lblUNtelefono2 = new JLabel("Tel\u00E9fono");
 		lblUNtelefono2.setHorizontalAlignment(SwingConstants.RIGHT);
 		lblUNtelefono2.setFont(new Font("Goudy Old Style", Font.PLAIN, 18));
-		lblUNtelefono2.setBounds(28, 361, 100, 30);
+		lblUNtelefono2.setBounds(28, 320, 100, 30);
 		getContentPane().add(lblUNtelefono2);
 		
 		JSeparator separator = new JSeparator();
-		separator.setBounds(38, 196, 388, 21);
+		separator.setBounds(38, 155, 388, 21);
 		getContentPane().add(separator);
 		
 		
 		JRadioButton rdbtnConCuenta = new JRadioButton("Con cuenta");
+	
 		rdbtnTipoUsuario.add(rdbtnConCuenta);
-		rdbtnConCuenta.setBounds(145, 409, 94, 23);
+		rdbtnConCuenta.setBounds(145, 361, 94, 23);
 		getContentPane().add(rdbtnConCuenta);
 		
 		JRadioButton rdbtnAdministrador = new JRadioButton("Administrador");
+		
 		rdbtnTipoUsuario.add(rdbtnAdministrador);
-		rdbtnAdministrador.setBounds(244, 409, 109, 23);
+		rdbtnAdministrador.setBounds(244, 361, 109, 23);
 		getContentPane().add(rdbtnAdministrador);
 		
 		
 		/*Etiqueta que avisa el error de campos faltantes*/
-		lblFaltanCampos = new JLabel("* Faltan campos obligatorios");
+		lblFaltanCampos = new JLabel("Faltan campos obligatorios");
 		lblFaltanCampos.setFont(new Font("Tahoma", Font.BOLD, 15));
-		lblFaltanCampos.setBounds(168, 439, 220, 21);
+		lblFaltanCampos.setBounds(168, 158, 220, 21);
 		getContentPane().add(lblFaltanCampos);
 		lblFaltanCampos.setVisible(false);
 		
+		txtPassAdmin = new JTextField();
+		txtPassAdmin.setColumns(10);
+		txtPassAdmin.setBounds(138, 393, 250, 30);
+		getContentPane().add(txtPassAdmin);
+		txtPassAdmin.setVisible(false);
+		
+		JLabel lblContrasea = new JLabel("Contrase\u00F1a");
+		lblContrasea.setFont(new Font("Goudy Old Style", Font.PLAIN, 18));
+		lblContrasea.setBounds(48, 391, 90, 30);
+		getContentPane().add(lblContrasea);
+		lblContrasea.setVisible(false);
+		
+		/*Se muestra el campo de pass para admin*/ 
+		rdbtnAdministrador.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				txtPassAdmin.setVisible(true);
+				lblContrasea.setVisible(true);
+			}
+		});
+		
+		rdbtnConCuenta.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				txtPassAdmin.setVisible(false);
+				lblContrasea.setVisible(false);
+			}
+		});
+		
 		/*INSTANCIO txt documento para pasarle a nueva cuenta*/
-		JTextField txtCNdocumento = FrmNuevaCuenta.getInstancia();
+		//JTextField txtCNdocumento = FrmNuevaCuenta.getInstancia();
 		
 		JButton btnAgregarUsuario = new JButton("Agregar");
 		btnAgregarUsuario.addActionListener(new ActionListener() {
 			Verificaciones verifica = new Verificaciones();
 			public void actionPerformed(ActionEvent arg0) {
-				String nombre = verifica.remplazoCaracteres(txtUNnombre.getText());
-				String apellido = verifica.remplazoCaracteres(txtUNapellido.getText());
-				String documento = verifica.remplazoCaracteres(txtUNdocumento.getText());
-				String calle = verifica.remplazoCaracteres(txtUNcalle.getText());
-				String nroPuerta = verifica.remplazoCaracteres(txtUNnroPuerta.getText());
-				String apto = verifica.remplazoCaracteres(txtUNapto.getText());
-				String numTel1 = verifica.remplazoCaracteres(txtUNtelefono1.getText());
-				String numTel2 = verifica.remplazoCaracteres(txtUNtelefono2.getText());
+				nombre = verifica.remplazoCaracteres(txtUNnombre.getText());
+				apellido = verifica.remplazoCaracteres(txtUNapellido.getText());
+				documento = verifica.remplazoCaracteres(txtUNdocumento.getText());
+				calle = verifica.remplazoCaracteres(txtUNcalle.getText());
+				nroPuerta = verifica.remplazoCaracteres(txtUNnroPuerta.getText());
+				apto = verifica.remplazoCaracteres(txtUNapto.getText());
+				numTel1 = verifica.remplazoCaracteres(txtUNtelefono1.getText());
+				numTel2 = verifica.remplazoCaracteres(txtUNtelefono2.getText());
 				
 				/*Instancio la clase verificacion*/
 				Verificaciones verifica = new Verificaciones();
 				if(verifica.campo_vacio(txtUNnombre) && verifica.campo_vacio(txtUNapellido) && verifica.documento(txtUNdocumento)){
-					try {
-						FCLogica.altaUsu(documento, nombre, apellido, calle, nroPuerta, apto, numTel1, numTel2);
+					
+						//FCLogica.altaUsu(documento, nombre, apellido, calle, nroPuerta, apto, numTel1, numTel2);
 						/*Cierro Ventana*/
-						setVisible(false);
-						/*Levanto la de cuenta*/
+						//setVisible(false);
 						
 						/*Debo ver que tipo de cuenta va a crear*/
 						if (rdbtnConCuenta.isSelected()){
+							/*El campo de contrase;a de administrador queda oculto*/
+							cuentazero = 1;
 							cuenta = new FrmNuevaCuenta();
 							abreVentana(cuenta);
-							txtCNdocumento.setText(documento);
-							txtCNdocumento.setBounds(150, 74, 250, 30);
+							dispose();
 						}
 						
 						if (rdbtnAdministrador.isSelected()){
+							String pass = txtPassAdmin.getText();
+							try {
+								FCLogica.altaUsuarioAdmin(documento, nombre, apellido, pass, calle, nroPuerta, apto, numTel1, numTel2);
+							} catch (SQLException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
 							
-					
+							dispose();
 						}
 						
-					} catch (SQLException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
+						
+					
 				}else{
 					lblFaltanCampos.setVisible(true);
 				}
 			}
 		});
-		btnAgregarUsuario.setBounds(142, 459, 246, 30);
+		btnAgregarUsuario.setBounds(59, 434, 329, 30);
 		getContentPane().add(btnAgregarUsuario);
+		
 	}
 	
 	public void abreVentana(JInternalFrame panel){

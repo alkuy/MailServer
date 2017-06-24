@@ -1,6 +1,6 @@
 package grafica;
+import static grafica.FrmNuevoUsuario.*; //Para traer los datos del formulario usuario
 
-import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -23,25 +23,13 @@ import Logica.Fachada;
 public class FrmNuevaCuenta extends JInternalFrame {
 
 	private JTextField txtCNnombre;
-	private static JTextField txtCNdocumento;
+	private JTextField txtCNdocumento;
 	private JButton btnCNingresar;
 	private final ButtonGroup grpbtnSelectTipoCuenta = new ButtonGroup();
 	private JLabel lblFaltanCampos;
 	/*Instancio la fachada*/
 	private Fachada FCLogica = Fachada.getInstancia();
 
-	/*El campo de documento que en algun caso lo traigo de Nuevo Usuario*/
-	public static JTextField getInstancia() {
-		if(txtCNdocumento == null)
-			txtCNdocumento = new JTextField();
-		
-		return txtCNdocumento;
-	}
-	
-	
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 
 	/**
@@ -115,6 +103,18 @@ Verificaciones verifica = new Verificaciones();
 		getContentPane().add(lblCNtipo);
 		
 		
+		txtCNdocumento = new JTextField();
+		getContentPane().add(txtCNdocumento);
+		txtCNdocumento.setBounds(150, 74, 250, 30);
+		txtCNdocumento.setColumns(8);
+		
+		if (cuentazero == 1){
+			txtCNdocumento.setText(documento);
+			txtCNdocumento.setEnabled(false);
+			rdbtnCNpersona.setSelected(true);
+			rdbtnGrupoUOficina.setEnabled(false);
+		}
+		
 		
 		rdbtnGrupoUOficina.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -128,17 +128,7 @@ Verificaciones verifica = new Verificaciones();
 				txtCNdocumento.setEditable(true);	
 			}
 		});
-		
-		JTextField txtCNdocumento = FrmNuevaCuenta.getInstancia();
-		if(txtCNdocumento.getText().isEmpty()){
-			rdbtnCNpersona.setSelected(true);
-			//txtCNdocumento.setEditable(false);
-		}
-		txtCNdocumento.setBounds(150, 74, 250, 30);
-		txtCNdocumento.setColumns(8);
-		getContentPane().add(txtCNdocumento);
-		
-		
+
 		lblFaltanCampos = new JLabel("*Faltan campos obligatorios");
 		lblFaltanCampos.setBounds(150, 105, 250, 30);
 		getContentPane().add(lblFaltanCampos);
@@ -158,17 +148,27 @@ Verificaciones verifica = new Verificaciones();
 				if (rdbtnCNpersona.isSelected()){ 
 					if (verifica.documento(txtCNdocumento) && verifica.campo_vacio(txtCNnombre)){ //Verificaciones de campos
 						//Variables con datos a cargar
-						String documento = txtCNdocumento.getText();
+						if(cuentazero == 0){ // Si no vengo desde el formulario anterior
+							documento = txtCNdocumento.getText();
+							}
 						String nom_usuario = txtCNnombre.getText();
 						String dominio = cboNCdominio.getSelectedItem().toString();
-						String cedula = txtCNdocumento.getText();
 						//Verificamos la existencia de la cuenta
 						System.out.println(nom_usuario+"@"+dominio);
 						boolean existe = FCLogica.VerificaCuenta(nom_usuario, dominio);
 							if (existe){
 								JOptionPane.showMessageDialog(new JPanel(), "La cuenta ya existe, debe elegir otro nombre");
 							}else{
-								FCLogica.altaCuentaPersonal(cedula, nom_usuario, dominio);//Damos de alta
+								try {
+									if(cuentazero == 1){ // Si el formulario viene desde la creacion del usuario
+									FCLogica.altaUsu(documento, nombre, apellido, calle, nroPuerta, apto, numTel1, numTel2);
+									cuentazero = 0;
+									}// Si no es que estoy cargando una cuenta de un usuario ya existente
+									FCLogica.altaCuentaPersonal(documento, nom_usuario, dominio);//Damos de alta
+								} catch (SQLException e) {
+									// TODO Auto-generated catch block
+									e.printStackTrace();
+								}
 								seguirEditando();
 							}
 				

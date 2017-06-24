@@ -36,7 +36,7 @@ public class FachadaBD {
 	//Metodo para ingresar un registro en la tabla Usuario
 	
 	public void InserUS (String pass){
-		this.user.InsertRow();
+		this.user.InsertRow(pass);
 	}
 	
 	//Metodo para modificar el pasword de un usuario administrador

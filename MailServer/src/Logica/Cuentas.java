@@ -45,12 +45,6 @@ public class Cuentas {
 	public void Insertar(Cuenta cuenta){
 		this.setCuentas.add(cuenta);
 		BD.InsertCuenta(cuenta.getId(), cuenta.getNom_u(), cuenta.getDominio(), cuenta.getContraseña_cuenta(), cuenta.getEs_lista());
-		/*COMPOBANDO QUE CARGA ARRAY. BORRAR*/
-		/*ArrayList<Cuenta> c = new ArrayList<Cuenta>();
-		c = this.getsetCuentas();
-		for (int i=0; i<c.size(); i++){
-			System.out.println(c.get(i).getNom_u());
-		}*/
 	}
 	
 	/** Determina sí el set está vacío o no.
