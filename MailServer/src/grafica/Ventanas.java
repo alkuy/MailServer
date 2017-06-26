@@ -5,6 +5,9 @@ import java.awt.event.ActionListener;
 
 import javax.swing.Timer;
 
+import Logica.Fachada;
+import Persistencia.FachadaBD;
+
 public class Ventanas {
 
 	public static void main(String[] args) {
@@ -24,7 +27,7 @@ public class Ventanas {
 		Timer cierre = new Timer(3000, realiza);
 		cierre.start();
 		
-		
+		Fachada Logica = Fachada.getInstancia();
 	}
 
 }

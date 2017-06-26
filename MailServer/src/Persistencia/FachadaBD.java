@@ -47,7 +47,7 @@ public class FachadaBD {
 	
 	//Metodo que devuelve el Resulset con los datos de la tabla Usuarios cargados
 	
-	public java.sql.ResultSet ConTablaUS(int idUsu) throws SQLException{
+	public java.sql.ResultSet ConTablaUS(/*int idUsu*/) throws SQLException{
 		java.sql.ResultSet rs;
 		rs = this.user.Select_tabla();
 		return rs;

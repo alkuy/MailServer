@@ -1,6 +1,11 @@
 package Logica;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.Enumeration;
 import java.util.Hashtable;
+
+import Persistencia.FachadaBD;
 
 /** Clase de ejemplo que muestra la sintaxis
  * elemental de un programa en java
@@ -12,9 +17,17 @@ public class Usuarios {
 	
 	private Hashtable<String, Usuario> hUsu;
 	
+	FachadaBD BD = FachadaBD.getInstancia();
+	
 	/** Método constructor de la colección Usuarios. */
 	public Usuarios() {
-		this.hUsu = new Hashtable<>();
+		try {
+			this.hUsu = cargaDesdeBD();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		//this.hUsu = new Hashtable<>();
 	}
 	
 	/** Método que determina si en el diccionario de Usuarios existe un Usuario con la clave <b>id_usuario</b>.
@@ -56,6 +69,38 @@ public class Usuarios {
 	 * @return No retorna nada. */
 	public void delete(String nom_usuario){
 		this.hUsu.remove(nom_usuario);
+	}
+	
+	public Hashtable<String, Usuario> cargaDesdeBD() throws SQLException{
+		Hashtable<String, Usuario> usuarios = new Hashtable<String, Usuario>();
+		ResultSet rs = null;
+		
+		rs = BD.ConTablaUS();
+		
+		while(rs.next()){
+			Usuario usu = new Usuario();
+			
+			usuarios.put(rs.getString("id_usuario"), usu.cargaDesdeBD(rs.getInt("id_usuario"), rs.getString("pass_admin")));
+		}
+		
+		return usuarios;
+	}
+
+	
+	public void imprimirConsola (Hashtable<String, Usuario> usus){
+		Enumeration<String> e = usus.keys();
+		
+		System.out.println("IMPRIMIENDO");
+		
+		while(e.hasMoreElements()){
+			String elem = e.nextElement();
+			System.out.println(elem);
+			
+		}
+	}
+	
+	public Hashtable<String, Usuario> getColection(){
+		return hUsu;
 	}
 
 }

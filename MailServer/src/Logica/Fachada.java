@@ -196,4 +196,11 @@ public class Fachada {
 		return false;
 	}*/
 	
+	public void cargaDesdeBD() throws SQLException{
+		//Usuarios usuarios = new Usuarios();
+		
+		//usuarios.imprimirConsola(usuarios.getColection());
+		
+	}
+	
 }
