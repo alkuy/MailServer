@@ -203,4 +203,9 @@ public class Fachada {
 		
 	}
 	
+
+public void altaDominio(String dominio, int prioridad){
+		Dominio dom = new Dominio(dominio, prioridad);
+	}
+	
 }

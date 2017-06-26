@@ -32,6 +32,7 @@ public class Dominio {
 	public Dominio(String nombre_dominio, int prioridad) {
 		this.nombre_dominio = nombre_dominio;
 		this.prioridad = prioridad;
+		BD.InsertDom(nombre_dominio, prioridad);
 	}
 	
 	/** Método que retorna el nombre de nombre de dominio.

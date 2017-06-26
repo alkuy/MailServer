@@ -39,6 +39,7 @@ public class principal extends JFrame {
 	private FrmNuevaCuenta frmcuenta; 
 	private FrmNuevoUsuario frmusuario;
 	private FrmNuevoDominio frmdominionuevo;
+	private FrmMuestraUsuarios frmmuestrausuarios;
 	
 	public static JPanel getInstancia() {
 		if(VentPrincipal == null)
@@ -86,6 +87,9 @@ public class principal extends JFrame {
 		
 		JMenuItem mntmNuevoUsuario = new JMenuItem("Nuevo");
 		mnUsuario.add(mntmNuevoUsuario);
+		
+		JMenuItem mntmVerUsuarios = new JMenuItem("Ver Usuarios");
+		mnUsuario.add(mntmVerUsuarios);
 		
 		JMenu mnConfiguracion = new JMenu("Configuracion");
 		menuBar.add(mnConfiguracion);
@@ -203,6 +207,7 @@ public class principal extends JFrame {
 				cierraVentana(frmusuario);
 				cierraVentana(frmdominionuevo);
 				cierraVentana(frmmuestradominios);
+				cierraVentana(frmmuestrausuarios);
 			
 			}
 		});
@@ -216,6 +221,7 @@ public class principal extends JFrame {
 				cierraVentana(frmcuenta);
 				cierraVentana(frmdominionuevo);
 				cierraVentana(frmmuestradominios);
+				cierraVentana(frmmuestrausuarios);
 			}
 		});
 		
@@ -228,6 +234,7 @@ public class principal extends JFrame {
 				cierraVentana(frmcuenta);
 				cierraVentana(frmdominionuevo);
 				cierraVentana(frmmuestradominios);
+				cierraVentana(frmmuestrausuarios);
 			}
 		});
 		
@@ -240,6 +247,7 @@ public class principal extends JFrame {
 				cierraVentana(frmcuenta);
 				cierraVentana(frmmuestracuentas);
 				cierraVentana(frmmuestradominios);
+				cierraVentana(frmmuestrausuarios);
 		
 			}
 		});
@@ -254,7 +262,21 @@ public class principal extends JFrame {
 				cierraVentana(frmcuenta);
 				cierraVentana(frmmuestracuentas);
 				cierraVentana(frmdominionuevo);
+				cierraVentana(frmmuestrausuarios);
 		
+			}
+		});
+		
+		mntmVerUsuarios.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				frmmuestrausuarios = new FrmMuestraUsuarios();
+				abreVentana(frmmuestrausuarios);
+				
+				cierraVentana(frmusuario);
+				cierraVentana(frmcuenta);
+				cierraVentana(frmmuestracuentas);
+				cierraVentana(frmdominionuevo);
+				cierraVentana(frmmuestradominios);
 			}
 		});
 		
@@ -263,7 +285,7 @@ public class principal extends JFrame {
 		
 		
 	}
-	public void abreVentana(JInternalFrame panel){
+	public static void abreVentana(JInternalFrame panel){
 		VentPrincipal.add(panel);
 		BasicInternalFrameTitlePane titlePane =
 			      (BasicInternalFrameTitlePane) ((BasicInternalFrameUI) panel.getUI()).

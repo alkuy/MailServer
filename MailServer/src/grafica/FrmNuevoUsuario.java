@@ -1,5 +1,5 @@
 package grafica;
-
+import static grafica.principal.abreVentana;
 import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -51,7 +51,7 @@ public class FrmNuevoUsuario extends JInternalFrame {
 	private FrmNuevaCuenta cuenta;
 	
 	private Fachada FCLogica = Fachada.getInstancia(); 
-	private JPanel VentPrincipal = principal.getInstancia();
+	private static JPanel VentPrincipal = principal.getInstancia();
 	private JTextField txtPassAdmin;
 	/**
 	 * Create the frame.
@@ -265,12 +265,5 @@ public class FrmNuevoUsuario extends JInternalFrame {
 		
 	}
 	
-	public void abreVentana(JInternalFrame panel){
-		VentPrincipal.add(panel);
-		BasicInternalFrameTitlePane titlePane =
-			      (BasicInternalFrameTitlePane) ((BasicInternalFrameUI) panel.getUI()).
-			      getNorthPane();
-		panel.remove(titlePane);
-		panel.setVisible(true);
-	}
+	
 }
