@@ -231,29 +231,29 @@ public class Usuario {
 	
 	public Usuario cargaDesdeBD(int id_usuario, String pass_admin) throws SQLException{
 		Usuario usu = new Usuario();
-		System.out.println("Persona " + id_usuario);
+		//System.out.println("Persona " + id_usuario);
 		//Se crea Resultset(rs) de la persona correspondiente a id_usuario
 		ResultSet rs = BD.ConFilaPer(id_usuario);
 		
 		if(!pass_admin.equals(null)){
-			System.out.println("ES UN ADMIN " + pass_admin);
+			//System.out.println("ES UN ADMIN " + pass_admin);
 			usu.pass_admin = pass_admin;
 		}
 		
 		while (rs.next()){
 			if(!rs.wasNull()){
 				//Si el rs no es null entonces es una persona y se cargan los datos de persona.
-				System.out.println("Persona\n " + rs.getInt("cedula"));
+				//System.out.println("Persona\n " + rs.getInt("cedula"));
 				usu.ci = String.valueOf(rs.getInt("cedula"));
-				System.out.println("Persona\n " + rs.getString("nombre"));
+				//System.out.println("Persona\n " + rs.getString("nombre"));
 				usu.nombre = rs.getString("nombre");
-				System.out.println("Persona\n " + rs.getString("apellido"));
+				//System.out.println("Persona\n " + rs.getString("apellido"));
 				usu.apellido = rs.getString("apellido");
-				System.out.println("Persona\n " + rs.getString("calle"));
+				//System.out.println("Persona\n " + rs.getString("calle"));
 				usu.calle = rs.getString("calle");
-				System.out.println("Persona\n " + rs.getString("nro_puerta"));
+				//System.out.println("Persona\n " + rs.getString("nro_puerta"));
 				usu.nro_puerta = rs.getString("nro_puerta");
-				System.out.println("Persona\n " + rs.getString("apto"));
+				//System.out.println("Persona\n " + rs.getString("apto"));
 				usu.apto = rs.getString("apto");
 				
 			}

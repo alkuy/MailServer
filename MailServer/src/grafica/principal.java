@@ -23,6 +23,8 @@ import javax.swing.JButton;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.Dimension;
+import java.awt.Component;
 
 public class principal extends JFrame {
 
@@ -40,6 +42,7 @@ public class principal extends JFrame {
 	private FrmNuevoUsuario frmusuario;
 	private FrmNuevoDominio frmdominionuevo;
 	private FrmMuestraUsuarios frmmuestrausuarios;
+	private FrmPruebaServidor frmPruebaServidor;
 	
 	public static JPanel getInstancia() {
 		if(VentPrincipal == null)
@@ -99,6 +102,12 @@ public class principal extends JFrame {
 		
 		JMenuItem mntmDominios = new JMenuItem("Ver Dominios");
 		mnConfiguracion.add(mntmDominios);
+		
+		JMenuItem mntmPruebaServidor = new JMenuItem("PruebaServidor");
+		mntmPruebaServidor.setBorder(null);
+		mntmPruebaServidor.setMaximumSize(new Dimension(145, 56));
+		mntmPruebaServidor.setPreferredSize(new Dimension(145, 24));
+		menuBar.add(mntmPruebaServidor);
 		
 		/*······························*/
 		/*Termina MENU ARRIBA*/
@@ -208,6 +217,7 @@ public class principal extends JFrame {
 				cierraVentana(frmdominionuevo);
 				cierraVentana(frmmuestradominios);
 				cierraVentana(frmmuestrausuarios);
+				cierraVentana(frmPruebaServidor);
 			
 			}
 		});
@@ -222,6 +232,7 @@ public class principal extends JFrame {
 				cierraVentana(frmdominionuevo);
 				cierraVentana(frmmuestradominios);
 				cierraVentana(frmmuestrausuarios);
+				cierraVentana(frmPruebaServidor);
 			}
 		});
 		
@@ -235,6 +246,7 @@ public class principal extends JFrame {
 				cierraVentana(frmdominionuevo);
 				cierraVentana(frmmuestradominios);
 				cierraVentana(frmmuestrausuarios);
+				cierraVentana(frmPruebaServidor);
 			}
 		});
 		
@@ -248,7 +260,7 @@ public class principal extends JFrame {
 				cierraVentana(frmmuestracuentas);
 				cierraVentana(frmmuestradominios);
 				cierraVentana(frmmuestrausuarios);
-		
+				cierraVentana(frmPruebaServidor);
 			}
 		});
 		
@@ -263,7 +275,7 @@ public class principal extends JFrame {
 				cierraVentana(frmmuestracuentas);
 				cierraVentana(frmdominionuevo);
 				cierraVentana(frmmuestrausuarios);
-		
+				cierraVentana(frmPruebaServidor);
 			}
 		});
 		
@@ -272,6 +284,21 @@ public class principal extends JFrame {
 				frmmuestrausuarios = new FrmMuestraUsuarios();
 				abreVentana(frmmuestrausuarios);
 				
+				cierraVentana(frmusuario);
+				cierraVentana(frmcuenta);
+				cierraVentana(frmmuestracuentas);
+				cierraVentana(frmdominionuevo);
+				cierraVentana(frmmuestradominios);
+				cierraVentana(frmPruebaServidor);
+			}
+		});
+		
+		mntmPruebaServidor.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				frmPruebaServidor = new FrmPruebaServidor();
+				abreVentana(frmPruebaServidor);
+				
+				cierraVentana(frmmuestrausuarios);
 				cierraVentana(frmusuario);
 				cierraVentana(frmcuenta);
 				cierraVentana(frmmuestracuentas);
