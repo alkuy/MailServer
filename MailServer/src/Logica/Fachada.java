@@ -196,7 +196,12 @@ public class Fachada {
 		return false;
 	}*/
 	
-	public void cargaDesdeBD() throws SQLException{
+	public DefaultTableModel DevUsuariosCompleto() throws SQLException{
+		DefaultTableModel modelo;
+		Usuarios usuarios = new Usuarios();
+		modelo = usuarios.DevTablaUsuario();
+		return modelo;
+		
 		//Usuarios usuarios = new Usuarios();
 		
 		//usuarios.imprimirConsola(usuarios.getColection());

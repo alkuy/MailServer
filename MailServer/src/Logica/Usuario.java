@@ -243,6 +243,7 @@ public class Usuario {
 		while (rs.next()){
 			if(!rs.wasNull()){
 				//Si el rs no es null entonces es una persona y se cargan los datos de persona.
+				usu.id_usuario = rs.getInt("id_usuario");
 				//System.out.println("Persona\n " + rs.getInt("cedula"));
 				usu.ci = String.valueOf(rs.getInt("cedula"));
 				//System.out.println("Persona\n " + rs.getString("nombre"));
@@ -261,6 +262,7 @@ public class Usuario {
 				//El rs es null entonces es una oficina y se carga el nombre de la oficina.
 				rs = BD.ConFilaOfi(usu.id_usuario);
 				
+				usu.id_usuario = rs.getInt("id_usuario");
 				usu.nombre = rs.getString("nombre");
 			}
 		}

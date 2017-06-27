@@ -5,6 +5,8 @@ import java.sql.SQLException;
 import java.util.Enumeration;
 import java.util.Hashtable;
 
+import javax.swing.table.DefaultTableModel;
+
 import Persistencia.FachadaBD;
 
 /** Clase de ejemplo que muestra la sintaxis
@@ -101,6 +103,41 @@ public class Usuarios {
 	
 	public Hashtable<String, Usuario> getColection(){
 		return hUsu;
+	}
+	
+	public DefaultTableModel DevTablaUsuario(){
+		String col[] = {"Cédula","Cuenta"};
+		DefaultTableModel modelo = new DefaultTableModel(col,0);
+		
+		Enumeration<Usuario> eUsu = hUsu.elements();
+		Usuario usu;
+		
+		while(eUsu.hasMoreElements()){
+			usu = eUsu.nextElement();
+			
+			//System.out.println("id " + usu.getId_usuario() + " CI " + usu.getCi() + " Nombre " + usu.getNombre());
+			String carga [] = {usu.getCi(), usu.getNombre()};
+			modelo.addRow(carga);
+		}
+		
+		return modelo;
+
+//		for (int i=0; i < setCuentas.size(); i++){
+//			String id, cuenta;
+//			int id_user;
+//			String nomUser, nomDominio;
+//			
+//			nomUser = setCuentas.get(i).getNom_u();
+//			nomDominio = setCuentas.get(i).getDominio();
+//			id_user = setCuentas.get(i).getId();
+//			
+//			id=""+id_user;
+//			cuenta = nomUser+"@"+nomDominio;
+//			
+//			String carga [] = {id, cuenta};	   
+//		   	modelo.addRow(carga);
+//		}
+//		return modelo;
 	}
 
 }
