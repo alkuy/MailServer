@@ -1,22 +1,32 @@
 package grafica;
-
+import static grafica.principal.*;
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
+import java.awt.Font;
 import java.sql.SQLException;
 
 import javax.swing.JButton;
 import javax.swing.JInternalFrame;
+import javax.swing.JLabel;
 import javax.swing.plaf.basic.BasicInternalFrameTitlePane;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
+import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableModel;
 
 import Logica.Fachada;
 import javax.swing.border.EmptyBorder;
 import java.awt.Color;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class FrmMuestraCuentas extends JInternalFrame {
+	
+	public static String id = new String();
+	public static String nombrecuenta = new String();
+	
+	private FrmDetalleCuenta detalle;
 
 	private JTable tblMuestraCuentas;
 	private static final long serialVersionUID = 1L;
@@ -36,6 +46,13 @@ public class FrmMuestraCuentas extends JInternalFrame {
 		this.SetTable();
 		/*#############################*/
 		
+		JLabel lblCuentas = new JLabel("Cuentas");
+		lblCuentas.setFont(new Font("Goudy Old Style", Font.BOLD, 24));
+		lblCuentas.setHorizontalAlignment(SwingConstants.CENTER);
+		lblCuentas.setBounds(133, 11, 164, 34);
+		getContentPane().add(lblCuentas);
+
+		
 		JScrollPane scrlMCMostrarCuentas = new JScrollPane(tblMuestraCuentas);
 		scrlMCMostrarCuentas.setEnabled(false);
 		scrlMCMostrarCuentas.setSize(430, 330);
@@ -44,7 +61,21 @@ public class FrmMuestraCuentas extends JInternalFrame {
 		getContentPane().add(scrlMCMostrarCuentas, BorderLayout.CENTER);
 		
 		JButton btnEditar = new JButton("Editar");
-		btnEditar.setBounds(10, 409, 89, 23);
+		btnEditar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				/*Cargo el valor del id de la tabla*/
+				int pos = tblMuestraCuentas.getSelectedRow();
+				id = (String) tblMuestraCuentas.getValueAt(pos, 0);
+				nombrecuenta = (String) tblMuestraCuentas.getValueAt(pos, 1);
+				//System.out.println(id);
+				detalle = new FrmDetalleCuenta();
+				abreVentana(detalle);
+				desapareceLogo();
+				
+				//dispose();
+			}
+		});
+		btnEditar.setBounds(10, 409, 430, 53);
 		getContentPane().add(btnEditar);
 
 	}

@@ -33,7 +33,7 @@ public class principal extends JFrame {
 	 */
 	private static final long serialVersionUID = 1L;
 	private static JPanel VentPrincipal;
-	private JLabel ImagenLogo = null;
+	private static JLabel ImagenLogo = null;
 	
 	
 	private FrmMuestraDominios frmmuestradominios;
@@ -113,10 +113,6 @@ public class principal extends JFrame {
 		/*Termina MENU ARRIBA*/
 		/*······························*/
 		
-		ImagenLogo = new JLabel(new ImageIcon(principal.class.getResource("/imagenes/logo-mail.png")));
-		ImagenLogo.setBounds(499, 81, 362, 248);
-		VentPrincipal.add(ImagenLogo);
-		
 			JLabel lblCorreoPintituciones = new JLabel("Correo Para Instituciones Educativas");
 			lblCorreoPintituciones.setHorizontalAlignment(SwingConstants.CENTER);
 			lblCorreoPintituciones.setFont(new Font("Goudy Old Style", Font.PLAIN, 13));
@@ -165,6 +161,10 @@ public class principal extends JFrame {
 		JButton btnNewButton = new JButton("INGRESAR");
 		btnNewButton.setBounds(90, 300, 250, 40);
 		VentPrincipal.add(btnNewButton);
+		
+		ImagenLogo = new JLabel(new ImageIcon(principal.class.getResource("/imagenes/logo-mail.png")));
+		ImagenLogo.setBounds(499, 81, 362, 248);
+		VentPrincipal.add(ImagenLogo);
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				ImgUserLog.setVisible(false);
@@ -319,11 +319,20 @@ public class principal extends JFrame {
 			      getNorthPane();
 		panel.remove(titlePane);
 		panel.setVisible(true);
+		panel.toFront();
 	}
 	
 	public void cierraVentana(JInternalFrame panel){
 		if (panel !=null){
 			panel.dispose();
 		}
+	}
+	
+	public static void desapareceLogo(){
+		ImagenLogo.setVisible(false);
+	}
+	
+	public static void apareceLogo(){
+		ImagenLogo.setVisible(true);
 	}
 }
