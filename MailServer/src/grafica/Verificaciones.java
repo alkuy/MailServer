@@ -1,5 +1,6 @@
 package grafica;
 import java.awt.Color;
+import java.sql.SQLException;
 
 import javax.swing.BorderFactory;
 import javax.swing.InputVerifier;
@@ -8,10 +9,15 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.border.Border;
 
+import Logica.Fachada;
+
 public class Verificaciones {
 	public Verificaciones(){
 		
 	}
+	
+	
+	private Fachada FCLogica = Fachada.getInstancia();
 	/**
 	 * Varifica documento ingresado
 	 * @param campo
@@ -85,4 +91,25 @@ public class Verificaciones {
 		cadena = cadena.replace("'", "''");
 		return cadena;
 	}
+
+
+
+  // metodo que se llama desde principal para que desde aca se conecte con la fachada de la capa logica para hacr la verificacion de usuario y contraseña de administrador
+  public boolean verifica_admin(String cedula, String passwd) {
+	  
+	  
+	 try { 		 
+		
+	 if (FCLogica.verifica_ingreso(cedula, passwd)){
+		 
+		  return true;
+		  
+	  } else {
+		  	
+		       return false; 	  
+	         }
+  } catch (Exception e){ return false;}
+	 
+  }  	 
+  
 }

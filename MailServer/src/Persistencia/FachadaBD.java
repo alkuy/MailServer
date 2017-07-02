@@ -73,11 +73,15 @@ public class FachadaBD {
 	
   //Metodo que devuelve el pasword segun el id del usuario ingresado
  	
-  	public java.sql.ResultSet Devolver_pass(int id) throws SQLException{
+  	public String Devolver_pass(int id) throws SQLException{
   		
+  		
+  		String pass = " ";
   		java.sql.ResultSet rs;
-  	    rs = this.user.Dev_pass(id);  		
-  		return rs;
+  	    rs = this.user.Dev_pass(id);  	 
+  	    rs.next();
+  	  	pass = rs.getString(1);
+		return pass;
   	}
   	
   	

@@ -104,7 +104,7 @@ public java.sql.ResultSet Dev_pass(int id) throws SQLException{
 	
 	String seleccion = "Select pass_admin from Usuario where id_usuario ='"+id+"'";		
 	java.sql.Statement ps = pruebaConn.getConexion().createStatement();
-	java.sql.ResultSet rs = ps.executeQuery(seleccion);		
+	java.sql.ResultSet rs = ps.executeQuery(seleccion);	
 	return rs;
 	
 }

@@ -213,4 +213,25 @@ public void altaDominio(String dominio, int prioridad){
 		Dominio dom = new Dominio(dominio, prioridad);
 	}
 	
-}
+
+
+
+ public boolean verifica_ingreso(String cedula, String passwd) throws SQLException{
+	 
+		
+		Usuario usuario = new Usuario();
+		
+			
+	if (usuario.autentica(cedula, passwd)){
+		
+		return true;
+		
+	}else {
+	
+		return false;
+		
+	   }
+		
+	}
+	 
+ }

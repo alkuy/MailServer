@@ -225,9 +225,41 @@ public class Usuario {
 	}
 
 	
-	public void autentica(String usuario, String pass){
+	//Metodo para verificar si la cedula y la contraseña ingresadas son correctas
+	
+	public boolean autentica(String usuario, String pass){
 		
+		
+		try {
+		
+			
+	    int id = BD.Devolver_id(usuario);
+	    
+		
+	    
+	    if ( id == 0){
+	    	
+	    	return false;
+	    	
+	    		    	
+	      } else {
+	    	
+	    	String contrasenia = BD.Devolver_pass(id);
+	    	
+	    	  if ( contrasenia.equals(pass)){
+	    		
+	    		return true;
+	    	  } else {
+	    		
+	    		       return false;
+	    	         }
+	    				
+		}
+			
+		}catch (Exception e){return false;} 
 	}
+	
+	
 	
 	public Usuario cargaDesdeBD(int id_usuario, String pass_admin) throws SQLException{
 		Usuario usu = new Usuario();

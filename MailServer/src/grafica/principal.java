@@ -18,10 +18,12 @@ import javax.swing.SwingConstants;
 import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 import java.awt.event.ActionEvent;
 import java.awt.Dimension;
 import java.awt.Component;
@@ -167,6 +169,16 @@ public class principal extends JFrame {
 		VentPrincipal.add(ImagenLogo);
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
+				
+				
+				
+					Verificaciones verifica = new Verificaciones();
+		
+		try{
+			
+			 if (verifica.verifica_admin(txtLOGusuario.getText(),passwordField.getText())){
+				
 				ImgUserLog.setVisible(false);
 				ImgKeyLog.setVisible(false);
 				txtLOGusuario.setVisible(false);
@@ -175,6 +187,17 @@ public class principal extends JFrame {
 				lblLogin.setVisible(false);
 				menuBar.setVisible(true);
 					
+			 } else {
+				 
+				 passwordField.setText(null);
+				
+				 JOptionPane.showMessageDialog(null, "Usuario y/o contraseña incorrectos");
+				
+			        }
+		  
+		
+		    } catch (Exception d){ }
+		
 			}
 		});
 
