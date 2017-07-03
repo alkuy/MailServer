@@ -36,6 +36,10 @@ public class principal extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private static JPanel VentPrincipal;
 	private static JLabel ImagenLogo = null;
+	private static JMenuBar menuBar;
+	private static JLabel lblCorreoPintituciones;
+	private static JLabel lblVersion;
+	private static JLabel lblCreadoEnInet;
 	
 	
 	private FrmMuestraDominios frmmuestradominios;
@@ -64,7 +68,7 @@ public class principal extends JFrame {
      	setIconImage(Toolkit.getDefaultToolkit().getImage(principal.class.getResource("/imagenes/ico-mail.png")));
      	setBackground(new Color(0, 128, 128));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 900, 600);
+		setBounds(100, 100, 950, 600);
 		VentPrincipal = new JPanel();
 		VentPrincipal.setBackground(new Color(0, 128, 128));
 		VentPrincipal.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -74,8 +78,8 @@ public class principal extends JFrame {
 		/*······························*/
 		/*MENU ARRIBA PRINCIPAL*/
 		/*······························*/
-		JMenuBar menuBar = new JMenuBar();
-		menuBar.setBounds(0, 0, 894, 21);
+		menuBar = new JMenuBar();
+		menuBar.setBounds(0, 0, 982, 21);
 		VentPrincipal.add(menuBar);
 		
 		JMenu mnCuenta = new JMenu("Cuentas");
@@ -115,19 +119,19 @@ public class principal extends JFrame {
 		/*Termina MENU ARRIBA*/
 		/*······························*/
 		
-			JLabel lblCorreoPintituciones = new JLabel("Correo Para Instituciones Educativas");
+		lblCorreoPintituciones = new JLabel("Correo Para Instituciones Educativas");
 			lblCorreoPintituciones.setHorizontalAlignment(SwingConstants.CENTER);
 			lblCorreoPintituciones.setFont(new Font("Goudy Old Style", Font.PLAIN, 13));
 			lblCorreoPintituciones.setBounds(576, 443, 250, 30);
 			VentPrincipal.add(lblCorreoPintituciones);
 		
-		JLabel lblVersion = new JLabel("Version 1.0");
+		lblVersion = new JLabel("Version 1.0");
 		lblVersion.setHorizontalAlignment(SwingConstants.CENTER);
 		lblVersion.setFont(new Font("Goudy Old Style", Font.PLAIN, 13));
 		lblVersion.setBounds(576, 470, 250, 30);
 		VentPrincipal.add(lblVersion);
 		
-		JLabel lblCreadoEnInet = new JLabel("Creado en INET");
+		lblCreadoEnInet = new JLabel("Creado en INET");
 		lblCreadoEnInet.setHorizontalAlignment(SwingConstants.CENTER);
 		lblCreadoEnInet.setFont(new Font("Goudy Old Style", Font.PLAIN, 13));
 		lblCreadoEnInet.setBounds(576, 499, 250, 30);
@@ -165,15 +169,18 @@ public class principal extends JFrame {
 		VentPrincipal.add(btnNewButton);
 		
 		ImagenLogo = new JLabel(new ImageIcon(principal.class.getResource("/imagenes/logo-mail.png")));
-		ImagenLogo.setBounds(499, 81, 362, 248);
+		ImagenLogo.setBounds(521, 81, 362, 248);
 		VentPrincipal.add(ImagenLogo);
+		
+		
+		/*La barra es invisible al comienzo hasta que se loguea el usuario*/
+		menuBar.setVisible(false);
+		/*##############################################################*/
+		
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				
-				
-				
-					Verificaciones verifica = new Verificaciones();
+				Verificaciones verifica = new Verificaciones();
 		
 		try{
 			
@@ -204,22 +211,6 @@ public class principal extends JFrame {
 		
 		/*############  FIN LOGIN ######################################*/
 		
-		/*···························*/
-		/*Formulario Nuevo Usuario*/
-		/*······························*/
-
-	
-
-
-		/*GAFICOS COSTADO*/
-		
-			
-		
-		/*############################################*/
-		 /* Paneles no visibles Hasta ser llamados */
-		/*############################################*/
-		
-		menuBar.setVisible(false);
 	
 		/*#######################################*/
 		/*#########     ACCIONES    #############*/
@@ -335,6 +326,10 @@ public class principal extends JFrame {
 		
 		
 	}
+	/**
+	 * Abre las ventanas sin marco
+	 * @param panel
+	 */
 	public static void abreVentana(JInternalFrame panel){
 		VentPrincipal.add(panel);
 		BasicInternalFrameTitlePane titlePane =
@@ -344,18 +339,38 @@ public class principal extends JFrame {
 		panel.setVisible(true);
 		panel.toFront();
 	}
-	
+	/**
+	 * Cierra JinternalFram verificando si fue abierto
+	 * @param panel
+	 */
 	public void cierraVentana(JInternalFrame panel){
 		if (panel !=null){
 			panel.dispose();
 		}
 	}
-	
+	/**
+	 * Invisible el logo y las letras de credito
+	 */
 	public static void desapareceLogo(){
 		ImagenLogo.setVisible(false);
+		lblCorreoPintituciones.setVisible(false);
+		lblVersion.setVisible(false);
+		lblCreadoEnInet.setVisible(false);
 	}
-	
+	/**
+	 * Visible el logo y las letras de credito
+	 */
 	public static void apareceLogo(){
 		ImagenLogo.setVisible(true);
+		lblCorreoPintituciones.setVisible(true);
+		lblVersion.setVisible(true);
+		lblCreadoEnInet.setVisible(true);
+	}
+	/*Solucionar esto. Quiero deshabilitar menuItem cuando abro determinada ventana*/
+	public static void menuHabilitado(){
+		menuBar.setEnabled(true);
+	}
+	public static void menuDesHabilitado(){
+		VentPrincipal.setEnabled(false);
 	}
 }

@@ -154,7 +154,6 @@ Verificaciones verifica = new Verificaciones();
 						String nom_usuario = txtCNnombre.getText();
 						String dominio = cboNCdominio.getSelectedItem().toString();
 						//Verificamos la existencia de la cuenta
-						System.out.println(nom_usuario+"@"+dominio);
 						boolean existe = FCLogica.VerificaCuenta(nom_usuario, dominio);
 							if (existe){
 								JOptionPane.showMessageDialog(new JPanel(), "La cuenta ya existe, debe elegir otro nombre");

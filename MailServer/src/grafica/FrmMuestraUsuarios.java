@@ -1,5 +1,8 @@
 package grafica;
 
+import static grafica.principal.abreVentana;
+import static grafica.principal.desapareceLogo;
+
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
 import java.sql.SQLException;
@@ -15,9 +18,14 @@ import javax.swing.table.DefaultTableModel;
 
 import Logica.Fachada;
 import java.awt.Font;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class FrmMuestraUsuarios extends JInternalFrame {
 
+	public static String id = new String();
+	
+	private FrmEdicionUsuario detalle;
 	/**
 	 * 
 	 */
@@ -47,13 +55,20 @@ public class FrmMuestraUsuarios extends JInternalFrame {
 		getContentPane().add(scrlMUsuarios, BorderLayout.CENTER);
 		
 		JButton btnEditar = new JButton("Editar");
-		btnEditar.setBounds(10, 398, 414, 34);
+		btnEditar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				int pos = tblMUsuarios.getSelectedRow();
+				id = (String) tblMUsuarios.getValueAt(pos, 0);
+				//System.out.println(id);
+				detalle = new FrmEdicionUsuario();
+				abreVentana(detalle);
+				desapareceLogo();
+				
+			}
+		});
+		btnEditar.setBounds(10, 398, 414, 50);
 		getContentPane().add(btnEditar);
 		
-		
-		
-		
-
 	}
 	
 	public void SetTable(){

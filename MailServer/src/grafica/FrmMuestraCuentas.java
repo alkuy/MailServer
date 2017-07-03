@@ -26,7 +26,7 @@ public class FrmMuestraCuentas extends JInternalFrame {
 	public static String id = new String();
 	public static String nombrecuenta = new String();
 	
-	private FrmDetalleCuenta detalle;
+	private FrmEdicionCuenta detalle;
 
 	private JTable tblMuestraCuentas;
 	private static final long serialVersionUID = 1L;
@@ -68,10 +68,10 @@ public class FrmMuestraCuentas extends JInternalFrame {
 				id = (String) tblMuestraCuentas.getValueAt(pos, 0);
 				nombrecuenta = (String) tblMuestraCuentas.getValueAt(pos, 1);
 				//System.out.println(id);
-				detalle = new FrmDetalleCuenta();
+				detalle = new FrmEdicionCuenta();
 				abreVentana(detalle);
 				desapareceLogo();
-				
+				menuDesHabilitado();
 				//dispose();
 			}
 		});

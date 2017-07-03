@@ -39,7 +39,7 @@ public class Cuenta {
 		if (pruebaConn!=null){
 			try{
 				java.sql.Statement stm = pruebaConn.getConexion().createStatement();
-				stm.execute("Insert into Cuenta values ('"+id_usuario+"','"+nom_usuario+"','"+nom_dominio+"','"+password+"', '"+es_lista+"' ,CURRENT_TIMESTAMP )");
+				stm.execute("Insert into Cuenta values ('"+id_usuario+"','"+nom_usuario+"','"+nom_dominio+"','"+password+"', '"+es_lista+"' ,CURRENT_TIMESTAMP, 1 )");
 				
 			}
 			catch (Exception e){
@@ -111,6 +111,18 @@ public void eliminar_cuenta(int id) {
 		System.out.println("no se pudo eliminar el registro");
 	}
 	
+	
+}
+
+public void habilitar_cuenta(int id, String nom_us, String nom_dom, int habilita){
+	
+	try{
+		java.sql.Statement stm = pruebaConn.getConexion().createStatement();
+		stm.execute("UPDATE Cuenta SET habilitado = '"+habilita+"'" + "where id_usuario = '"+id+"' AND nom_usuario = '"+nom_us+"' AND nom_dominio = '"+nom_dom+"'");
+  }
+	catch (Exception e){
+		System.out.println("no se pudo modificar la cuenta");
+	}
 	
 }
 	
