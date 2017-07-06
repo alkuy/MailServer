@@ -26,7 +26,7 @@ public class FrmNuevaCuenta extends JInternalFrame {
 	private JTextField txtCNdocumento;
 	private JButton btnCNingresar;
 	private final ButtonGroup grpbtnSelectTipoCuenta = new ButtonGroup();
-	private JLabel lblFaltanCampos;
+	private JLabel lblCamposErrores;
 	/*Instancio la fachada*/
 	private Fachada FCLogica = Fachada.getInstancia();
 
@@ -129,10 +129,10 @@ Verificaciones verifica = new Verificaciones();
 			}
 		});
 
-		lblFaltanCampos = new JLabel("*Faltan campos obligatorios");
-		lblFaltanCampos.setBounds(150, 105, 250, 30);
-		getContentPane().add(lblFaltanCampos);
-		lblFaltanCampos.setVisible(false);
+		lblCamposErrores = new JLabel("* Hay campos con errores");
+		lblCamposErrores.setBounds(138, 106, 307, 30);
+		getContentPane().add(lblCamposErrores);
+		lblCamposErrores.setVisible(false);
 		
 		
 		btnCNingresar = new JButton("INGRESAR");
@@ -146,7 +146,22 @@ Verificaciones verifica = new Verificaciones();
 				 * PAra Cuenta Personal
 				 */
 				if (rdbtnCNpersona.isSelected()){ 
-					if (verifica.documento(txtCNdocumento) && verifica.campo_vacio(txtCNnombre)){ //Verificaciones de campos
+					/*Verificaciones*/
+					boolean continua = true;
+					if (!verifica.cant_caracteres(txtCNnombre, 20, 1)){
+						continua = false;
+					}else{	
+						if(!verifica.caracteres_validos(txtCNnombre)){continua = false;}
+						}
+					if (!verifica.cant_caracteres(txtCNdocumento, 8, 7)){
+						continua = false;
+						if(!verifica.numerico(txtCNdocumento)){continua = false;}
+						}
+					if(!verifica.existe_cedula(txtCNdocumento.getText())){
+						continua = false;
+					}
+					/*Fin verificaciones*/
+					if (continua == true){
 						//Variables con datos a cargar
 						if(cuentazero == 0){ // Si no vengo desde el formulario anterior
 							documento = txtCNdocumento.getText();
@@ -162,7 +177,7 @@ Verificaciones verifica = new Verificaciones();
 									if(cuentazero == 1){ // Si el formulario viene desde la creacion del usuario
 									FCLogica.altaUsu(documento, nombre, apellido, calle, nroPuerta, apto, numTel1, numTel2);
 									cuentazero = 0;
-									}// Si no es que estoy cargando una cuenta de un usuario ya existente
+									}// Si no, es que estoy cargando una cuenta de un usuario ya existente
 									FCLogica.altaCuentaPersonal(documento, nom_usuario, dominio);//Damos de alta
 								} catch (SQLException e) {
 									// TODO Auto-generated catch block
@@ -172,7 +187,7 @@ Verificaciones verifica = new Verificaciones();
 							}
 				
 					}else{
-						lblFaltanCampos.setVisible(true);
+						lblCamposErrores.setVisible(true);
 					}
 					
 				}
@@ -181,7 +196,7 @@ Verificaciones verifica = new Verificaciones();
 				 * PAra cuenta Grupal
 				 */
 				if (rdbtnGrupoUOficina.isSelected()){// Si seleccionamos cuenta de grupo
-					if(verifica.campo_vacio(txtCNnombre)){
+					if(verifica.cant_caracteres(txtCNnombre, 20, 1)){
 						String nom_usuario = txtCNnombre.getText();
 						String dominio = cboNCdominio.getSelectedItem().toString();
 						boolean existe = FCLogica.VerificaCuenta(nom_usuario, dominio);
@@ -203,7 +218,7 @@ Verificaciones verifica = new Verificaciones();
 							}
 						}	
 					}else{
-						lblFaltanCampos.setVisible(true);
+						lblCamposErrores.setVisible(true);
 					}
 				}
 						
@@ -218,7 +233,7 @@ Verificaciones verifica = new Verificaciones();
 		txtCNdocumento.setText(null);
 		txtCNnombre.setText(null);
 		grpbtnSelectTipoCuenta.clearSelection();
-		lblFaltanCampos.setVisible(false);
+		lblCamposErrores.setVisible(false);
 	}
 	
 	public void seguirEditando(){
@@ -232,5 +247,7 @@ Verificaciones verifica = new Verificaciones();
 		      System.out.println("JOptionPane closed");
 		    }
 	}
+	
+
 
 }

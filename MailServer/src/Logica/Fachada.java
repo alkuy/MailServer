@@ -233,5 +233,13 @@ public void altaDominio(String dominio, int prioridad){
 	   }
 		
 	}
-	 
+ 
+ public int trae_id(String cedula){
+	 int id;
+	 Usuario usuario = new Usuario();
+	 id=usuario.trae_id(cedula);
+	 return id;
+	 }
  }
+	 
+ 

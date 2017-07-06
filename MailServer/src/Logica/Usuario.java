@@ -301,4 +301,15 @@ public class Usuario {
 		
 		return usu;
 	}
+	
+	public int trae_id(String ci){
+		int id = 0;
+		try {
+			id=BD.Devolver_id(ci);
+		} catch (SQLException e) {
+			id=0;
+			e.printStackTrace();
+		}
+		return id;
+	}
 }

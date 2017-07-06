@@ -5,9 +5,11 @@ import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
+import java.text.NumberFormat;
 
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
+import javax.swing.JFormattedTextField;
 import javax.swing.JFrame;
 import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
@@ -38,6 +40,8 @@ public class FrmNuevoUsuario extends JInternalFrame {
 	private JTextField txtUNnombre;
 	private JTextField txtUNapellido;
 	private JTextField txtUNdocumento;
+	/*private JFormattedTextField txtUNdocumento;
+	private NumberFormat numerico;*/ //Un detalle que estaria bueno pero no resolvi aun
 	private JTextField txtUNcalle;
 	private JTextField txtUNnroPuerta;
 	private JTextField txtUNapto;
@@ -95,7 +99,9 @@ public class FrmNuevoUsuario extends JInternalFrame {
 		lblUNdocumento.setFont(new Font("Goudy Old Style", Font.PLAIN, 18));
 		lblUNdocumento.setBounds(28, 117, 100, 30);
 		getContentPane().add(lblUNdocumento);
-				
+		
+		
+		//txtUNdocumento = new JFormattedTextField();//Esto aun sin resolver, se vera mas adelante si da el tiempo de meterle este lujo
 		txtUNdocumento = new JTextField();
 		txtUNdocumento.setColumns(10);
 		txtUNdocumento.setBounds(138, 117, 250, 30);
@@ -175,7 +181,7 @@ public class FrmNuevoUsuario extends JInternalFrame {
 		
 		
 		/*Etiqueta que avisa el error de campos faltantes*/
-		lblFaltanCampos = new JLabel("Faltan campos obligatorios");
+		lblFaltanCampos = new JLabel("Hay campos con errores");
 		lblFaltanCampos.setFont(new Font("Tahoma", Font.BOLD, 15));
 		lblFaltanCampos.setBounds(168, 158, 220, 21);
 		getContentPane().add(lblFaltanCampos);
@@ -215,30 +221,56 @@ public class FrmNuevoUsuario extends JInternalFrame {
 		btnAgregarUsuario.addActionListener(new ActionListener() {
 			Verificaciones verifica = new Verificaciones();
 			public void actionPerformed(ActionEvent arg0) {
-				nombre = verifica.remplazoCaracteres(txtUNnombre.getText());
-				apellido = verifica.remplazoCaracteres(txtUNapellido.getText());
-				documento = verifica.remplazoCaracteres(txtUNdocumento.getText());
-				calle = verifica.remplazoCaracteres(txtUNcalle.getText());
-				nroPuerta = verifica.remplazoCaracteres(txtUNnroPuerta.getText());
-				apto = verifica.remplazoCaracteres(txtUNapto.getText());
-				numTel1 = verifica.remplazoCaracteres(txtUNtelefono1.getText());
-				numTel2 = verifica.remplazoCaracteres(txtUNtelefono2.getText());
+				/*Remplaza algun caracter que pueda complicar al guardar*/
 				
 				/*Instancio la clase verificacion*/
 				Verificaciones verifica = new Verificaciones();
-				if(verifica.campo_vacio(txtUNnombre) && verifica.campo_vacio(txtUNapellido) && verifica.documento(txtUNdocumento)){
+				boolean continua = true;
+				/*Realizo todas las verificaciones de campos*/
+				int i=0;
+				while(i == 0){
+				if (!verifica.cant_caracteres(txtUNnombre, 20, 1)){continua = false; break;}
+				if (!verifica.cant_caracteres(txtUNapellido, 20, 1)){continua = false; break;}
+				if (!verifica.cant_caracteres(txtUNdocumento, 8, 7)){
+					continua = false; break;
+				}else{
+					if(!verifica.numerico(txtUNdocumento)){continua = false; break;}
+				}
+				
+				if (!verifica.cant_caracteres(txtUNcalle, 50, 0)){continua = false; break;}
+				if (!verifica.cant_caracteres(txtUNnroPuerta, 4, 0)){continua = false; break;}
+				if (!verifica.cant_caracteres(txtUNapto, 4, 0)){continua = false; break;}
+				if (!verifica.cant_caracteres(txtUNtelefono1, 10, 0)){
+					continua = false; break;
+				}else{
+					if(!verifica.numerico(txtUNtelefono1)){continua = false; break;}
+					}
+				if (!verifica.cant_caracteres(txtUNtelefono1, 10, 0)){
+					continua = false; break;
+				}else{	
+					if(!verifica.numerico(txtUNtelefono2)){continua = false; break;}
+					}
+				i=1;
+				}
+				nombre = verifica.remplazoCaracteres(txtUNnombre.getText());
+				apellido = verifica.remplazoCaracteres(txtUNapellido.getText());
+				//documento = verifica.remplazoCaracteres(txtUNdocumento.getText());
+				calle = verifica.remplazoCaracteres(txtUNcalle.getText());
+				nroPuerta = verifica.remplazoCaracteres(txtUNnroPuerta.getText());
+				apto = verifica.remplazoCaracteres(txtUNapto.getText());
+				/*numTel1 = verifica.remplazoCaracteres(txtUNtelefono1.getText());
+				numTel2 = verifica.remplazoCaracteres(txtUNtelefono2.getText());*/
+				
+				/*FIN VERIFICACIONES*/
+				if (continua == true){
 					
-						//FCLogica.altaUsu(documento, nombre, apellido, calle, nroPuerta, apto, numTel1, numTel2);
-						/*Cierro Ventana*/
-						//setVisible(false);
-						
 						/*Debo ver que tipo de cuenta va a crear*/
 						if (rdbtnConCuenta.isSelected()){
 							/*El campo de contrase;a de administrador queda oculto*/
-							cuentazero = 1;
-							cuenta = new FrmNuevaCuenta();
-							abreVentana(cuenta);
-							dispose();
+							cuentazero = 1; /*Este dato sirve para enviar a cuanta indicandole que es un nuevo usuario*/
+							cuenta = new FrmNuevaCuenta(); 
+							abreVentana(cuenta); /*Abro cuenta y le envio los valores*/
+							dispose(); /*Cierro esta ventana (nuevoUsuaroi)*/
 						}
 						
 						if (rdbtnAdministrador.isSelected()){
