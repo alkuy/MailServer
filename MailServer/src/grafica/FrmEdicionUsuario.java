@@ -6,6 +6,8 @@ import java.awt.EventQueue;
 import javax.swing.JInternalFrame;
 
 import Logica.Fachada;
+import Logica.Usuario;
+
 import javax.swing.JTextField;
 import javax.swing.JLabel;
 import java.awt.Font;
@@ -29,7 +31,9 @@ public class FrmEdicionUsuario extends JInternalFrame {
 	/**
 	 * Create the frame.
 	 */
-	public FrmEdicionUsuario() {
+	public FrmEdicionUsuario(String id) {
+		System.out.println(id);
+		Usuario usu = FCLogica.findUsu(FCLogica.getID(id));
 		setBounds(550, 100, 350, 440);
 		getContentPane().setLayout(null);
 		
@@ -37,41 +41,49 @@ public class FrmEdicionUsuario extends JInternalFrame {
 		txtNombre.setBounds(84, 2, 240, 30);
 		getContentPane().add(txtNombre);
 		txtNombre.setColumns(10);
+		txtNombre.setText(usu.getNombre());
 		
 		txtApellido = new JTextField();
 		txtApellido.setColumns(10);
 		txtApellido.setBounds(84, 43, 240, 30);
 		getContentPane().add(txtApellido);
+		txtApellido.setText(usu.getApellido());
 		
 		txtDocumento = new JTextField();
 		txtDocumento.setColumns(10);
 		txtDocumento.setBounds(84, 84, 240, 30);
 		getContentPane().add(txtDocumento);
+		txtDocumento.setText(usu.getCi());
 		
 		txtTel2 = new JTextField();
 		txtTel2.setColumns(10);
 		txtTel2.setBounds(84, 259, 240, 30);
 		getContentPane().add(txtTel2);
+//		txtTel2.setText(usu.getNombre());
 		
 		txtTel1 = new JTextField();
 		txtTel1.setColumns(10);
 		txtTel1.setBounds(84, 218, 240, 30);
 		getContentPane().add(txtTel1);
+//		txtTel1.setText(usu.getNombre());
 		
 		txtCalle = new JTextField();
 		txtCalle.setColumns(10);
 		txtCalle.setBounds(84, 130, 240, 30);
 		getContentPane().add(txtCalle);
+		txtCalle.setText(usu.getCalle());
 		
 		txtNroPuerta = new JTextField();
 		txtNroPuerta.setColumns(10);
 		txtNroPuerta.setBounds(84, 171, 70, 30);
 		getContentPane().add(txtNroPuerta);
+		txtNroPuerta.setText(usu.getNro_puerta());
 		
 		txtApto = new JTextField();
 		txtApto.setColumns(10);
 		txtApto.setBounds(254, 171, 70, 30);
 		getContentPane().add(txtApto);
+		txtApto.setText(usu.getApto());
 		
 		JLabel lblNombre = new JLabel("Nombre");
 		lblNombre.setHorizontalAlignment(SwingConstants.RIGHT);
@@ -122,6 +134,15 @@ public class FrmEdicionUsuario extends JInternalFrame {
 		getContentPane().add(lblApto);
 		
 		JButton btnGuardar = new JButton("Guardar y Cerrar");
+		btnGuardar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				FCLogica.modifyUsuario(txtDocumento.getText(), txtNombre.getText(), txtApellido.getText(), 
+						txtCalle.getText(), txtNroPuerta.getText(), txtApto.getText());
+				dispose();
+				apareceLogo();
+				
+			}
+		});
 		btnGuardar.setBounds(15, 317, 303, 35);
 		getContentPane().add(btnGuardar);
 		

@@ -68,7 +68,8 @@ public class FrmMuestraCuentas extends JInternalFrame {
 				id = (String) tblMuestraCuentas.getValueAt(pos, 0);
 				nombrecuenta = (String) tblMuestraCuentas.getValueAt(pos, 1);
 				//System.out.println(id);
-				detalle = new FrmEdicionCuenta();
+				//detalle = new FrmEdicionCuenta(); <- asi lo tenias
+				detalle = new FrmEdicionCuenta(Integer.valueOf(id),"frodr","inet","123"); //Para probar
 				abreVentana(detalle);
 				desapareceLogo();
 				menuDesHabilitado();

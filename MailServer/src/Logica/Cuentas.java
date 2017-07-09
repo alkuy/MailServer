@@ -138,7 +138,17 @@ public class Cuentas {
 		return modelo;
 	}
 
-	
+	public void modify(int id, String nom_us, String nom_dom, String pass){
+//		BD.Modifica_cuentaPS(id, nom_us, nom_dom, pass);
+		
+//		ArrayList<Cuenta> cuentas = this.getsetCuentas();
+// 		Iterator<Cuenta> aux = cuentas.iterator();
+// 		while(aux.hasNext()){
+// 			if(aux.next().getNom_u().equals(nom_us))
+// 				aux.next().setContraseña_cuenta(pass);
+// 		}
+// 		System.out.println("Dentro de cuentas " + aux.next().getContraseña_cuenta());
+	}
 	
 
 

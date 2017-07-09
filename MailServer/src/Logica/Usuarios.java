@@ -56,13 +56,27 @@ public class Usuarios {
 		return this.hUsu.get(String.valueOf(id_usuario));
 	}
 	
+	public int getID(String ci){
+		Enumeration<Usuario> eUsu = hUsu.elements();
+		Usuario usu = new Usuario();
+		while(eUsu.hasMoreElements()){
+			usu = eUsu.nextElement();
+			System.out.println(usu.getId_usuario() + " " + usu.getCi() + " " + ci);
+			if(usu.getCi() != null && usu.getCi().equals(ci)){
+				return usu.getId_usuario();
+			}
+		}
+		return 0;
+	}
+	
 	/** Método que sustituye el viejo usuario en el diccionario por el nuevo usuario.
 	 * <b>Precondición</b>: el usuario es miembro del diccionario.
 	 * @param usu usuario a modificar en la colección Usuarios.
 	 * @return No retorna nada. */
-	public void modify(Usuario usu){
+	public void modify(String ci, String nombre, String apellido, String calle, String nro, String apto){
 //		delete(usu.getNom_usuario());
 //		this.hUsu.put(usu.getNom_usuario(), usu);
+		BD.Modifica_datos_per(ci, nombre, apellido, calle, nro, apto);
 	}
 	
 	/** Método que dado nombre de usuario de un usuario lo dada de baja del diccionario.
@@ -83,6 +97,7 @@ public class Usuarios {
 			Usuario usu = new Usuario();
 			
 			usuarios.put(rs.getString("id_usuario"), usu.cargaDesdeBD(rs.getInt("id_usuario"), rs.getString("pass_admin")));
+//			System.out.println(rs.getString("id_usuario"));
 		}
 		
 		return usuarios;
@@ -121,23 +136,6 @@ public class Usuarios {
 		}
 		
 		return modelo;
-
-//		for (int i=0; i < setCuentas.size(); i++){
-//			String id, cuenta;
-//			int id_user;
-//			String nomUser, nomDominio;
-//			
-//			nomUser = setCuentas.get(i).getNom_u();
-//			nomDominio = setCuentas.get(i).getDominio();
-//			id_user = setCuentas.get(i).getId();
-//			
-//			id=""+id_user;
-//			cuenta = nomUser+"@"+nomDominio;
-//			
-//			String carga [] = {id, cuenta};	   
-//		   	modelo.addRow(carga);
-//		}
-//		return modelo;
 	}
 
 }

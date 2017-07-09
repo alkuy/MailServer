@@ -3,8 +3,11 @@ package Logica;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Iterator;
 
 import javax.swing.table.DefaultTableModel;
+
+import Persistencia.FachadaBD;
 
 /** Clase de ejemplo que muestra la sintaxis
  * elemental de un programa en java
@@ -17,6 +20,8 @@ public class Fachada {
 	private static Fachada instancia;
 	private static Dominio dominio;
 	private Usuarios hUsu;
+	
+	FachadaBD BD = FachadaBD.getInstancia(); //Provisorio
 
 	
 	private Fachada() {
@@ -66,9 +71,6 @@ public class Fachada {
 ///		hUsu.delete(usuario.getNom_usuario());
 	}
 	
-	public void mofifUsu(Usuario usuario){
-		
-	}
 	/**
 	 * Metodo que carga ArrayList de dominios. Lo usoa para cargar combobox en Nueva Cuenta
 	 * @return ArrayList<String> con dominios
@@ -240,6 +242,38 @@ public void altaDominio(String dominio, int prioridad){
 	 id=usuario.trae_id(cedula);
 	 return id;
 	 }
+ 
+ 
+ 	public Usuario findUsu(int id_usuario){
+ 		return hUsu.find(id_usuario);
+ 	}
+ 	
+ 	public int getID(String ci){
+ 		return hUsu.getID(ci);
+ 	}
+ 	
+ 	public void modifyUsuario(String ci, String nombre, String apellido, String calle, String nro, String apto){
+ 		hUsu.modify(ci, nombre, apellido, calle, nro, apto);
+ 	}
+ 	
+ 	public void modifyCuenta(int id, String nom_us, String nom_dom, String pass){
+ 		Usuario usu = hUsu.find(id);
+ 		System.out.println(id);
+// 		//Imprimir pass para probar que se modifica
+// 		ArrayList<Cuenta> cuentas = usu.getCuentas().getsetCuentas();
+// 		Iterator<Cuenta> aux = cuentas.iterator();
+// 		while(aux.hasNext()){
+// 			System.out.println("pass " + aux.next().getContraseña_cuenta());
+// 		}
+// 		
+// 		pass = usu.getCi();
+ 		
+// 		usu.getCuentas().modify(id, nom_us, nom_dom, pass);
+ 		
+// 		System.out.println("new pass " + pass);
+ 		
+ 		BD.Modifica_cuentaPS(id, nom_us, nom_dom, usu.getCi());
+ 	}
  }
 	 
  

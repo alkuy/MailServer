@@ -22,7 +22,7 @@ public class FrmEdicionCuenta extends JInternalFrame {
 	/**
 	 * Create the frame.
 	 */
-	public FrmEdicionCuenta() {
+	public FrmEdicionCuenta(int id, String nom_us, String nom_dom, String pass) {
 		setBounds(550, 100, 300, 340);
 		getContentPane().setLayout(null);
 		toFront();
@@ -63,6 +63,8 @@ public class FrmEdicionCuenta extends JInternalFrame {
 		JButton btnGuardar = new JButton("Guardar y Cerrar");
 		btnGuardar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				if(chkResetPass.isSelected())
+					FCLogica.modifyCuenta(id, nom_us, nom_dom, pass);
 				apareceLogo();
 				dispose();
 			}

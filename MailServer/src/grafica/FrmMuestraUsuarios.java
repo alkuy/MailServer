@@ -17,6 +17,8 @@ import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableModel;
 
 import Logica.Fachada;
+import Logica.Usuario;
+
 import java.awt.Font;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -60,7 +62,7 @@ public class FrmMuestraUsuarios extends JInternalFrame {
 				int pos = tblMUsuarios.getSelectedRow();
 				id = (String) tblMUsuarios.getValueAt(pos, 0);
 				//System.out.println(id);
-				detalle = new FrmEdicionUsuario();
+				detalle = new FrmEdicionUsuario(id); //detalle = new FrmEdicionUsuario();
 				abreVentana(detalle);
 				desapareceLogo();
 				
