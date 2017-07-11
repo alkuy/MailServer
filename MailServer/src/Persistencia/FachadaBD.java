@@ -361,7 +361,7 @@ public class FachadaBD {
 	}
 	//Metodo que devuelve el Resulset con todos los datos de la tabla Telefono cargados
 	
-	public java.sql.ResultSet ConTablaTel(int id) throws SQLException{
+	public java.sql.ResultSet ConTablaTel(/*int id*/) throws SQLException{ //No se usaba int id. Carlos.
 		java.sql.ResultSet rs;
 		rs = this.telefono.Select_tabla();
 		return rs;

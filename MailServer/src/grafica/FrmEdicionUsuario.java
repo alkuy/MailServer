@@ -31,9 +31,12 @@ public class FrmEdicionUsuario extends JInternalFrame {
 	/**
 	 * Create the frame.
 	 */
-	public FrmEdicionUsuario(String id) {
-		System.out.println(id);
-		Usuario usu = FCLogica.findUsu(FCLogica.getID(id));
+	public FrmEdicionUsuario(String id) { //Este id es cedula
+//		System.out.println(id);
+		int id_usuario = FCLogica.getID(id);
+		Usuario usu = FCLogica.findUsu(id_usuario);
+		
+		
 		setBounds(550, 100, 350, 440);
 		getContentPane().setLayout(null);
 		
@@ -59,13 +62,13 @@ public class FrmEdicionUsuario extends JInternalFrame {
 		txtTel2.setColumns(10);
 		txtTel2.setBounds(84, 259, 240, 30);
 		getContentPane().add(txtTel2);
-//		txtTel2.setText(usu.getNombre());
+//		txtTel2.setText(FCLogica.retornarTelx(FCLogica.getID(id), 1));  falta
 		
 		txtTel1 = new JTextField();
 		txtTel1.setColumns(10);
 		txtTel1.setBounds(84, 218, 240, 30);
 		getContentPane().add(txtTel1);
-//		txtTel1.setText(usu.getNombre());
+		txtTel1.setText(FCLogica.retornarTelx(FCLogica.getID(id), 0)); //tel 1 es el 0
 		
 		txtCalle = new JTextField();
 		txtCalle.setColumns(10);
@@ -136,8 +139,9 @@ public class FrmEdicionUsuario extends JInternalFrame {
 		JButton btnGuardar = new JButton("Guardar y Cerrar");
 		btnGuardar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				FCLogica.modifyUsuario(txtDocumento.getText(), txtNombre.getText(), txtApellido.getText(), 
-						txtCalle.getText(), txtNroPuerta.getText(), txtApto.getText());
+				FCLogica.modifyUsuario(id_usuario, txtDocumento.getText(), txtNombre.getText(), 
+						txtApellido.getText(), txtCalle.getText(), txtNroPuerta.getText(), 
+						txtApto.getText());
 				dispose();
 				apareceLogo();
 				
@@ -159,3 +163,5 @@ public class FrmEdicionUsuario extends JInternalFrame {
 
 	}
 }
+
+

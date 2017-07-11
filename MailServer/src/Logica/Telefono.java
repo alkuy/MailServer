@@ -1,5 +1,8 @@
 package Logica;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
 import Persistencia.FachadaBD;
 
 public class Telefono {
@@ -7,17 +10,17 @@ public class Telefono {
 	private String numTel;
 	private int id;
 //	private int tipoTel;
-	
-	
 
 	FachadaBD BD = FachadaBD.getInstancia();
+	
+	public Telefono(){
+		
+	}
 	
 	public Telefono(int idUsu, String numTel) {
 		this.numTel = numTel;
 		//BD.InsertTel(idUsu, numTel);
 	}
-	
-	
 		
 	/**
 	 * @return the id
@@ -48,6 +51,18 @@ public class Telefono {
 			BD.InsertTel(idUsu, numTel);
 			
 		}
+	}
+	
+	public Telefono cargaDesdeBD(int idUsu) throws SQLException{
+		ResultSet rs = BD.ConFilaTel(idUsu);
+		Telefono tel = new Telefono();
+		tel.id = idUsu;
+		String numTel=null;
+		if(rs.next()){
+			tel.numTel = rs.getString("telefono");
+		}
+		
+		return tel;
 	}
 
 }

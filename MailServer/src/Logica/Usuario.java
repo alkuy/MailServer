@@ -168,6 +168,12 @@ public class Usuario {
 		return prefiles;
 	}
 	
+	/** Método que retorna los telefonos del usuario.
+	 * @return Telefonos del usuario. */
+	public Telefonos getTels() {
+		return tels;
+	}
+	
 	/** Método para modificar la constraseña de un usuario administrador.
 	 * @param pass_admin Nueva contraseña.
 	 * @return No retorna nada. */
@@ -263,7 +269,7 @@ public class Usuario {
 	
 	public Usuario cargaDesdeBD(int id_usuario, String pass_admin) throws SQLException{
 		Usuario usu = new Usuario();
-		//System.out.println("Persona " + id_usuario);
+		System.out.println("Persona " + id_usuario);
 		//Se crea Resultset(rs) de la persona correspondiente a id_usuario
 		ResultSet rs = BD.ConFilaPer(id_usuario);
 		
@@ -275,6 +281,7 @@ public class Usuario {
 		while (rs.next()){
 			if(!rs.wasNull()){
 				//Si el rs no es null entonces es una persona y se cargan los datos de persona.
+				System.out.println("PERSONA");
 				usu.id_usuario = rs.getInt("id_usuario");
 				//System.out.println("Persona\n " + rs.getInt("cedula"));
 				usu.ci = String.valueOf(rs.getInt("cedula"));
@@ -289,9 +296,19 @@ public class Usuario {
 				//System.out.println("Persona\n " + rs.getString("apto"));
 				usu.apto = rs.getString("apto");
 				
+				Telefonos auxTels = new Telefonos(usu.id_usuario);
+//				System.out.println("DESDE USU0 ");
+//				System.out.println("DESDE USU1 "+usu.id_usuario);
+//				auxTels = auxTels.cargaDesdeBD(usu.id_usuario);
+//				usu.tels = auxTels.cargaDesdeBD(usu.id_usuario);
+//				System.out.println("DESDE USUARIO");
+				usu.tels = auxTels;
+//				usu.tels.imprimirTels(auxTels.getSetTelefonos());
+				
 			}
 			else{
 				//El rs es null entonces es una oficina y se carga el nombre de la oficina.
+				System.out.println("OFICINA");
 				rs = BD.ConFilaOfi(usu.id_usuario);
 				
 				usu.id_usuario = rs.getInt("id_usuario");

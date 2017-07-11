@@ -252,13 +252,24 @@ public void altaDominio(String dominio, int prioridad){
  		return hUsu.getID(ci);
  	}
  	
- 	public void modifyUsuario(String ci, String nombre, String apellido, String calle, String nro, String apto){
- 		hUsu.modify(ci, nombre, apellido, calle, nro, apto);
+ 	public void modifyUsuario(int id_usuario, String ci, String nombre, String apellido, String calle, String nro, String apto){
+ 		hUsu.modify(id_usuario, ci, nombre, apellido, calle, nro, apto);
+ 	}
+ 	
+ 	public String retornarTelx(int id_usuario, int x){
+// 		System.out.println("EN FACHADA " + hUsu.find(id_usuario).getId_usuario());
+// 		System.out.println("DONDE EXPLOTAS1");
+ 		Telefonos tels = new Telefonos();
+ 		tels = hUsu.find(id_usuario).getTels();
+// 		System.out.println("DONDE EXPLOTAS2");
+// 		if(tels==null)
+// 			System.out.println("SOY UN PUTO NULL");
+ 		return tels.retornarTelx(tels.getSetTelefonos(), x);
  	}
  	
  	public void modifyCuenta(int id, String nom_us, String nom_dom, String pass){
  		Usuario usu = hUsu.find(id);
- 		System.out.println(id);
+// 		System.out.println(id);
 // 		//Imprimir pass para probar que se modifica
 // 		ArrayList<Cuenta> cuentas = usu.getCuentas().getsetCuentas();
 // 		Iterator<Cuenta> aux = cuentas.iterator();

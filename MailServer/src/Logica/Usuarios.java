@@ -61,7 +61,7 @@ public class Usuarios {
 		Usuario usu = new Usuario();
 		while(eUsu.hasMoreElements()){
 			usu = eUsu.nextElement();
-			System.out.println(usu.getId_usuario() + " " + usu.getCi() + " " + ci);
+//			System.out.println(usu.getId_usuario() + " " + usu.getCi() + " " + ci);
 			if(usu.getCi() != null && usu.getCi().equals(ci)){
 				return usu.getId_usuario();
 			}
@@ -73,9 +73,14 @@ public class Usuarios {
 	 * <b>Precondición</b>: el usuario es miembro del diccionario.
 	 * @param usu usuario a modificar en la colección Usuarios.
 	 * @return No retorna nada. */
-	public void modify(String ci, String nombre, String apellido, String calle, String nro, String apto){
+	public void modify(int id_usuario, String ci, String nombre, String apellido, String calle, String nro, String apto){
 //		delete(usu.getNom_usuario());
 //		this.hUsu.put(usu.getNom_usuario(), usu);
+		this.find(id_usuario).setNombre(nombre);
+		this.find(id_usuario).setApellido(apellido);
+		this.find(id_usuario).setCalle(calle);
+		this.find(id_usuario).setNro_puerta(nro);
+		this.find(id_usuario).setApto(apto);
 		BD.Modifica_datos_per(ci, nombre, apellido, calle, nro, apto);
 	}
 	
