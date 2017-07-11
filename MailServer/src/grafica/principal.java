@@ -223,6 +223,7 @@ public class principal extends JFrame {
 		
 		mntmNuevoCuenta.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				cierraVentana(frmcuenta);
 				frmcuenta = new FrmNuevaCuenta();
 				abreVentana(frmcuenta);
 			
@@ -238,6 +239,7 @@ public class principal extends JFrame {
 		
 		mntmNuevoUsuario.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				cierraVentana(frmusuario);
 				frmusuario = new FrmNuevoUsuario();
 				abreVentana(frmusuario);
 				
@@ -252,6 +254,7 @@ public class principal extends JFrame {
 		
 		mntmVerCuentas.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				cierraVentana(frmmuestracuentas);
 				frmmuestracuentas = new FrmMuestraCuentas();
 				abreVentana(frmmuestracuentas);
 				
@@ -266,6 +269,7 @@ public class principal extends JFrame {
 		
 		mntmAgregarDominio.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				cierraVentana(frmdominionuevo);
 				frmdominionuevo = new FrmNuevoDominio();
 				abreVentana(frmdominionuevo);
 				
@@ -281,6 +285,7 @@ public class principal extends JFrame {
 		
 		mntmDominios.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				cierraVentana(frmmuestradominios);
 				frmmuestradominios = new FrmMuestraDominios();
 				abreVentana(frmmuestradominios);
 				
@@ -295,6 +300,7 @@ public class principal extends JFrame {
 		
 		mntmVerUsuarios.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				cierraVentana(frmmuestrausuarios);
 				frmmuestrausuarios = new FrmMuestraUsuarios();
 				abreVentana(frmmuestrausuarios);
 				
