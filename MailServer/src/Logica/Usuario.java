@@ -298,13 +298,7 @@ public class Usuario {
 				usu.apto = rs.getString("apto");
 				
 				Telefonos auxTels = new Telefonos(usu.id_usuario);
-//				System.out.println("DESDE USU0 ");
-//				System.out.println("DESDE USU1 "+usu.id_usuario);
-//				auxTels = auxTels.cargaDesdeBD(usu.id_usuario);
-//				usu.tels = auxTels.cargaDesdeBD(usu.id_usuario);
-//				System.out.println("DESDE USUARIO");
 				usu.tels = auxTels;
-//				usu.tels.imprimirTels(auxTels.getSetTelefonos());
 				
 			}
 			else{

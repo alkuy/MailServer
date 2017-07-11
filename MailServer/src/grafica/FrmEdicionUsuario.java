@@ -65,7 +65,6 @@ public class FrmEdicionUsuario extends JInternalFrame {
 		getContentPane().add(txtTel1);
 		String numTel1 = FCLogica.retornarTelx(FCLogica.getID(id), 0);
 		txtTel1.setText(numTel1); //tel 1 es el 0
-//		System.out.println("ED USU "+FCLogica.retornarTelx(FCLogica.getID(id), 0));
 		
 		txtTel2 = new JTextField();
 		txtTel2.setColumns(10);

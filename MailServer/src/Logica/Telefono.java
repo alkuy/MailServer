@@ -54,19 +54,4 @@ public class Telefono {
 			
 		}
 	}
-	
-	/*public Telefono cargaDesdeBD(int idUsu) throws SQLException{
-		ResultSet rs = BD.ConFilaTel(idUsu);
-		Telefono tel = new Telefono();
-		tel.id = idUsu;
-		String numTel=null;
-		if(rs.next()){
-			tel.numTel = rs.getString("telefono");
-		}
-		
-		return tel;
-	}*/
-	
-	
-
 }
