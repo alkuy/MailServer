@@ -269,7 +269,7 @@ public class Usuario {
 	
 	public Usuario cargaDesdeBD(int id_usuario, String pass_admin) throws SQLException{
 		Usuario usu = new Usuario();
-		System.out.println("Persona " + id_usuario);
+//		System.out.println("Persona " + id_usuario);
 		//Se crea Resultset(rs) de la persona correspondiente a id_usuario
 		ResultSet rs = BD.ConFilaPer(id_usuario);
 		
@@ -281,7 +281,7 @@ public class Usuario {
 		while (rs.next()){
 			if(!rs.wasNull()){
 				//Si el rs no es null entonces es una persona y se cargan los datos de persona.
-				System.out.println("PERSONA");
+//				System.out.println("PERSONA");
 				usu.id_usuario = rs.getInt("id_usuario");
 				//System.out.println("Persona\n " + rs.getInt("cedula"));
 				usu.ci = String.valueOf(rs.getInt("cedula"));
@@ -308,7 +308,7 @@ public class Usuario {
 			}
 			else{
 				//El rs es null entonces es una oficina y se carga el nombre de la oficina.
-				System.out.println("OFICINA");
+//				System.out.println("OFICINA");
 				rs = BD.ConFilaOfi(usu.id_usuario);
 				
 				usu.id_usuario = rs.getInt("id_usuario");

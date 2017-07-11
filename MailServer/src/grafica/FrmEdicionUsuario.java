@@ -58,17 +58,20 @@ public class FrmEdicionUsuario extends JInternalFrame {
 		getContentPane().add(txtDocumento);
 		txtDocumento.setText(usu.getCi());
 		
-		txtTel2 = new JTextField();
-		txtTel2.setColumns(10);
-		txtTel2.setBounds(84, 259, 240, 30);
-		getContentPane().add(txtTel2);
-//		txtTel2.setText(FCLogica.retornarTelx(FCLogica.getID(id), 1));  falta
-		
 		txtTel1 = new JTextField();
 		txtTel1.setColumns(10);
 		txtTel1.setBounds(84, 218, 240, 30);
 		getContentPane().add(txtTel1);
-		txtTel1.setText(FCLogica.retornarTelx(FCLogica.getID(id), 0)); //tel 1 es el 0
+		String numTel1 = FCLogica.retornarTelx(FCLogica.getID(id), 0);
+		txtTel1.setText(numTel1); //tel 1 es el 0
+//		System.out.println("ED USU "+FCLogica.retornarTelx(FCLogica.getID(id), 0));
+		
+		txtTel2 = new JTextField();
+		txtTel2.setColumns(10);
+		txtTel2.setBounds(84, 259, 240, 30);
+		getContentPane().add(txtTel2);
+		String numTel2 = FCLogica.retornarTelx(FCLogica.getID(id), 1);
+		txtTel2.setText(numTel2);
 		
 		txtCalle = new JTextField();
 		txtCalle.setColumns(10);

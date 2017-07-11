@@ -25,15 +25,27 @@ public class Telefonos {
 		this.setTelefonos.add(tel);
 	}
 	
-	public ArrayList<Telefono> cargaDesdeBD(int idUsu) throws SQLException{	//tengo que poner aca el rs para cargar los 2 telefonos
+	/*public ArrayList<Telefono> cargaDesdeBD(int idUsu) throws SQLException{	//tengo que poner aca el rs para cargar los 2 telefonos
 		ArrayList<Telefono> auxTels = new ArrayList<Telefono>();
-//		ResultSet rs = BD.ConFilaTel(idUsu);
 		Telefono tel = new Telefono();
 		auxTels.add(tel.cargaDesdeBD(idUsu));
 		
 		System.out.println("TELEFONOS | " + idUsu);
 		imprimirTels(auxTels);
-//		System.out.println("ANTES DE RETORNAR");
+		return auxTels;
+	}*/
+	public ArrayList<Telefono> cargaDesdeBD(int idUsu) throws SQLException{
+		ArrayList<Telefono> auxTels = new ArrayList<Telefono>();
+		ResultSet rs = BD.ConFilaTel(idUsu);
+//		Telefono tel = new Telefono();
+		
+		while(rs.next()){
+			Telefono tel = new Telefono(idUsu, rs.getString("telefono"));
+			auxTels.add(tel);
+		}
+		
+//		System.out.println("TELEFONOS | " + idUsu);
+//		imprimirTels(auxTels);
 		return auxTels;
 	}
 	
@@ -42,10 +54,25 @@ public class Telefonos {
 	}
 	
 	public String retornarTelx(ArrayList<Telefono> tels, int x){
-//		tel1=tels.get(0).getNumTel();
-//		tel1=tels.get(x).getNumTel();
-//		tel2=tels.get(1).getNumTel();
-		return tels.get(x).getNumTel();
+//		String numTel;
+//		System.out.println("ANTES"+x);
+//		if(tels.get(x). != null){
+//			System.out.println("SOY UN PUTO NULL con "+x);
+//			numTel = tels.get(x).getNumTel();
+//		}
+//		else
+//			numTel = "";
+//		return numTel;
+		
+		int cont=0;
+		Iterator<Telefono> iteTels = tels.iterator();
+		while(iteTels.hasNext()){
+			Telefono auxTel = iteTels.next();
+			if(cont==x)
+				return auxTel.getNumTel();
+			cont++;
+		}
+		return "";
 	}
 	
 	public void imprimirTels(ArrayList<Telefono> tels){

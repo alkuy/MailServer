@@ -19,6 +19,7 @@ public class Telefono {
 	
 	public Telefono(int idUsu, String numTel) {
 		this.numTel = numTel;
+		this.id = idUsu;
 		//BD.InsertTel(idUsu, numTel);
 	}
 		
@@ -53,7 +54,7 @@ public class Telefono {
 		}
 	}
 	
-	public Telefono cargaDesdeBD(int idUsu) throws SQLException{
+	/*public Telefono cargaDesdeBD(int idUsu) throws SQLException{
 		ResultSet rs = BD.ConFilaTel(idUsu);
 		Telefono tel = new Telefono();
 		tel.id = idUsu;
@@ -63,6 +64,8 @@ public class Telefono {
 		}
 		
 		return tel;
-	}
+	}*/
+	
+	
 
 }

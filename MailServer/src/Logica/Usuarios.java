@@ -73,7 +73,8 @@ public class Usuarios {
 	 * <b>Precondición</b>: el usuario es miembro del diccionario.
 	 * @param usu usuario a modificar en la colección Usuarios.
 	 * @return No retorna nada. */
-	public void modify(int id_usuario, String ci, String nombre, String apellido, String calle, String nro, String apto){
+	public void modify(int id_usuario, String ci, String nombre, String apellido, String calle, 
+			String nro, String apto/*, String numTel1, String numTel2*/){
 //		delete(usu.getNom_usuario());
 //		this.hUsu.put(usu.getNom_usuario(), usu);
 		this.find(id_usuario).setNombre(nombre);
