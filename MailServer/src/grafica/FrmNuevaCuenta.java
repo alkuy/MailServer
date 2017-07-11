@@ -26,6 +26,7 @@ public class FrmNuevaCuenta extends JInternalFrame {
 	private JTextField txtCNdocumento;
 	private JButton btnCNingresar;
 	private final ButtonGroup grpbtnSelectTipoCuenta = new ButtonGroup();
+	private JRadioButton rdbtnGrupoUOficina;
 	private JLabel lblCamposErrores;
 	/*Instancio la fachada*/
 	private Fachada FCLogica = Fachada.getInstancia();
@@ -79,7 +80,7 @@ Verificaciones verifica = new Verificaciones();
 		lblCNdominio.setBounds(46, 207, 100, 30);
 		getContentPane().add(lblCNdominio);
 		
-		JRadioButton rdbtnGrupoUOficina = new JRadioButton("Grupo u Oficina");
+		rdbtnGrupoUOficina = new JRadioButton("Grupo u Oficina");
 		grpbtnSelectTipoCuenta.add(rdbtnGrupoUOficina);
 		rdbtnGrupoUOficina.setBounds(257, 48, 109, 23);
 		getContentPane().add(rdbtnGrupoUOficina);
@@ -153,13 +154,16 @@ Verificaciones verifica = new Verificaciones();
 					}else{	
 						if(!verifica.caracteres_validos(txtCNnombre)){continua = false;}
 						}
-					if (!verifica.cant_caracteres(txtCNdocumento, 8, 7)){
+					if (!verifica.cant_caracteres(txtCNdocumento, 8, 7)){ //Limito entre 7 y 8 la cantidad de caracteres
 						continua = false;
-						if(!verifica.numerico(txtCNdocumento)){continua = false;}
+						if(!verifica.numerico(txtCNdocumento)){continua = false;} // Verifico si es numerico tot el campo
 						}
-					if(!verifica.existe_cedula(txtCNdocumento.getText())){
-						continua = false;
-					}
+					if(cuentazero == 0){ // Si no vengo desde el formulario usuario, verifico que la cedula exista en la base
+						// Si vengo desde el formulario usuario no realizo esta comprobacion, porque aun no esta en la base
+						if(!verifica.existe_cedula(txtCNdocumento.getText())){
+							continua = false;
+						}
+					}	
 					/*Fin verificaciones*/
 					if (continua == true){
 						//Variables con datos a cargar
@@ -233,6 +237,8 @@ Verificaciones verifica = new Verificaciones();
 		txtCNdocumento.setText(null);
 		txtCNnombre.setText(null);
 		grpbtnSelectTipoCuenta.clearSelection();
+		txtCNdocumento.setEnabled(true);
+		rdbtnGrupoUOficina.setEnabled(true);
 		lblCamposErrores.setVisible(false);
 	}
 	
