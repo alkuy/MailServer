@@ -9,6 +9,7 @@ import Persistencia.FachadaBD;
  * @version 1.0
 */ 
 
+
 public class Usuario {
 	
 //	private Date fecha_alta;

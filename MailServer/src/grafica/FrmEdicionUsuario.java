@@ -28,6 +28,7 @@ public class FrmEdicionUsuario extends JInternalFrame {
 	private JTextField txtNroPuerta;
 	private JTextField txtApto;
 
+	
 	/**
 	 * Create the frame.
 	 */

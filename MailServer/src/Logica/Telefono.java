@@ -5,6 +5,7 @@ import java.sql.SQLException;
 
 import Persistencia.FachadaBD;
 
+
 public class Telefono {
 	
 	private String numTel;
