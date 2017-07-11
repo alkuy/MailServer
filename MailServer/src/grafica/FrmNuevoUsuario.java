@@ -254,12 +254,12 @@ public class FrmNuevoUsuario extends JInternalFrame {
 				}
 				nombre = verifica.remplazoCaracteres(txtUNnombre.getText());
 				apellido = verifica.remplazoCaracteres(txtUNapellido.getText());
-				//documento = verifica.remplazoCaracteres(txtUNdocumento.getText());
+				documento = txtUNdocumento.getText();
 				calle = verifica.remplazoCaracteres(txtUNcalle.getText());
 				nroPuerta = verifica.remplazoCaracteres(txtUNnroPuerta.getText());
 				apto = verifica.remplazoCaracteres(txtUNapto.getText());
-				/*numTel1 = verifica.remplazoCaracteres(txtUNtelefono1.getText());
-				numTel2 = verifica.remplazoCaracteres(txtUNtelefono2.getText());*/
+				numTel1 = verifica.remplazoCaracteres(txtUNtelefono1.getText());
+				numTel2 = verifica.remplazoCaracteres(txtUNtelefono2.getText());
 				
 				/*FIN VERIFICACIONES*/
 				if (continua == true){
