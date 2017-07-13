@@ -117,8 +117,6 @@ public class Dominio {
 		tblMDominios.setRowSelectionAllowed(false);
 		tblMDominios.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		
-		
-			
 			java.sql.ResultSet rs;
 			rs = BD.ConTablaDom();
 			// Bucle para cada resultado en la consulta
@@ -139,6 +137,21 @@ public class Dominio {
 		return modelo;
 	}
 
+	public int trae_prioridad(String Dominio){
+		java.sql.ResultSet rs;
+		int pri = 0;
+		try {
+			rs = BD.ConFilaDom(Dominio);
+			while (rs.next()){
+				pri = rs.getInt("prioridad");
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return pri;
+		
+	}
 	
 /*-----------------------------------------------------------------*/
 }

@@ -225,7 +225,7 @@ public java.sql.ResultSet Select_fila(int id) throws SQLException{
 	try{
 		java.sql.Statement stm = pruebaConn.getConexion().createStatement();
 		stm.execute("UPDATE Persona SET nombre = '"+nom+"', apellido = '"+ap+"', calle = '"+calle+"', nro_puerta = '"+nro+"', apto = '"+apart+"'" + "where cedula = '"+ci+"';");
-  }
+  }	
 	catch (Exception e){
 		System.out.println("no se pudo modificar el passwd");
 	}	

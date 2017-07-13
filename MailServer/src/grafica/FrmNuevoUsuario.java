@@ -8,6 +8,7 @@ import java.sql.SQLException;
 import java.text.NumberFormat;
 
 import javax.swing.ButtonGroup;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFormattedTextField;
 import javax.swing.JFrame;
@@ -22,6 +23,7 @@ import javax.swing.plaf.basic.BasicInternalFrameTitlePane;
 import javax.swing.plaf.basic.BasicInternalFrameUI;
 
 import Logica.Fachada;
+import java.awt.Color;
 
 
 public class FrmNuevoUsuario extends JInternalFrame {
@@ -69,6 +71,19 @@ public class FrmNuevoUsuario extends JInternalFrame {
 		lblNuevoUsuario.setFont(new Font("Goudy Old Style", Font.BOLD, 21));
 		lblNuevoUsuario.setBounds(138, -14, 166, 46);
 		getContentPane().add(lblNuevoUsuario);
+		
+		/*BOTON DE CERRAR*/
+		JButton btnCerrar = new JButton("");
+		 btnCerrar.addActionListener(new ActionListener() {
+		 	public void actionPerformed(ActionEvent arg0) {
+		 		dispose();
+		 	}
+		 });
+		 btnCerrar.setIcon(new ImageIcon(FrmNuevoDominio.class.getResource("/imagenes/cerrar.png")));
+		 btnCerrar.setBounds(10, 0, 35, 35);
+		 getContentPane().add(btnCerrar);
+		 /*FIN DE BOTON DE CERRAR*/
+		
 		
 		/*Nombre*/
 		JLabel lblUNnombre = new JLabel("Nombre");
@@ -163,7 +178,7 @@ public class FrmNuevoUsuario extends JInternalFrame {
 		getContentPane().add(lblUNtelefono2);
 		
 		JSeparator separator = new JSeparator();
-		separator.setBounds(38, 155, 388, 21);
+		separator.setBounds(28, 176, 388, 21);
 		getContentPane().add(separator);
 		
 		
@@ -182,8 +197,9 @@ public class FrmNuevoUsuario extends JInternalFrame {
 		
 		/*Etiqueta que avisa el error de campos faltantes*/
 		lblFaltanCampos = new JLabel("Hay campos con errores");
+		lblFaltanCampos.setForeground(Color.RED);
 		lblFaltanCampos.setFont(new Font("Tahoma", Font.BOLD, 15));
-		lblFaltanCampos.setBounds(168, 158, 220, 21);
+		lblFaltanCampos.setBounds(122, 464, 220, 21);
 		getContentPane().add(lblFaltanCampos);
 		lblFaltanCampos.setVisible(false);
 		
@@ -237,6 +253,8 @@ public class FrmNuevoUsuario extends JInternalFrame {
 					if(!verifica.numerico(txtUNdocumento)){continua = false; break;}
 				}
 				
+				if(!verifica.verificaCedula(txtUNdocumento)){continua = false; break;}
+				
 				if (!verifica.cant_caracteres(txtUNcalle, 50, 0)){continua = false; break;}
 				if (!verifica.cant_caracteres(txtUNnroPuerta, 4, 0)){continua = false; break;}
 				if (!verifica.cant_caracteres(txtUNapto, 4, 0)){continua = false; break;}
@@ -245,7 +263,7 @@ public class FrmNuevoUsuario extends JInternalFrame {
 				}else{
 					if(!verifica.numerico(txtUNtelefono1)){continua = false; break;}
 					}
-				if (!verifica.cant_caracteres(txtUNtelefono1, 10, 0)){
+				if (!verifica.cant_caracteres(txtUNtelefono2, 10, 0)){
 					continua = false; break;
 				}else{	
 					if(!verifica.numerico(txtUNtelefono2)){continua = false; break;}
@@ -294,6 +312,11 @@ public class FrmNuevoUsuario extends JInternalFrame {
 		});
 		btnAgregarUsuario.setBounds(59, 434, 329, 30);
 		getContentPane().add(btnAgregarUsuario);
+		
+		JLabel lblsinPuntosNi = new JLabel("(Sin puntos ni guiones: Ejemplo 1.234.567-8 -> 12345678)");
+		lblsinPuntosNi.setFont(new Font("Sylfaen", Font.ITALIC, 10));
+		lblsinPuntosNi.setBounds(134, 151, 290, 14);
+		getContentPane().add(lblsinPuntosNi);
 		
 	}
 	

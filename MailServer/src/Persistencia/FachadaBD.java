@@ -269,8 +269,6 @@ public class FachadaBD {
 
 
   	public void Eliminar_dominio(String nom){
-  		
-  		
   		this.dominio.eliminar_dominio(nom);
   	}
 	
@@ -569,6 +567,10 @@ public java.sql.ResultSet ConFilaLista(String nom_lis, String nom_dom_lis, Strin
 	}
 
 
+	public void habilitacion_usuario(int id, boolean habilita){
+		user.habilitar_usuario(id, habilita);
+		cuenta.habilitar_cuenta(id, habilita);
+	}
 
 }
 

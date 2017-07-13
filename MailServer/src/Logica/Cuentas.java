@@ -96,9 +96,11 @@ public class Cuentas {
 				int id_user = rs.getInt("id_usuario");
 				String nom_u = rs.getString("nom_usuario");
 				String nom_d = rs.getString("nom_dominio");
+				boolean habilitada = rs.getBoolean("habilitada");
 				c.setIdUsuario(id_user);
 				c.setNomU(nom_u);
 				c.setDominio(nom_d);
+				c.setHabilitada(habilitada);
 				set.add(c);
 			}
 		} catch (SQLException e) {
@@ -117,7 +119,7 @@ public class Cuentas {
 	 */
 	public DefaultTableModel DevTablaCuenta(){
 				
-		String col[] = {"Id_Usuario","Cuenta"};
+		String col[] = {"Id_Usuario","Cuenta", "Habilitada"};
 		DefaultTableModel modelo = new DefaultTableModel(col,0);
 
 		for (int i=0; i < setCuentas.size(); i++){
@@ -125,14 +127,17 @@ public class Cuentas {
 			int id_user;
 			String nomUser, nomDominio;
 			
+			
 			nomUser = setCuentas.get(i).getNom_u();
 			nomDominio = setCuentas.get(i).getDominio();
 			id_user = setCuentas.get(i).getId();
-			
+			boolean habilitado = setCuentas.get(i).isHabilitada();
+			String habi = String.valueOf(habilitado);
 			id=""+id_user;
 			cuenta = nomUser+"@"+nomDominio;
 			
-			String carga [] = {id, cuenta};	   
+			
+			String carga [] = {id, cuenta, habi};	   
 		   	modelo.addRow(carga);
 		}
 		return modelo;

@@ -21,6 +21,7 @@ public class Usuario {
 	private String calle;
 	private String nro_puerta;
 	private String apto;
+	private boolean habilitado;
 	
 	private Cuentas cuentas;
 	private Perfiles prefiles;
@@ -43,7 +44,7 @@ public class Usuario {
 	 * @param nro_puerta Número de puerta de la dirección del usuario.
 	 * @param apto Número de apartamento de la dirección del usuario.  */
 	public Usuario(int id, String ci, String nombre, String apellido, 
-			String calle, String nro_puerta, String apto) {
+			String calle, String nro_puerta, String apto, boolean habilitado) {
 		this.id_usuario = id;
 		this.ci = ci;
 		this.nombre = nombre;
@@ -51,6 +52,7 @@ public class Usuario {
 		this.calle = calle;
 		this.nro_puerta = nro_puerta;
 		this.apto = apto;
+		this.habilitado = habilitado;
 		this.cuentas = new Cuentas();
 		this.prefiles = new Perfiles();
 		this.tels = new Telefonos();
@@ -78,7 +80,7 @@ public class Usuario {
 	 * @param contraseña_admin contraseña de usuario administrador.
 	 * @param ci cedula del usuario. */
 	public Usuario(int id_usuario, String pass_admin, String ci, String nombre, 
-			String apellido, String calle, String nro_puerta, String apto) {
+			String apellido, String calle, String nro_puerta, String apto, boolean habilitado) {
 		this.id_usuario = id_usuario;
 		this.pass_admin = pass_admin;
 		this.ci = ci;
@@ -86,10 +88,10 @@ public class Usuario {
 		this.apellido = apellido;
 		this.calle = calle;
 		this.nro_puerta = nro_puerta;
+		this.habilitado = habilitado;
 		this.apto = apto;
-		//this.cuentas = new Cuentas(); //No comprendo de que nos sirve esto
-		//this.prefiles = new Perfiles();  // No entiendo para que una coleccion de perfiles dentro de usuario //ADRIAN
-		//BD.InserUS(pass_admin);
+	
+		
 		BD.InsertPer(id_usuario, ci, nombre, apellido, calle, nro_puerta, apto);
 		
 	}
@@ -230,10 +232,20 @@ public class Usuario {
 	public void setPrefiles(Perfiles prefiles) {
 		this.prefiles = prefiles;
 	}
+	
+	
 
 	
 	//Metodo para verificar si la cedula y la contraseña ingresadas son correctas
 	
+	public boolean getHabilitado() {
+		return habilitado;
+	}
+
+	public void setHabilitado(boolean habilitado) {
+		this.habilitado = habilitado;
+	}
+
 	public boolean autentica(String usuario, String pass){
 		
 		
@@ -268,12 +280,12 @@ public class Usuario {
 	
 	
 	
-	public Usuario cargaDesdeBD(int id_usuario, String pass_admin) throws SQLException{
+	public Usuario cargaDesdeBD(int id_usuario, String pass_admin, boolean habilitado) throws SQLException{
 		Usuario usu = new Usuario();
 //		System.out.println("Persona " + id_usuario);
 		//Se crea Resultset(rs) de la persona correspondiente a id_usuario
 		ResultSet rs = BD.ConFilaPer(id_usuario);
-		
+	
 		if(!pass_admin.equals(null)){
 			//System.out.println("ES UN ADMIN " + pass_admin);
 			usu.pass_admin = pass_admin;
@@ -296,6 +308,7 @@ public class Usuario {
 				usu.nro_puerta = rs.getString("nro_puerta");
 				//System.out.println("Persona\n " + rs.getString("apto"));
 				usu.apto = rs.getString("apto");
+				usu.habilitado = habilitado;
 				
 				Telefonos auxTels = new Telefonos(usu.id_usuario);
 				usu.tels = auxTels;

@@ -45,8 +45,11 @@ public class Fachada {
 	public void altaUsu(String doc, String nom, String ape, String calle, String nro_puerta, String apto, String numTel1, String numTel2) throws SQLException{
 		Usuario usu = new Usuario();
 		int id= usu.InstertaUserDevuelveId(null);
-		Usuario NU = new Usuario(id, doc, nom, ape, calle,  nro_puerta, apto);
+		Usuario NU = new Usuario(id, doc, nom, ape, calle,  nro_puerta, apto, true);
 		hUsu.insert(NU);
+		
+		/*System.out.println(NU.getHabilitado());
+		System.out.println(NU.getApellido());*/
 		
 		this.altaTel(id, numTel1);
 		this.altaTel(id, numTel2);
@@ -144,7 +147,8 @@ public class Fachada {
 		cuenta.setNomU(nomU);
 		cuenta.setDominio(dominio);
 		cuenta.setContraseña_cuenta(cedula);
-		cuenta.setEs_lista(0);		
+		cuenta.setEs_lista(0);
+		cuenta.setHabilitada(true);
 		cuentas.Insertar(cuenta);
 		cuenta.LimpiaCuenta();
 		
@@ -186,7 +190,7 @@ public class Fachada {
 	public void altaUsuarioAdmin(String doc, String nom, String ape, String pass_admin, String calle, String nro_puerta, String apto, String numTel1, String numTel2) throws SQLException{
 		Usuario usu = new Usuario();
 		int id= usu.InstertaUserDevuelveId(pass_admin);
-		Usuario NU = new Usuario(id, pass_admin, doc, nom, ape,calle, nro_puerta, apto);
+		Usuario NU = new Usuario(id, pass_admin, doc, nom, ape,calle, nro_puerta, apto, true); //Ingreso el usuario como habilitado
 		hUsu.insert(NU);
 		
 		this.altaTel(id, numTel1);
@@ -252,8 +256,9 @@ public void altaDominio(String dominio, int prioridad){
  		return hUsu.getID(ci);
  	}
  	
- 	public void modifyUsuario(int id_usuario, String ci, String nombre, String apellido, String calle, String nro, String apto){
- 		hUsu.modify(id_usuario, ci, nombre, apellido, calle, nro, apto);
+ 	public void modifyUsuario(int id_usuario, String ci, String nombre, String apellido, String calle, 
+ 			String nro, String apto, boolean habilitado){
+ 		hUsu.modify(id_usuario, ci, nombre, apellido, calle, nro, apto, habilitado);
  	}
  	
  	public String retornarTelx(int id_usuario, int x){
@@ -284,6 +289,13 @@ public void altaDominio(String dominio, int prioridad){
 // 		System.out.println("new pass " + pass);
  		
  		BD.Modifica_cuentaPS(id, nom_us, nom_dom, usu.getCi());
+ 	}
+ 	
+ 	
+ 	public int pri_Dom(String Dom){
+ 		Dominio domi = new Dominio();
+ 		int pri = domi.trae_prioridad(Dom);
+ 		return pri;
  	}
  }
 	 

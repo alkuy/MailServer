@@ -14,6 +14,7 @@ public class Cuenta {
 	private String contraseña_cuenta;
 	private String dominio;
 	private int es_lista;
+	private boolean habilitada;
 	
 	private Correos correos;
 	//private Dominio dominio; // Por que es del tipo dominios ?????
@@ -78,6 +79,14 @@ public class Cuenta {
 		this.nom_u = nombre;
 	}
 	
+	public boolean isHabilitada() {
+		return habilitada;
+	}
+
+	public void setHabilitada(boolean habilitada) {
+		this.habilitada = habilitada;
+	}
+
 	/**
 	 * A partir de la cedula devuelve el id del usuario, para poder asociarlo a la cuenta
 	 * */

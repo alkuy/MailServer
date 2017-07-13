@@ -13,6 +13,8 @@ import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.SwingConstants;
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
@@ -38,7 +40,7 @@ public class FrmEdicionUsuario extends JInternalFrame {
 		Usuario usu = FCLogica.findUsu(id_usuario);
 		
 		
-		setBounds(550, 100, 350, 440);
+		setBounds(550, 80, 350, 470);
 		getContentPane().setLayout(null);
 		
 		txtNombre = new JTextField();
@@ -139,18 +141,69 @@ public class FrmEdicionUsuario extends JInternalFrame {
 		lblApto.setBounds(184, 171, 64, 30);
 		getContentPane().add(lblApto);
 		
+		JCheckBox chckbxHabilitada = new JCheckBox("Deshabilitada");
+		chckbxHabilitada.setFont(new Font("Goudy Old Style", Font.PLAIN, 20));
+		chckbxHabilitada.setBounds(84, 296, 145, 31);
+		getContentPane().add(chckbxHabilitada);
+		if (usu.getHabilitado() == false){
+			chckbxHabilitada.setSelected(true);
+		}
+		
 		JButton btnGuardar = new JButton("Guardar y Cerrar");
 		btnGuardar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				FCLogica.modifyUsuario(id_usuario, txtDocumento.getText(), txtNombre.getText(), 
-						txtApellido.getText(), txtCalle.getText(), txtNroPuerta.getText(), 
-						txtApto.getText());
-				dispose();
-				apareceLogo();
+				Verificaciones verifica = new Verificaciones();
 				
+				boolean continua = true;
+				int i = 0;
+				while(i == 0){
+					if (!verifica.cant_caracteres(txtNombre, 20, 1)){continua = false; break;}
+					if (!verifica.cant_caracteres(txtApellido, 20, 1)){continua = false; break;}
+					if (!verifica.cant_caracteres(txtDocumento, 8, 7)){
+						continua = false; break;
+					}else{
+						if(!verifica.numerico(txtDocumento)){continua = false; break;}
+					}
+					
+					if (!verifica.cant_caracteres(txtCalle, 50, 0)){continua = false; break;}
+					if (!verifica.cant_caracteres(txtNroPuerta, 4, 0)){continua = false; break;}
+					if (!verifica.cant_caracteres(txtApto, 4, 0)){continua = false; break;}
+					if (!verifica.cant_caracteres(txtTel1, 10, 0)){
+						continua = false; break;
+					}else{
+						if(!verifica.numerico(txtTel1)){continua = false; break;}
+						}
+					if (!verifica.cant_caracteres(txtTel2, 10, 0)){
+						continua = false; break;
+					}else{	
+						if(!verifica.numerico(txtTel2)){continua = false; break;}
+						}
+					i=1;
+					}
+					String nombre = verifica.remplazoCaracteres(txtNombre.getText());
+					String apellido = verifica.remplazoCaracteres(txtApellido.getText());
+					String documento = txtDocumento.getText();
+					String calle = verifica.remplazoCaracteres(txtCalle.getText());
+					String nroPuerta = verifica.remplazoCaracteres(txtNroPuerta.getText());
+					String apto = verifica.remplazoCaracteres(txtApto.getText());
+					String numTel1 = verifica.remplazoCaracteres(txtTel1.getText());
+					String numTel2 = verifica.remplazoCaracteres(txtTel2.getText());
+					boolean habilitado = true;
+					if (chckbxHabilitada.isSelected()){
+						habilitado = false;
+					}
+					
+					
+					/*FIN VERIFICACIONES*/
+				
+				if (continua == true){
+					FCLogica.modifyUsuario(id_usuario, documento, nombre, apellido, calle, nroPuerta, apto, habilitado);
+					dispose();
+					apareceLogo();
+				}
 			}
 		});
-		btnGuardar.setBounds(15, 317, 303, 35);
+		btnGuardar.setBounds(15, 348, 303, 35);
 		getContentPane().add(btnGuardar);
 		
 		JButton btnCerrar = new JButton("Cerrar");
@@ -160,7 +213,7 @@ public class FrmEdicionUsuario extends JInternalFrame {
 				apareceLogo();
 			}
 		});
-		btnCerrar.setBounds(15, 363, 303, 35);
+		btnCerrar.setBounds(15, 394, 303, 35);
 		getContentPane().add(btnCerrar);
 		toFront();
 

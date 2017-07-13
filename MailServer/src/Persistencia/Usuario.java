@@ -9,6 +9,7 @@ public class Usuario {
 	private int id_usuario;
 	private String passAdmin;
 	private String sqlFecha;
+	private int habilitado = 1; // Lo pongo preestablecido como uno que es como se carga el usuario
 	private Conexion pruebaConn = Conexion.getInstancia();
 	
 	/*public Usuario(String pass){
@@ -41,7 +42,7 @@ public class Usuario {
 		if (pruebaConn!=null){
 			try{
 				java.sql.Statement stm = pruebaConn.getConexion().createStatement();
-				stm.execute("Insert into Usuario (pass_admin, fecha_alta) values ('"+pass+"','"+sqlFecha+"')");
+				stm.execute("Insert into Usuario (pass_admin, fecha_alta, habilitado) values ('"+pass+"','"+sqlFecha+"', '"+habilitado+"')");
 			}
 			catch (Exception e){
 				
@@ -139,6 +140,25 @@ public void eliminar_us(int id) {
 		System.out.println("no se pudo eliminar el usuario");
 	}
 	
+	
+}
+
+/**
+ * Deshabilita el usuario y todas sus cuentas
+ * 1 - Habilitada
+ * 0 - Deshabilitada
+ * @param id
+ * @param habilita
+ */
+public void habilitar_usuario(int id, boolean habilita){
+	
+	try{
+		java.sql.Statement stm = pruebaConn.getConexion().createStatement();
+		stm.execute("UPDATE Usuario SET habilitado = '"+habilita+"'" + "where id_usuario = '"+id+"'");
+  }
+	catch (Exception e){
+		System.out.println("no se pudo modificar la cuenta");
+	}
 	
 }
 	

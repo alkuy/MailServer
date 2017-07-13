@@ -50,6 +50,11 @@ public class principal extends JFrame {
 	private FrmMuestraUsuarios frmmuestrausuarios;
 	private FrmPruebaServidor frmPruebaServidor;
 	
+	private FrmEdicionUsuario frmEdicionUsuario;
+	private FrmEdicionCuenta frmEdicionCuenta;
+	
+	
+	
 	public static JPanel getInstancia() {
 		if(VentPrincipal == null)
 			VentPrincipal = new JPanel();
@@ -223,93 +228,58 @@ public class principal extends JFrame {
 		
 		mntmNuevoCuenta.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				cierraVentana(frmcuenta);
+				cierraTodo();
 				frmcuenta = new FrmNuevaCuenta();
 				abreVentana(frmcuenta);
 			
-				cierraVentana(frmmuestracuentas);
-				cierraVentana(frmusuario);
-				cierraVentana(frmdominionuevo);
-				cierraVentana(frmmuestradominios);
-				cierraVentana(frmmuestrausuarios);
-				cierraVentana(frmPruebaServidor);
 			
 			}
 		});
 		
 		mntmNuevoUsuario.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				cierraVentana(frmusuario);
+				cierraTodo();
 				frmusuario = new FrmNuevoUsuario();
 				abreVentana(frmusuario);
-				
-				cierraVentana(frmmuestracuentas);
-				cierraVentana(frmcuenta);
-				cierraVentana(frmdominionuevo);
-				cierraVentana(frmmuestradominios);
-				cierraVentana(frmmuestrausuarios);
-				cierraVentana(frmPruebaServidor);
+	
 			}
 		});
 		
 		mntmVerCuentas.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				cierraVentana(frmmuestracuentas);
+				cierraTodo();
 				frmmuestracuentas = new FrmMuestraCuentas();
 				abreVentana(frmmuestracuentas);
 				
-				cierraVentana(frmusuario);
-				cierraVentana(frmcuenta);
-				cierraVentana(frmdominionuevo);
-				cierraVentana(frmmuestradominios);
-				cierraVentana(frmmuestrausuarios);
-				cierraVentana(frmPruebaServidor);
 			}
 		});
 		
 		mntmAgregarDominio.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				cierraVentana(frmdominionuevo);
+				cierraTodo();
 				frmdominionuevo = new FrmNuevoDominio();
 				abreVentana(frmdominionuevo);
-				
-				cierraVentana(frmusuario);
-				cierraVentana(frmcuenta);
-				cierraVentana(frmmuestracuentas);
-				cierraVentana(frmmuestradominios);
-				cierraVentana(frmmuestrausuarios);
-				cierraVentana(frmPruebaServidor);
+			
 			}
 		});
 		
 		
 		mntmDominios.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				cierraVentana(frmmuestradominios);
+				cierraTodo();
 				frmmuestradominios = new FrmMuestraDominios();
 				abreVentana(frmmuestradominios);
 				
-				cierraVentana(frmusuario);
-				cierraVentana(frmcuenta);
-				cierraVentana(frmmuestracuentas);
-				cierraVentana(frmdominionuevo);
-				cierraVentana(frmmuestrausuarios);
-				cierraVentana(frmPruebaServidor);
+			
 			}
 		});
 		
 		mntmVerUsuarios.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				cierraVentana(frmmuestrausuarios);
+				cierraTodo();
 				frmmuestrausuarios = new FrmMuestraUsuarios();
 				abreVentana(frmmuestrausuarios);
 				
-				cierraVentana(frmusuario);
-				cierraVentana(frmcuenta);
-				cierraVentana(frmmuestracuentas);
-				cierraVentana(frmdominionuevo);
-				cierraVentana(frmmuestradominios);
-				cierraVentana(frmPruebaServidor);
 			}
 		});
 		
@@ -349,7 +319,7 @@ public class principal extends JFrame {
 	 * Cierra JinternalFram verificando si fue abierto
 	 * @param panel
 	 */
-	public void cierraVentana(JInternalFrame panel){
+	public static void cierraVentana(JInternalFrame panel){
 		if (panel !=null){
 			panel.dispose();
 		}
@@ -378,5 +348,17 @@ public class principal extends JFrame {
 	}
 	public static void menuDesHabilitado(){
 		VentPrincipal.setEnabled(false);
+	}
+	
+	public void cierraTodo(){
+		cierraVentana(frmusuario);
+		cierraVentana(frmcuenta);
+		cierraVentana(frmmuestracuentas);
+		cierraVentana(frmdominionuevo);
+		cierraVentana(frmmuestradominios);
+		cierraVentana(frmPruebaServidor);
+		cierraVentana(frmmuestrausuarios);
+		cierraVentana(frmEdicionCuenta);
+		cierraVentana(frmEdicionUsuario);
 	}
 }

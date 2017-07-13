@@ -12,6 +12,7 @@ public class Cuenta {
 	private String password;
 	private String fecha_creacion; 
 	private int es_lista;
+	private int habilitado;
 	
 	
 	private Conexion pruebaConn = Conexion.getInstancia();
@@ -27,6 +28,7 @@ public class Cuenta {
 		this.nom_dominio = nom_dom;
 		this.password = pass;
 		this.es_lista = es_lista;
+		this.habilitado = 1; // Lo pongo en uno que es el predeterminado cuando se crea
 	}
 	
 	
@@ -39,7 +41,7 @@ public class Cuenta {
 		if (pruebaConn!=null){
 			try{
 				java.sql.Statement stm = pruebaConn.getConexion().createStatement();
-				stm.execute("Insert into Cuenta values ('"+id_usuario+"','"+nom_usuario+"','"+nom_dominio+"','"+password+"', '"+es_lista+"' ,CURRENT_TIMESTAMP, 1 )");
+				stm.execute("Insert into Cuenta values ('"+id_usuario+"','"+nom_usuario+"','"+nom_dominio+"','"+password+"', '"+es_lista+"' ,CURRENT_TIMESTAMP, '"+habilitado+"')");
 				
 			}
 			catch (Exception e){
@@ -113,19 +115,44 @@ public void eliminar_cuenta(int id) {
 	
 	
 }
+/**
+ * Para habilitar o deshabilitar una cuenta
+ * 1 - Habilitada
+ * 0 - Deshabilitada
+ * @param id
+ * @param nom_us
+ * @param nom_dom
+ * @param habilita
+ */
 
-public void habilitar_cuenta(int id, String nom_us, String nom_dom, int habilita){
+public void habilitar_cuenta(int id, String nom_us, String nom_dom, boolean habilita){
 	
 	try{
 		java.sql.Statement stm = pruebaConn.getConexion().createStatement();
-		stm.execute("UPDATE Cuenta SET habilitado = '"+habilita+"'" + "where id_usuario = '"+id+"' AND nom_usuario = '"+nom_us+"' AND nom_dominio = '"+nom_dom+"'");
+		stm.execute("UPDATE Cuenta SET habilitada = '"+habilita+"'" + "where id_usuario = '"+id+"' AND nom_usuario = '"+nom_us+"' AND nom_dominio = '"+nom_dom+"'");
   }
 	catch (Exception e){
 		System.out.println("no se pudo modificar la cuenta");
 	}
 	
 }
+/**
+ * Habilita o deshabilita todas las cuentas de ese usuario
+ * @param id
+ * @param habilita
+ */
+public void habilitar_cuenta(int id, boolean habilita){
 	
+	try{
+		java.sql.Statement stm = pruebaConn.getConexion().createStatement();
+		stm.execute("UPDATE Cuenta SET habilitada = '"+habilita+"'" + "where id_usuario = '"+id+"';");
+  }
+	catch (Exception e){
+		System.out.println("no se pudo modificar la cuenta");
+	}
+	
+}
+
 	
 }
 

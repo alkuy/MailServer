@@ -10,24 +10,20 @@ import Persistencia.FachadaBD;
 
 public class Ventanas {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws InterruptedException {
 		// TODO Auto-generated method stub
 		Presentacion present = new Presentacion();
 		present.setLocationRelativeTo(null);  
 		present.setVisible(true);
-		principal pri = new principal();
-		ActionListener realiza = new ActionListener() {
-		public void actionPerformed(ActionEvent arg0) {
-			present.dispose();
-			pri.setLocationRelativeTo(null); 
-			pri.setVisible(true);
-			}
-		};
-			  
-		Timer cierre = new Timer(3000, realiza);
-		cierre.start();
 		
-		Fachada Logica = Fachada.getInstancia();
+		Thread.sleep (5000);  // Excelente solución de Castelli
+		principal pri = new principal();
+		present.dispose();
+			
+		pri.setLocationRelativeTo(null); 
+			
+		pri.setVisible(true);
+	
 	}
 
 }

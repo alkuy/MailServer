@@ -6,6 +6,7 @@ import java.awt.Font;
 import javax.swing.JButton;
 import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
@@ -14,6 +15,7 @@ import Logica.Fachada;
 import javax.swing.JComboBox;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.ImageIcon;
 
 public class FrmNuevoDominio extends JInternalFrame {
 
@@ -25,6 +27,7 @@ public class FrmNuevoDominio extends JInternalFrame {
 	 * Create the frame.
 	 */
 	public FrmNuevoDominio() {
+		Verificaciones verifica = new Verificaciones();
 		setBounds(20, 60, 450, 300);
 		getContentPane().setLayout(null);
 		
@@ -64,14 +67,42 @@ public class FrmNuevoDominio extends JInternalFrame {
 		JLabel lblAlta = new JLabel("1 - Alta"); lblAlta.setBounds(298, 120, 78, 26); getContentPane().add(lblAlta);
 		JLabel lblMedia = new JLabel("2 - Media"); lblMedia.setBounds(298, 142, 78, 26); getContentPane().add(lblMedia);
 		JLabel lblBaja = new JLabel("3 - Baja"); lblBaja.setBounds(298, 162, 78, 26); getContentPane().add(lblBaja);
+ 
+		/*BOTON DE CERRAR*/
+		JButton btnCerrar = new JButton("");
+		 btnCerrar.addActionListener(new ActionListener() {
+		 	public void actionPerformed(ActionEvent arg0) {
+		 		dispose();
+		 	}
+		 });
+		 btnCerrar.setIcon(new ImageIcon(FrmNuevoDominio.class.getResource("/imagenes/cerrar.png")));
+		 btnCerrar.setBounds(10, 0, 35, 35);
+		 getContentPane().add(btnCerrar);
+		 /*FIN DE BOTON DE CERRAR*/
 		
 		
 		btnADagregar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				String dominio = txtADdominio.getText();
-				String prioridad = comboBox.getSelectedItem().toString();
-				int pri = Integer.parseInt(prioridad);
-				FCLogica.altaDominio(dominio, pri);
+				boolean continua = true;
+				
+				if(!verifica.cant_caracteres(txtADdominio, 20, 1)){
+					continua = false;
+				}
+				if(!verifica.caracteres_validos(txtADdominio)){
+					continua = false;
+				}
+				if(verifica.existe_dominio(txtADdominio.getText())){
+					continua = false;
+				}
+				
+				if (continua == true){
+					//String dominio = txtADdominio.getText();
+					String prioridad = comboBox.getSelectedItem().toString();
+					int pri = Integer.parseInt(prioridad);
+					FCLogica.altaDominio(txtADdominio.getText(), pri);
+					JOptionPane.showMessageDialog(null, "Dominio ingresado con exito");
+					
+				}
 			}
 		});
 

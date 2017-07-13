@@ -8,6 +8,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import javax.swing.ButtonGroup;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JInternalFrame;
@@ -37,7 +38,7 @@ public class FrmNuevaCuenta extends JInternalFrame {
 	 * Create the frame.
 	 */
 	public FrmNuevaCuenta() {
-Verificaciones verifica = new Verificaciones();
+		Verificaciones verifica = new Verificaciones();
 		
 		setBounds(20, 60, 450, 330);
 		getContentPane().setLayout(null);
@@ -47,6 +48,19 @@ Verificaciones verifica = new Verificaciones();
 		lblNuevaCuenta.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNuevaCuenta.setFont(new Font("Goudy Old Style", Font.BOLD, 21));
 		getContentPane().add(lblNuevaCuenta);
+		
+		/*BOTON DE CERRAR*/
+		JButton btnCerrar = new JButton("");
+		 btnCerrar.addActionListener(new ActionListener() {
+		 	public void actionPerformed(ActionEvent arg0) {
+		 		limpiaCampos();
+		 		dispose();
+		 	}
+		 });
+		 btnCerrar.setIcon(new ImageIcon(FrmNuevoDominio.class.getResource("/imagenes/cerrar.png")));
+		 btnCerrar.setBounds(10, 0, 35, 35);
+		 getContentPane().add(btnCerrar);
+		 /*FIN DE BOTON DE CERRAR*/
 		
 		/**
 		 * ComboBox con dominios

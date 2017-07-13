@@ -1,11 +1,16 @@
 package Logica;
 
+import java.awt.Color;
+import java.awt.Component;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Enumeration;
 import java.util.Hashtable;
+import javax.swing.table.*;
+import javax.swing.*;
 
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableCellRenderer;
 
 import Persistencia.FachadaBD;
 
@@ -75,7 +80,7 @@ public class Usuarios {
 	 * @param usu usuario a modificar en la colección Usuarios.
 	 * @return No retorna nada. */
 	public void modify(int id_usuario, String ci, String nombre, String apellido, String calle, 
-			String nro, String apto/*, String numTel1, String numTel2*/){
+			String nro, String apto/*, String numTel1, String numTel2*/, boolean habilitado){
 //		delete(usu.getNom_usuario());
 //		this.hUsu.put(usu.getNom_usuario(), usu);
 		this.find(id_usuario).setNombre(nombre);
@@ -83,7 +88,9 @@ public class Usuarios {
 		this.find(id_usuario).setCalle(calle);
 		this.find(id_usuario).setNro_puerta(nro);
 		this.find(id_usuario).setApto(apto);
+		this.find(id_usuario).setHabilitado(habilitado);
 		BD.Modifica_datos_per(ci, nombre, apellido, calle, nro, apto);
+		BD.habilitacion_usuario(id_usuario, habilitado);
 	}
 	
 	/** Método que dado nombre de usuario de un usuario lo dada de baja del diccionario.
@@ -102,8 +109,7 @@ public class Usuarios {
 		
 		while(rs.next()){
 			Usuario usu = new Usuario();
-			
-			usuarios.put(rs.getString("id_usuario"), usu.cargaDesdeBD(rs.getInt("id_usuario"), rs.getString("pass_admin")));
+			usuarios.put(rs.getString("id_usuario"), usu.cargaDesdeBD(rs.getInt("id_usuario"), rs.getString("pass_admin"), rs.getBoolean("habilitado")));
 //			System.out.println(rs.getString("id_usuario"));
 		}
 		
@@ -128,7 +134,7 @@ public class Usuarios {
 	}
 	
 	public DefaultTableModel DevTablaUsuario(){
-		String col[] = {"Cédula","Cuenta"};
+		String col[] = {"Cédula","Nombre", "Habilitado"};
 		DefaultTableModel modelo = new DefaultTableModel(col,0);
 		
 		Enumeration<Usuario> eUsu = hUsu.elements();
@@ -136,13 +142,17 @@ public class Usuarios {
 		
 		while(eUsu.hasMoreElements()){
 			usu = eUsu.nextElement();
+			boolean hab = usu.getHabilitado();
+			//System.out.println(usu.getHabilitado());
+			String habi = String.valueOf(hab);
+			;
+			String carga [] = {usu.getCi(), usu.getNombre()+" "+usu.getApellido(), habi};
 			
-			//System.out.println("id " + usu.getId_usuario() + " CI " + usu.getCi() + " Nombre " + usu.getNombre());
-			String carga [] = {usu.getCi(), usu.getNombre()};
 			modelo.addRow(carga);
 		}
 		
 		return modelo;
 	}
-
+	
+	
 }

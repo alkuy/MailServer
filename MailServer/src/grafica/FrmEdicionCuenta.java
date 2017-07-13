@@ -73,6 +73,12 @@ public class FrmEdicionCuenta extends JInternalFrame {
 		getContentPane().add(btnGuardar);
 		
 		JButton btnCerrar = new JButton("Cerrar");
+		btnCerrar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				apareceLogo();
+				dispose();
+			}
+		});
 		btnCerrar.setBounds(19, 262, 246, 35);
 		getContentPane().add(btnCerrar);
 
