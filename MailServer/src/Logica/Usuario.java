@@ -2,6 +2,8 @@ package Logica;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import javax.swing.table.DefaultTableModel;
+
 import Persistencia.FachadaBD;
 /** Clase de ejemplo que muestra la sintaxis
  * elemental de un programa en java
@@ -315,6 +317,9 @@ public class Usuario {
 				
 				Telefonos auxTels = new Telefonos(usu.id_usuario);
 				usu.tels = auxTels;
+				
+				Cuentas auxCuentas = new Cuentas(usu.id_usuario);
+				usu.cuentas = auxCuentas;
 				
 			}
 			else{

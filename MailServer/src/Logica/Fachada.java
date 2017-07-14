@@ -3,6 +3,7 @@ package Logica;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Enumeration;
 import java.util.Iterator;
 
 import javax.swing.table.DefaultTableModel;
@@ -86,18 +87,6 @@ public class Fachada {
 		Dominio dom = new Dominio();
 		dominios = dom.carga_nom_dom();
 		return dominios;
-		
-	}
-	
-	/**
-	 * Metdo que trae Array con todos la cueta
-	 * @return ArrayList<Cuenta>
-	 */
-	public ArrayList<Cuenta> carga_cuentas(){
-		ArrayList<Cuenta> cuenta = new ArrayList<Cuenta>();
-		Cuentas cont = new Cuentas();
-		cuenta = cont.cargaCuentasdesdeBD();
-		return cuenta;
 		
 	}
 	
@@ -211,11 +200,6 @@ public class Fachada {
 		Usuarios usuarios = new Usuarios();
 		modelo = usuarios.DevTablaUsuario();
 		return modelo;
-		
-		//Usuarios usuarios = new Usuarios();
-		
-		//usuarios.imprimirConsola(usuarios.getColection());
-		
 	}
 	
 
@@ -280,33 +264,14 @@ public void altaDominio(String dominio, int prioridad){
 	}
  	
  	public String retornarTelx(int id_usuario, int x){
-// 		System.out.println("EN FACHADA " + hUsu.find(id_usuario).getId_usuario());
-// 		System.out.println("DONDE EXPLOTAS1");
  		Telefonos tels = new Telefonos();
  		tels = hUsu.find(id_usuario).getTels();
-// 		System.out.println("DONDE EXPLOTAS2");
-// 		if(tels==null)
-// 			System.out.println("SOY UN PUTO NULL");
  		return tels.retornarTelx(tels.getSetTelefonos(), x);
  	}
  	
- 	public void modifyCuenta(int id, String nom_us, String nom_dom, String pass){
- 		Usuario usu = hUsu.find(id);
-// 		System.out.println(id);
-// 		//Imprimir pass para probar que se modifica
-// 		ArrayList<Cuenta> cuentas = usu.getCuentas().getsetCuentas();
-// 		Iterator<Cuenta> aux = cuentas.iterator();
-// 		while(aux.hasNext()){
-// 			System.out.println("pass " + aux.next().getContraseña_cuenta());
-// 		}
-// 		
-// 		pass = usu.getCi();
- 		
-// 		usu.getCuentas().modify(id, nom_us, nom_dom, pass);
- 		
-// 		System.out.println("new pass " + pass);
- 		
- 		BD.Modifica_cuentaPS(id, nom_us, nom_dom, usu.getCi());
+ 	public void resetPassCuenta(int id, String nom_us, String nom_dom, String pass){
+ 		//System.out.println(id);
+ 		hUsu.find(id).getCuentas().resetPass(id, nom_us, nom_dom, pass);
  	}
  	
  	
@@ -315,6 +280,7 @@ public void altaDominio(String dominio, int prioridad){
  		int pri = domi.trae_prioridad(Dom);
  		return pri;
  	}
+ 	
  }
 	 
  

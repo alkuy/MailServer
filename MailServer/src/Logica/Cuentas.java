@@ -35,7 +35,11 @@ public class Cuentas {
 	
 	/** Método constructor de la colección Cuentas. */
 	public Cuentas() {
-		this.setCuentas = this.cargaCuentasdesdeBD();
+		this.setCuentas = new ArrayList<>();
+	}
+	
+	public Cuentas(int id_usuario) {
+		this.setCuentas = this.cargaCuentasDeUsuariodesdeBD(id_usuario);
 	}
 	
 	/** Método que da de alta un cuenta al set.
@@ -112,26 +116,48 @@ public class Cuentas {
 		
 	}
 	
+	public ArrayList<Cuenta> cargaCuentasDeUsuariodesdeBD(int id_usuario){
+		ArrayList<Cuenta> set = new ArrayList<Cuenta>();
+		ResultSet rs = null;
+		try {
+			rs = BD.ConTablaCuentaID(id_usuario);
+			while (rs.next()){
+				Cuenta auxCuenta = new Cuenta();
+				auxCuenta.setIdUsuario(rs.getInt("id_usuario"));
+				auxCuenta.setNomU(rs.getString("nom_usuario"));
+				auxCuenta.setDominio(rs.getString("nom_dominio"));
+				auxCuenta.setHabilitada(rs.getBoolean("habilitada"));
+				set.add(auxCuenta);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return set;
+		
+	}
+	
 	/**
 	 * Carga la tabla con el Id de Usuario y la cuenta concatenando nombre y dominio
 	 * @return TableModel
 	 * @throws SQLException
 	 */
 	public DefaultTableModel DevTablaCuenta(){
-				
+		ArrayList<Cuenta> auxCuentas = this.cargaCuentasdesdeBD();
 		String col[] = {"Id_Usuario","Cuenta", "Habilitada"};
 		DefaultTableModel modelo = new DefaultTableModel(col,0);
 
-		for (int i=0; i < setCuentas.size(); i++){
+		for (int i=0; i < auxCuentas.size(); i++){
 			String id, cuenta;
 			int id_user;
 			String nomUser, nomDominio;
 			
 			
-			nomUser = setCuentas.get(i).getNom_u();
-			nomDominio = setCuentas.get(i).getDominio();
-			id_user = setCuentas.get(i).getId();
-			boolean habilitado = setCuentas.get(i).isHabilitada();
+			nomUser = auxCuentas.get(i).getNom_u();
+			nomDominio = auxCuentas.get(i).getDominio();
+			id_user = auxCuentas.get(i).getId();
+			boolean habilitado = auxCuentas.get(i).isHabilitada();
 			String habi = String.valueOf(habilitado);
 			id=""+id_user;
 			cuenta = nomUser+"@"+nomDominio;
@@ -143,18 +169,29 @@ public class Cuentas {
 		return modelo;
 	}
 
-	public void modify(int id, String nom_us, String nom_dom, String pass){
-//		BD.Modifica_cuentaPS(id, nom_us, nom_dom, pass);
-		
-//		ArrayList<Cuenta> cuentas = this.getsetCuentas();
-// 		Iterator<Cuenta> aux = cuentas.iterator();
-// 		while(aux.hasNext()){
-// 			if(aux.next().getNom_u().equals(nom_us))
-// 				aux.next().setContraseña_cuenta(pass);
-// 		}
-// 		System.out.println("Dentro de cuentas " + aux.next().getContraseña_cuenta());
+	public void resetPass(int id, String nom_us, String nom_dom, String pass){
+		Iterator<Cuenta> iteCuentas = this.setCuentas.iterator();
+		while(iteCuentas.hasNext()){
+			Cuenta auxCuenta = iteCuentas.next();
+			if(auxCuenta.getNom_u().equals(nom_us) && auxCuenta.getDominio().equals(nom_dom)){
+				auxCuenta.setContraseña_cuenta(pass);
+				BD.Modifica_cuentaPS(id, nom_us, nom_dom, pass);
+			}
+		}
 	}
 	
-
+	public void imprimir(){
+		Iterator<Cuenta> iteCuentas = this.setCuentas.iterator();
+		while(iteCuentas.hasNext()){
+			Cuenta auxCuenta = iteCuentas.next();
+			
+			System.out.println(
+					auxCuenta.getId()+
+					auxCuenta.getNom_u()+
+					auxCuenta.getDominio()
+					);
+			
+		}
+	}
 
 }

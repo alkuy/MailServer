@@ -310,6 +310,13 @@ public class FachadaBD {
 		return rs;
 	}
 	
+	//Metodo que devuelve el ResultSet con los registros de la tabla Cuenta de un id <- Necesitaba para cargar las cuentas de un usuario. Carlos.
+	
+	public java.sql.ResultSet ConTablaCuentaID(int id) throws SQLException{
+		java.sql.ResultSet rs;
+		rs = this.cuenta.Select_Tabla_Id(id);
+		return rs;
+	} 
 	
 	//Metodo que devuelve el Resulset con los datos de la fila de la tabla Cuenta que se elija segun su clave
 	

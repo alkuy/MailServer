@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Component;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.Hashtable;
 import javax.swing.table.*;
@@ -145,7 +146,7 @@ public class Usuarios {
 			boolean hab = usu.getHabilitado();
 			//System.out.println(usu.getHabilitado());
 			String habi = String.valueOf(hab);
-			;
+			
 			String carga [] = {usu.getCi(), usu.getNombre()+" "+usu.getApellido(), habi};
 			
 			modelo.addRow(carga);

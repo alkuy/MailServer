@@ -7,6 +7,7 @@ import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
 
 import Logica.Fachada;
+import Logica.Usuario;
 
 import javax.swing.JButton;
 import java.awt.Font;
@@ -15,14 +16,20 @@ import java.awt.event.ActionEvent;
 import javax.swing.JCheckBox;
 import javax.swing.SwingConstants;
 import java.awt.Color;
+import javax.swing.JTextField;
 
 public class FrmEdicionCuenta extends JInternalFrame {
 
 	private Fachada FCLogica = Fachada.getInstancia();
+	private JTextField txtDocumento;
+	private JTextField txtNombre;
+	private JTextField txtApellido;
 	/**
 	 * Create the frame.
 	 */
-	public FrmEdicionCuenta(int id, String nom_us, String nom_dom, String pass) {
+	public FrmEdicionCuenta() {
+		Usuario usu = FCLogica.findUsu(Integer.valueOf(id));
+		
 		setBounds(550, 100, 300, 340);
 		getContentPane().setLayout(null);
 		toFront();
@@ -50,6 +57,27 @@ public class FrmEdicionCuenta extends JInternalFrame {
 		lblCuenta.setBounds(10, 0, 263, 31);
 		getContentPane().add(lblCuenta);
 		
+		txtDocumento = new JTextField();
+		txtDocumento.setEditable(false);
+		txtDocumento.setBounds(128, 45, 145, 20);
+		getContentPane().add(txtDocumento);
+		txtDocumento.setColumns(10);
+		txtDocumento.setText(usu.getCi());
+		
+		txtNombre = new JTextField();
+		txtNombre.setEditable(false);
+		txtNombre.setColumns(10);
+		txtNombre.setBounds(129, 79, 145, 20);
+		getContentPane().add(txtNombre);
+		txtNombre.setText(usu.getNombre());
+		
+		txtApellido = new JTextField();
+		txtApellido.setEditable(false);
+		txtApellido.setColumns(10);
+		txtApellido.setBounds(128, 108, 145, 20);
+		getContentPane().add(txtApellido);
+		txtApellido.setText(usu.getApellido());
+		
 		JCheckBox chckbxHabilitada = new JCheckBox("Deshabilitada");
 		chckbxHabilitada.setFont(new Font("Goudy Old Style", Font.PLAIN, 20));
 		chckbxHabilitada.setBounds(19, 138, 145, 31);
@@ -63,8 +91,12 @@ public class FrmEdicionCuenta extends JInternalFrame {
 		JButton btnGuardar = new JButton("Guardar y Cerrar");
 		btnGuardar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				if(chkResetPass.isSelected())
-					FCLogica.modifyCuenta(id, nom_us, nom_dom, pass);
+				if(chkResetPass.isSelected()){
+					String nomUsu = nombrecuenta.substring(0, nombrecuenta.indexOf("@"));
+					String nomDom = nombrecuenta.substring(nombrecuenta.indexOf("@")+1);
+					
+					FCLogica.resetPassCuenta(Integer.valueOf(id), nomUsu, nomDom, usu.getCi()); //El ultimo es pass, pero el reseteo pone la cedula.
+				}
 				apareceLogo();
 				dispose();
 			}

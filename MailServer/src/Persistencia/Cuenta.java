@@ -67,10 +67,23 @@ public class Cuenta {
 		
 	}
 	
+	/* metodo para cargar un resulset con los registros de un id_usuario */
+	
+	public java.sql.ResultSet Select_Tabla_Id(int id) throws SQLException{
+		
+		String seleccion = "Select * from Cuenta where id_usuario ='"+id+"'";
+		
+		java.sql.Statement ps = pruebaConn.getConexion().createStatement();
+		java.sql.ResultSet rs = ps.executeQuery(seleccion);
+	//	pruebaConn.closeConextion();
+		
+		return rs;
+		
+	}
 	
 	/* metodo para cargar un resulset con lo datos de un registro seleccionado */
 	
-public java.sql.ResultSet Select_fila(int id, String nom_us, String nom_dom ) throws SQLException{
+	public java.sql.ResultSet Select_fila(int id, String nom_us, String nom_dom ) throws SQLException{
 		
 		String seleccion = "Select * from Persona where id_usuario ='"+id+"'and nom_usuario = '"+nom_us+"'and nom_dominio = '"+nom_dom+"'";
 		
