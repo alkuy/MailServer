@@ -46,20 +46,23 @@ public class Fachada {
 		Usuario usu = new Usuario();
 		int id= usu.InstertaUserDevuelveId(null);
 		Usuario NU = new Usuario(id, doc, nom, ape, calle,  nro_puerta, apto, true);
-		hUsu.insert(NU);
 		
 		/*System.out.println(NU.getHabilitado());
 		System.out.println(NU.getApellido());*/
 		
-		this.altaTel(id, numTel1);
-		this.altaTel(id, numTel2);
+		NU.setTels(this.altaTel(NU.getTels(), id, numTel1));
+		NU.setTels(this.altaTel(NU.getTels(), id, numTel2));
+		
+		hUsu.insert(NU);
 	}
 	
-	public void altaTel(int idUsu, String numTel){
-		Telefonos auxTels = new Telefonos();
+	public Telefonos altaTel(Telefonos auxTels, int idUsu, String numTel){
+//		Telefonos auxTels = new Telefonos();
 		Telefono auxTel = new Telefono(idUsu, numTel);
 		auxTel.InsertTel(idUsu, numTel);
 		auxTels.Insertar(auxTel);
+		
+		return auxTels;
 	}
 	
 	public int altaUsuGrupo(String nom) throws SQLException{
@@ -191,10 +194,11 @@ public class Fachada {
 		Usuario usu = new Usuario();
 		int id= usu.InstertaUserDevuelveId(pass_admin);
 		Usuario NU = new Usuario(id, pass_admin, doc, nom, ape,calle, nro_puerta, apto, true); //Ingreso el usuario como habilitado
-		hUsu.insert(NU);
 		
-		this.altaTel(id, numTel1);
-		this.altaTel(id, numTel2);
+		NU.setTels(this.altaTel(NU.getTels(), id, numTel1));
+		NU.setTels(this.altaTel(NU.getTels(), id, numTel2));
+		
+		hUsu.insert(NU);
 	}
 /*	public boolean ExisteUsuario(String cedula){
 		Usuarios usuarios = new Usuarios();
@@ -260,6 +264,20 @@ public void altaDominio(String dominio, int prioridad){
  			String nro, String apto, boolean habilitado){
  		hUsu.modify(id_usuario, ci, nombre, apellido, calle, nro, apto, habilitado);
  	}
+ 	
+ 	public void modifyTelUsu(int id_usuario, String oldTel, String newTel, int tel1o2){
+		//Si el nuevo telefono es vacio entonces no se hace nada.
+ 		if(!newTel.isEmpty()){
+	 		if(oldTel.isEmpty()){
+				//El telefono anterior es vacio. Si el nuevo telefono NO es vacio se debe ingresar.
+	 			hUsu.find(id_usuario).setTels(this.altaTel(hUsu.find(id_usuario).getTels(), id_usuario, newTel));
+			}
+			else{
+				//Se pasa a modificar el telefono
+				hUsu.find(id_usuario).getTels().Modificar(id_usuario, oldTel, newTel, tel1o2);
+			}
+		}
+	}
  	
  	public String retornarTelx(int id_usuario, int x){
 // 		System.out.println("EN FACHADA " + hUsu.find(id_usuario).getId_usuario());

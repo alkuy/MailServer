@@ -78,12 +78,12 @@ public java.sql.ResultSet Select_fila(int id) throws SQLException{
 
 //Metodo que permite modificar los telefonos de una persona segun su id
 
-public void cambiar_telefonos(int id, String tel) {
+public void cambiar_telefonos(int id, String oldTel, String newTel) {
 	
 	
 	try{
 		java.sql.Statement stm = pruebaConn.getConexion().createStatement();
-		stm.execute("UPDATE Telefono SET telefono = '"+tel+"'" + "where id_usuario = '"+id+"'");
+		stm.execute("UPDATE Telefono SET telefono = '"+newTel+"'" + "where id_usuario = '"+id+"'" + " and " + "telefono = "+oldTel);
 }
 	catch (Exception e){
 		System.out.println("no se pudo modificar el telefono");

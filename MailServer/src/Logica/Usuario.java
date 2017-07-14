@@ -90,7 +90,8 @@ public class Usuario {
 		this.nro_puerta = nro_puerta;
 		this.habilitado = habilitado;
 		this.apto = apto;
-	
+		this.cuentas = new Cuentas();
+		this.tels = new Telefonos();	
 		
 		BD.InsertPer(id_usuario, ci, nombre, apellido, calle, nro_puerta, apto);
 		
@@ -234,7 +235,9 @@ public class Usuario {
 	}
 	
 	
-
+	public void setTels(Telefonos tels) {
+		this.tels = tels;
+	}
 	
 	//Metodo para verificar si la cedula y la contraseña ingresadas son correctas
 	

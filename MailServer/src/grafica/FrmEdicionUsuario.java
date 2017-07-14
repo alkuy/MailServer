@@ -37,6 +37,7 @@ public class FrmEdicionUsuario extends JInternalFrame {
 	public FrmEdicionUsuario(String id) { //Este id es cedula
 //		System.out.println(id);
 		int id_usuario = FCLogica.getID(id);
+//		System.out.println(id_usuario);
 		Usuario usu = FCLogica.findUsu(id_usuario);
 		
 		
@@ -66,6 +67,7 @@ public class FrmEdicionUsuario extends JInternalFrame {
 		txtTel1.setBounds(84, 218, 240, 30);
 		getContentPane().add(txtTel1);
 		String numTel1 = FCLogica.retornarTelx(FCLogica.getID(id), 0);
+		String oldTel1 = numTel1;
 		txtTel1.setText(numTel1); //tel 1 es el 0
 		
 		txtTel2 = new JTextField();
@@ -73,6 +75,7 @@ public class FrmEdicionUsuario extends JInternalFrame {
 		txtTel2.setBounds(84, 259, 240, 30);
 		getContentPane().add(txtTel2);
 		String numTel2 = FCLogica.retornarTelx(FCLogica.getID(id), 1);
+		String oldTel2 = numTel2;
 		txtTel2.setText(numTel2);
 		
 		txtCalle = new JTextField();
@@ -198,6 +201,8 @@ public class FrmEdicionUsuario extends JInternalFrame {
 				
 				if (continua == true){
 					FCLogica.modifyUsuario(id_usuario, documento, nombre, apellido, calle, nroPuerta, apto, habilitado);
+					FCLogica.modifyTelUsu(id_usuario, oldTel1, numTel1, 0);
+					FCLogica.modifyTelUsu(id_usuario, oldTel2, numTel2, 1);
 					dispose();
 					apareceLogo();
 				}

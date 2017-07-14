@@ -25,6 +25,12 @@ public class Telefonos {
 	public void Insertar (Telefono tel){
 		this.setTelefonos.add(tel);
 	}
+	
+	public void Modificar(int id_usuario, String oldTel, String newTel, int tel1o2){
+		this.setTelefonos.get(tel1o2).setNumTel(newTel);
+		BD.Modifica_tel(id_usuario, oldTel, newTel);
+	}
+	
 	public ArrayList<Telefono> cargaDesdeBD(int idUsu) throws SQLException{
 		ArrayList<Telefono> auxTels = new ArrayList<Telefono>();
 		ResultSet rs = BD.ConFilaTel(idUsu);
@@ -60,5 +66,7 @@ public class Telefonos {
 			System.out.println(auxTel.getNumTel());
 		}
 	}
+	
+	
 
 }

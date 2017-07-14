@@ -354,8 +354,8 @@ public class FachadaBD {
 	
 	//Metodo para modificar un telefono de una persona segun su id 
 
-	public void Modifica_tel (int id, String tel){
-		this.telefono.cambiar_telefonos(id,tel);
+	public void Modifica_tel (int id, String oldTel, String newTel){
+		this.telefono.cambiar_telefonos(id,oldTel,newTel);
 	}
 	//Metodo que devuelve el Resulset con todos los datos de la tabla Telefono cargados
 	
