@@ -68,8 +68,8 @@ public class FrmNuevoUsuario extends JInternalFrame {
 		
 		JLabel lblNuevoUsuario = new JLabel("Nuevo Usuario");
 		lblNuevoUsuario.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNuevoUsuario.setFont(new Font("Goudy Old Style", Font.BOLD, 21));
-		lblNuevoUsuario.setBounds(138, -14, 166, 46);
+		lblNuevoUsuario.setFont(new Font("Goudy Old Style", Font.BOLD, 26));
+		lblNuevoUsuario.setBounds(130, -15, 166, 46);
 		getContentPane().add(lblNuevoUsuario);
 		
 		/*BOTON DE CERRAR*/

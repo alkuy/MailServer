@@ -40,13 +40,13 @@ public class FrmNuevaCuenta extends JInternalFrame {
 	public FrmNuevaCuenta() {
 		Verificaciones verifica = new Verificaciones();
 		
-		setBounds(20, 60, 450, 330);
+		setBounds(20, 30, 450, 330);
 		getContentPane().setLayout(null);
 		
 		JLabel lblNuevaCuenta = new JLabel("Nueva Cuenta");
-		lblNuevaCuenta.setBounds(163, 5, 123, 26);
+		lblNuevaCuenta.setBounds(114, 0, 206, 26);
 		lblNuevaCuenta.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNuevaCuenta.setFont(new Font("Goudy Old Style", Font.BOLD, 21));
+		lblNuevaCuenta.setFont(new Font("Goudy Old Style", Font.BOLD, 26));
 		getContentPane().add(lblNuevaCuenta);
 		
 		/*BOTON DE CERRAR*/

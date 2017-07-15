@@ -178,6 +178,14 @@ public class Fachada {
 		return modelo;
 	}
 	
+	/*Para cuentas de un solo usuario*/
+	public DefaultTableModel DevCuentasUsuario(int idUsuario) throws SQLException{
+		DefaultTableModel modelo;
+		Cuentas cuentas = new Cuentas();
+		modelo = cuentas.DevTablaCuentasUsuario(idUsuario);
+		return modelo;
+	}
+	
 	
 	public void altaUsuarioAdmin(String doc, String nom, String ape, String pass_admin, String calle, String nro_puerta, String apto, String numTel1, String numTel2) throws SQLException{
 		Usuario usu = new Usuario();

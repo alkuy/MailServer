@@ -47,7 +47,7 @@ public class FrmMuestraUsuarios extends JInternalFrame {
 	 * Create the frame.
 	 */
 	public FrmMuestraUsuarios() {
-		setBounds(20, 60, 450, 500);
+		setBounds(20, 30, 450, 500);
 		getContentPane().setLayout(null);
 		
 		/*BOTON DE CERRAR*/
@@ -68,9 +68,9 @@ public class FrmMuestraUsuarios extends JInternalFrame {
 		this.SetTable();
 		
 		JLabel lblUsuarios = new JLabel("Usuarios");
-		lblUsuarios.setFont(new Font("Goudy Old Style", Font.BOLD, 24));
+		lblUsuarios.setFont(new Font("Goudy Old Style", Font.BOLD, 26));
 		lblUsuarios.setHorizontalAlignment(SwingConstants.CENTER);
-		lblUsuarios.setBounds(133, 11, 164, 34);
+		lblUsuarios.setBounds(135, 0, 164, 34);
 		getContentPane().add(lblUsuarios);
 		
 		JScrollPane scrlMUsuarios = new JScrollPane(tblMUsuarios);

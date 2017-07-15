@@ -46,8 +46,8 @@ public class FrmMuestraCuentas extends JInternalFrame {
 	public FrmMuestraCuentas() {
 		setTitle("Cuentas");
 		setForeground(Color.LIGHT_GRAY);
-		setBorder(new EmptyBorder(0, 0, 0, 0));
-		setBounds(20, 60, 450, 500);
+		//setBorder(new EmptyBorder(0, 0, 0, 0));
+		setBounds(20, 60, 465, 500);
 		getContentPane().setLayout(null);
 
 		/*BOTON DE CERRAR*/
@@ -69,9 +69,9 @@ public class FrmMuestraCuentas extends JInternalFrame {
 		/*#############################*/
 		
 		JLabel lblCuentas = new JLabel("Cuentas");
-		lblCuentas.setFont(new Font("Goudy Old Style", Font.BOLD, 24));
+		lblCuentas.setFont(new Font("Goudy Old Style", Font.BOLD, 26));
 		lblCuentas.setHorizontalAlignment(SwingConstants.CENTER);
-		lblCuentas.setBounds(133, 11, 164, 34);
+		lblCuentas.setBounds(142, 0, 164, 34);
 		getContentPane().add(lblCuentas);
 
 		

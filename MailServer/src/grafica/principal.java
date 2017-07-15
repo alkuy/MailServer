@@ -48,10 +48,13 @@ public class principal extends JFrame {
 	private FrmNuevoUsuario frmusuario;
 	private FrmNuevoDominio frmdominionuevo;
 	private FrmMuestraUsuarios frmmuestrausuarios;
+	private FrmBuscaUsuario frmbuscausuario;
 	private FrmPruebaServidor frmPruebaServidor;
 	
-	private FrmEdicionUsuario frmEdicionUsuario;
-	private FrmEdicionCuenta frmEdicionCuenta;
+	
+	
+	//private FrmEdicionUsuario frmEdicionUsuario;
+	//private FrmEdicionCuenta frmEdicionCuenta;
 	
 	
 	
@@ -96,6 +99,9 @@ public class principal extends JFrame {
 		JMenuItem mntmVerCuentas = new JMenuItem("Ver cuentas");
 		mnCuenta.add(mntmVerCuentas);
 		
+		JMenuItem mntmBuscarCuenta = new JMenuItem("Buscar");
+		mnCuenta.add(mntmBuscarCuenta);
+		
 		JMenu mnUsuario = new JMenu("Usuarios");
 		menuBar.add(mnUsuario);
 		
@@ -104,6 +110,9 @@ public class principal extends JFrame {
 		
 		JMenuItem mntmVerUsuarios = new JMenuItem("Ver Usuarios");
 		mnUsuario.add(mntmVerUsuarios);
+		
+		JMenuItem mntmBuscarUsuario = new JMenuItem("Buscar");
+		mnUsuario.add(mntmBuscarUsuario);
 		
 		JMenu mnConfiguracion = new JMenu("Configuracion");
 		menuBar.add(mnConfiguracion);
@@ -285,15 +294,18 @@ public class principal extends JFrame {
 		
 		mntmPruebaServidor.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				cierraTodo();
 				frmPruebaServidor = new FrmPruebaServidor();
 				abreVentana(frmPruebaServidor);
-				
-				cierraVentana(frmmuestrausuarios);
-				cierraVentana(frmusuario);
-				cierraVentana(frmcuenta);
-				cierraVentana(frmmuestracuentas);
-				cierraVentana(frmdominionuevo);
-				cierraVentana(frmmuestradominios);
+			
+			}
+		});
+		
+		mntmBuscarUsuario.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				cierraTodo();
+				frmbuscausuario = new FrmBuscaUsuario();
+				abreVentana(frmbuscausuario);
 			}
 		});
 		
@@ -358,7 +370,8 @@ public class principal extends JFrame {
 		cierraVentana(frmmuestradominios);
 		cierraVentana(frmPruebaServidor);
 		cierraVentana(frmmuestrausuarios);
-		cierraVentana(frmEdicionCuenta);
-		cierraVentana(frmEdicionUsuario);
+		
+		cierraVentana(frmbuscausuario);
+		
 	}
 }

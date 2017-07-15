@@ -193,5 +193,38 @@ public class Cuentas {
 			
 		}
 	}
+	
+	/**
+	 * Devuelve las cuentas de determinado usuario
+	 * @param idUsuario
+	 * @return
+	 */
+	public DefaultTableModel DevTablaCuentasUsuario(int idUsuario){
+		ArrayList<Cuenta> auxCuentas = this.cargaCuentasdesdeBD();
+		String col[] = {"Cuenta", "Habilitada"};
+		DefaultTableModel modelo = new DefaultTableModel(col,0);
+
+		for (int i=0; i < auxCuentas.size(); i++){
+			String cuenta;
+			String nomUser, nomDominio;
+			
+			
+			if (idUsuario == auxCuentas.get(i).getId()){
+				nomUser = auxCuentas.get(i).getNom_u();
+				nomDominio = auxCuentas.get(i).getDominio();
+				//id_user = setCuentas.get(i).getId();
+				boolean habilitado = auxCuentas.get(i).isHabilitada();
+				String habi = String.valueOf(habilitado);
+				//id=""+id_user;
+				cuenta = nomUser+"@"+nomDominio;
+				String carga [] = {cuenta, habi};	   
+			   	modelo.addRow(carga);
+			}
+			
+			
+		}
+		return modelo;
+	}
+
 
 }
