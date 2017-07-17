@@ -88,15 +88,24 @@ public class FrmEdicionCuenta extends JInternalFrame {
 		chkResetPass.setBounds(19, 172, 211, 31);
 		getContentPane().add(chkResetPass);
 		
+		String nomUsu = nombrecuenta.substring(0, nombrecuenta.indexOf("@"));
+		String nomDom = nombrecuenta.substring(nombrecuenta.indexOf("@")+1);
+		
+		if(!FCLogica.desOhabCuenta(Integer.valueOf(id), nomUsu, nomDom)){
+			chckbxHabilitada.setSelected(true);
+		}
+		
 		JButton btnGuardar = new JButton("Guardar y Cerrar");
 		btnGuardar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
+			public void actionPerformed(ActionEvent arg0) {		
 				if(chkResetPass.isSelected()){
-					String nomUsu = nombrecuenta.substring(0, nombrecuenta.indexOf("@"));
-					String nomDom = nombrecuenta.substring(nombrecuenta.indexOf("@")+1);
-					
 					FCLogica.resetPassCuenta(Integer.valueOf(id), nomUsu, nomDom, usu.getCi()); //El ultimo es pass, pero el reseteo pone la cedula.
 				}
+				boolean habilitado = true;
+				if(chckbxHabilitada.isSelected()){
+					habilitado = false;
+				}
+				FCLogica.deshabCuenta(Integer.valueOf(id), nomUsu, nomDom, habilitado);
 				apareceLogo();
 				dispose();
 			}

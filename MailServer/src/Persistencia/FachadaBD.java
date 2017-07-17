@@ -337,7 +337,9 @@ public class FachadaBD {
   	}
 	
 	
-	
+	public void deshabCuenta(int id, String nom_us, String nom_dom, boolean habilita){
+		this.cuenta.habilitar_cuenta(id, nom_us, nom_dom, habilita);
+	}
 	
 	
 	
