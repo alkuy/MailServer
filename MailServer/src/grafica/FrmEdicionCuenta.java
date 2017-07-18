@@ -106,6 +106,9 @@ public class FrmEdicionCuenta extends JInternalFrame {
 					habilitado = false;
 				}
 				FCLogica.deshabCuenta(Integer.valueOf(id), nomUsu, nomDom, habilitado);
+				cierraVentana(frmmuestracuentas);
+				frmmuestracuentas = new FrmMuestraCuentas();
+				abreVentana(frmmuestracuentas);
 				apareceLogo();
 				dispose();
 			}

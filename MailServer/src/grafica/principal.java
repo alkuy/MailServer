@@ -43,11 +43,11 @@ public class principal extends JFrame {
 	
 	
 	private FrmMuestraDominios frmmuestradominios;
-	private FrmMuestraCuentas frmmuestracuentas;
+	public static FrmMuestraCuentas frmmuestracuentas;
 	private FrmNuevaCuenta frmcuenta; 
 	private FrmNuevoUsuario frmusuario;
 	private FrmNuevoDominio frmdominionuevo;
-	private FrmMuestraUsuarios frmmuestrausuarios;
+	public static FrmMuestraUsuarios frmmuestrausuarios;
 	private FrmBuscaUsuario frmbuscausuario;
 	private FrmPruebaServidor frmPruebaServidor;
 	
