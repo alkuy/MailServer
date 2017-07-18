@@ -72,7 +72,7 @@ public class principal extends JFrame {
      	setResizable(false);
 		/**
 		 * Panel Principal*/
-     	setTitle("Admisnitrador");
+     	setTitle("Administrador");
      	setIconImage(Toolkit.getDefaultToolkit().getImage(principal.class.getResource("/imagenes/ico-mail.png")));
      	setBackground(new Color(0, 128, 128));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

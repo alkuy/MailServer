@@ -60,7 +60,7 @@ public class Usuario {
 		this.tels = new Telefonos();
 		String tipo = "usuario";
 		BD.InsertPer(id, ci, nombre, apellido, calle, nro_puerta, apto);
-		BD.Insert_TPerfil(id, tipo); // VER si lo hacemos asi
+		//BD.Insert_TPerfil(id, tipo); // VER si lo hacemos asi
 	}
 	
 	
@@ -74,7 +74,7 @@ public class Usuario {
 		//this.cuentas = new Cuentas(); // No comprendo bien que hacemos aca
 		//this.prefiles = new Perfiles(); // No entiendo para que una coleccion de perfiles dentro de usuario //ADRIAN
 		BD.InsertOfi(id_usuario, nombre);
-		BD.Insert_TPerfil(id_usuario, "usuario"); // VER si lo hacemos asi
+		//BD.Insert_TPerfil(id_usuario, "usuario"); // VER si lo hacemos asi
 	}
 	
 	/** Método constructor de la clase para usuario <u><b>administrador</b></u>.
@@ -250,35 +250,33 @@ public class Usuario {
 	public void setHabilitado(boolean habilitado) {
 		this.habilitado = habilitado;
 	}
+	
+	/** Metodo de autenticacion de login inicial
+	 * 
+	 * @param usuario
+	 * @param pass
+	 * @return true or false
+	 */
 
-	public boolean autentica(String usuario, String pass){
+	public boolean autentica(String usuario, String pass){		
 		
-		
-		try {
-		
-			
-	    int id = BD.Devolver_id(usuario);
-	    
-		
+		try {			
+	    int id = BD.Devolver_id(usuario);	
 	    
 	    if ( id == 0){
 	    	
-	    	return false;
-	    	
+	    	return false;	    	
 	    		    	
-	      } else {
-	    	
+	      } else {	    	
 	    	String contrasenia = BD.Devolver_pass(id);
 	    	
 	    	  if ( contrasenia.equals(pass)){
 	    		
 	    		return true;
-	    	  } else {
-	    		
+	    	  } else {	    		
 	    		       return false;
 	    	         }
-	    				
-		}
+	   		}
 			
 		}catch (Exception e){return false;} 
 	}

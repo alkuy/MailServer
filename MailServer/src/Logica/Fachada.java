@@ -217,19 +217,21 @@ public void altaDominio(String dominio, int prioridad){
 	
 
 
-
- public boolean verifica_ingreso(String cedula, String passwd) throws SQLException{
-	 
+  /** Metodo de autenticacion de login
+   * 
+   * @param cedula
+   * @param passwd
+   * @return true or false
+   * @throws SQLException
+  */
+ public boolean verifica_ingreso(String cedula, String passwd) throws SQLException{	 
 		
 		Usuario usuario = new Usuario();
-		
 			
-	if (usuario.autentica(cedula, passwd)){
-		
+	if (usuario.autentica(cedula, passwd)){		
 		return true;
 		
-	}else {
-	
+	}else {	
 		return false;
 		
 	   }

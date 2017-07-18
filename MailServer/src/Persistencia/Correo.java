@@ -2,6 +2,11 @@ package Persistencia;
 
 import java.sql.SQLException;
 
+
+/** Clase para ABM de un correo en la BD.
+ * @author 
+ * @version 1.0
+*/ 
 public class Correo{
 	
 	private String nom_usuario_emisor;
@@ -18,9 +23,27 @@ public class Correo{
 	
 	private Conexion pruebaConn = Conexion.getInstancia();
 	
-	// Contructor general para cargar todos los datos de un correo
+	
+	/** Método constructor de la clase correo - vacio
+	 *
+	*/
 	
 	public Correo (){}
+	
+	
+	
+	/** Método constructor de la clase correo.
+	 *@param nom_us1 nombre del usuario emisor
+	 *@param nom_dom1 nombre del dominio emisor
+	 *@param nom_us2 nombre del usuario receptor
+	 *@param nom_dom2 nombre del dominio receptor
+	 *@param fecha es la fecha del correo
+	 *@param id1 id del usuario emisor
+	 *@param id2 id del usuario receptor
+	 *@param asunto asunto del correo
+	 *@param texto texto del correo
+	 *@param id id de conversacion
+	*/
 	
 	public Correo(String nom_us1, String nom_dom1, String nom_us2, String nom_dom2, String fecha, int id1, int id2, String asunto, String texto, int id){
 		
@@ -37,7 +60,8 @@ public class Correo{
 	}
 	
 	
-	/* Metodo de ingreso de datos a la base */
+	/** Método de ingreso de datos del correo a la BD
+    */
 	
 	public void InsertRow(){
 		
@@ -48,14 +72,17 @@ public class Correo{
 				stm.execute("Insert into Correo values ('"+nom_usuario_emisor+"','"+nom_dominio_emisor+"','"+nom_usuario_receptor+"','"+nom_dominio_receptor+"','"+fecha+"','"+id_usuario_emisor+"','"+id_usuario_receptor+"','"+asunto+"','"+texto+"','"+id_conversacion+"')");
 			}
 			catch (Exception e){
-				System.out.println("aca la cago");
+				
 			}
 		}else{
-			System.out.println("Desconectado");
+			
 		}
 	}
 	
-	/* metodo para cargar un resulset con lo datos de la tabla */
+	/** Método que devuelve todos los datos de la tabla correo
+	 * @return Resulset con la tabla correo
+	 * @throws SQLException
+	*/
 	
 	public java.sql.ResultSet Select_tabla() throws SQLException{
 		
@@ -68,10 +95,18 @@ public class Correo{
 	}
 	
 	
-	/* metodo para cargar un resulset con lo datos de un registro seleccionado */
+	/** Método que devuelve todos los datos de un correo seleccionado
+	 *@param nom_us1 nombre del usuario emisor
+	 *@param nom_dom1 nombre del dominio emisor
+	 *@param nom_us2 nombre del usuario receptor
+	 *@param nom_dom2 nombre del dominio receptor
+	 *@param fecha es la fecha del correo
+	 * @return Resulset con la fila correspondiente al correo seleccionado
+	 * @throws SQLException
+	*/
 	
-public java.sql.ResultSet Select_fila(String nom_us1,String nom_dom1, String nom_us2, String nom_dom2, String fecha) throws SQLException{
-		
+    public java.sql.ResultSet Select_fila(String nom_us1,String nom_dom1, String nom_us2, String nom_dom2, String fecha) throws SQLException{
+ 		
 		String seleccion = "Select * from Correo where nom_usuario_emisor = '"+nom_us1+"' and nom_dominio_emisor = '"+nom_dom1+"' and nom_usuario_receptor = '"+nom_us2+"' and nom_dominio_receptor = '"+nom_dom2+"' and fecha ='"+fecha+"'";
 		
 		java.sql.Statement ps = pruebaConn.getConexion().createStatement();
@@ -81,24 +116,27 @@ public java.sql.ResultSet Select_fila(String nom_us1,String nom_dom1, String nom
 	}
 	
 
-/* Metodo para eliminar un registro de la tabla Correo*/
+        
+    /** Método para eliminar un correo seleccionado
+     *@param nom_us1 nombre del usuario emisor
+	 *@param nom_dom1 nombre del dominio emisor
+	 *@param nom_us2 nombre del usuario receptor
+	 *@param nom_dom2 nombre del dominio receptor
+	 *@param fecha es la fecha del correo
+	*/
 
-
-public void eliminar_correo(String nom_us1,String nom_dom1, String nom_us2, String nom_dom2, String fecha) {
+   public void eliminar_correo(String nom_us1,String nom_dom1, String nom_us2, String nom_dom2, String fecha) {
 	
 	
 	try{
 		java.sql.Statement stm = pruebaConn.getConexion().createStatement();
 		stm.execute("DELETE from Correo where nom_usuario_emisor = '"+nom_us1+"' and nom_dominio_emisor = '"+nom_dom1+"' and nom_usuario_receptor = '"+nom_us2+"' and nom_dominio_receptor = '"+nom_dom2+"' and fecha ='"+fecha+"'");
-  }
-	catch (Exception e){
-		System.out.println("no se pudo eliminar el registro");
-	}
+    }catch (Exception e){}
 	
 	
-}
+   }
 	
-}
+} // fin clase correo
 
 
 

@@ -9,23 +9,20 @@ public class Usuario {
 	private int id_usuario;
 	private String passAdmin;
 	private String sqlFecha;
-	private int habilitado = 1; // Lo pongo preestablecido como uno que es como se carga el usuario
+	private int habilitado = 1; // preestablecido como uno que es como se carga el usuario
 	private Conexion pruebaConn = Conexion.getInstancia();
 	
-	/*public Usuario(String pass){
-		
-		this.passAdmin = pass;	
-	}
 	
-    public Usuario(int id){
-		
-		this.id_usuario = id;	
-	}*/
+	/** Método constructor de la clase usuario - vacio.
+	 *
+	*/		
+	public Usuario(){};
 	
-
 	
-	public void InsertRow(String pass){
-		
+	/** Método de ingreso de datos del usuario a la BD
+	 * @exception Exception
+    */		
+	public void InsertRow(String pass){		
 		
 		Calendar fecha = Calendar.getInstance();
 		int anio = fecha.get(Calendar.YEAR);
@@ -47,121 +44,102 @@ public class Usuario {
 			catch (Exception e){
 				
 			}
-		//	pruebaConn.closeConextion();
-		}else{
-			System.out.println("Desconectado");
-		}
-	}
+		}else{}
+	 }
 	
-	/* metodo para cargar un resulset con lo datos de la tabla */
+	
+	
+	
+	/** Método que devuelve todos los datos de la tabla usuarios
+	 * @return Resulset con la tabla usuario
+	 * @throws SQLException
+	*/
 	
 	public java.sql.ResultSet Select_tabla() throws SQLException{
 		
-		String seleccion = "Select * from Usuario";
-		
+		String seleccion = "Select * from Usuario";		
 		java.sql.Statement ps = pruebaConn.getConexion().createStatement();
 		java.sql.ResultSet rs = ps.executeQuery(seleccion);
-	//	pruebaConn.closeConextion();
-		
 		return rs;
-		
-	}
+	 }
 	
+	
+	
+	 
 	/* metodo para cargar un resulset con lo datos de un registro seleccionado */
 	
-public java.sql.ResultSet Select_fila(int id) throws SQLException{
+    public java.sql.ResultSet Select_fila(int id) throws SQLException{
 		
 		String seleccion = "Select * from Usuario where id_usuario ='"+id+"'";
-		
 		java.sql.Statement ps = pruebaConn.getConexion().createStatement();
 		java.sql.ResultSet rs = ps.executeQuery(seleccion);
-		
-		//pruebaConn.closeConextion();
-		
-		return rs;
-		
-	}
+		return rs;		
+	 }
 
 
-   /* metodo para cargar un resulset con el ultimo id_usuario generado */
+    /** Método que devuelve el ultimo id de usuario ingresado
+	 * @return Resulset con el ultimo id de usuario
+	 * @throws SQLException
+	*/	
 
-public java.sql.ResultSet Select_ultimo_id() throws SQLException{
+    public java.sql.ResultSet Select_ultimo_id() throws SQLException{
 	
-	String seleccion = "SELECT MAX(id_usuario) FROM Usuario";
+	  String seleccion = "SELECT MAX(id_usuario) FROM Usuario";	
+	  java.sql.Statement ps = pruebaConn.getConexion().createStatement();
+	  java.sql.ResultSet rs = ps.executeQuery(seleccion);	
+	  return rs;
 	
-	java.sql.Statement ps = pruebaConn.getConexion().createStatement();
-	java.sql.ResultSet rs = ps.executeQuery(seleccion);
-	
-	//pruebaConn.closeConextion();
-	
-	return rs;
-	
-}
+     }
 
 
-/* metodo para devolver el pass de un usuario en base a su id */
+    /** Método que devuelve el passwd de usuario segun su id
+     * @param id id de usuario
+	 * @return Resulset con el passwd de usuario
+	 * @throws SQLException
+	*/	
 
-public java.sql.ResultSet Dev_pass(int id) throws SQLException{
+    public java.sql.ResultSet Dev_pass(int id) throws SQLException{
 	
-	String seleccion = "Select pass_admin from Usuario where id_usuario ='"+id+"'";		
-	java.sql.Statement ps = pruebaConn.getConexion().createStatement();
-	java.sql.ResultSet rs = ps.executeQuery(seleccion);	
-	return rs;
+	  String seleccion = "Select pass_admin from Usuario where id_usuario ='"+id+"'";		
+	  java.sql.Statement ps = pruebaConn.getConexion().createStatement();
+	  java.sql.ResultSet rs = ps.executeQuery(seleccion);	
+	  return rs;
 	
-}
+     }
+    
 
-/* metodo para modificar el passwor del administrador en la base */
+    /** Método para modificar el passwd de un administrador en la BD
+	 * @exception Exception
+    */
 
-public void cambiar_passwd(int id, String passwd) {
+    public void cambiar_passwd(int id, String passwd) {	
 	
-	
-	try{
+	  try{
 		java.sql.Statement stm = pruebaConn.getConexion().createStatement();
 		stm.execute("UPDATE Usuario SET pass_admin = '"+passwd+"'" + "where id_usuario = '"+id+"';");
-  }
-	catch (Exception e){
-		System.out.println("no se pudo modificar el passwd");
-	}
+      }catch (Exception e){}
 	
 	
-}
-
-/* Metodo para eliminar un registro de la tabla Usuarios*/
+    }
 
 
-public void eliminar_us(int id) {
-	
-	
-	try{
-		java.sql.Statement stm = pruebaConn.getConexion().createStatement();
-		stm.execute("DELETE from Usuario where id_usuario = '"+id+"';");
-  }
-	catch (Exception e){
-		System.out.println("no se pudo eliminar el usuario");
-	}
-	
-	
-}
 
-/**
- * Deshabilita el usuario y todas sus cuentas
- * 1 - Habilitada
- * 0 - Deshabilitada
- * @param id
- * @param habilita
- */
-public void habilitar_usuario(int id, boolean habilita){
+   /**
+    * Metodo que deshabilita el usuario y todas sus cuentas
+    * 1 - Habilitada
+    * 0 - Deshabilitada
+    * @param id id usuario
+    * @param habilita indica habilitado o no
+   */
+   public void habilitar_usuario(int id, boolean habilita){
 	
-	try{
+	 try{
 		java.sql.Statement stm = pruebaConn.getConexion().createStatement();
 		stm.execute("UPDATE Usuario SET habilitado = '"+habilita+"'" + "where id_usuario = '"+id+"'");
-  }
-	catch (Exception e){
-		System.out.println("no se pudo modificar la cuenta");
-	}
+      }catch (Exception e){}
 	
-}
+    }
 	
 	
-}
+}// fin clase Usuario
 

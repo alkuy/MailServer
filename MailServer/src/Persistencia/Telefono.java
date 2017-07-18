@@ -4,6 +4,11 @@ package Persistencia;
 import java.sql.SQLException;
 
 
+/** Clase para ABM de los telefonos de una persona en la BD
+ * @author 
+ * @version 1.0
+*/ 
+
 public class Telefono {
 
 	
@@ -17,18 +22,29 @@ public class Telefono {
 		this.telefono = tel;	
 	}
 	
-/* Contructor vacio*/
+
+	
+	/** Método constructor de la clase telefono - vacio.
+	 *
+	*/	
 	public Telefono (){};
 	
 	
-public Telefono(int id){
+	 /** Método constructor de la clase telefono
+	 *@param id id de usuario
+	 */	
+	
+    public Telefono(int id){
 		
-		this.id_usuario = id;
-		
+		this.id_usuario = id;		
 	}
+    
+    
+    
 	
-	/* Metodo de ingreso de datos a la base */
-	
+    /** Método de ingreso de telefonos a la BD
+	 * @exception Exception
+    */	
 	public void InsertRow(){
 		
 			
@@ -40,76 +56,69 @@ public Telefono(int id){
 			catch (Exception e){
 				
 			}
-			//pruebaConn.closeConextion();
-		}else{
-			System.out.println("Desconectado");
-		}
+		}else{}
 	}
 	
-	/* metodo para cargar un resulset con lo datos de la tabla */
 	
+	/** Método que devuelve todos los datos de la tabla telefonos
+	 * @return Resulset con la tabla telefono
+	 * @throws SQLException
+	*/
 	public java.sql.ResultSet Select_tabla() throws SQLException{
 		
-		String seleccion = "Select * from Telefono";
-		
+		String seleccion = "Select * from Telefono";		
 		java.sql.Statement ps = pruebaConn.getConexion().createStatement();
 		java.sql.ResultSet rs = ps.executeQuery(seleccion);
-	//	pruebaConn.closeConextion();
-		
 		return rs;
 		
 	}
 	
-	/* metodo para cargar un resulset con lo datos de un registro seleccionado */
 	
-public java.sql.ResultSet Select_fila(int id) throws SQLException{
+	
+	/** Método que devuelve los telefonos de usuario segun el id de usuario seleccionado
+	 * @return Resulset con los telefonos del usuario
+	 * @throws SQLException
+	*/		
+    public java.sql.ResultSet Select_fila(int id) throws SQLException{
 		
-		String seleccion = "Select * from Telefono where id_usuario ='"+id+"'";
-		
+		String seleccion = "Select * from Telefono where id_usuario ='"+id+"'";		
 		java.sql.Statement ps = pruebaConn.getConexion().createStatement();
 		java.sql.ResultSet rs = ps.executeQuery(seleccion);
-		
-		//pruebaConn.closeConextion();
-		
-		return rs;
-		
-	}
+		return rs;		
+	  }
 
 
-//Metodo que permite modificar los telefonos de una persona segun su id
-
-public void cambiar_telefonos(int id, String oldTel, String newTel) {
+    /** Método que permite modificar los telefonos de una persona segun su id
+     * @param id es el id de usuario
+     * @param oldTel telefono anterior
+     * @param newTel nuevo telefono
+	 * @throws SQLException
+	*/
+    public void cambiar_telefonos(int id, String oldTel, String newTel) {
 	
 	
-	try{
-		java.sql.Statement stm = pruebaConn.getConexion().createStatement();
-		stm.execute("UPDATE Telefono SET telefono = '"+newTel+"'" + "where id_usuario = '"+id+"'" + " and " + "telefono = "+oldTel);
-}
-	catch (Exception e){
-		System.out.println("no se pudo modificar el telefono");
-	}	
+	   try{
+		   java.sql.Statement stm = pruebaConn.getConexion().createStatement();
+		   stm.execute("UPDATE Telefono SET telefono = '"+newTel+"'" + "where id_usuario = '"+id+"'" + " and " + "telefono = "+oldTel);
+       }catch (Exception e){}	
 	
-}
+     }
 
 
-/* Metodo para eliminar lo registros de u usuario en la tabla Telefonos*/
-
-
-public void eliminar_tels(int id) {
+    /** Método para eliminar el registro de un telefono segun el id de usuario seleccionado
+    * @param id, id de usuario 
+	* @throws SQLException
+	*/
+   public void eliminar_tels(int id) {
 	
-	
-	try{
+	 try{
 		java.sql.Statement stm = pruebaConn.getConexion().createStatement();
 		stm.execute("DELETE from Telefono where id_usuario = '"+id+"';");
-  }
-	catch (Exception e){
-		System.out.println("no se pudieron eliminar los telefonos");
-	}
-	
-	
-}
+      }catch (Exception e){}
+    }
 	
 	
 	
-}
+	
+}// fin clase Telefono
 

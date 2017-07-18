@@ -2,6 +2,11 @@ package Persistencia;
 
 import java.sql.SQLException;
 
+/** Clase para cargar los datos de un dominio a la BD y devolverlo de ella.
+ * @author 
+ * @version 1.0
+*/ 
+
 
 public class Dominio {
 
@@ -10,17 +15,32 @@ public class Dominio {
 	private int prioridad;
 	private Conexion pruebaConn = Conexion.getInstancia();
 	
+	
+	/** Método constructor de la clase dominio - vacio.
+	 *
+	*/
+	
+	public Dominio(){}
+	
+	
+	/** Método constructor de la clase dominio
+	 *@param nom_dominio nombre del dominio
+	 *@param prioridad del dominio
+	*/
+	
 	public Dominio(String nom_dominio, int prioridad){
 				
 		this.nom_dominio = nom_dominio;	
 		this.prioridad = prioridad;
 	}
 	
-	public Dominio(){
-		
-	}
-   
-	public void InsertRow(){
+	
+	
+	/** Método de ingreso de datos del dominio a la BD
+	 * @exception Exception
+    */	
+	
+   	public void InsertRow(){
 		
 		
 		if (pruebaConn!=null){
@@ -33,74 +53,64 @@ public class Dominio {
 			catch (Exception e){
 				
 			}
-		}else{
-			System.out.println("Desconectado");
-		}
+		}else{}
 	}
 	
-	/* metodo para cargar un resulset con lo datos de la tabla */
-	
+   	
+   	
+   	/** Método que devuelve todos los datos de la tabla dominio
+	 * @return Resulset con la tabla dominio
+	 * @throws SQLException
+	*/
+   	
 	public java.sql.ResultSet Select_tabla() throws SQLException{
 		
 		String seleccion = "Select * from Dominio";
 		
 		java.sql.Statement ps = pruebaConn.getConexion().createStatement();
 		java.sql.ResultSet rs = ps.executeQuery(seleccion);
-	//	pruebaConn.closeConextion();
-		
 		return rs;
 		
 	}
 	
-	/* metodo para cargar un resulset con lo datos de un registro seleccionado */
 	
-public java.sql.ResultSet Select_fila(String nom_dominio) throws SQLException{
+	
+	/** Método que devuelve todos los datos de un dominio seleccionado
+	 * @param dom es nombre de dominio
+	 * @return Resulset con la fila correspondiente al dominio seleccionado
+	 * @throws SQLException
+	*/
+	
+	public java.sql.ResultSet Select_fila(String nom_dominio) throws SQLException{
 		
 		String seleccion = "Select * from Dominio where nom_dominio ='"+nom_dominio+"'";
 		
 		java.sql.Statement ps = pruebaConn.getConexion().createStatement();
 		java.sql.ResultSet rs = ps.executeQuery(seleccion);
 		
-		//pruebaConn.closeConextion();
-		
+				
 		return rs;
 		
 	}
+    
+    
 
-/*Metodo para modificar la prioridad de un dominio*/
+	/** Método para modificar la prioridad de un dominio
+	 * @param nom es nombre del dominio
+	 * @param prioridad es la prioridad del dominio
+	 * @exception Exception
+    */
 
-public void cambiar_prioridad(String nom, int prioridad) {
+    public void cambiar_prioridad(String nom, int prioridad) {
 	
 	
-	try{
+	  try{
 		java.sql.Statement stm = pruebaConn.getConexion().createStatement();
 		stm.execute("UPDATE Dominio SET prioridad = '"+prioridad+"'" + "where nom_dominio = '"+nom+"';");
-  }
-	catch (Exception e){
-		System.out.println("no se pudo modificar la prioridad del dominio");
+      }catch (Exception e){}
 	}
-	
-	
-}
 
 
-/* Metodo para eliminar un registro de la tabla Dominio*/
-
-
-public void eliminar_dominio(String nombre) {
 	
-	
-	try{
-		java.sql.Statement stm = pruebaConn.getConexion().createStatement();
-		stm.execute("DELETE from Doinio where nom_dominio = '"+nombre+"';");
-  }
-	catch (Exception e){
-		System.out.println("no se pudo eliminar el registro");
-	}
-	
-	
-}
-	
-	
-}
+}// fin clase Dominio
 

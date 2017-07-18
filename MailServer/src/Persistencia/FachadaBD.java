@@ -2,7 +2,12 @@ package Persistencia;
 
 import java.sql.SQLException;
 
-/* Fachada de conexión entre la capa de Persistencia y la capa Lógica */
+
+
+/** Clase fachada de conexion entre la capa de Persistencia y las clases de la capa logica.
+ * @author 
+ * @version 1.0
+*/ 
 
 public class FachadaBD {
 
@@ -13,13 +18,15 @@ public class FachadaBD {
 	private Dominio dominio = new Dominio();
 	private Cuenta cuenta = new Cuenta();
 	private Telefono telefono = new Telefono();
-	private Perfil perfil = new Perfil();
 	private Oficina oficina = new Oficina();	
-	private Tiene_perfil tiene_perfil = new Tiene_perfil();
-	private Lista_distribucion lista_dist = new Lista_distribucion();
 	
-	private FachadaBD(){
-	}
+	
+	
+	
+	/** Método constructor de la clase FachadaBD - vacio.
+	 *
+	*/
+	private FachadaBD(){}
 	
 		
 	public static FachadaBD getInstancia(){
@@ -30,40 +37,53 @@ public class FachadaBD {
 	}
 	
 	
-/* METODOS PARA LA CLASE USUARIO */
+    /* METODOS PARA LA CLASE USUARIO */
 	
 	
-	//Metodo para ingresar un registro en la tabla Usuario
-	
+	/** Metodo para ingresar un registro en la tabla Usuario
+	 *@param pass passwd admin
+	*/
 	public void InserUS (String pass){
 		this.user.InsertRow(pass);
 	}
 	
-	//Metodo para modificar el pasword de un usuario administrador
 	
-		public void ModificaPS (int id, String pass){
+	
+	/** Metodo para modificar el passwd de un Usuario Admin.
+	 *@param pass passwd admin
+	 *@param id id usuario
+	*/
+	public void ModificaPS (int id, String pass){
 			this.user.cambiar_passwd(id, pass);
-		}
+	}
 	
-	//Metodo que devuelve el Resulset con los datos de la tabla Usuarios cargados
-	
-	public java.sql.ResultSet ConTablaUS(/*int idUsu*/) throws SQLException{
+	/** Método que devuelve todos los datos de la tabla usuarios
+	 * @return Resulset con la tabla usuario
+	 * @throws SQLException
+	*/
+	public java.sql.ResultSet ConTablaUS() throws SQLException{
 		java.sql.ResultSet rs;
 		rs = this.user.Select_tabla();
 		return rs;
 	}
 	
 	
-	//Metodo que devuelve el Resulset con los datos de la fila de la tabla Usuarios que se elija segun id
+	/** Método que devuelve todos los datos de un usuario seleccionado segun su id
+	 * @return Resulset con la fila correspondiente al usuario seleccionado
+	 * @throws SQLException
+	*/
 	
 	public java.sql.ResultSet ConFilaUS(int idUsu) throws SQLException{
 		java.sql.ResultSet rs;
 		rs = this.user.Select_fila(idUsu);
 		return rs;
 	}
+		
 	
-	// Metodo que devuelve un resulset con el ultimo id de usuario generado
-	
+	/** Método que devuelve el ultimo id de usuario ingresado
+	 * @return Resulset con el ultimo id de usuario
+	 * @throws SQLException
+	*/	
 	public java.sql.ResultSet ConUltimoID() throws SQLException{
 		java.sql.ResultSet rs;
 	    rs = this.user.Select_ultimo_id();
@@ -71,10 +91,12 @@ public class FachadaBD {
 	}
 	
 	
-  //Metodo que devuelve el pasword segun el id del usuario ingresado
- 	
-  	public String Devolver_pass(int id) throws SQLException{
-  		
+	/** Método que devuelve el passwd de usuario segun su id
+	 * @param id id de usuario
+	 * @return Resulset con el passwd de usuario
+	 * @throws SQLException
+	*/ 	
+  	public String Devolver_pass(int id) throws SQLException{ 		
   		
   		String pass = " ";
   		java.sql.ResultSet rs;
@@ -85,22 +107,31 @@ public class FachadaBD {
   	}
   	
   	
+  	/**
+     * Metodo que deshabilita el usuario y todas sus cuentas
+     * 1 - Habilitada
+     * 0 - Deshabilitada
+     * @param id id usuario
+     * @param habilita indica habilitado o no
+    */
+	public void habilitacion_usuario(int id, boolean habilita){
+		user.habilitar_usuario(id, habilita);
+		cuenta.habilitar_cuenta(id, habilita);
+	}
   	
-  	/* Metodo para eliminar un registro de la tabla Usuarios*/
-
-
-  	public void Eliminar_us(int id) {
-  		
-  		
-  		this.user.eliminar_us(id);
-  	}
-	
-	
 	
 	/* METODOS PARA LA CLASE PERSONA */
 	
 	
-	//Metodo que crea un objeto persona en la tabla Persona
+	 /** Método que crea un objeto persona en la tabla Persona
+	 *@param id es el id de usuario
+	 *@param ced cedula de la persona
+	 *@param nom nombre de la persona
+	 *@param apellido apellido de la persona
+	 *@param calle calle donde vive la persona
+	 *@param nro numero de puerta
+	 *@param apto numero de apartmento
+     */	
 	
 	public void Nueva_Persona (int id, String ced, String nom, String ap, String calle, String nro, String apto){
 		
@@ -108,22 +139,18 @@ public class FachadaBD {
 	}
 	
 	
-	//Metodo para modificar los datos personales (a partir de la ceduala)
-
+	/** Método para modificar los datos peronales a partir de la ci
+	*/	
 	public void Modifica_datos_per (String ci, String nombre, String apellido,String calle, String nro, String apto){
 		this.persona.cambiar_datos_personales(ci, nombre, apellido, calle, nro, apto);
 	}
 
 	
-	//Metodo para modificar los datos personales (a partir de la ceduala)
 	
-	/*	public void Modifica_datos_per (Persona pers){
-			this.persona.cambiar_datos_personales(pers.getCi(),pers.getNombre(),pers.getApellido(),pers.getCalle(),pers.getNro_puerta(),pers.getApto());
-		}*/
-
-     
-     //Metodo que devuelve un entero con el id segun la cedula de usuario ingresada
- 	
+	/** Método que devuelve el id de usuario segun la cedula ingresada
+	 * @return Resulset con el id de usuario
+	 * @throws SQLException
+	*/	
   	public int Devolver_id(String ci) throws SQLException{
  		int id=0;
  		java.sql.ResultSet rs;
@@ -135,25 +162,32 @@ public class FachadaBD {
  	}
      
  	
-    //Metodo que devuelve la cedula segun el id del usuario ingresado
- 	
+  	/** Método que devuelve la c.i de usuario segun su id
+	 * @return Resulset con la c.i de usuario
+	 * @throws SQLException
+	*/	 	
   	public java.sql.ResultSet Devolver_ci(int id) throws SQLException{
   		
   		java.sql.ResultSet rs;
   	   	rs = this.persona.Dev_ci(id);  		
   		return rs;
   	}
+  	
+  	
      
-	//Metodo para ingresar un registro en la tabla Persona
-	
+  	/** Método de ingreso de datos de la persona a la BD
+	 * @exception Exception
+    */		
 	public void InsertPer (int id, String ced, String nom, String ap, String calle, String nro, String apto){
 		this.Nueva_Persona(id,ced,nom,ap, calle, nro, apto);
 		this.persona.InsertRow();
 	}
 	
 		
-	//Metodo que devuelve el Resulset con los datos de la tabla Persona cargados
-	
+	/** Método que devuelve todos los datos de la tabla persona
+	 * @return Resulset con la tabla persona
+	 * @throws SQLException
+	*/	
 	public java.sql.ResultSet ConTablaPer(int idUsu) throws SQLException{
 		java.sql.ResultSet rs;
 		rs = this.persona.Select_Tabla();
@@ -161,8 +195,11 @@ public class FachadaBD {
 	}
 	
 	
-	//Metodo que devuelve el Resulset con los datos de la fila de la tabla Persona que se elija segun id
-	
+	/** Método que devuelve todos los datos de una Persona seleccionada
+	 * @param id , id de usuario
+	 * @return Resulset con la fila correspondiente a la persona seleccionada
+	 * @throws SQLException
+	*/		
 	public java.sql.ResultSet ConFilaPer(int idUsu) throws SQLException{
 		java.sql.ResultSet rs;
 		rs = this.persona.Select_fila(idUsu);
@@ -170,32 +207,52 @@ public class FachadaBD {
 	}
 	
 	
-	/* Metodo para eliminar un registro de la tabla Persona */
-
-
-  	public void Eliminar_persona(int id) {
-  		
-  		
-  		this.persona.eliminar_persona(id);
-  	}
-	
-	
-	
+		
 	/*METODOS PARA LA CLASE CORREO*/
+	
+	
+	/** Método que crea un objeto correo en la clase Correo
+	 *@param nom_us1 nombre del usuario emisor
+	 *@param nom_dom1 nombre del dominio emisor
+	 *@param nom_us2 nombre del usuario receptor
+	 *@param nom_dom2 nombre del dominio receptor
+	 *@param fecha es la fecha del correo
+	 *@param id1 id del usuario emisor
+	 *@param id2 id del usuario receptor
+	 *@param asunto asunto del correo
+	 *@param texto texto del correo
+	 *@param id id de conversacion
+	*/
 	
 	public void NuevoCorreo (String nom_us1, String nom_dom1, String nom_us2, String nom_dom2, String fecha, int id1, int id2, String asunto, String texto, int id){
 		this.correo = new Correo(nom_us1,nom_dom1, nom_us2, nom_dom2,fecha, id1, id2, asunto,texto, id);
 	}
 	
 		
-	//Metodo para ingresar un registro en la tabla Correo
+	/** Método de ingreso de datos del correo a la BD
+	 *@param nom_us1 nombre del usuario emisor
+	 *@param nom_dom1 nombre del dominio emisor
+	 *@param nom_us2 nombre del usuario receptor
+	 *@param nom_dom2 nombre del dominio receptor
+	 *@param fecha es la fecha del correo
+	 *@param id1 id del usuario emisor
+	 *@param id2 id del usuario receptor
+	 *@param asunto asunto del correo
+	 *@param texto texto del correo
+	 *@param id id de conversacion
+	    */
 	
 	public void InsertCorreo (String nom_us1, String nom_dom1, String nom_us2, String nom_dom2, String fecha, int id1, int id2, String asunto, String texto, int id){
 		this.NuevoCorreo(nom_us1, nom_dom1, nom_us2, nom_dom2, fecha, id1, id2, asunto, texto, id);
 		this.correo.InsertRow();
 	}
 	
-	//Metodo que devuelve el Resulset con los datos de la tabla Correo cargados
+	
+	
+	/** Método que devuelve todos los datos de la tabla correo
+	 * @return Resulset con la tabla correo
+	 * @throws SQLException
+	*/
 	
 	public java.sql.ResultSet ConTablaCorreo(String nom_us1,String nom_dom1, String nom_us2, String nom_dom2, String fecha) throws SQLException{
 		java.sql.ResultSet rs;
@@ -204,8 +261,15 @@ public class FachadaBD {
 	}
 	
 	
-	//Metodo que devuelve el Resulset con los datos de la fila de la tabla Correo que se elija segun las claves
-	
+	/** Método que devuelve todos los datos de un correo seleccionado
+	 *@param nom_us1 nombre del usuario emisor
+	 *@param nom_dom1 nombre del dominio emisor
+	 *@param nom_us2 nombre del usuario receptor
+	 *@param nom_dom2 nombre del dominio receptor
+	 *@param fecha es la fecha del correo
+	 * @return Resulset con la fila correspondiente al correo seleccionado
+	 * @throws SQLException
+	*/	
 	public java.sql.ResultSet ConFilaCorreo(String nom_us1,String nom_dom1, String nom_us2, String nom_dom2, String fecha) throws SQLException{
 		java.sql.ResultSet rs;
 		rs = this.correo.Select_fila(nom_us1,nom_dom1,nom_us2, nom_dom2,fecha);
@@ -213,9 +277,13 @@ public class FachadaBD {
 	}
 	
 
-	/* Metodo para eliminar un registro de la tabla Correo */
-
-
+	/** Método para eliminar un correo seleccionado
+     *@param nom_us1 nombre del usuario emisor
+	 *@param nom_dom1 nombre del dominio emisor
+	 *@param nom_us2 nombre del usuario receptor
+	 *@param nom_dom2 nombre del dominio receptor
+	 *@param fecha es la fecha del correo
+	*/
   	public void Eliminar_correo(String nom_us1,String nom_dom1, String nom_us2, String nom_dom2, String fecha) {
   		
   		
@@ -226,30 +294,44 @@ public class FachadaBD {
 	
 	
 	
-/* METODOS PARA LA CLASE DOMINIO*/
-	
+   /* METODOS PARA LA CLASE DOMINIO*/
+  	
+
+	/** Método que cre un objeto dominio de la clase dominio
+	 *@param dom es nombre del dominio
+	 *@param priori es prioridad del dominio
+	*/	
 	public void NuevoDom (String dom, int priori){
 		this.dominio = new Dominio(dom, priori);
 	}
 		
 	
-	//Metodo para ingresar un registro en la tabla Dominio
-	
+	/** Método de ingreso de datos del dominio a la BD
+	 * @param nom es nombre del dominio
+	 * @param prioridad es la prioridad del dominio
+	 * @exception Exception
+    */		
 	public void InsertDom (String dom, int priori){
 		this.NuevoDom(dom, priori);
 		this.dominio.InsertRow();
 	}
 	
 	
-	/*Metodo para modificar la prioridad de un dominio*/
-	
-		public void Modifica_prioridad (String nom, int prioridad){
+	/** Método para modificar la prioridad de un dominio
+	 * @param nom es nombre del dominio
+	 * @param prioridad es la prioridad del dominio
+	 * @exception Exception
+    */
+	public void Modifica_prioridad (String nom, int prioridad){
 			this.dominio.cambiar_prioridad(nom, prioridad);
 		}
 
 	
-	//Metodo que devuelve el Resulset con todos los datos de la tabla Dominio cargados
-	/*METE MANO ADRIAN*/
+	/** Método que devuelve todos los datos de la tabla dominio
+	 * @return Resulset con la tabla dominio
+	 * @throws SQLException
+	*/
+	
 	public java.sql.ResultSet ConTablaDom() throws SQLException{
 		java.sql.ResultSet rs;
 		rs = dominio.Select_tabla();
@@ -257,7 +339,11 @@ public class FachadaBD {
 	}
 	
 	
-	//Metodo que devuelve el Resulset con los datos de la fila de la tabla Dominio que se elija
+	/** Método que devuelve todos los datos de un dominio seleccionado
+	 * @param dom es nombre de dominio
+	 * @return Resulset con la fila correspondiente al dominio seleccionado
+	 * @throws SQLException
+	*/
 	
 	public java.sql.ResultSet ConFilaDom(String dom) throws SQLException{
 		java.sql.ResultSet rs;
@@ -265,20 +351,19 @@ public class FachadaBD {
 		return rs;
 	}
 	
-	/* Metodo para eliminar un registro de la tabla Dominio*/
-
-
-  	public void Eliminar_dominio(String nom){
-  		this.dominio.eliminar_dominio(nom);
-  	}
-	
-	
 	
 	
 /* METODOS PARA LA CLASE CUENTA */
 	
 	
-	//Metodo que crea un objeto persona en la tabla Cuenta
+	/** Método que crea un objeto cuenta
+	 *@param id identificador del usuario propietario de la cuenta
+	 *@param nom_us nombre de usuario
+	 *@param nom_dom nombre de dominio
+	 *@param pass clave de acceso
+	 *@param es_lista indica si es lista de distribucion o no (si vale 0 no es lista, si vale 1 es lista).
+	  
+	*/
 	
 	public void Nueva_Cuenta (int id, String nom_us, String nom_dom, String pass, int es_lista){
 		
@@ -287,7 +372,8 @@ public class FachadaBD {
 	
 	
      	
-	//Metodo para ingresar un registro en la tabla Cuenta
+	/** Método de ingreso de datos de la cuenta a la BD
+	*/
 	
 	public void InsertCuenta (int id, String nom_us, String nom_dom, String pass, int es_lista){
 		this.Nueva_Cuenta(id,nom_us, nom_dom, pass, es_lista);
@@ -295,87 +381,103 @@ public class FachadaBD {
 	}
 	
 	
-	//Metodo para modificar el pasword de una cuenta
+	/** Método para modificar el passwd de ingreso
+	 *@param id identificador del usuario propietario de la cuenta
+	 *@param nom_us nombre de usuario
+	 *@param nom_dom nombre de dominio
+	 *@param pass clave de acceso
+	* @exception Exception
+	*/
+	public void Modifica_cuentaPS (int id, String nom_us, String nom_dom,String pass){
+		this.cuenta.cambiar_passwd(id,nom_us,nom_dom, pass);
+	}
 	
-			public void Modifica_cuentaPS (int id, String nom_us, String nom_dom,String pass){
-				this.cuenta.cambiar_passwd(id,nom_us,nom_dom, pass);
-			}
 	
+	/** Método que devuelve todos los datos de la tabla cuenta
+	* @return Resulset con la tabla cuenta
+	* @throws SQLException
+	*/
 	
-	//Metodo que devuelve el Resulset con los datos de la tabla Cuenta cargados
-	
-	public java.sql.ResultSet ConTablaCuenta() throws SQLException{
+	 public java.sql.ResultSet ConTablaCuenta() throws SQLException{
 		java.sql.ResultSet rs;
 		rs = this.cuenta.Select_Tabla();
 		return rs;
 	}
 	
-	//Metodo que devuelve el ResultSet con los registros de la tabla Cuenta de un id <- Necesitaba para cargar las cuentas de un usuario. Carlos.
 	
+    /** Método que devuelve un Resulset con los registros de la cuenta de un usuario segun su id
+	* @param id de usuario
+	* @return Resulset con la tabla cuenta
+	* @throws SQLException
+	*/
 	public java.sql.ResultSet ConTablaCuentaID(int id) throws SQLException{
 		java.sql.ResultSet rs;
 		rs = this.cuenta.Select_Tabla_Id(id);
 		return rs;
 	} 
 	
-	//Metodo que devuelve el Resulset con los datos de la fila de la tabla Cuenta que se elija segun su clave
 	
-	public java.sql.ResultSet ConFilaCuenta(int id, String nom_us, String nom_dom) throws SQLException{
-		java.sql.ResultSet rs;
-		rs = this.cuenta.Select_fila(id, nom_us, nom_dom);
-		return rs;
-	}
-	
-	
-	/* Metodo para eliminar un registro de la tabla Cuenta */
-
-
-  	public void Eliminar_cuenta(int id) {
-  		
-  		
-  		this.cuenta.eliminar_cuenta(id);
-  	}
-	
+	/** Metodo que desabilita una cuenta de usuario
+	 * 
+	 * @param id
+	 * @param nom_us
+	 * @param nom_dom
+	 * @param habilita
+	 */
 	
 	public void deshabCuenta(int id, String nom_us, String nom_dom, boolean habilita){
 		this.cuenta.habilitar_cuenta(id, nom_us, nom_dom, habilita);
-	}
-	
-	
+   }
+
 	
 		
-/* METODOS PARA LA CLASE TELEFONO*/
+    /* METODOS PARA LA CLASE TELEFONO*/
 	
+	 /** Método que crea un objeto de la clase telfono
+		 *@param id id de usuario
+		 *@param tel telefono
+	 */	
 	public void NuevoTel (int id, String tel){
 		this.telefono = new Telefono(id, tel);
 		
 	}
 	
 	
-	//Metodo para ingresar un registro en la tabla Telefono
-	
+    /** Método de ingreso de telefonos a la BD
+	 * @exception Exception
+    */		
 	public void InsertTel (int id, String tel){
 		this.NuevoTel(id, tel);
 		this.telefono.InsertRow();
 	}
 	
 	
-	
-	//Metodo para modificar un telefono de una persona segun su id 
-
+	/** Método que permite modificar los telefonos de una persona segun su id
+     * @param id es el id de usuario
+     * @param oldTel telefono anterior
+     * @param newTel nuevo telefono
+	 * @throws SQLException
+	*/
 	public void Modifica_tel (int id, String oldTel, String newTel){
 		this.telefono.cambiar_telefonos(id,oldTel,newTel);
 	}
-	//Metodo que devuelve el Resulset con todos los datos de la tabla Telefono cargados
 	
-	public java.sql.ResultSet ConTablaTel(/*int id*/) throws SQLException{ //No se usaba int id. Carlos.
+	
+	/** Método que devuelve todos los datos de la tabla telefonos
+	 * @return Resulset con la tabla telefono
+	 * @throws SQLException
+	*/	
+	public java.sql.ResultSet ConTablaTel() throws SQLException{ 
 		java.sql.ResultSet rs;
 		rs = this.telefono.Select_tabla();
 		return rs;
 	}
 	
 	
-	//Metodo que devuelve el Resulset con los datos de la fila de la tabla Telefono que se elija
+	/** Método que devuelve los telefonos de usuario segun el id de usuario seleccionado
+	 * @return Resulset con los telefonos del usuario
+	 * @throws SQLException
+	*/	
 	
 	public java.sql.ResultSet ConFilaTel(int id) throws SQLException{
 		java.sql.ResultSet rs;
@@ -384,25 +486,34 @@ public class FachadaBD {
 	}
 	
 	
-	/* Metodo para eliminar los o el telefono de un usuario*/
-
-
-  	public void Eliminar_tels(int id) {
-  		
+	/** Método para eliminar el registro de un telefono segun el id de usuario seleccionado
+	    * @param id, id de usuario 
+		* @throws SQLException
+	*/
+  	public void Eliminar_tels(int id) {  		
   		
   		this.telefono.eliminar_tels(id);
   	}
 	
 	
-/* METODOS PARA LA CLASE OFICINA*/
-	
+     /* METODOS PARA LA CLASE OFICINA*/
+  	
+  	
+  	/** Método que crea un objeto de la clase telfono
+	 *@param id id de usuario
+	 *@param nom nombre de usuario
+    */		
 	public void NuevaOfi (int id, String nom){
 		this.oficina = new Oficina(id, nom);
 		
 	}
 	
 	
-	//Metodo para ingresar un registro en la tabla Telefono
+	/** Método de ingreso de datos del grupo a la BD
+	 *@param id id de usuario
+	 *@param nom nombre de usuario
+	 * @exception Exception
+    */	
 	
 	public void InsertOfi (int id, String nom){
 		this.NuevaOfi(id, nom);
@@ -410,177 +521,41 @@ public class FachadaBD {
 	}
 	
 	
-	//Metodo para modificar el nombre de la oficina
+	/** Método para modificar el nombre del grupo u oficina
+	 * @param id, es id de usuario
+	 * @param nom nuevo nombre de oficina
+	 * @exception Exception
+    */
 	
 	public void Modifica_nom_ofi(int id, String nom){
 		this.oficina.cambiar_nom_ofi(id,nom);
 	}
 	
-	//Metodo que devuelve el Resulset con todos los datos de la tabla Telefono cargados
 	
-	public java.sql.ResultSet ConTablaOfi(int id) throws SQLException{
+	/** Método que devuelve todos los datos de la tabla oficina
+	 * @return Resulset con la tabla oficina
+	 * @throws SQLException
+	*/	
+	public java.sql.ResultSet ConTablaOfi() throws SQLException{
 		java.sql.ResultSet rs;
 		rs = this.oficina.Select_tabla();
 		return rs;
 	}
 	
 	
-	//Metodo que devuelve el Resulset con los datos de la fila de la tabla Telefono que se elija
-	
+	/** Método que devuelve todos los datos de un grupo seleccionado
+	 * @param id, id de usuario
+	 * @return Resulset con la fila correspondiente al grupo seleccionado
+	 * @throws SQLException
+	*/	
 	public java.sql.ResultSet ConFilaOfi(int id) throws SQLException{
 		java.sql.ResultSet rs;
 		rs = this.oficina.Select_fila(id);
 		return rs;
 	}
 	
-	/* Metodo para eliminar un registro de la tabla Oficina */
+	
 
-
-  	public void Eliminar_oficina(int id) {
-  		
-  		
-  		this.oficina.eliminar_oficina(id);
-  	}	
-	
-	
-		
-	
-	
-/* METODOS PARA LA CLASE PERFIL*/
-	
-	public void NuevoPerf(String tipo){
-		this.perfil = new Perfil(tipo);
-	}
-		
-	
-	//Metodo para ingresar un registro en la tabla Perfil
-	
-	public void InsertPerf (String tipo){
-		this.NuevoPerf(tipo);
-		this.perfil.InsertRow();
-	}
-	
-	//Metodo que devuelve el Resulset con todos los datos de la tabla Perfil cargados
-	
-	public java.sql.ResultSet ConTablaPerf(String tipo) throws SQLException{
-		java.sql.ResultSet rs;
-		this.NuevoPerf(tipo);
-		rs = this.perfil.Select_tabla();
-		return rs;
-	}
-	
-	
-	//Metodo que devuelve el Resulset con los datos de la fila de la tabla Perfil que se elija
-	
-	public java.sql.ResultSet ConFilaPerf(String tipo) throws SQLException{
-		java.sql.ResultSet rs;
-		this.NuevoPerf(tipo);
-		rs = this.perfil.Select_fila(tipo);
-		return rs;
-	}
-	
-	
-	/* Metodo para eliminar un registro de la tabla Perfil */
-
-
-  	public void Eliminar_perfil(String tipo) {
-  		
-  		
-  		this.perfil.Eliminar_perfil(tipo);
-  	}	
-	
-	
-	
-	
-/* METODOS PARA LA CLASE TIENE PERFIL*/
-	
-	public void Nuevo_TPerfil (int id, String tipo){
-		this.tiene_perfil = new Tiene_perfil(id, tipo);
-		
-	}
-	
-	//Metodo para ingresar un registro en la tabla Tiene Perfil
-	
-	public void Insert_TPerfil (int id, String tipo){
-		this.Nuevo_TPerfil(id, tipo);
-		this.tiene_perfil.InsertRow();
-	}
-	
-	//Metodo que devuelve el Resulset con todos los datos de la tabla Tiene Perfil cargados
-	
-	public java.sql.ResultSet ConTabla_TPerfil(int id) throws SQLException{
-		java.sql.ResultSet rs;
-		rs = this.tiene_perfil.Select_tabla();
-		return rs;
-	}
-	
-	
-	//Metodo que devuelve el Resulset con los datos de la fila de la tabla Telefono que se elija
-	
-	public java.sql.ResultSet ConFila_TPerfil(int id) throws SQLException{
-		java.sql.ResultSet rs;
-		rs = this.tiene_perfil.Select_fila(id);
-		return rs;
-	}
-	
-	/* Metodo para eliminar un registro de la tabla Tiene Perfil */
-
-
-  	public void Eliminar_reg_tiene_perfil(int id) {
-  		
-  		
-  		this.tiene_perfil.eliminar_tipo_perfil(id);
-  	}
-
-
-
-/*METODOS PARA LA CLASE LISTA DISTRIBUCION*/
-
-public void NuevaLista (String nom_lis, String nom_dom_lis, String nom_res, String nom_dom_res, int id_lis, int id_res){
-	this.lista_dist = new Lista_distribucion(nom_lis, nom_dom_lis, nom_res, nom_dom_res, id_lis, id_res);
-}
-
-
-//Metodo para ingresar un registro en la tabla Lista Distribucion
-
-public void InsertLista (String nom_lis, String nom_dom_lis, String nom_res, String nom_dom_res, int id_lis, int id_res){
-	this.NuevaLista(nom_lis, nom_dom_lis, nom_res, nom_dom_res, id_lis, id_res);
-	this.lista_dist.InsertRow();
-}
-
-//Metodo que devuelve el Resulset con los datos de la tabla Lista Dristribucion cargados
-
-public java.sql.ResultSet ConTablaLista(String nom_lis, String nom_dom_lis, String nom_res, String nom_dom_res) throws SQLException{
-	java.sql.ResultSet rs;
-	rs = this.lista_dist.Select_tabla();
-	return rs;
-}
-
-
-//Metodo que devuelve el Resulset con los datos de la fila de la tabla Lista Distribucion que se elija segun las claves
-
-public java.sql.ResultSet ConFilaLista(String nom_lis, String nom_dom_lis, String nom_res, String nom_dom_res) throws SQLException{
-	java.sql.ResultSet rs;
-	rs = this.lista_dist.Select_fila(nom_lis, nom_dom_lis, nom_res, nom_dom_res);
-	return rs;
-}
-
-
-/* Metodo para eliminar un registro de la tabla Lista Distribucion */
-
-
-	public void Eliminar_Lista(String nom_us_lis, String nom_dom_lis, String nom_us_res, String nom_dom_res) {
-		
-		
-		this.lista_dist.eliminar_lista(nom_us_lis, nom_dom_lis, nom_us_res, nom_dom_res);
-	}
-
-
-	public void habilitacion_usuario(int id, boolean habilita){
-		user.habilitar_usuario(id, habilita);
-		cuenta.habilitar_cuenta(id, habilita);
-	}
-
-}
+}// fin clase FachadaBD
 
 
