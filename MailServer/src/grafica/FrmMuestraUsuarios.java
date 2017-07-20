@@ -47,7 +47,7 @@ public class FrmMuestraUsuarios extends JInternalFrame {
 	 * Create the frame.
 	 */
 	public FrmMuestraUsuarios() {
-		setBounds(20, 30, 450, 500);
+		setBounds(20, 30, 465, 500);
 		getContentPane().setLayout(null);
 		
 		/*BOTON DE CERRAR*/
@@ -70,13 +70,13 @@ public class FrmMuestraUsuarios extends JInternalFrame {
 		JLabel lblUsuarios = new JLabel("Usuarios");
 		lblUsuarios.setFont(new Font("Goudy Old Style", Font.BOLD, 26));
 		lblUsuarios.setHorizontalAlignment(SwingConstants.CENTER);
-		lblUsuarios.setBounds(135, 0, 164, 34);
+		lblUsuarios.setBounds(142, 0, 164, 34);
 		getContentPane().add(lblUsuarios);
 		
 		JScrollPane scrlMUsuarios = new JScrollPane(tblMUsuarios);
 		scrlMUsuarios.setEnabled(false);
 		scrlMUsuarios.setSize(414, 301);
-		scrlMUsuarios.setLocation(10, 57);
+		scrlMUsuarios.setLocation(17, 57);
 		//Agregamos el JScrollPane al contenedor
 		getContentPane().add(scrlMUsuarios, BorderLayout.CENTER);
 		
@@ -96,13 +96,13 @@ public class FrmMuestraUsuarios extends JInternalFrame {
 				}
 			}
 		});
-		btnEditar.setBounds(10, 409, 414, 50);
+		btnEditar.setBounds(17, 409, 414, 50);
 		getContentPane().add(btnEditar);
 		
 		JLabel lblEnGrisUsuarios = new JLabel("En gris usuarios no activos del sistema");
 		lblEnGrisUsuarios.setFont(new Font("Segoe UI Semilight", Font.PLAIN, 21));
 		lblEnGrisUsuarios.setForeground(Color.GRAY);
-		lblEnGrisUsuarios.setBounds(37, 369, 360, 29);
+		lblEnGrisUsuarios.setBounds(44, 369, 360, 29);
 		getContentPane().add(lblEnGrisUsuarios);
 		
 	}

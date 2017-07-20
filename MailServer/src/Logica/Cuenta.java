@@ -124,4 +124,5 @@ public class Cuenta {
 		this.id_usuario = 0;
 		this.nom_u = null;
 	}
+	
 }

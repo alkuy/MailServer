@@ -99,9 +99,9 @@ public class principal extends JFrame {
 		JMenuItem mntmVerCuentas = new JMenuItem("Ver cuentas");
 		mnCuenta.add(mntmVerCuentas);
 		
-		JMenuItem mntmBuscarCuenta = new JMenuItem("Buscar");
+/*		JMenuItem mntmBuscarCuenta = new JMenuItem("Buscar");
 		mnCuenta.add(mntmBuscarCuenta);
-		
+	*/	
 		JMenu mnUsuario = new JMenu("Usuarios");
 		menuBar.add(mnUsuario);
 		

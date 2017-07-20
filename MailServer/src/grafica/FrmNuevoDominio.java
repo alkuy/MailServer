@@ -28,13 +28,13 @@ public class FrmNuevoDominio extends JInternalFrame {
 	 */
 	public FrmNuevoDominio() {
 		Verificaciones verifica = new Verificaciones();
-		setBounds(20, 60, 450, 300);
+		setBounds(20, 30, 450, 300);
 		getContentPane().setLayout(null);
 		
 		JLabel lblADtitulo = new JLabel("Agregar Dominio");
-		lblADtitulo.setBounds(150, 11, 150, 26);
+		lblADtitulo.setBounds(116, 11, 204, 26);
 		lblADtitulo.setHorizontalAlignment(SwingConstants.CENTER);
-		lblADtitulo.setFont(new Font("Goudy Old Style", Font.BOLD, 21));
+		lblADtitulo.setFont(new Font("Goudy Old Style", Font.BOLD, 26));
 		getContentPane().add(lblADtitulo);
 		
 		JLabel lblADdominio = new JLabel("Nombre");

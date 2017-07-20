@@ -102,27 +102,7 @@ public class Fachada {
 		return modelo;
 	}
 	
-	
-	public boolean VerificaCuenta(String usuario, String dominio){
-		boolean vale = false;
-		
-		String usu, dom, cadena1, cadena2;
-		cadena2 = usuario+dominio;
-		/*Paso a minuscula porque sino del commbobox lo trae en mayuscula*/
-		cadena2 = cadena2.toLowerCase();
-		for (int i = 0; i < cuentas.getsetCuentas().size()-1; i++){ // sigo sin resolver bien esto
-			usu = cuentas.getsetCuentas().get(i).getNom_u().toString();
-			dom = cuentas.getsetCuentas().get(i).getDominio().toString();
-			cadena1 = usu+dom;
-			/*comparo lo ingresado con lo existente en el arraylist*/
-			
-			if (cadena1.equals(cadena2)){
-				vale = true;
-			}
-			
-		}
-		return vale;
-	}
+
 	
 	/**
 	 * Funcion que ingresa sobre la base todos los datos de la cuenta
@@ -296,6 +276,21 @@ public void altaDominio(String dominio, int prioridad){
  		Dominio domi = new Dominio();
  		int pri = domi.trae_prioridad(Dom);
  		return pri;
+ 	}
+ 	
+ 	/**
+ 	 * Verifica la existencia de una cuenta
+ 	 * @param usuario
+ 	 * @param dominio
+ 	 * @return true si la cuenta ya existe con ese nombre
+ 	 */
+ 	public boolean VerificaCuenta(String usuario, String dominio){
+ 		Cuentas cuenta = new Cuentas();
+ 		if(cuenta.comprueba_cuenta(usuario, dominio)){
+ 			return true;
+ 		}else{
+ 			return false;
+ 		}
  	}
  	
  }

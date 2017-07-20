@@ -28,8 +28,8 @@ public class FrmMuestraDominios extends JInternalFrame {
 	 * Create the frame.
 	 */
 	public FrmMuestraDominios() {
-		setBounds(20, 60, 450, 360);
-		setLayout(null);
+		setBounds(20, 30, 450, 360);
+		getContentPane().setLayout(null);
 		
 		/*BOTON DE CERRAR*/
 		JButton btnCerrar = new JButton("");
@@ -45,7 +45,7 @@ public class FrmMuestraDominios extends JInternalFrame {
 		
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(53, 76, 343, 220);
-		add(scrollPane);
+		getContentPane().add(scrollPane);
 		
 		String col[] = {"Dominio","Prioridad"};
 		DefaultTableModel modelo = new DefaultTableModel(col,0);
@@ -62,9 +62,9 @@ public class FrmMuestraDominios extends JInternalFrame {
 		
 		JLabel lblDominios = new JLabel("Dominios");
 		lblDominios.setHorizontalAlignment(SwingConstants.CENTER);
-		lblDominios.setFont(new Font("Goudy Old Style", Font.BOLD, 24));
-		lblDominios.setBounds(153, 11, 159, 40);
-		add(lblDominios);
+		lblDominios.setFont(new Font("Goudy Old Style", Font.BOLD, 26));
+		lblDominios.setBounds(137, 0, 159, 40);
+		getContentPane().add(lblDominios);
 
 	}
 

@@ -254,6 +254,7 @@ public class FrmNuevoUsuario extends JInternalFrame {
 				}
 				
 				if(!verifica.verificaCedula(txtUNdocumento)){continua = false; break;}
+				if(verifica.existe_cedula(txtUNdocumento)){continua = false; break;}
 				
 				if (!verifica.cant_caracteres(txtUNcalle, 50, 0)){continua = false; break;}
 				if (!verifica.cant_caracteres(txtUNnroPuerta, 4, 0)){continua = false; break;}

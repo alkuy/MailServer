@@ -248,5 +248,22 @@ public class Cuentas {
 		return modelo;
 	}
 
-
+	public boolean comprueba_cuenta(String usu, String dom){
+		ArrayList<Cuenta> auxCuentas = this.cargaCuentasdesdeBD();
+		String usuario, dominio, cadena1, cadena2;
+		cadena2 = usu+dom;
+		for (int i = 0; i < auxCuentas.size(); i++){ // sigo sin resolver bien esto
+			usuario = auxCuentas.get(i).getNom_u().toString();
+			dominio = auxCuentas.get(i).getDominio().toString();
+			cadena1 = usuario+dominio;
+			/*comparo lo ingresado con lo existente en el arraylist*/
+			
+			if (cadena1.equals(cadena2)){
+				return true;
+			}
+			
+		}
+		return false;
+	}
+	
 }

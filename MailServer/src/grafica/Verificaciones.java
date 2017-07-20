@@ -132,6 +132,7 @@ public class Verificaciones {
   }
   /**
    * Verifica que exista un usuario con esa cedula en el sistema
+   * En este caso es para la parte de cuenta, debe ingresar la cedula en usuario
    * @param cedula
    * @return boolean
    */
@@ -145,7 +146,22 @@ public class Verificaciones {
 			 return true;
 		 }
   }
-  
+  /**
+   * Para verificar que no se ingrese una cedula ya existente
+   * @param campo
+   * @return
+   */
+  public boolean existe_cedula(JComponent campo){
+	  	int id;
+	  	String cedula = ((JTextField)campo).getText();
+	  	id = FCLogica.trae_id(cedula);
+		 if (id==0){
+			 return false;
+		 }else{
+			 JOptionPane.showMessageDialog(null, "El documento ya existe en el sistema", null, JOptionPane.INFORMATION_MESSAGE);
+			 return true;
+		 }
+}
   /**
    * Metodo que se fija si es correcto el digito verificador de la cedula ingresada
    * @param cedula
@@ -216,6 +232,10 @@ public class Verificaciones {
 		  JOptionPane.showMessageDialog(null, "El dominio ya existe", null, JOptionPane.ERROR_MESSAGE);
 		  return true;
 	  }
+  }
+  
+  public boolean existe_cuenta(String nUser, String dominio){
+	  return false;
   }
   
 }  

@@ -47,7 +47,7 @@ public class FrmMuestraCuentas extends JInternalFrame {
 		setTitle("Cuentas");
 		setForeground(Color.LIGHT_GRAY);
 		//setBorder(new EmptyBorder(0, 0, 0, 0));
-		setBounds(20, 60, 465, 500);
+		setBounds(20, 30, 465, 500);
 		getContentPane().setLayout(null);
 
 		/*BOTON DE CERRAR*/

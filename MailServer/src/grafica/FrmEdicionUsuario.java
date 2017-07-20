@@ -42,7 +42,7 @@ public class FrmEdicionUsuario extends JInternalFrame {
 		Usuario usu = FCLogica.findUsu(id_usuario);
 		
 		
-		setBounds(550, 80, 350, 470);
+		setBounds(550, 30, 350, 470);
 		getContentPane().setLayout(null);
 		
 		txtNombre = new JTextField();

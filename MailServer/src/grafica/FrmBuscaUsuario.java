@@ -7,6 +7,7 @@ import static grafica.principal.desapareceLogo;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -28,6 +29,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 import javax.swing.JScrollPane;
@@ -210,10 +212,36 @@ public class FrmBuscaUsuario extends JInternalFrame {
 		getContentPane().add(scrlContTabla, BorderLayout.CENTER);
 		
 		
+		/*Ocukto la columna que tiene el valor de Usuario eliminado*/
+		TableColumn myTableColumn1 = table.getColumnModel().getColumn(1);
+		table.getColumnModel().removeColumn(myTableColumn1);
 		
+		
+		table.getColumnModel().getColumn(0).setCellRenderer(new CustomRenderer());
+
 		//tblMuestraCuentas.getColumnModel().getColumn(0).setWidth(250);
 		
 	}
+	
+	class CustomRenderer extends DefaultTableCellRenderer 
+	{
+	private static final long serialVersionUID = 6703872492730589499L;
+
+	    public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column)
+	    {
+	        Component cellComponent = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
+
+	        String estado = (String)table.getModel().getValueAt(row, 1);
+	        if ("false".equals(estado)){
+	        	setBackground(Color.GRAY);
+	        }else{
+	        	setBackground(Color.WHITE);
+	        }
+	     
+	        return cellComponent;
+	    }
+	}
+
 	
 	
 	public void MostrarEtiquetas(boolean m){

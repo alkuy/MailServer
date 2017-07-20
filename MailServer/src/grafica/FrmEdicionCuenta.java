@@ -30,7 +30,7 @@ public class FrmEdicionCuenta extends JInternalFrame {
 	public FrmEdicionCuenta() {
 		Usuario usu = FCLogica.findUsu(Integer.valueOf(id));
 		
-		setBounds(550, 100, 300, 340);
+		setBounds(550, 30, 300, 340);
 		getContentPane().setLayout(null);
 		toFront();
 		
