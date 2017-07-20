@@ -1,6 +1,7 @@
 package grafica;
 
 import static grafica.principal.abreVentana;
+import static grafica.FrmMuestraUsuarios.*;
 import static grafica.principal.apareceLogo;
 import static grafica.principal.cierraVentana;
 import static grafica.principal.desapareceLogo;
@@ -184,6 +185,7 @@ public class FrmBuscaUsuario extends JInternalFrame {
 		btnEditar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				cierraVentana(detalle);
+				desdemuestra = 0;
 				detalle = new FrmEdicionUsuario(documento); //detalle = new FrmEdicionUsuario();
 				abreVentana(detalle);
 				desapareceLogo();

@@ -103,6 +103,7 @@ public class FrmMuestraCuentas extends JInternalFrame {
 			
 				detalle = new FrmEdicionCuenta(); //<- asi lo tenias
 				
+				
 //				detalle = new FrmEdicionCuenta(Integer.valueOf(id)); //Para probar
 				abreVentana(detalle);
 				desapareceLogo();

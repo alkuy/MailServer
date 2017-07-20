@@ -32,10 +32,11 @@ import java.awt.Font;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
+
 public class FrmMuestraUsuarios extends JInternalFrame {
 
 	public static String id = new String();
-	
+	public static int desdemuestra = 0;
 	private FrmEdicionUsuario detalle;
 	/**
 	 * 
@@ -90,6 +91,7 @@ public class FrmMuestraUsuarios extends JInternalFrame {
 					id = (String) tblMUsuarios.getValueAt(pos, 0);
 					//System.out.println(id);
 					cierraVentana(detalle);
+					desdemuestra = 1; //Utilizad para avisarle que vengo desde el listado y no desde busqyeda 
 					detalle = new FrmEdicionUsuario(id); //detalle = new FrmEdicionUsuario();
 					abreVentana(detalle);
 					desapareceLogo();

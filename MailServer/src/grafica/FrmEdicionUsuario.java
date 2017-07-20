@@ -1,5 +1,6 @@
 package grafica;
 import static grafica.principal.*;
+import static grafica.FrmMuestraUsuarios.*;
 
 import java.awt.EventQueue;
 
@@ -204,9 +205,12 @@ public class FrmEdicionUsuario extends JInternalFrame {
 					FCLogica.modifyUsuario(id_usuario, documento, nombre, apellido, calle, nroPuerta, apto, habilitado);
 					FCLogica.modifyTelUsu(id_usuario, oldTel1, numTel1, 0);
 					FCLogica.modifyTelUsu(id_usuario, oldTel2, numTel2, 1);
+					
+					if(desdemuestra == 1){
 					cierraVentana(frmmuestrausuarios);
 					frmmuestrausuarios = new FrmMuestraUsuarios();
 					abreVentana(frmmuestrausuarios);
+					}
 					dispose();
 					apareceLogo();
 					//abreVentana(frmmuestrausuarios);
