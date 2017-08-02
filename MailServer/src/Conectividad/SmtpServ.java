@@ -150,6 +150,12 @@ public class SmtpServ extends Thread{
 	    	Random rnd = new Random();
 	        
 			while(true){
+//	        	try {
+//	        		mailServer.purgeEmailFromAllMailboxes();
+//	        	} catch (FolderException e1) {
+//	        		// TODO Bloque catch generado automáticamente
+//	        		e1.printStackTrace();
+//	        	}
 				MimeMessage[] messages = mailServer.getReceivedMessages();
 		        if (messages.length > 0){
 		        	cont = 0;
@@ -175,12 +181,12 @@ public class SmtpServ extends Thread{
 		        		// TODO Bloque catch generado automáticamente
 		        		e1.printStackTrace();
 		        	}
-					try {
-						Thread.sleep(5000);
-					}catch (InterruptedException e){
-						e.printStackTrace();
-					}
 		        }
+				try {
+					Thread.sleep(5000);
+				}catch (InterruptedException e){
+					e.printStackTrace();
+				}
 			}
 	    }
 	    
