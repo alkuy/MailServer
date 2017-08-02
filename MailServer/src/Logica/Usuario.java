@@ -281,6 +281,22 @@ public class Usuario {
 		}catch (Exception e){return false;} 
 	}
 	
+	/** Metodo para obtener el Password de un usuario
+	 * @param Nombre de Usuario
+	 * @return Password
+	 */
+	
+	public String ObtenerPass(String Usu) throws SQLException{
+		java.sql.ResultSet rs = BD.Devolver_ci2(Usu);
+		String pass = new String();
+		String CI;
+		rs.next();
+		CI = String.valueOf(rs.getInt(1));
+		int id = BD.Devolver_id(CI);
+		pass = BD.Devolver_pass(id);
+		return pass;
+	}
+	
 	
 	
 	public Usuario cargaDesdeBD(int id_usuario, String pass_admin, boolean habilitado) throws SQLException{

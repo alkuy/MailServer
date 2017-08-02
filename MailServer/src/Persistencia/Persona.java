@@ -114,6 +114,19 @@ public class Persona {
 		
 	}
 	
+	/** Método que devuelve la c.i de usuario segun su nombre de Usuario
+	 * @return Resulset con la c.i de usuario
+	 * @throws SQLException
+	*/		
+	public java.sql.ResultSet Dev_ci_2(String NomUsu) throws SQLException{
+		
+		String seleccion = "select cedula from Persona P, Cuenta C where C.nom_usuario = '"+NomUsu+"' and P.id_usuario = C.id_usuario";		
+		java.sql.Statement ps = pruebaConn.getConexion().createStatement();
+		java.sql.ResultSet rs = ps.executeQuery(seleccion);		
+		return rs;
+		
+	}
+	
 	
 	
 	/** Método que devuelve todos los datos de una Persona seleccionada

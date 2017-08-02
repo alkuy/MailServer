@@ -173,6 +173,17 @@ public class FachadaBD {
   		return rs;
   	}
   	
+ 	/** Método que devuelve la c.i de usuario segun su Nombre de Usuario
+	 * @return Resulset con la c.i de usuario
+	 * @throws SQLException
+	*/	 	
+  	public java.sql.ResultSet Devolver_ci2(String NomUsu) throws SQLException{
+  		
+  		java.sql.ResultSet rs;
+  	   	rs = this.persona.Dev_ci_2(NomUsu);  		
+  		return rs;
+  	}
+  	
   	
      
   	/** Método de ingreso de datos de la persona a la BD
@@ -254,7 +265,7 @@ public class FachadaBD {
 	 * @throws SQLException
 	*/
 	
-	public java.sql.ResultSet ConTablaCorreo(String nom_us1,String nom_dom1, String nom_us2, String nom_dom2, String fecha) throws SQLException{
+	public java.sql.ResultSet ConTablaCorreo() throws SQLException{
 		java.sql.ResultSet rs;
 		rs = this.correo.Select_tabla();
 		return rs;

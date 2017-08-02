@@ -151,6 +151,13 @@ public class Fachada {
 	 * @return TableModel
 	 * @throws SQLException
 	 */
+	
+	public java.sql.ResultSet CuentasDesdeBD() throws SQLException{
+		java.sql.ResultSet rs = null;
+		rs = BD.ConTablaCuenta();
+		return rs;
+	}
+	
 	public DefaultTableModel DevCuentasCompleto() throws SQLException{
 		DefaultTableModel modelo;
 		Cuentas cuentas = new Cuentas();
@@ -218,14 +225,19 @@ public void altaDominio(String dominio, int prioridad){
 		
 	}
  
- public int trae_id(String cedula){
+ 	public int trae_id(String cedula){
 	 int id;
 	 Usuario usuario = new Usuario();
 	 id=usuario.trae_id(cedula);
 	 return id;
 	 }
  
- 
+ 	public String ObtenPass(String Usu) throws SQLException{
+ 		Usuario usuario = new Usuario();
+ 		String pass = usuario.ObtenerPass(Usu);
+ 		return pass;
+ 	}
+ 	
  	public Usuario findUsu(int id_usuario){
  		return hUsu.find(id_usuario);
  	}
@@ -278,6 +290,15 @@ public void altaDominio(String dominio, int prioridad){
  		return pri;
  	}
  	
+	public int IdUsuario(String NomUsu) throws SQLException{
+		java.sql.ResultSet rs = BD.Devolver_ci2(NomUsu);
+		String CI;
+		rs.next();
+		CI = String.valueOf(rs.getInt(1));
+		int id = BD.Devolver_id(CI);
+		return id;
+	}
+ 	
  	/**
  	 * Verifica la existencia de una cuenta
  	 * @param usuario
@@ -291,6 +312,17 @@ public void altaDominio(String dominio, int prioridad){
  		}else{
  			return false;
  		}
+ 	}
+ 	
+ 	public void CargaCorreoBD(String emisor, int IdEmisor, String receptor, int IdReceptor, String asunto, int IdCorreo, String Texto){
+ 		Correo C = new Correo(emisor, IdEmisor, receptor, IdReceptor, asunto, IdCorreo, false, Texto);
+ 		C.CargarCorreoEnBase(C);
+ 	}
+ 	
+ 	public java.sql.ResultSet ObtieneCorreosBD() throws SQLException{
+ 		Correo C = new Correo("a", 1, "b", 2, "c", 4, false, "e");
+ 		java.sql.ResultSet rs = C.ObtenerCorreoDeBase();
+ 		return rs;
  	}
  	
  }

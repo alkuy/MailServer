@@ -69,7 +69,10 @@ public class Correo{
 		if (pruebaConn!=null){
 			try{
 				java.sql.Statement stm = pruebaConn.getConexion().createStatement();
-				stm.execute("Insert into Correo values ('"+nom_usuario_emisor+"','"+nom_dominio_emisor+"','"+nom_usuario_receptor+"','"+nom_dominio_receptor+"','"+fecha+"','"+id_usuario_emisor+"','"+id_usuario_receptor+"','"+asunto+"','"+texto+"','"+id_conversacion+"')");
+				if (id_usuario_receptor == 0)
+					stm.execute("Insert into Correo values ('"+nom_usuario_emisor+"','"+nom_dominio_emisor+"','"+nom_usuario_receptor+"','"+nom_dominio_receptor+"','"+fecha+"','"+id_usuario_emisor+"','"+asunto+"','"+texto+"','"+id_conversacion+"')");
+				else
+					stm.execute("Insert into Correo values ('"+nom_usuario_emisor+"','"+nom_dominio_emisor+"','"+nom_usuario_receptor+"','"+nom_dominio_receptor+"','"+fecha+"','"+id_usuario_emisor+"','"+id_usuario_receptor+"','"+asunto+"','"+texto+"','"+id_conversacion+"')");
 			}
 			catch (Exception e){
 				

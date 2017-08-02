@@ -28,6 +28,8 @@ import java.awt.event.ActionEvent;
 import java.awt.Dimension;
 import java.awt.Component;
 
+import Conectividad.FachadaCon;
+
 public class principal extends JFrame {
 
 	/**
@@ -52,7 +54,7 @@ public class principal extends JFrame {
 	private FrmPruebaServidor frmPruebaServidor;
 	
 	
-	
+	FachadaCon FC = FachadaCon.getInstancia();
 	//private FrmEdicionUsuario frmEdicionUsuario;
 	//private FrmEdicionCuenta frmEdicionCuenta;
 	
@@ -67,8 +69,10 @@ public class principal extends JFrame {
 
 	/**
 	 * Create the frame.
+	 * @throws SQLException 
 	 */
-	public principal() {
+	public principal() throws SQLException {
+		FC.IniSocket();
      	setResizable(false);
 		/**
 		 * Panel Principal*/

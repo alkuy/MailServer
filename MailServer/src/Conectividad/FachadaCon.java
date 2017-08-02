@@ -1,5 +1,11 @@
 package Conectividad;
 
+import java.io.IOException;
+import java.sql.SQLException;
+
+import javax.mail.MessagingException;
+
+import com.icegreen.greenmail.user.UserException;
 
 public class FachadaCon {
 
@@ -14,22 +20,34 @@ public class FachadaCon {
 	}
 	
 	// Incia el Servicio que escucha en un puerto TCP esperando el mail
-	public void InciaServ(){
-		PruebaServ P = PruebaServ.getInstancia();
+	public void InciaServ() throws SQLException{
+		SmtpServ P = SmtpServ.getInstancia();
+		P.start();
+
 	}
 	
-	public void ComenzarServ(){
-		PruebaServ P = PruebaServ.getInstancia();
-		P.ServStart();
+	public void DetenerServ() throws SQLException{
+		SmtpServ P = SmtpServ.getInstancia();
+		P.tearDown();
+
 	}
 	
-	public void DetenerServ(){
-		PruebaServ P = PruebaServ.getInstancia();
-		P.Servstop();
-	}
-	
-	public void InciaCli(){
+	public void InciaCli() throws SQLException, IOException, MessagingException, UserException, InterruptedException{
 		PruebaCli C = new PruebaCli();
+		SmtpServ P = SmtpServ.getInstancia();
 		C.Enviar();
+		P.setMailsBD();
+	}
+	
+	public void ObtenerMail() throws IOException, MessagingException, UserException, InterruptedException, SQLException{
+		POP3Serv Q = POP3Serv.getInstancia();
+		SmtpServ P = SmtpServ.getInstancia();
+		P.getMailsBD();
+		Q.getMails();
+	}
+	
+	public void IniSocket() throws SQLException{
+		InfoSocket I = InfoSocket.getInstancia();
+		I.start();
 	}
 }

@@ -12,11 +12,15 @@ import javax.swing.JTable;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableModel;
 
+import com.icegreen.greenmail.user.UserException;
+
 import Conectividad.FachadaCon;
 import javax.swing.JTextArea;
 import javax.swing.ScrollPaneConstants;
+import javax.mail.MessagingException;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.awt.event.ActionEvent;
 import javax.swing.JScrollBar;
 import javax.swing.JPanel;
@@ -31,7 +35,7 @@ public class FrmPruebaServidor extends JInternalFrame {
 	 * Create the frame.
 	 */
 	public FrmPruebaServidor() {
-		FCCon.InciaServ();
+		//FCCon.InciaServ();
 		
 		setBounds(20, 60, 450, 360);
 		getContentPane().setLayout(null);
@@ -54,16 +58,22 @@ public class FrmPruebaServidor extends JInternalFrame {
 		MensajeServ.setBorder(null);
 		MensajeServ.setEditable(false);
 		
-		MessageConsole mc = new MessageConsole(MensajeServ);
-		mc.redirectOut();
-		mc.redirectErr(Color.RED, null);
+//		MessageConsole mc = new MessageConsole(MensajeServ);
+//		mc.redirectOut();
+//		mc.redirectErr(Color.RED, null);
 
 		
 		JButton btnInciarServidor = new JButton("Inciar Servicio");
 		btnInciarServidor.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				FCCon.ComenzarServ();
+				//FCCon.ComenzarServ();
 				//MensajeServ.append();
+				try {
+					FCCon.InciaServ();
+				} catch (SQLException e) {
+					// TODO Bloque catch generado automáticamente
+					e.printStackTrace();
+				}
 			}
 		});
 		btnInciarServidor.setBounds(295, 81, 127, 25);
@@ -72,13 +82,50 @@ public class FrmPruebaServidor extends JInternalFrame {
 		JButton btnNewButton = new JButton("Enviar Mail");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				FCCon.InciaCli();
-				try {
-					this.finalize();
-				} catch (Throwable e1) {
-					// TODO Bloque catch generado automáticamente
-					e1.printStackTrace();
-				}
+//				try {
+//					FCCon.InciaCli();
+//				} catch (SQLException e3) {
+//					// TODO Bloque catch generado automáticamente
+//					e3.printStackTrace();
+//				} catch (IOException e3) {
+//					// TODO Bloque catch generado automáticamente
+//					e3.printStackTrace();
+//				} catch (MessagingException e3) {
+//					// TODO Bloque catch generado automáticamente
+//					e3.printStackTrace();
+//				} catch (UserException e3) {
+//					// TODO Bloque catch generado automáticamente
+//					e3.printStackTrace();
+//				} catch (InterruptedException e3) {
+//					// TODO Bloque catch generado automáticamente
+//					e3.printStackTrace();
+//				}
+//				try {
+//					try {
+//						FCCon.ObtenerMail();
+//					} catch (SQLException e1) {
+//						// TODO Bloque catch generado automáticamente
+//						e1.printStackTrace();
+//					}
+//				} catch (IOException e2) {
+//					// TODO Bloque catch generado automáticamente
+//					e2.printStackTrace();
+//				} catch (MessagingException e2) {
+//					// TODO Bloque catch generado automáticamente
+//					e2.printStackTrace();
+//				} catch (UserException e2) {
+//					// TODO Bloque catch generado automáticamente
+//					e2.printStackTrace();
+//				} catch (InterruptedException e2) {
+//					// TODO Bloque catch generado automáticamente
+//					e2.printStackTrace();
+//				}
+//				try {
+//					this.finalize();
+//				} catch (Throwable e1) {
+//					// TODO Bloque catch generado automáticamente
+//					e1.printStackTrace();
+//				}
 			}
 		});
 		btnNewButton.setBounds(295, 132, 127, 25);
@@ -87,7 +134,12 @@ public class FrmPruebaServidor extends JInternalFrame {
 		JButton btnNewButton_1 = new JButton("Detener Servicio");
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				FCCon.DetenerServ();
+				try {
+					FCCon.DetenerServ();
+				} catch (SQLException e1) {
+					// TODO Bloque catch generado automáticamente
+					e1.printStackTrace();
+				}
 			}
 		});
 		btnNewButton_1.setBounds(295, 178, 127, 25);

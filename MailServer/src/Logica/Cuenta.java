@@ -10,7 +10,7 @@ public class Cuenta {
 	FachadaBD BD = FachadaBD.getInstancia();
 	
 	private int id_usuario; // Esto se debe traer de la tabla Usuario 
-	private String nom_u; // Solo agregue esto aca. No se por que no se pudo de entrada, por eso no lo puse en el contructor
+	private String nom_u; // Solo agregue esto aca. No se porque no se pudo de entrada, por eso no lo puse en el contructor
 	private String contraseña_cuenta;
 	private String dominio;
 	private int es_lista;
