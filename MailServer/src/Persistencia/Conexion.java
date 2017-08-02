@@ -39,7 +39,7 @@ public class Conexion {
 	public Connection getConexion() {
 		try {
 			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-			Conn=DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=Servidor_Mail", "DC", "diego");
+			Conn=DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=Servidor_Mail", "sa", "admin");
 			} catch (Exception e) {
 			Conn=null;
 		   }
