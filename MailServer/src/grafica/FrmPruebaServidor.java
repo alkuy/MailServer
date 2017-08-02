@@ -82,50 +82,50 @@ public class FrmPruebaServidor extends JInternalFrame {
 		JButton btnNewButton = new JButton("Enviar Mail");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-//				try {
-//					FCCon.InciaCli();
-//				} catch (SQLException e3) {
-//					// TODO Bloque catch generado automáticamente
-//					e3.printStackTrace();
-//				} catch (IOException e3) {
-//					// TODO Bloque catch generado automáticamente
-//					e3.printStackTrace();
-//				} catch (MessagingException e3) {
-//					// TODO Bloque catch generado automáticamente
-//					e3.printStackTrace();
-//				} catch (UserException e3) {
-//					// TODO Bloque catch generado automáticamente
-//					e3.printStackTrace();
-//				} catch (InterruptedException e3) {
-//					// TODO Bloque catch generado automáticamente
-//					e3.printStackTrace();
-//				}
-//				try {
-//					try {
-//						FCCon.ObtenerMail();
-//					} catch (SQLException e1) {
-//						// TODO Bloque catch generado automáticamente
-//						e1.printStackTrace();
-//					}
-//				} catch (IOException e2) {
-//					// TODO Bloque catch generado automáticamente
-//					e2.printStackTrace();
-//				} catch (MessagingException e2) {
-//					// TODO Bloque catch generado automáticamente
-//					e2.printStackTrace();
-//				} catch (UserException e2) {
-//					// TODO Bloque catch generado automáticamente
-//					e2.printStackTrace();
-//				} catch (InterruptedException e2) {
-//					// TODO Bloque catch generado automáticamente
-//					e2.printStackTrace();
-//				}
-//				try {
-//					this.finalize();
-//				} catch (Throwable e1) {
-//					// TODO Bloque catch generado automáticamente
-//					e1.printStackTrace();
-//				}
+				try {
+					FCCon.InciaCli();
+				} catch (SQLException e3) {
+					// TODO Bloque catch generado automáticamente
+					e3.printStackTrace();
+				} catch (IOException e3) {
+					// TODO Bloque catch generado automáticamente
+					e3.printStackTrace();
+				} catch (MessagingException e3) {
+					// TODO Bloque catch generado automáticamente
+					e3.printStackTrace();
+				} catch (UserException e3) {
+					// TODO Bloque catch generado automáticamente
+					e3.printStackTrace();
+				} catch (InterruptedException e3) {
+					// TODO Bloque catch generado automáticamente
+					e3.printStackTrace();
+				}
+				try {
+					try {
+						FCCon.ObtenerMail();
+					} catch (SQLException e1) {
+						// TODO Bloque catch generado automáticamente
+						e1.printStackTrace();
+					}
+				} catch (IOException e2) {
+					// TODO Bloque catch generado automáticamente
+					e2.printStackTrace();
+				} catch (MessagingException e2) {
+					// TODO Bloque catch generado automáticamente
+					e2.printStackTrace();
+				} catch (UserException e2) {
+					// TODO Bloque catch generado automáticamente
+					e2.printStackTrace();
+				} catch (InterruptedException e2) {
+					// TODO Bloque catch generado automáticamente
+					e2.printStackTrace();
+				}
+				try {
+					this.finalize();
+				} catch (Throwable e1) {
+					// TODO Bloque catch generado automáticamente
+					e1.printStackTrace();
+				}
 			}
 		});
 		btnNewButton.setBounds(295, 132, 127, 25);
