@@ -11,6 +11,7 @@ import java.awt.Component;
 import java.awt.EventQueue;
 import java.sql.SQLException;
 
+import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JInternalFrame;
@@ -29,6 +30,7 @@ import Logica.Fachada;
 import Logica.Usuario;
 
 import java.awt.Font;
+import java.awt.Image;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
@@ -60,9 +62,12 @@ public class FrmMuestraUsuarios extends JInternalFrame {
 		 		dispose();
 		 	}
 		 });
-		 btnCerrar.setIcon(new ImageIcon(FrmNuevoDominio.class.getResource("/imagenes/cerrar.png")));
-		 btnCerrar.setBounds(10, 0, 35, 35);
-		 getContentPane().add(btnCerrar);
+		 
+		btnCerrar.setBounds(0, 0, 19, 19);
+		ImageIcon iconocerrar = new ImageIcon(principal.class.getResource("/imagenes/cerrar.png"));
+		Icon iconClose = new ImageIcon(iconocerrar.getImage().getScaledInstance(btnCerrar.getWidth(),btnCerrar.getHeight(),Image.SCALE_DEFAULT));
+		btnCerrar.setIcon(iconClose);
+		getContentPane().add(btnCerrar);
 		 /*FIN DE BOTON DE CERRAR*/
 		
 		 
@@ -119,7 +124,8 @@ public class FrmMuestraUsuarios extends JInternalFrame {
 		}
 		
 		tblMUsuarios = new JTable(modelo);
-		tblMUsuarios.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		tblMUsuarios.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
+		//tblMUsuarios.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		
 		
 		tblMUsuarios.getColumnModel().getColumn(0).setWidth(250);
@@ -148,13 +154,23 @@ public class FrmMuestraUsuarios extends JInternalFrame {
 	    public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column)
 	    {
 	        Component cellComponent = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
-
+	      
 	        String estado = (String)table.getModel().getValueAt(row, 2);
 	        if ("false".equals(estado)){
 	        	setBackground(Color.GRAY);
 	        }else{
 	        	setBackground(Color.WHITE);
 	        }
+	        
+	        if (hasFocus) {
+                // this cell is the anchor and the table has the focus
+	        	Color azulcito = new Color(47,79,79);
+                this.setBackground(azulcito);
+                this.setForeground(Color.white);
+            } else {
+                this.setForeground(Color.black);
+            }
+
 	     
 	        return cellComponent;
 	    }

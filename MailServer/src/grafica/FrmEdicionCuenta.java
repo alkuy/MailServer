@@ -59,7 +59,7 @@ public class FrmEdicionCuenta extends JInternalFrame {
 		
 		txtDocumento = new JTextField();
 		txtDocumento.setEditable(false);
-		txtDocumento.setBounds(128, 45, 145, 20);
+		txtDocumento.setBounds(128, 45, 145, 23);
 		getContentPane().add(txtDocumento);
 		txtDocumento.setColumns(10);
 		txtDocumento.setText(usu.getCi());
@@ -67,14 +67,14 @@ public class FrmEdicionCuenta extends JInternalFrame {
 		txtNombre = new JTextField();
 		txtNombre.setEditable(false);
 		txtNombre.setColumns(10);
-		txtNombre.setBounds(129, 79, 145, 20);
+		txtNombre.setBounds(129, 79, 145, 23);
 		getContentPane().add(txtNombre);
 		txtNombre.setText(usu.getNombre());
 		
 		txtApellido = new JTextField();
 		txtApellido.setEditable(false);
 		txtApellido.setColumns(10);
-		txtApellido.setBounds(128, 108, 145, 20);
+		txtApellido.setBounds(128, 108, 145, 23);
 		getContentPane().add(txtApellido);
 		txtApellido.setText(usu.getApellido());
 		

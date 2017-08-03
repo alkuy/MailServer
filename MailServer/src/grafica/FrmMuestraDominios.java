@@ -5,10 +5,12 @@ import static grafica.principal.cierraVentana;
 
 import java.awt.EventQueue;
 import java.awt.Font;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
 
+import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JInternalFrame;
@@ -38,9 +40,12 @@ public class FrmMuestraDominios extends JInternalFrame {
 		 		dispose();
 		 	}
 		 });
-		 btnCerrar.setIcon(new ImageIcon(FrmNuevoDominio.class.getResource("/imagenes/cerrar.png")));
-		 btnCerrar.setBounds(10, 0, 35, 35);
-		 getContentPane().add(btnCerrar);
+		 btnCerrar.setBounds(0, 0, 19, 19);
+		ImageIcon iconocerrar = new ImageIcon(principal.class.getResource("/imagenes/cerrar.png"));
+		Icon iconClose = new ImageIcon(iconocerrar.getImage().getScaledInstance(btnCerrar.getWidth(),btnCerrar.getHeight(),Image.SCALE_DEFAULT));
+		btnCerrar.setIcon(iconClose);
+		getContentPane().add(btnCerrar);
+			 /*FIN DE BOTON DE CERRAR*/
 		 /*FIN DE BOTON DE CERRAR*/
 		
 		JScrollPane scrollPane = new JScrollPane();

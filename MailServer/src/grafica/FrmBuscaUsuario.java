@@ -11,6 +11,7 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.EventQueue;
 import java.awt.Font;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
@@ -26,6 +27,7 @@ import grafica.FrmMuestraCuentas.CustomRenderer;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
+import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.SwingConstants;
@@ -77,8 +79,12 @@ public class FrmBuscaUsuario extends JInternalFrame {
 		 	}
 		 });
 		 
-		 btnCerrar.setIcon(new ImageIcon(FrmNuevoDominio.class.getResource("/imagenes/cerrar.png")));
-		 getContentPane().add(btnCerrar);
+		 btnCerrar.setBounds(0, 0, 19, 19);
+			ImageIcon iconocerrar = new ImageIcon(principal.class.getResource("/imagenes/cerrar.png"));
+			Icon iconClose = new ImageIcon(iconocerrar.getImage().getScaledInstance(btnCerrar.getWidth(),btnCerrar.getHeight(),Image.SCALE_DEFAULT));
+			btnCerrar.setIcon(iconClose);
+			getContentPane().add(btnCerrar);
+			 /*FIN DE BOTON DE CERRAR*/
 		 /*FIN DE BOTON DE CERRAR*/
 		 
 			JLabel lblBuscarUsuario = new JLabel("Buscar Usuario");

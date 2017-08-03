@@ -3,8 +3,10 @@ import static grafica.principal.*;
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
 import java.awt.Font;
+import java.awt.Image;
 import java.sql.SQLException;
 
+import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JInternalFrame;
@@ -59,9 +61,12 @@ public class FrmMuestraCuentas extends JInternalFrame {
 		 		dispose();
 		 	}
 		 });
-		 btnCerrar.setIcon(new ImageIcon(FrmNuevoDominio.class.getResource("/imagenes/cerrar.png")));
-		 btnCerrar.setBounds(10, 0, 35, 35);
-		 getContentPane().add(btnCerrar);
+		 btnCerrar.setBounds(0, 0, 19, 19);
+		ImageIcon iconocerrar = new ImageIcon(principal.class.getResource("/imagenes/cerrar.png"));
+		Icon iconClose = new ImageIcon(iconocerrar.getImage().getScaledInstance(btnCerrar.getWidth(),btnCerrar.getHeight(),Image.SCALE_DEFAULT));
+		btnCerrar.setIcon(iconClose);
+		getContentPane().add(btnCerrar);
+			 /*FIN DE BOTON DE CERRAR*/
 		 /*FIN DE BOTON DE CERRAR*/
 		
 		
@@ -127,7 +132,7 @@ public class FrmMuestraCuentas extends JInternalFrame {
 		}
 		
 		tblMuestraCuentas = new JTable(modelo);
-		tblMuestraCuentas.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		tblMuestraCuentas.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
 		
 		tblMuestraCuentas.getColumnModel().getColumn(0).setWidth(250);
 		
@@ -155,6 +160,14 @@ public class FrmMuestraCuentas extends JInternalFrame {
 	        }else{
 	        	setBackground(Color.WHITE);
 	        }
+	        
+	        if (hasFocus) {
+	        	Color azulcito = new Color(47,79,79);
+                this.setBackground(azulcito);
+                this.setForeground(Color.white);
+            } else {
+                this.setForeground(Color.black);
+            }
 	     
 	        return cellComponent;
 	    }
