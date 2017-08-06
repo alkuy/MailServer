@@ -87,6 +87,7 @@ public class POP3Serv {
     public void getMailsBDUsu(String Usu) throws FolderException, Exception {
     	String mailFrom, mailTo, mailSubjet, mailText; 
     	String NomEmi, DomEmi, NomDest, DomDest, DestPass;
+    	int IdConv;
     	java.sql.ResultSet rs = FC.ObtieneCorreosBDUsu(Usu);
     	GreenMailUser Usuario;
     	Managers managers = new Managers();
@@ -97,9 +98,10 @@ public class POP3Serv {
     		DomEmi = rs.getString("nom_dominio_emisor");
     		NomDest = rs.getString("nom_usuario_receptor");
     		DomDest = rs.getString("nom_dominio_receptor");
+    		IdConv = rs.getInt("id_conversacion");
     		mailFrom = NomEmi+"@"+DomEmi;
     		mailTo = NomDest+"@"+DomDest;
-    		mailSubjet = rs.getString("asunto");
+    		mailSubjet = IdConv+"%"+rs.getString("asunto");
     		mailText = rs.getString("texto");
     		
     		//Crea un mensaje con JavaMail
