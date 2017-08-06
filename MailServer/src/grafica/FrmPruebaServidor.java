@@ -70,7 +70,7 @@ public class FrmPruebaServidor extends JInternalFrame {
 				//MensajeServ.append();
 				try {
 					FCCon.InciaServ();
-				} catch (SQLException e) {
+				} catch (SQLException | MessagingException | UserException e) {
 					// TODO Bloque catch generado automáticamente
 					e.printStackTrace();
 				}

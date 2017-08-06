@@ -27,7 +27,9 @@ import com.icegreen.greenmail.util.GreenMail;
 import com.icegreen.greenmail.util.ServerSetupTest;
 import com.sun.mail.smtp.SMTPTransport;
 import com.dumbster.smtp.SmtpMessage;
+import com.icegreen.greenmail.Managers;
 import com.icegreen.greenmail.store.FolderException;
+import com.icegreen.greenmail.store.MailFolder;
 import com.icegreen.greenmail.user.GreenMailUser;
 
 import org.slf4j.Logger;
@@ -49,6 +51,7 @@ public class SmtpServ extends Thread{
 	 private static final String LOCALHOST = "127.0.0.1";
 	 private ArrayList<Cuenta> setCuentas;
 	 private static SmtpServ instancia;
+	 private int cantMails;
 	 private Fachada FCLogica = Fachada.getInstancia();
 	 
 	//Esta clase utiliza el patron Singleton
@@ -65,7 +68,7 @@ public class SmtpServ extends Thread{
 	 
 	    //@Before
 	    public void setUp() throws SQLException {
-	        mailServer = new GreenMail(ServerSetupTest.SMTP_POP3);
+	        mailServer = new GreenMail(ServerSetupTest.SMTP);
 	        mailServer.start();
 	        cargaCuenta();
 	    }
@@ -140,28 +143,65 @@ public class SmtpServ extends Thread{
 	            //Almacenamos los mensaje en memoria para el INBOX de cada usuario
 	            Usuario.deliver(message);
 	    	}
+	    	
+	    	MimeMessage[] messages = mailServer.getReceivedMessages();
+	    	this.cantMails = messages.length;
 	    }
+	    
+//	    public void getMailsBDUsu(String Usu) throws FolderException, Exception {
+//	    	String mailFrom, mailTo, mailSubjet, mailText; 
+//	    	String NomEmi, DomEmi, NomDest, DomDest, DestPass;
+//	    	java.sql.ResultSet rs = FCLogica.ObtieneCorreosBDUsu(Usu);
+//	    	GreenMailUser Usuario;
+//	    	Managers managers = new Managers();
+//	    	
+//	    	while(rs.next()){
+//	    		
+//	    		NomEmi = rs.getString("nom_usuario_emisor");
+//	    		DomEmi = rs.getString("nom_dominio_emisor");
+//	    		NomDest = rs.getString("nom_usuario_receptor");
+//	    		DomDest = rs.getString("nom_dominio_receptor");
+//	    		mailFrom = NomEmi+"@"+DomEmi;
+//	    		mailTo = NomDest+"@"+DomDest;
+//	    		mailSubjet = rs.getString("asunto");
+//	    		mailText = rs.getString("texto");
+//	    		
+//	    		//Crea un mensaje con JavaMail
+//	    		MimeMessage message = new MimeMessage((Session) null);
+//	            message.setFrom(new InternetAddress(mailFrom));
+//	            message.addRecipient(Message.RecipientType.TO, new InternetAddress(
+//	            mailTo));
+//	            message.setSubject(mailSubjet);
+//	            message.setText(mailText);
+//	            
+//	            DestPass = FCLogica.ObtenPass(NomDest);
+//	            //Usuario = managers.getUserManager().getUser(Usu);
+//	            Usuario = mailServer.setUser(Usu, DomDest, DestPass);
+//	            
+//	            //Almacenamos los mensaje en memoria para el INBOX de cada usuario
+//	            mailServer.getManagers().getImapHostManager().getInbox(Usuario).store(message);
+//	            //Usuario.deliver(message);
+//	    	}
+//	    }
 	    
 	    @Override
 		public void run(){
-			String Esperando = "Esperando e-mails...";
+
 	    	String NomUsu, NomRecp;
-	    	int UserIdE, UserIdR, cont;   	
+	    	int UserIdE, UserIdR, cont, aux;   	
 	    	Random rnd = new Random();
-	        
+	    	MimeMessage[] messages;
+	    	cont = 0;
 			while(true){
-//	        	try {
-//	        		mailServer.purgeEmailFromAllMailboxes();
-//	        	} catch (FolderException e1) {
-//	        		// TODO Bloque catch generado automáticamente
-//	        		e1.printStackTrace();
-//	        	}
-				MimeMessage[] messages = mailServer.getReceivedMessages();
-		        if (messages.length > 0){
-		        	cont = 0;
+				messages = mailServer.getReceivedMessages();
+		        if (cont < messages.length){
+//		        	cont = messages.length;
+//		        	aux = cont - this.cantMails;
+//		        	cont = 0;
 		        	while(cont < messages.length){
 		        		MimeMessage m = messages[cont];
 		        		try {
+		        			
 		        			NomUsu = m.getFrom()[0].toString().substring(0, m.getFrom()[0].toString().indexOf("@"));
 		        			NomRecp = m.getHeader("To")[0].toString().substring(0, m.getHeader("To")[0].toString().indexOf("@"));
 		        			UserIdE = FCLogica.IdUsuario(NomUsu);
@@ -172,21 +212,18 @@ public class SmtpServ extends Thread{
 				
 		        			FCLogica.CargaCorreoBD(m.getFrom()[0].toString(), UserIdE, m.getHeader("To")[0].toString(), UserIdR, m.getSubject(),  (int)(rnd.nextDouble() * 10000), m.getContent().toString());
 		        			cont++;
-		        		}catch(Exception e){
-		        		}
+		        		}catch(Exception e){}
 		        	}
-		        	try {
-		        		mailServer.purgeEmailFromAllMailboxes();
-		        	} catch (FolderException e1) {
-		        		// TODO Bloque catch generado automáticamente
-		        		e1.printStackTrace();
-		        	}
+
 		        }
+//		        this.cantMails = messages.length;
 				try {
+					mailServer.purgeEmailFromAllMailboxes();
 					Thread.sleep(5000);
-				}catch (InterruptedException e){
+				}catch (InterruptedException | FolderException e){
 					e.printStackTrace();
 				}
+			cont = 0;
 			}
 	    }
 	    

@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 
 import javax.mail.MessagingException;
+import javax.mail.internet.AddressException;
 
 import com.icegreen.greenmail.user.UserException;
 
@@ -20,10 +21,10 @@ public class FachadaCon {
 	}
 	
 	// Incia el Servicio que escucha en un puerto TCP esperando el mail
-	public void InciaServ() throws SQLException{
+	public void InciaServ() throws SQLException, AddressException, MessagingException, UserException{
 		SmtpServ P = SmtpServ.getInstancia();
+//		P.getMailsBD();
 		P.start();
-
 	}
 	
 	public void DetenerServ() throws SQLException{
@@ -40,10 +41,8 @@ public class FachadaCon {
 	}
 	
 	public void ObtenerMail() throws IOException, MessagingException, UserException, InterruptedException, SQLException{
-		POP3Serv Q = POP3Serv.getInstancia();
 		SmtpServ P = SmtpServ.getInstancia();
 		P.getMailsBD();
-		Q.getMails();
 	}
 	
 	public void IniSocket() throws SQLException{

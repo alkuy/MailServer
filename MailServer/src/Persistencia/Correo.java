@@ -82,6 +82,22 @@ public class Correo{
 		}
 	}
 	
+	/** Método para borrar los correos de la tabala Correo
+	 * 
+	 * 
+	*/
+		
+		public void DeleteCorreo(){
+			if (pruebaConn!=null){
+				try{
+					java.sql.Statement stm = pruebaConn.getConexion().createStatement();
+					stm.execute("delete from Correo");
+				}
+				catch (Exception e){	
+				}
+			}else{}
+		}
+	
 	/** Método que devuelve todos los datos de la tabla correo
 	 * @return Resulset con la tabla correo
 	 * @throws SQLException
@@ -90,6 +106,21 @@ public class Correo{
 	public java.sql.ResultSet Select_tabla() throws SQLException{
 		
 		String seleccion = "Select * from Correo";
+		
+		java.sql.Statement ps = pruebaConn.getConexion().createStatement();
+		java.sql.ResultSet rs = ps.executeQuery(seleccion);
+		return rs;
+		
+	}
+	
+	/** Método que devuelve todos los datos de la tabla correo de un Usuario
+	 * @return Resulset con la tabla correo
+	 * @throws SQLException
+	*/
+	
+	public java.sql.ResultSet Select_tabla_Usuario(String Usu) throws SQLException{
+		
+		String seleccion = "select * from Correo where nom_usuario_receptor = '"+Usu+"'";
 		
 		java.sql.Statement ps = pruebaConn.getConexion().createStatement();
 		java.sql.ResultSet rs = ps.executeQuery(seleccion);

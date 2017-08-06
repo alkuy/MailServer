@@ -9,7 +9,8 @@ public class InfoSocket extends Thread {
 	private static InfoSocket instancia;
 	private ServerSocket server;
 	private Socket socket;
-	private int puerto = 5000;
+	private DataInputStream entrada;
+	private int puerto = 6000;
 	
 	//Esta clase utiliza el patron Singleton
 	public static InfoSocket getInstancia() throws SQLException{
@@ -25,6 +26,7 @@ public class InfoSocket extends Thread {
 	
 	@Override
 	public void run(){
+		String mensaje;
 		try{
 			server = new ServerSocket(puerto);
 			int IdSession = 0;
@@ -32,7 +34,13 @@ public class InfoSocket extends Thread {
 			while (true){
 				socket = new Socket();
 				socket = server.accept();
-				((HiloSocket) new HiloSocket(socket, IdSession)).start();
+				entrada = new DataInputStream(socket.getInputStream());
+				
+				mensaje = entrada.readUTF();
+				if (mensaje.compareToIgnoreCase("Conn") == 0)
+					((HiloSocket) new HiloSocket(socket, IdSession)).start();
+				else
+					((HiloUsuSocket) new HiloUsuSocket(socket, IdSession)).start();
 				IdSession++;
 			}
 		}catch(Exception e){};

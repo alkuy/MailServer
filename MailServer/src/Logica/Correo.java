@@ -165,6 +165,11 @@ public class Correo {
 		return rs;		
 	}
 	
+	public java.sql.ResultSet ObtenerCorreoDeBaseUsu(String Usu) throws SQLException{
+		java.sql.ResultSet rs = BD.ConTablaCorreoUsu(Usu);
+		return rs;		
+	}
+	
 	
 	
 //	No va a contener los set porque en el srv no se van a cambiar los atributos,

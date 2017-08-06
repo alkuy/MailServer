@@ -271,6 +271,27 @@ public class FachadaBD {
 		return rs;
 	}
 	
+	/** Método que borra todos los correos
+	 * 
+	 * 
+	*/
+	
+	public void BorrarTablaCorreos(){
+		correo.DeleteCorreo();
+	}
+	
+	/** Método que devuelve todos los datos de la tabla correo de un Usuario
+	 * @param Usuario a consultar
+	 * @return Resulset con la tabla correo del Usuario
+	 * @throws SQLException
+	*/
+	
+	public java.sql.ResultSet ConTablaCorreoUsu(String Usu) throws SQLException{
+		java.sql.ResultSet rs;
+		rs = this.correo.Select_tabla_Usuario(Usu);
+		return rs;
+	}
+	
 	
 	/** Método que devuelve todos los datos de un correo seleccionado
 	 *@param nom_us1 nombre del usuario emisor
