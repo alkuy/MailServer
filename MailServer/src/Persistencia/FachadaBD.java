@@ -106,6 +106,20 @@ public class FachadaBD {
 		return pass;
   	}
   	
+	/** Método que devuelve el passwd de usuario segun su id
+	 * @param id id de usuario
+	 * @return Resulset con el passwd de usuario
+	 * @throws SQLException
+	*/ 	
+  	public String Devolver_passCon(int id) throws SQLException{ 		
+  		
+  		String pass = " ";
+  		java.sql.ResultSet rs;
+  	    rs = this.user.Dev_passCon(id);  	 
+  	    rs.next();
+  	  	pass = rs.getString(1);
+		return pass;
+  	}
   	
   	/**
      * Metodo que deshabilita el usuario y todas sus cuentas

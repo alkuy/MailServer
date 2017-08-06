@@ -98,9 +98,24 @@ public class Usuario {
 	 * @throws SQLException
 	*/	
 
-    public java.sql.ResultSet Dev_pass(int id) throws SQLException{
+    public java.sql.ResultSet Dev_passCon(int id) throws SQLException{
 	
 	  String seleccion = "Select password from Cuenta where id_usuario ='"+id+"'";		
+	  java.sql.Statement ps = pruebaConn.getConexion().createStatement();
+	  java.sql.ResultSet rs = ps.executeQuery(seleccion);	
+	  return rs;
+	
+     }
+    
+    /** Método que devuelve el passwd de usuario segun su id
+     * @param id id de usuario
+	 * @return Resulset con el passwd de usuario
+	 * @throws SQLException
+	*/	
+
+    public java.sql.ResultSet Dev_pass(int id) throws SQLException{
+	
+	  String seleccion = "Select pass_admin from Usuario where id_usuario ='"+id+"'";		
 	  java.sql.Statement ps = pruebaConn.getConexion().createStatement();
 	  java.sql.ResultSet rs = ps.executeQuery(seleccion);	
 	  return rs;

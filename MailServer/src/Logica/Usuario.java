@@ -293,7 +293,7 @@ public class Usuario {
 		rs.next();
 		CI = String.valueOf(rs.getInt(1));
 		int id = BD.Devolver_id(CI);
-		pass = BD.Devolver_pass(id);
+		pass = BD.Devolver_passCon(id);
 		return pass;
 	}
 	
