@@ -57,14 +57,17 @@ public class HiloLoginSocket extends Thread {
 	@Override
 	public void run(){
 		String NomUsu, NomDom, Pass, P ,msg;
+		int ID;
 		
 		try {
 			
 			NomUsu = entrada.readUTF();
 			NomDom = entrada.readUTF();
 			Pass = entrada.readUTF();
+			
+			ID = FC.IdUsuario(NomUsu);
 
-			if (FC.VerificaCuenta(NomUsu, NomDom) && FC.desOhabCuenta(Integer.valueOf(id), NomUsu, NomDom)){
+			if (FC.VerificaCuenta(NomUsu, NomDom) && FC.desOhabCuenta(Integer.valueOf(ID), NomUsu, NomDom)){
 				P = FC.ObtenPass(NomUsu);
 				if (Pass.compareTo(P) == 0)
 					msg = "Valido";
