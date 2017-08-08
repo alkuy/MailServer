@@ -26,6 +26,7 @@ import javax.swing.JScrollBar;
 import javax.swing.JPanel;
 import java.awt.Rectangle;
 import java.awt.Component;
+import javax.swing.JToggleButton;
 
 public class FrmPruebaServidor extends JInternalFrame {
 	private FachadaCon FCCon = FachadaCon.getInstancia();
@@ -37,19 +38,19 @@ public class FrmPruebaServidor extends JInternalFrame {
 	public FrmPruebaServidor() {
 		//FCCon.InciaServ();
 		
-		setBounds(20, 60, 450, 360);
+		setBounds(20, 60, 519, 360);
 		getContentPane().setLayout(null);
 		
-		JLabel lblDominios = new JLabel("Prueba del Servidor");
+		JLabel lblDominios = new JLabel("Log de Eventos");
 		lblDominios.setHorizontalAlignment(SwingConstants.CENTER);
 		lblDominios.setFont(new Font("Goudy Old Style", Font.BOLD, 24));
-		lblDominios.setBounds(22, 13, 190, 40);
+		lblDominios.setBounds(53, 13, 190, 40);
 		getContentPane().add(lblDominios);
 		
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
 		scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
-		scrollPane.setBounds(22, 66, 270, 245);
+		scrollPane.setBounds(22, 66, 305, 245);
 		getContentPane().add(scrollPane);
 		
 		JTextArea MensajeServ = new JTextArea();
@@ -58,12 +59,12 @@ public class FrmPruebaServidor extends JInternalFrame {
 		MensajeServ.setBorder(null);
 		MensajeServ.setEditable(false);
 		
-//		MessageConsole mc = new MessageConsole(MensajeServ);
-//		mc.redirectOut();
+		MessageConsole mc = new MessageConsole(MensajeServ);
+		mc.redirectOut();
 //		mc.redirectErr(Color.RED, null);
 
 		
-		JButton btnInciarServidor = new JButton("Inciar Servicio");
+		JButton btnInciarServidor = new JButton("Inciar SMTP Serv");
 		btnInciarServidor.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				//FCCon.ComenzarServ();
@@ -76,62 +77,10 @@ public class FrmPruebaServidor extends JInternalFrame {
 				}
 			}
 		});
-		btnInciarServidor.setBounds(295, 81, 127, 25);
+		btnInciarServidor.setBounds(339, 99, 145, 25);
 		getContentPane().add(btnInciarServidor);
 		
-		JButton btnNewButton = new JButton("Enviar Mail");
-		btnNewButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-//				try {
-//					FCCon.InciaCli();
-//				} catch (SQLException e3) {
-//					// TODO Bloque catch generado automáticamente
-//					e3.printStackTrace();
-//				} catch (IOException e3) {
-//					// TODO Bloque catch generado automáticamente
-//					e3.printStackTrace();
-//				} catch (MessagingException e3) {
-//					// TODO Bloque catch generado automáticamente
-//					e3.printStackTrace();
-//				} catch (UserException e3) {
-//					// TODO Bloque catch generado automáticamente
-//					e3.printStackTrace();
-//				} catch (InterruptedException e3) {
-//					// TODO Bloque catch generado automáticamente
-//					e3.printStackTrace();
-//				}
-//				try {
-//					try {
-//						FCCon.ObtenerMail();
-//					} catch (SQLException e1) {
-//						// TODO Bloque catch generado automáticamente
-//						e1.printStackTrace();
-//					}
-//				} catch (IOException e2) {
-//					// TODO Bloque catch generado automáticamente
-//					e2.printStackTrace();
-//				} catch (MessagingException e2) {
-//					// TODO Bloque catch generado automáticamente
-//					e2.printStackTrace();
-//				} catch (UserException e2) {
-//					// TODO Bloque catch generado automáticamente
-//					e2.printStackTrace();
-//				} catch (InterruptedException e2) {
-//					// TODO Bloque catch generado automáticamente
-//					e2.printStackTrace();
-//				}
-//				try {
-//					this.finalize();
-//				} catch (Throwable e1) {
-//					// TODO Bloque catch generado automáticamente
-//					e1.printStackTrace();
-//				}
-			}
-		});
-		btnNewButton.setBounds(295, 132, 127, 25);
-		getContentPane().add(btnNewButton);
-		
-		JButton btnNewButton_1 = new JButton("Detener Servicio");
+		JButton btnNewButton_1 = new JButton("Detener SMTP Serv");
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
@@ -142,7 +91,7 @@ public class FrmPruebaServidor extends JInternalFrame {
 				}
 			}
 		});
-		btnNewButton_1.setBounds(295, 178, 127, 25);
+		btnNewButton_1.setBounds(339, 158, 145, 25);
 		getContentPane().add(btnNewButton_1);
 		
 

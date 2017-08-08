@@ -39,6 +39,8 @@ public class InfoSocket extends Thread {
 				mensaje = entrada.readUTF();
 				if (mensaje.compareToIgnoreCase("Conn") == 0)
 					((HiloSocket) new HiloSocket(socket, IdSession)).start();
+				else if (mensaje.compareToIgnoreCase("Auth") == 0)
+					((HiloLoginSocket) new HiloLoginSocket(socket, IdSession)).start();
 				else
 					((HiloUsuSocket) new HiloUsuSocket(socket, IdSession)).start();
 				IdSession++;
