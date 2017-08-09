@@ -19,7 +19,7 @@ public class Correo{
 	private String asunto;
 	private String texto;
 	private int id_conversacion;
-	
+	private int Enviado;
 	
 	private Conexion pruebaConn = Conexion.getInstancia();
 	
@@ -57,6 +57,7 @@ public class Correo{
 		this.asunto = asunto;
 		this.texto = texto;
 		this.id_conversacion = id;
+		this.Enviado = 0; //Se setea en 0 debido a que el correo todavia no ha salido del servidor
 	}
 	
 	
@@ -70,9 +71,9 @@ public class Correo{
 			try{
 				java.sql.Statement stm = pruebaConn.getConexion().createStatement();
 				if (id_usuario_receptor == 0)
-					stm.execute("Insert into Correo values ('"+nom_usuario_emisor+"','"+nom_dominio_emisor+"','"+nom_usuario_receptor+"','"+nom_dominio_receptor+"','"+fecha+"','"+id_usuario_emisor+"','"+asunto+"','"+texto+"','"+id_conversacion+"')");
+					stm.execute("Insert into Correo values ('"+nom_usuario_emisor+"','"+nom_dominio_emisor+"','"+nom_usuario_receptor+"','"+nom_dominio_receptor+"','"+fecha+"','"+id_usuario_emisor+"','"+asunto+"','"+texto+"','"+id_conversacion+"','"+Enviado+"')");
 				else
-					stm.execute("Insert into Correo values ('"+nom_usuario_emisor+"','"+nom_dominio_emisor+"','"+nom_usuario_receptor+"','"+nom_dominio_receptor+"','"+fecha+"','"+id_usuario_emisor+"','"+id_usuario_receptor+"','"+asunto+"','"+texto+"','"+id_conversacion+"')");
+					stm.execute("Insert into Correo values ('"+nom_usuario_emisor+"','"+nom_dominio_emisor+"','"+nom_usuario_receptor+"','"+nom_dominio_receptor+"','"+fecha+"','"+id_usuario_emisor+"','"+id_usuario_receptor+"','"+asunto+"','"+texto+"','"+id_conversacion+"','"+Enviado+"')");
 			}
 			catch (Exception e){
 				
@@ -167,6 +168,22 @@ public class Correo{
 		stm.execute("DELETE from Correo where nom_usuario_emisor = '"+nom_us1+"' and nom_dominio_emisor = '"+nom_dom1+"' and nom_usuario_receptor = '"+nom_us2+"' and nom_dominio_receptor = '"+nom_dom2+"' and fecha ='"+fecha+"'");
     }catch (Exception e){}
 	
+	
+   }
+   
+   /**
+   * Metodo para setear un correo como eviado o no a su destinatario
+   * 1 - Enviado
+   * 0 - No Enviado
+   * @param fecha
+   * @param Enviado
+   */
+   public void Set_Enviado(String fecha, boolean Enviado){
+	
+	  try{
+		java.sql.Statement stm = pruebaConn.getConexion().createStatement();
+		stm.execute("UPDATE Correo SET Enviado = '"+Enviado+"'" + "where fecha = '"+fecha+"'");
+     }catch (Exception e){}
 	
    }
 	

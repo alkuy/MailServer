@@ -337,7 +337,16 @@ public class FachadaBD {
   	}
 	
 	
-	
+  	/**
+     * Metodo que setea como Enviado un correo cuando se remite a su Destinatario
+     * 1 - Enviado
+     * 0 - No Enviado
+     * @param fecha
+     * @param Enviado
+    */
+	public void Set_Enviado(String fecha, boolean Enviado){
+		this.correo.Set_Enviado(fecha, Enviado);
+	}
 	
 	
    /* METODOS PARA LA CLASE DOMINIO*/

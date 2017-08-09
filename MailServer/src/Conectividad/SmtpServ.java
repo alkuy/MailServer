@@ -208,7 +208,6 @@ public class SmtpServ extends Thread{
 		        			UserIdR = FCLogica.IdUsuario(NomRecp);
 		        		
 		        			System.out.println("Nuevo e-mail de " + m.getFrom()[0].toString() + " | " + "Para: " +  m.getHeader("To")[0].toString() + " | " + "Asunto: " +  m.getSubject());
-		        			System.out.println(m.getContent().toString());
 				
 		        			FCLogica.CargaCorreoBD(m.getFrom()[0].toString(), UserIdE, m.getHeader("To")[0].toString(), UserIdR, m.getSubject(),  (int)(rnd.nextDouble() * 10000), m.getContent().toString());
 		        			cont++;

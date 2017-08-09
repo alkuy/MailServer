@@ -170,6 +170,9 @@ public class Correo {
 		return rs;		
 	}
 	
+	public void Correo_Enviado(String fecha, boolean Enviado){
+		BD.Set_Enviado(fecha, Enviado);
+	}
 	
 	
 //	No va a contener los set porque en el srv no se van a cambiar los atributos,

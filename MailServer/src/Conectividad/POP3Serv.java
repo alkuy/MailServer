@@ -86,7 +86,9 @@ public class POP3Serv {
     
     public void getMailsBDUsu(String Usu) throws FolderException, Exception {
     	String mailFrom, mailTo, mailSubjet, mailText; 
-    	String NomEmi, DomEmi, NomDest, DomDest, DestPass;
+    	String NomEmi, DomEmi, NomDest, DomDest, DestPass, fecha;
+    	boolean Enviado = true;
+    	boolean SeEnvio = false;
     	int IdConv;
     	java.sql.ResultSet rs = FC.ObtieneCorreosBDUsu(Usu);
     	GreenMailUser Usuario;
@@ -103,6 +105,14 @@ public class POP3Serv {
     		mailTo = NomDest+"@"+DomDest;
     		mailSubjet = IdConv+"%"+rs.getString("asunto");
     		mailText = rs.getString("texto");
+    		fecha = rs.getString("fecha");
+    		SeEnvio = rs.getBoolean("Enviado");
+    		
+    		//Arregla la fecha para que pueda hacer el Update en la BD
+    		String anio = fecha.substring(0, fecha.indexOf(" "));
+    		String[] Arr = anio.split("-");
+    		String[] hora = fecha.split("\\s");
+    		fecha = Arr[0]+Arr[1]+Arr[2]+" "+hora[1];
     		
     		//Crea un mensaje con JavaMail
     		MimeMessage message = new MimeMessage((Session) null);
@@ -116,9 +126,11 @@ public class POP3Serv {
             //Usuario = managers.getUserManager().getUser(Usu);
             Usuario = POPServer.setUser(mailTo, Usu, DestPass);
             
-            //Almacenamos los mensaje en memoria para el INBOX de cada usuario
-            //POPServer.getManagers().getImapHostManager().getInbox(Usuario).store(message);
-            Usuario.deliver(message);
+            if (!SeEnvio){
+            	//Almacenamos los mensaje en memoria para el INBOX de cada usuario
+            	Usuario.deliver(message);
+            	FC.Correo_Enviado(fecha, Enviado);
+            }
     	}
     }
     

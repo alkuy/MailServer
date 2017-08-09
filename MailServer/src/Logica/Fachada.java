@@ -331,6 +331,11 @@ public void altaDominio(String dominio, int prioridad){
  		return rs;
  	}
  	
+ 	
+ 	public void Correo_Enviado(String fecha, boolean Enviado){
+ 		Correo C = new Correo("a", 1, "b", 2, "c", 4, false, "e");
+ 		C.Correo_Enviado(fecha, Enviado);
+ 	}
  }
 	 
  
