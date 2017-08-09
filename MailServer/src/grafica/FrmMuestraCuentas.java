@@ -1,7 +1,7 @@
 package grafica;
 import static grafica.principal.*;
+
 import java.awt.BorderLayout;
-import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.Image;
 import java.sql.SQLException;
@@ -13,7 +13,6 @@ import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.plaf.basic.BasicInternalFrameTitlePane;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
@@ -23,9 +22,7 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 
 import Logica.Fachada;
-import grafica.FrmMuestraUsuarios.CustomRenderer;
 
-import javax.swing.border.EmptyBorder;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.event.ActionListener;
@@ -36,7 +33,7 @@ public class FrmMuestraCuentas extends JInternalFrame {
 	public static String id = new String();
 	public static String nombrecuenta = new String();
 	
-	private FrmEdicionCuenta detalle;
+	//private FrmEdicionCuenta edicCuenta;
 
 	private JTable tblMuestraCuentas;
 	private static final long serialVersionUID = 1L;
@@ -57,7 +54,7 @@ public class FrmMuestraCuentas extends JInternalFrame {
 		 btnCerrar.addActionListener(new ActionListener() {
 		 	public void actionPerformed(ActionEvent arg0) {
 		 		apareceLogo();
-		 		cierraVentana(detalle);
+		 		cierraVentana(edicCuenta);
 		 		dispose();
 		 	}
 		 });
@@ -104,13 +101,13 @@ public class FrmMuestraCuentas extends JInternalFrame {
 				}else{
 				id = (String) tblMuestraCuentas.getValueAt(pos, 0);
 				nombrecuenta = (String) tblMuestraCuentas.getValueAt(pos, 1);
-				cierraVentana(detalle);
+				cierraVentana(edicCuenta);
 			
-				detalle = new FrmEdicionCuenta(); //<- asi lo tenias
+				edicCuenta = new FrmEdicionCuenta(); //<- asi lo tenias
 				
 				
 //				detalle = new FrmEdicionCuenta(Integer.valueOf(id)); //Para probar
-				abreVentana(detalle);
+				abreVentana(edicCuenta);
 				desapareceLogo();
 				//menuDesHabilitado(); //No funciona aún
 				//dispose();
@@ -153,21 +150,28 @@ public class FrmMuestraCuentas extends JInternalFrame {
 	    public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column)
 	    {
 	        Component cellComponent = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
-
-	        String estado = (String)table.getModel().getValueAt(row, 2);
-	        if ("false".equals(estado)){
-	        	setBackground(Color.GRAY);
+	        
+	        Color gricesito = new Color(240,240,240);
+	        if (row%2==0){
+	        	setBackground(gricesito);
 	        }else{
-	        	setBackground(Color.WHITE);
+	        	setBackground(Color.white);
 	        }
 	        
-	        if (hasFocus) {
+	        String estado = (String)table.getModel().getValueAt(row, 2);
+	        if ("false".equals(estado)){
+	        	setBackground(Color.gray);
+	        }
+	        
+	        if (isSelected) {
 	        	Color azulcito = new Color(47,79,79);
                 this.setBackground(azulcito);
                 this.setForeground(Color.white);
             } else {
                 this.setForeground(Color.black);
             }
+	        
+	        
 	     
 	        return cellComponent;
 	    }

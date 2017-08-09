@@ -1,17 +1,18 @@
 package grafica;
 import static grafica.principal.abreVentana;
-import java.awt.EventQueue;
+
 import java.awt.Font;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
-import java.text.NumberFormat;
+
 
 import javax.swing.ButtonGroup;
+import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JFormattedTextField;
-import javax.swing.JFrame;
+
 import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -19,8 +20,7 @@ import javax.swing.JRadioButton;
 import javax.swing.JSeparator;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
-import javax.swing.plaf.basic.BasicInternalFrameTitlePane;
-import javax.swing.plaf.basic.BasicInternalFrameUI;
+
 
 import Logica.Fachada;
 import java.awt.Color;
@@ -79,10 +79,12 @@ public class FrmNuevoUsuario extends JInternalFrame {
 		 		dispose();
 		 	}
 		 });
-		 btnCerrar.setIcon(new ImageIcon(FrmNuevoDominio.class.getResource("/imagenes/cerrar.png")));
-		 btnCerrar.setBounds(10, 0, 35, 35);
-		 getContentPane().add(btnCerrar);
-		 /*FIN DE BOTON DE CERRAR*/
+		 btnCerrar.setBounds(0, 0, 19, 19);
+			ImageIcon iconocerrar = new ImageIcon(principal.class.getResource("/imagenes/cerrar.png"));
+			Icon iconClose = new ImageIcon(iconocerrar.getImage().getScaledInstance(btnCerrar.getWidth(),btnCerrar.getHeight(),Image.SCALE_DEFAULT));
+			btnCerrar.setIcon(iconClose);
+			getContentPane().add(btnCerrar);
+			 /*FIN DE BOTON DE CERRAR*/
 		
 		
 		/*Nombre*/

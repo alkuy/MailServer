@@ -52,6 +52,8 @@ public class principal extends JFrame {
 	public static FrmMuestraUsuarios frmmuestrausuarios;
 	private FrmBuscaUsuario frmbuscausuario;
 	private FrmPruebaServidor frmPruebaServidor;
+	public static FrmEdicionUsuario EdicUsuario;
+	public static FrmEdicionCuenta edicCuenta;
 	
 	
 	FachadaCon FC = FachadaCon.getInstancia();
@@ -374,6 +376,8 @@ public class principal extends JFrame {
 		cierraVentana(frmmuestradominios);
 		cierraVentana(frmPruebaServidor);
 		cierraVentana(frmmuestrausuarios);
+		cierraVentana(EdicUsuario);
+		cierraVentana(edicCuenta);
 		
 		cierraVentana(frmbuscausuario);
 		

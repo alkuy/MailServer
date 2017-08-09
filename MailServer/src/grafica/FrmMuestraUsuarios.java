@@ -4,11 +4,11 @@ import static grafica.principal.abreVentana;
 import static grafica.principal.apareceLogo;
 import static grafica.principal.cierraVentana;
 import static grafica.principal.desapareceLogo;
+import static grafica.principal.EdicUsuario;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
-import java.awt.EventQueue;
 import java.sql.SQLException;
 
 import javax.swing.Icon;
@@ -27,7 +27,7 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 
 import Logica.Fachada;
-import Logica.Usuario;
+
 
 import java.awt.Font;
 import java.awt.Image;
@@ -39,7 +39,7 @@ public class FrmMuestraUsuarios extends JInternalFrame {
 
 	public static String id = new String();
 	public static int desdemuestra = 0;
-	private FrmEdicionUsuario detalle;
+	//private FrmEdicionUsuario EdicUsuario;
 	/**
 	 * 
 	 */
@@ -58,7 +58,7 @@ public class FrmMuestraUsuarios extends JInternalFrame {
 		 btnCerrar.addActionListener(new ActionListener() {
 		 	public void actionPerformed(ActionEvent arg0) {
 		 		apareceLogo();
-		 		cierraVentana(detalle);
+		 		cierraVentana(EdicUsuario);
 		 		dispose();
 		 	}
 		 });
@@ -95,10 +95,10 @@ public class FrmMuestraUsuarios extends JInternalFrame {
 				}else{
 					id = (String) tblMUsuarios.getValueAt(pos, 0);
 					//System.out.println(id);
-					cierraVentana(detalle);
+					cierraVentana(EdicUsuario);
 					desdemuestra = 1; //Utilizad para avisarle que vengo desde el listado y no desde busqyeda 
-					detalle = new FrmEdicionUsuario(id); //detalle = new FrmEdicionUsuario();
-					abreVentana(detalle);
+					EdicUsuario = new FrmEdicionUsuario(id); //detalle = new FrmEdicionUsuario();
+					abreVentana(EdicUsuario);
 					desapareceLogo();
 				}
 			}
@@ -155,14 +155,19 @@ public class FrmMuestraUsuarios extends JInternalFrame {
 	    {
 	        Component cellComponent = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
 	      
-	        String estado = (String)table.getModel().getValueAt(row, 2);
-	        if ("false".equals(estado)){
-	        	setBackground(Color.GRAY);
+	        Color gricesito = new Color(240,240,240);
+	        if (row%2==0){
+	        	setBackground(gricesito);
 	        }else{
-	        	setBackground(Color.WHITE);
+	        	setBackground(Color.white);
 	        }
 	        
-	        if (hasFocus) {
+	        String estado = (String)table.getModel().getValueAt(row, 2);
+	        if ("false".equals(estado)){
+	        	setBackground(Color.gray);
+	        }
+	        
+	        if (isSelected) {
                 // this cell is the anchor and the table has the focus
 	        	Color azulcito = new Color(47,79,79);
                 this.setBackground(azulcito);
