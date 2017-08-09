@@ -215,7 +215,7 @@ public class SmtpServ extends Thread{
 		        	}
 
 		        }
-//		        this.cantMails = messages.length;
+
 				try {
 					mailServer.purgeEmailFromAllMailboxes();
 					Thread.sleep(5000);
