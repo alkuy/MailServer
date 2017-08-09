@@ -19,7 +19,7 @@ public class Correo{
 	private String asunto;
 	private String texto;
 	private int id_conversacion;
-	private int Enviado;
+	private boolean Enviado;
 	
 	private Conexion pruebaConn = Conexion.getInstancia();
 	
@@ -57,7 +57,7 @@ public class Correo{
 		this.asunto = asunto;
 		this.texto = texto;
 		this.id_conversacion = id;
-		this.Enviado = 0; //Se setea en 0 debido a que el correo todavia no ha salido del servidor
+		this.Enviado = false; //Se setea en 0 debido a que el correo todavia no ha salido del servidor
 	}
 	
 	
