@@ -24,7 +24,7 @@ import Persistencia.FachadaBD;
 
 public class Usuarios {
 	
-	private Hashtable<String, Usuario> hUsu;
+	private Hashtable<String, Usuario> hUsu, admins;
 	
 	FachadaBD BD = FachadaBD.getInstancia();
 	
@@ -32,6 +32,7 @@ public class Usuarios {
 	public Usuarios() {
 		try {
 			this.hUsu = cargaDesdeBD();
+			//this.admins = cargaAdminsDesdeBD();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -111,7 +112,7 @@ public class Usuarios {
 		while(rs.next()){
 			Usuario usu = new Usuario();
 			usuarios.put(rs.getString("id_usuario"), usu.cargaDesdeBD(rs.getInt("id_usuario"), rs.getString("pass_admin"), rs.getBoolean("habilitado")));
-//			System.out.println(rs.getString("id_usuario"));
+	
 		}
 		
 		return usuarios;
@@ -144,15 +145,63 @@ public class Usuarios {
 		while(eUsu.hasMoreElements()){
 			usu = eUsu.nextElement();
 			boolean hab = usu.getHabilitado();
-			//System.out.println(usu.getHabilitado());
 			String habi = String.valueOf(hab);
-			
+				
 			String carga [] = {usu.getCi(), usu.getNombre()+" "+usu.getApellido(), habi};
-			
-			modelo.addRow(carga);
+			if(usu.getPass_admin().equals("null")){
+				modelo.addRow(carga);
+			}
 		}
 		
 		return modelo;
+	}
+	
+	
+	/**
+	 * Table Model con Administradores
+	 * @return
+	 */
+	public DefaultTableModel DevTablaAdmins(){
+		String col[] = {"Cédula","Nombre", "Habilitado"};
+		DefaultTableModel modelo = new DefaultTableModel(col,0);
+		
+		Enumeration<Usuario> eUsu = hUsu.elements();
+		Usuario usu;
+		
+		while(eUsu.hasMoreElements()){
+			usu = eUsu.nextElement();
+			boolean hab = usu.getHabilitado();
+			String habi = String.valueOf(hab);
+			
+			String carga [] = {usu.getCi(), usu.getNombre()+" "+usu.getApellido(), habi};
+			if(!usu.getPass_admin().equals("null")){
+				modelo.addRow(carga);
+			}	
+		}
+		
+		return modelo;
+	}
+	
+	/**
+	 * Coprueba que no existan usuarioss ingresados en la base. 
+	 * Utilizada para primer ingreso
+	 * @return true si la base no riene ingresado usuarios
+	 * @throws SQLException
+	 */
+	public boolean CompurebaVacio() throws SQLException{
+		ResultSet rs = null;
+		try {
+			rs = BD.DevTodoUsuario();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		if (!rs.next()){
+			return true;
+		}
+		return false;
+		
 	}
 	
 	

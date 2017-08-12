@@ -336,6 +336,50 @@ public void altaDominio(String dominio, int prioridad){
  		Correo C = new Correo("a", 1, "b", 2, "c", 4, false, "e");
  		C.Correo_Enviado(fecha, Enviado);
  	}
+ 	
+ 	/*public String getPassAdmin(String id){
+ 		String pass=null;
+ 		pass = 
+ 		return pass;
+ 	}*/
+ 	
+ 	/**
+ 	 * Trae tabla con Administrdores
+ 	 * @return
+ 	 * @throws SQLException
+ 	 */
+ 	public DefaultTableModel DevTablaAdmins() throws SQLException{
+		DefaultTableModel modelo;
+		Usuarios admin = new Usuarios();
+		modelo = admin.DevTablaAdmins();
+		return modelo;
+	}
+ 	
+ 	/**
+ 	 * Se fija si no hay ningun registro en la base 
+ 	 * @return True si no hay registros
+ 	 */
+ 	public boolean BaseNueva(){
+ 		Usuarios user = new Usuarios();
+ 		boolean es = false;
+		try {
+			es = user.CompurebaVacio();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+ 		return es;
+ 	}
+ 	
+ 	/**
+ 	 * Cambia el password del asministrador
+ 	 * @param id
+ 	 * @param pass
+ 	 */
+ 	public void cambiaPassAdmin(int id, String pass){
+ 		Usuario user = new Usuario();
+ 		user.cambiaPassAdmin(id, pass);
+ 	}
  }
 	 
  

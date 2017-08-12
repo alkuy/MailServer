@@ -609,6 +609,23 @@ public class FachadaBD {
 		return rs;
 	}
 	
+	/**
+	 * Trae todos los registros de la tabla Usuarios
+	 * @return
+	 * @throws SQLException
+	 */
+	public java.sql.ResultSet DevTodoUsuario() throws SQLException{
+		Usuario user = new Usuario();
+		java.sql.ResultSet rs;
+		rs = user.TraeTodo(); 
+		return rs;
+	}
+	
+
+	public void cambiaPassAdmin(int id, String passwd){
+		Usuario user = new Usuario();
+		user.cambiar_passwd(id, passwd);
+	}
 	
 
 }// fin clase FachadaBD

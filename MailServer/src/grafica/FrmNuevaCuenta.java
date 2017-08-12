@@ -1,5 +1,7 @@
 package grafica;
 import static grafica.FrmNuevoUsuario.*; //Para traer los datos del formulario usuario
+import static grafica.principal.menuDesHabilitado;
+import static grafica.principal.menuHabilitado;
 
 import java.awt.Font;
 import java.awt.Image;
@@ -56,6 +58,7 @@ public class FrmNuevaCuenta extends JInternalFrame {
 		 btnCerrar.addActionListener(new ActionListener() {
 		 	public void actionPerformed(ActionEvent arg0) {
 		 		limpiaCampos();
+		 		menuHabilitado();
 		 		dispose();
 		 	}
 		 });
@@ -133,6 +136,7 @@ public class FrmNuevaCuenta extends JInternalFrame {
 			txtCNdocumento.setEnabled(false);
 			rdbtnCNpersona.setSelected(true);
 			rdbtnGrupoUOficina.setEnabled(false);
+			menuDesHabilitado();
 		}
 		
 		
@@ -252,7 +256,6 @@ public class FrmNuevaCuenta extends JInternalFrame {
 	}
 	
 	public void limpiaCampos(){
-		
 		txtCNdocumento.setText(null);
 		txtCNnombre.setText(null);
 		grpbtnSelectTipoCuenta.clearSelection();
@@ -268,6 +271,7 @@ public class FrmNuevaCuenta extends JInternalFrame {
 		      dispose();
 		    } else if (response == JOptionPane.YES_OPTION) {
 		    	limpiaCampos();
+		    	menuHabilitado();
 		    } else if (response == JOptionPane.CLOSED_OPTION) {
 		      System.out.println("JOptionPane closed");
 		    }

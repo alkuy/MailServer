@@ -251,6 +251,7 @@ public class Usuario {
 		this.habilitado = habilitado;
 	}
 	
+	
 	/** Metodo de autenticacion de login inicial
 	 * 
 	 * @param usuario
@@ -349,6 +350,11 @@ public class Usuario {
 		return usu;
 	}
 	
+	/**
+	 * Devuelve el id del usuario a partir de su cedula
+	 * @param ci (documento)
+	 * @return id del usuario
+	 */
 	public int trae_id(String ci){
 		int id = 0;
 		try {
@@ -359,4 +365,14 @@ public class Usuario {
 		}
 		return id;
 	}
+	
+	/**
+	 * Cambia el password de administrador
+	 * @param id
+	 * @param pass
+	 */
+	public void cambiaPassAdmin(int id, String pass){
+		BD.cambiaPassAdmin(id, pass);
+	}
+	
 }

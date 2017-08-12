@@ -154,6 +154,22 @@ public class Usuario {
       }catch (Exception e){}
 	
     }
+   
+   /**
+    * Trae el recordSet completo de usuario
+    * @return
+    * @throws SQLException
+    */
+   public java.sql.ResultSet TraeTodo() throws SQLException{
+		
+		  String seleccion = "Select * from Usuario";		
+		  java.sql.Statement ps = pruebaConn.getConexion().createStatement();
+		  java.sql.ResultSet rs = ps.executeQuery(seleccion);	
+		  return rs;
+		
+	     }
+   
+  
 	
 	
 }// fin clase Usuario

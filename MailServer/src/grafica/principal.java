@@ -29,6 +29,7 @@ import java.awt.Dimension;
 import java.awt.Component;
 
 import Conectividad.FachadaCon;
+import Logica.Fachada;
 
 public class principal extends JFrame {
 
@@ -51,15 +52,16 @@ public class principal extends JFrame {
 	private FrmNuevoDominio frmdominionuevo;
 	public static FrmMuestraUsuarios frmmuestrausuarios;
 	private FrmBuscaUsuario frmbuscausuario;
+	private FrmMuestraAdmins frmadmins;
 	private FrmPruebaServidor frmPruebaServidor;
 	public static FrmEdicionUsuario EdicUsuario;
 	public static FrmEdicionCuenta edicCuenta;
+	public static FrmAdminCambiaPass AdminPass;
 	
-	
+	Fachada FL = Fachada.getInstancia();
 	FachadaCon FC = FachadaCon.getInstancia();
-	//private FrmEdicionUsuario frmEdicionUsuario;
-	//private FrmEdicionCuenta frmEdicionCuenta;
-	
+	private JTextField txtApellidoAdmin;
+	private JTextField txtNombreAdmin;
 	
 	
 	public static JPanel getInstancia() {
@@ -129,6 +131,9 @@ public class principal extends JFrame {
 		JMenuItem mntmDominios = new JMenuItem("Ver Dominios");
 		mnConfiguracion.add(mntmDominios);
 		
+		JMenuItem mntmAdministradores = new JMenuItem("Administradores");
+		mnConfiguracion.add(mntmAdministradores);
+		
 		JMenuItem mntmPruebaServidor = new JMenuItem("PruebaServidor");
 		mntmPruebaServidor.setBorder(null);
 		mntmPruebaServidor.setMaximumSize(new Dimension(145, 56));
@@ -178,7 +183,7 @@ public class principal extends JFrame {
 		VentPrincipal.add(ImgKeyLog);
 		
 		JLabel lblLogin = new JLabel("LogIn");
-		lblLogin.setBounds(120, 100, 208, 30);
+		lblLogin.setBounds(120, 139, 208, 30);
 		VentPrincipal.add(lblLogin);
 		lblLogin.setHorizontalAlignment(SwingConstants.CENTER);
 		lblLogin.setFont(new Font("Goudy Old Style", Font.BOLD, 28));
@@ -192,6 +197,70 @@ public class principal extends JFrame {
 		ImagenLogo.setBounds(521, 81, 362, 248);
 		VentPrincipal.add(ImagenLogo);
 		
+		JLabel lblDocumento = new JLabel("(Documento)");
+		lblDocumento.setHorizontalAlignment(SwingConstants.CENTER);
+		lblDocumento.setFont(new Font("Goudy Old Style", Font.BOLD, 14));
+		lblDocumento.setBounds(340, 179, 88, 30);
+		VentPrincipal.add(lblDocumento);
+		lblDocumento.setVisible(false);
+
+		
+		JLabel lblPrimer = new JLabel("Primer Ingreso");
+		lblPrimer.setHorizontalAlignment(SwingConstants.CENTER);
+		lblPrimer.setFont(new Font("Goudy Old Style", Font.BOLD, 28));
+		lblPrimer.setBounds(108, 371, 208, 30);
+		VentPrincipal.add(lblPrimer);
+		
+		txtApellidoAdmin = new JTextField();
+		txtApellidoAdmin.setBounds(140, 109, 200, 30);
+		VentPrincipal.add(txtApellidoAdmin);
+		txtApellidoAdmin.setColumns(10);
+		txtApellidoAdmin.setVisible(false);
+		
+		txtNombreAdmin = new JTextField();
+		txtNombreAdmin.setColumns(10);
+		txtNombreAdmin.setBounds(140, 64, 200, 30);
+		VentPrincipal.add(txtNombreAdmin);
+		txtNombreAdmin.setVisible(false);
+		
+		JLabel lblApellido = new JLabel("Apellido");
+		lblApellido.setFont(new Font("Goudy Old Style", Font.BOLD, 15));
+		lblApellido.setBounds(74, 112, 69, 22);
+		VentPrincipal.add(lblApellido);
+		lblApellido.setVisible(false);
+		
+		JLabel lblNombre = new JLabel("Nombre");
+		lblNombre.setFont(new Font("Goudy Old Style", Font.BOLD, 15));
+		lblNombre.setBounds(74, 68, 69, 21);
+		lblNombre.setVisible(false);
+		VentPrincipal.add(lblNombre);
+		
+		JLabel lblIngreseSusDatos = new JLabel("Ingrese sus datos y una contrase\u00F1a");
+		lblIngreseSusDatos.setFont(new Font("Goudy Old Style", Font.BOLD, 15));
+		lblIngreseSusDatos.setBounds(118, 399, 257, 30);
+		lblIngreseSusDatos.setVisible(false);
+		VentPrincipal.add(lblIngreseSusDatos);
+		
+		JLabel lblTuNombreDe = new JLabel("Tu nombre de usuario ser\u00E1 tu n\u00FAmero de documento");
+		lblTuNombreDe.setFont(new Font("Goudy Old Style", Font.BOLD, 15));
+		lblTuNombreDe.setBounds(68, 429, 339, 44);
+		VentPrincipal.add(lblTuNombreDe);
+		lblTuNombreDe.setVisible(false);
+		lblPrimer.setVisible(false);
+		
+		if(FL.BaseNueva()){
+			JOptionPane.showMessageDialog(null, "Bienvenido a EDUMAIL. Ingrese usuario y password nuevos. Usuario debe ser su documento");
+			lblPrimer.setVisible(true);
+			lblDocumento.setVisible(true);
+			lblNombre.setVisible(true);
+			lblApellido.setVisible(true);
+			txtNombreAdmin.setVisible(true);
+			txtApellidoAdmin.setVisible(true);
+			lblLogin.setVisible(false);
+			lblIngreseSusDatos.setVisible(true);
+			lblTuNombreDe.setVisible(true);
+		}
+		
 		
 		/*La barra es invisible al comienzo hasta que se loguea el usuario*/
 		menuBar.setVisible(false);
@@ -202,29 +271,42 @@ public class principal extends JFrame {
 				
 				Verificaciones verifica = new Verificaciones();
 		
-		try{
-			
-			 if (verifica.verifica_admin(txtLOGusuario.getText(),passwordField.getText())){
-				
-				ImgUserLog.setVisible(false);
-				ImgKeyLog.setVisible(false);
-				txtLOGusuario.setVisible(false);
-				passwordField.setVisible(false);
-				btnNewButton.setVisible(false);
-				lblLogin.setVisible(false);
-				menuBar.setVisible(true);
+				try{
+					if(FL.BaseNueva()){
+						boolean continua = true;
+						if(!verifica.verificaCedula(txtLOGusuario))continua=false;
+						if(!verifica.cant_caracteres(txtNombreAdmin, 20, 1))continua=false;
+						if(!verifica.cant_caracteres(txtApellidoAdmin, 20, 1))continua=false;
+						if(!verifica.cant_caracteres(passwordField, 20, 1))continua=false;
+						
+						if(continua){
+							String nombreAdmin = txtNombreAdmin.getText();
+							String apellidoAdmin = txtApellidoAdmin.getText();
+							ImgUserLog.setVisible(false);ImgKeyLog.setVisible(false);txtLOGusuario.setVisible(false); passwordField.setVisible(false);
+							btnNewButton.setVisible(false); lblLogin.setVisible(false); lblPrimer.setVisible(false); lblIngreseSusDatos.setVisible(false); lblDocumento.setVisible(false);
+							lblNombre.setVisible(false); lblApellido.setVisible(false); txtNombreAdmin.setVisible(false); txtApellidoAdmin.setVisible(false);
+							lblTuNombreDe.setVisible(false); menuBar.setVisible(true);
+							FL.altaUsuarioAdmin(txtLOGusuario.getText(), nombreAdmin, apellidoAdmin, passwordField.getText(), null, null, null, null, null);
+						}
+					}else{
 					
-			 } else {
-				 
-				 passwordField.setText(null);
-				
-				 JOptionPane.showMessageDialog(null, "Usuario y/o contraseña incorrectos");
-				
-			        }
-		  
-		
-		    } catch (Exception d){ }
-		
+						if (verifica.verifica_admin(txtLOGusuario.getText(),passwordField.getText())){
+						
+							ImgUserLog.setVisible(false);
+							ImgKeyLog.setVisible(false);
+							txtLOGusuario.setVisible(false);
+							passwordField.setVisible(false);
+							btnNewButton.setVisible(false);
+							lblLogin.setVisible(false);
+							menuBar.setVisible(true);
+						}else{
+							passwordField.setText(null);
+							JOptionPane.showMessageDialog(null, "Usuario y/o contraseña incorrectos");
+						
+					    }
+				  
+					}
+				 } catch (Exception d){ }		
 			}
 		});
 
@@ -315,6 +397,15 @@ public class principal extends JFrame {
 			}
 		});
 		
+		mntmAdministradores.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				cierraTodo();
+				frmadmins = new FrmMuestraAdmins();
+				abreVentana(frmadmins);
+				
+			}
+		});
+		
 		/*################   FIN  -   BOTONES D BARRA DE MENU  ###############################*/
 		/*####################################################################################*/
 		
@@ -362,11 +453,12 @@ public class principal extends JFrame {
 	}
 	/*Solucionar esto. Quiero deshabilitar menuItem cuando abro determinada ventana*/
 	public static void menuHabilitado(){
-		menuBar.setEnabled(true);
+		menuBar.setVisible(true);
 	}
 	public static void menuDesHabilitado(){
-		VentPrincipal.setEnabled(false);
+		menuBar.setVisible(false);
 	}
+	
 	
 	public void cierraTodo(){
 		cierraVentana(frmusuario);
@@ -378,8 +470,9 @@ public class principal extends JFrame {
 		cierraVentana(frmmuestrausuarios);
 		cierraVentana(EdicUsuario);
 		cierraVentana(edicCuenta);
-		
+		cierraVentana(frmadmins);
 		cierraVentana(frmbuscausuario);
+		cierraVentana(AdminPass);
 		
 	}
 }
