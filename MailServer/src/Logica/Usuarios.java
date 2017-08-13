@@ -15,8 +15,7 @@ import javax.swing.table.TableCellRenderer;
 
 import Persistencia.FachadaBD;
 
-/** Clase de ejemplo que muestra la sintaxis
- * elemental de un programa en java
+/** Clase para el diccionario de los usuarios
  * @author 
  * @version 1.0
 */ 
@@ -32,12 +31,9 @@ public class Usuarios {
 	public Usuarios() {
 		try {
 			this.hUsu = cargaDesdeBD();
-			//this.admins = cargaAdminsDesdeBD();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		//this.hUsu = new Hashtable<>();
 	}
 	
 	/** Método que determina si en el diccionario de Usuarios existe un Usuario con la clave <b>id_usuario</b>.
@@ -64,12 +60,16 @@ public class Usuarios {
 		return this.hUsu.get(String.valueOf(id_usuario));
 	}
 	
+	/** Método que retorna el ID del usuario con la CI especificada
+	 * <BR><b>Precondición</b>: el usuario es miembro del diccionario.</BR>
+	 * @param ci cédula del usuario
+	 * @return id de usuario
+	 */
 	public int getID(String ci){
 		Enumeration<Usuario> eUsu = hUsu.elements();
 		Usuario usu = new Usuario();
 		while(eUsu.hasMoreElements()){
 			usu = eUsu.nextElement();
-//			System.out.println(usu.getId_usuario() + " " + usu.getCi() + " " + ci);
 			if(usu.getCi() != null && usu.getCi().equals(ci)){
 				return usu.getId_usuario();
 			}
@@ -82,9 +82,7 @@ public class Usuarios {
 	 * @param usu usuario a modificar en la colección Usuarios.
 	 * @return No retorna nada. */
 	public void modify(int id_usuario, String ci, String nombre, String apellido, String calle, 
-			String nro, String apto/*, String numTel1, String numTel2*/, boolean habilitado){
-//		delete(usu.getNom_usuario());
-//		this.hUsu.put(usu.getNom_usuario(), usu);
+			String nro, String apto, boolean habilitado){
 		this.find(id_usuario).setNombre(nombre);
 		this.find(id_usuario).setApellido(apellido);
 		this.find(id_usuario).setCalle(calle);
@@ -103,6 +101,11 @@ public class Usuarios {
 		this.hUsu.remove(nom_usuario);
 	}
 	
+	/** Método que carga la colección de usuarios desde la base de datos.
+	 * 
+	 * @return Diccionario de usuarios.
+	 * @throws SQLException
+	 */
 	public Hashtable<String, Usuario> cargaDesdeBD() throws SQLException{
 		Hashtable<String, Usuario> usuarios = new Hashtable<String, Usuario>();
 		ResultSet rs = null;
@@ -117,24 +120,17 @@ public class Usuarios {
 		
 		return usuarios;
 	}
-
 	
-	public void imprimirConsola (Hashtable<String, Usuario> usus){
-		Enumeration<String> e = usus.keys();
-		
-		System.out.println("IMPRIMIENDO");
-		
-		while(e.hasMoreElements()){
-			String elem = e.nextElement();
-			System.out.println(elem);
-			
-		}
-	}
-	
+	/** Método que retorna la colección de usuarios
+	 * @return Hashtable
+	 */
 	public Hashtable<String, Usuario> getColection(){
 		return hUsu;
 	}
 	
+	/** Carga la tabla con la cédula y el nombre del usuario 
+	 * @return TableModel
+	 */
 	public DefaultTableModel DevTablaUsuario(){
 		String col[] = {"Cédula","Nombre", "Habilitado"};
 		DefaultTableModel modelo = new DefaultTableModel(col,0);
@@ -159,7 +155,7 @@ public class Usuarios {
 	
 	/**
 	 * Table Model con Administradores
-	 * @return
+	 * @return Table Model
 	 */
 	public DefaultTableModel DevTablaAdmins(){
 		String col[] = {"Cédula","Nombre", "Habilitado"};

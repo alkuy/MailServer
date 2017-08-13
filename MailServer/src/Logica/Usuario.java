@@ -236,17 +236,23 @@ public class Usuario {
 		this.prefiles = prefiles;
 	}
 	
-	
+	/** Carga el set de teléfonos al set de teléfonos del usuario.
+	 * @param tels (set de teléfonos)
+	 */
 	public void setTels(Telefonos tels) {
 		this.tels = tels;
 	}
 	
-	//Metodo para verificar si la cedula y la contraseña ingresadas son correctas
-	
+	/** Método que retorna si el usuario está habilitado o no.
+	 * @return True: habilitado. False: inhabilitado.
+	 */
 	public boolean getHabilitado() {
 		return habilitado;
 	}
 
+	/** Método para modificar el campo de habilitado de un usuario.
+	 * @param habilitado (boolean)
+	 */
 	public void setHabilitado(boolean habilitado) {
 		this.habilitado = habilitado;
 	}
@@ -299,34 +305,29 @@ public class Usuario {
 	}
 	
 	
-	
+	/** Método que retorna un usuario desde la base de datos (persistencia).
+	 * @param id_usuario
+	 * @param pass_admin
+	 * @param habilitado
+	 * @return Usuario
+	 * @throws SQLException
+	 */
 	public Usuario cargaDesdeBD(int id_usuario, String pass_admin, boolean habilitado) throws SQLException{
 		Usuario usu = new Usuario();
-//		System.out.println("Persona " + id_usuario);
-		//Se crea Resultset(rs) de la persona correspondiente a id_usuario
 		ResultSet rs = BD.ConFilaPer(id_usuario);
 	
 		if(!pass_admin.equals(null)){
-			//System.out.println("ES UN ADMIN " + pass_admin);
 			usu.pass_admin = pass_admin;
 		}
 		
 		while (rs.next()){
 			if(!rs.wasNull()){
-				//Si el rs no es null entonces es una persona y se cargan los datos de persona.
-//				System.out.println("PERSONA");
 				usu.id_usuario = rs.getInt("id_usuario");
-				//System.out.println("Persona\n " + rs.getInt("cedula"));
 				usu.ci = String.valueOf(rs.getInt("cedula"));
-				//System.out.println("Persona\n " + rs.getString("nombre"));
 				usu.nombre = rs.getString("nombre");
-				//System.out.println("Persona\n " + rs.getString("apellido"));
 				usu.apellido = rs.getString("apellido");
-				//System.out.println("Persona\n " + rs.getString("calle"));
 				usu.calle = rs.getString("calle");
-				//System.out.println("Persona\n " + rs.getString("nro_puerta"));
 				usu.nro_puerta = rs.getString("nro_puerta");
-				//System.out.println("Persona\n " + rs.getString("apto"));
 				usu.apto = rs.getString("apto");
 				usu.habilitado = habilitado;
 				
@@ -338,8 +339,6 @@ public class Usuario {
 				
 			}
 			else{
-				//El rs es null entonces es una oficina y se carga el nombre de la oficina.
-//				System.out.println("OFICINA");
 				rs = BD.ConFilaOfi(usu.id_usuario);
 				
 				usu.id_usuario = rs.getInt("id_usuario");
