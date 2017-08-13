@@ -255,6 +255,7 @@ public class FrmNuevaCuenta extends JInternalFrame {
 		getContentPane().add(btnCNingresar);		
 	}
 	
+	
 	public void limpiaCampos(){
 		txtCNdocumento.setText(null);
 		txtCNnombre.setText(null);
@@ -263,15 +264,16 @@ public class FrmNuevaCuenta extends JInternalFrame {
 		rdbtnGrupoUOficina.setEnabled(true);
 		lblCamposErrores.setVisible(false);
 	}
-	
+	 
 	public void seguirEditando(){
 		int response = JOptionPane.showConfirmDialog(null, "La cuenta se cargo, desea seguir ingresando?", "Cuenta nueva ingresada",
 		        JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
 		    if (response == JOptionPane.NO_OPTION) {
-		      dispose();
+		    	menuHabilitado();
+		    	dispose();
 		    } else if (response == JOptionPane.YES_OPTION) {
 		    	limpiaCampos();
-		    	menuHabilitado();
+		    	//menuHabilitado();
 		    } else if (response == JOptionPane.CLOSED_OPTION) {
 		      System.out.println("JOptionPane closed");
 		    }
