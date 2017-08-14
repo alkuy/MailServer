@@ -30,9 +30,10 @@ public class HiloSocket extends Thread{
 
 	@Override
 	public void run(){
-		java.sql.ResultSet rs;
-		String NomDom, respuesta;
-		int Prioridad;
+		java.sql.ResultSet rs, rsUsu;
+		String NomDom, NomUsu, DomUsu, CuentaUsu, Nombre, Apellido, NomComp;
+		int Prioridad, Id;
+		NomComp = "";
 		
 		try {
 			rs = BD.ConTablaDom();
@@ -40,9 +41,29 @@ public class HiloSocket extends Thread{
 				NomDom = rs.getString("nom_dominio");
 				Prioridad = rs.getInt("prioridad");
 				salida.writeUTF(NomDom);
-				//respuesta = entrada.readLine();
 				salida.writeInt(Prioridad);
-				//respuesta = entrada.readLine();
+			}
+			salida.writeUTF("finDom");
+		} catch (IOException | SQLException e){	}
+		
+		
+		try {
+			rs = BD.ConTablaCuenta();
+		
+			while (rs.next()){
+				NomUsu = rs.getString("nom_usuario");
+				DomUsu = rs.getString("nom_dominio");
+				CuentaUsu = NomUsu+"@"+DomUsu;
+				Id = rs.getInt("id_usuario");
+				
+				rsUsu = BD.ConFilaPer(Id);
+				while(rsUsu.next()){
+					Nombre = rsUsu.getString("nombre");
+					Apellido = rsUsu.getString("apellido");
+					NomComp = Nombre+" "+Apellido;
+				}
+				salida.writeUTF(NomComp);
+				salida.writeUTF(CuentaUsu);
 			}
 			salida.writeUTF("fin");
 		} catch (IOException | SQLException e){	}
