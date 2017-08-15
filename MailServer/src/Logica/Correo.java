@@ -60,10 +60,10 @@ public class Correo {
 		int dia = Calendario.get(Calendar.DAY_OF_MONTH);
 		java.sql.Time sqlTime = new java.sql.Time(lnMilisegundos);
 		if (mes < 10){
-			this.fecha = anio+"-0"+mes+"-"+dia+" "+sqlTime;
+			this.fecha = anio+"0"+mes+dia+" "+sqlTime;
 		}
 		else
-			this.fecha = anio+"-"+mes+"-"+dia+" "+sqlTime;
+			this.fecha = anio+mes+dia+" "+sqlTime;
 	}
 
 	/**
