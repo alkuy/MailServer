@@ -94,6 +94,10 @@ public class principal extends JFrame {
 		/*······························*/
 		/*MENU ARRIBA PRINCIPAL*/
 		/*······························*/
+		
+		
+		
+		//FL.cambiaPassCuenta("diego","ces", "44903589", "44903589");
 		menuBar = new JMenuBar();
 		menuBar.setBounds(0, 0, 982, 21);
 		VentPrincipal.add(menuBar);

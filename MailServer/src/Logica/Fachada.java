@@ -277,6 +277,19 @@ public void altaDominio(String dominio, int prioridad){
  		hUsu.find(id).getCuentas().resetPass(id, nom_us, nom_dom, pass);
  	}
  	
+ 	
+ 	
+	public void cambiaPassCuenta(String nom_us, String nom_dom, String passviejo, String passNuevo){
+ 		//System.out.println(id);
+		
+		int id = this.trae_id(passviejo);
+ 		hUsu.find(id).getCuentas().cambiaPass(nom_us, nom_dom, passNuevo);
+ 	}
+ 	
+ 	
+ 	
+ 	
+ 	
  	public void deshabCuenta(int id, String nom_us, String nom_dom, boolean habilitada){
  		hUsu.find(id).getCuentas().deshabCuenta(id, nom_us, nom_dom, habilitada);
  	}

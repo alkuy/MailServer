@@ -180,6 +180,22 @@ public class Cuentas {
 		}
 	}
 	
+	public void cambiaPass(String nom_us, String nom_dom, String pass){
+		Iterator<Cuenta> iteCuentas = this.setCuentas.iterator();
+		while(iteCuentas.hasNext()){
+			Cuenta auxCuenta = iteCuentas.next();
+			if(auxCuenta.getNom_u().equals(nom_us) && auxCuenta.getDominio().equals(nom_dom)){
+				auxCuenta.setContraseña_cuenta(pass);
+				BD.Cambia_Psswd(nom_us, nom_dom, pass);
+			}
+		}
+	}
+	
+	
+	
+	
+	
+	
 	public void deshabCuenta(int id, String nom_us, String nom_dom, boolean habilitada){
 		Iterator<Cuenta> iteCuentas = this.setCuentas.iterator();
 		while(iteCuentas.hasNext()){

@@ -77,6 +77,8 @@ public class Usuarios {
 		return 0;
 	}
 	
+	
+		
 	/** Método que sustituye el viejo usuario en el diccionario por el nuevo usuario.
 	 * <b>Precondición</b>: el usuario es miembro del diccionario.
 	 * @param usu usuario a modificar en la colección Usuarios.

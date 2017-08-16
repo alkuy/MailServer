@@ -444,7 +444,14 @@ public class FachadaBD {
 	* @exception Exception
 	*/
 	public void Modifica_cuentaPS (int id, String nom_us, String nom_dom,String pass){
-		this.cuenta.cambiar_passwd(id,nom_us,nom_dom, pass);
+		this.cuenta.resetear_passwd(id,nom_us,nom_dom, pass);
+	}
+	
+	
+	
+	
+	public void Cambia_Psswd (String nom_us, String nom_dom,String pass){
+		this.cuenta.cambiar_passwd(nom_us,nom_dom, pass);
 	}
 	
 	

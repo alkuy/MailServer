@@ -108,7 +108,7 @@ public class Cuenta {
 	
 
 	
-	/** Método para modificar el passwd de ingreso
+	/** Método para resetear el passwd de ingreso
 	 *@param id identificador del usuario propietario de la cuenta
 	 *@param nom_us nombre de usuario
 	 *@param nom_dom nombre de dominio
@@ -116,7 +116,7 @@ public class Cuenta {
 	* @exception Exception
 	*/
 
-  public void cambiar_passwd(int id, String nom_us, String nom_dom, String passwd) {
+  public void resetear_passwd(int id, String nom_us, String nom_dom, String passwd) {
 	
 	
 	try{
@@ -124,10 +124,25 @@ public class Cuenta {
 		stm.execute("UPDATE Cuenta SET password = '"+passwd+"'" + "where id_usuario = '"+id+"' AND nom_usuario = '"+nom_us+"' AND nom_dominio = '"+nom_dom+"'");
     }
 	catch (Exception e){
-		//System.out.println("no se pudo modificar el passwd");
+	
 	}
 	
   }
+  
+  
+  
+  public void cambiar_passwd(String nom_us, String nom_dom, String passwd) {
+		
+		
+		try{
+			java.sql.Statement stm = pruebaConn.getConexion().createStatement();
+			stm.execute("UPDATE Cuenta SET password = '"+passwd+"'" + "where nom_usuario = '"+nom_us+"' AND nom_dominio = '"+nom_dom+"'");
+	    }
+		catch (Exception e){
+		
+		}
+		
+	  }
 
 
 
