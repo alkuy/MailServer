@@ -31,6 +31,7 @@ import com.icegreen.greenmail.Managers;
 import com.icegreen.greenmail.store.FolderException;
 import com.icegreen.greenmail.store.MailFolder;
 import com.icegreen.greenmail.user.GreenMailUser;
+import com.icegreen.greenmail.smtp.*;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -89,7 +90,7 @@ public class SmtpServ extends Thread{
 	    		UserName = rs.getString("nom_usuario");
 	    		UserDom = rs.getString("nom_dominio");
 	    		UserId = rs.getInt("id_usuario");
-	    		UserPass = FCLogica.ObtenPass(UserName);
+	    		UserPass = rs.getString("password");
 	    		UserAddress = UserName+"@"+UserDom;
 	    		mailServer.setUser(UserAddress, UserName, UserPass);
 	    	}
