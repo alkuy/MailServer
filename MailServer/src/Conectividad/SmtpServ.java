@@ -24,6 +24,7 @@ import javax.swing.table.DefaultTableModel;
 import com.icegreen.greenmail.user.UserException;
 import com.icegreen.greenmail.user.UserManager;
 import com.icegreen.greenmail.util.GreenMail;
+import com.icegreen.greenmail.util.ServerSetup;
 import com.icegreen.greenmail.util.ServerSetupTest;
 import com.sun.mail.smtp.SMTPTransport;
 import com.dumbster.smtp.SmtpMessage;
@@ -69,7 +70,8 @@ public class SmtpServ extends Thread{
 	 
 	    //@Before
 	    public void setUp() throws SQLException {
-	        mailServer = new GreenMail(ServerSetupTest.SMTP);
+	    	ServerSetup setup = new ServerSetup(3025, "localhost", "smtp");
+	        mailServer = new GreenMail(setup);
 	        mailServer.start();
 	        cargaCuenta();
 	    }

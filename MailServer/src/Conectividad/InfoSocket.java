@@ -43,6 +43,8 @@ public class InfoSocket extends Thread {
 					((HiloLoginSocket) new HiloLoginSocket(socket, IdSession)).start();
 				else if (mensaje.compareToIgnoreCase("Old") == 0)
 					((HiloCAntiguoSocket) new HiloCAntiguoSocket(socket, IdSession)).start();
+				else if (mensaje.compareToIgnoreCase("Pass") == 0)
+					((HiloCambioPassSocket) new HiloCambioPassSocket(socket, IdSession)).start();
 				else
 					((HiloUsuSocket) new HiloUsuSocket(socket, IdSession)).start();
 				IdSession++;
