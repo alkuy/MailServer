@@ -621,12 +621,44 @@ public class FachadaBD {
 		return rs;
 	}
 	
-
+/**
+ * Metodo para cambiar password admin
+ * @param id
+ * @param passwd
+ */
 	public void cambiaPassAdmin(int id, String passwd){
 		Usuario user = new Usuario();
 		user.cambiar_passwd(id, passwd);
 	}
 	
+	/**
+	 * Metodo para traer oficina
+	 * @param id
+	 * @return
+	 * @throws SQLException
+	 */
+	public java.sql.ResultSet TraeOficina(int id) throws SQLException{
+		Usuario user = new Usuario();
+		java.sql.ResultSet rs;
+		rs =user.TraeOficina(id);
+		return rs;
+	}
+	
+	/**
+	 * Metodo para habilitar o deshabilitar Oficina o grupo
+	 * @param id
+	 * @param habilita
+	 */
+	public void habilitaOficina(int id, boolean habilita){
+		Cuenta c = new Cuenta();
+		c.habilitar_cuenta(id, habilita);
+	}
+	
+	
+	public void ResetPassOfi(int id){
+		Cuenta c = new Cuenta();
+		c.ResetearPassOficina(id);
+	}
 
 }// fin clase FachadaBD
 

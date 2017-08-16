@@ -125,4 +125,8 @@ public class Cuenta {
 		this.nom_u = null;
 	}
 	
+	public void ResetPassOfi(int id){
+		BD.ResetPassOfi(id);
+	}
+	
 }

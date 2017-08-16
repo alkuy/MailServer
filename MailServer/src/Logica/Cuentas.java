@@ -266,4 +266,26 @@ public class Cuentas {
 		return false;
 	}
 	
+	public void habilitaOficina(int id, boolean habilita)throws SQLException{
+		BD.habilitaOficina(id, habilita);
+	}
+	
+	
+	/**
+	 * Se fija si la cuenta de Oficina esta Habilitada
+	 * @param id
+	 * @return
+	 * @throws SQLException
+	 */
+	public boolean estaHabilitadaOf(int id)throws SQLException{
+		ResultSet rs = null;
+		rs = BD.ConTablaCuentaID(id);
+		boolean esta = false;
+		while(rs.next()){
+			esta = rs.getBoolean("habilitada");
+		}
+		return esta;
+		
+	}
+	
 }

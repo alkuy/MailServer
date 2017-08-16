@@ -130,8 +130,9 @@ public class Usuarios {
 	
 	/** Carga la tabla con la cédula y el nombre del usuario 
 	 * @return TableModel
+	 * @throws SQLException 
 	 */
-	public DefaultTableModel DevTablaUsuario(){
+	public DefaultTableModel DevTablaUsuario() throws SQLException{
 		String col[] = {"Cédula","Nombre", "Habilitado"};
 		DefaultTableModel modelo = new DefaultTableModel(col,0);
 		
@@ -142,10 +143,16 @@ public class Usuarios {
 			usu = eUsu.nextElement();
 			boolean hab = usu.getHabilitado();
 			String habi = String.valueOf(hab);
-				
+			//System.out.println(usu.getCi());
+			/*if(usu.getCi().equals(" ")){ //Para que no imprima usuario de grupo u oficina
+				System.out.println("Entra");
+			}*/
 			String carga [] = {usu.getCi(), usu.getNombre()+" "+usu.getApellido(), habi};
-			if(usu.getPass_admin().equals("null")){
-				modelo.addRow(carga);
+			
+			if(usu.getPass_admin().equals("null")){ // para que no traiga los usuarios administradores
+				if(!carga[1].equals("null null")){ //Para evitar que imprima usuarios de Grupo u Oficina	
+					modelo.addRow(carga);
+				}
 			}
 		}
 		
@@ -200,5 +207,40 @@ public class Usuarios {
 		
 	}
 	
+	/**
+	 * Comprueba con el id de usuario si es una oficina
+	 * @param id
+	 * @return Devuelve true si es oficina
+	 * @throws SQLException
+	 */
+	public boolean esOficina(int id) throws SQLException{
+		ResultSet rs = null;
+		rs = BD.TraeOficina(id);
+		if (rs.next()){
+			return true;
+		}
+		return false;
+		
+		
+	}
 	
+	/**
+	 * Proporciona el nombre del grupo u oficina a travez del id
+	 * @param id
+	 * @return
+	 * @throws SQLException
+	 */
+	public String nombreOficina(int id)throws SQLException{
+		ResultSet rs = null;
+		rs = BD.TraeOficina(id);
+		String of="";
+		while(rs.next()){
+			of = rs.getString("nombre");
+		}
+		return of;
+	}
+	
+	
+	
+
 }

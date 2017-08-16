@@ -138,9 +138,10 @@ public class Fachada {
 		cuenta.setIdUsuario(id);
 		cuenta.setNomU(nomU);
 		cuenta.setDominio(dominio);
-		Calendar fecha = Calendar.getInstance();
+		/*Calendar fecha = Calendar.getInstance();
 		int anio = fecha.get(Calendar.YEAR);
-		cuenta.setContraseña_cuenta(dominio+anio);
+		cuenta.setContraseña_cuenta(dominio+anio);*/
+		cuenta.setContraseña_cuenta("1234");
 		cuenta.setEs_lista(0);		
 		cuentas.Insertar(cuenta);
 		cuenta.LimpiaCuenta();
@@ -380,6 +381,60 @@ public void altaDominio(String dominio, int prioridad){
  		Usuario user = new Usuario();
  		user.cambiaPassAdmin(id, pass);
  	}
+ 	
+ 	/**
+ 	 * Comprueba si el id dado pertenece a un grupo u oficina
+ 	 * @param id
+ 	 * @return true si es Oficina
+ 	 * @throws SQLException
+ 	 */
+ 	public boolean esOficina(int id) throws SQLException{
+ 		Usuarios user = new Usuarios();
+ 		boolean es = user.esOficina(id);
+ 		return es;
+ 	}
+ 	
+ 	/**
+ 	 * Traer el nombre de la oficina
+ 	 * @param id
+ 	 * @return
+ 	 * @throws SQLException
+ 	 */
+ 	public String nomOficina(int id)throws SQLException{
+ 		Usuarios user = new Usuarios();
+ 		String of = user.nombreOficina(id);
+ 		return of;
+ 	}
+ 	
+ 	/**
+ 	 * Habilitar o deshabilitar oficina
+ 	 * @param id
+ 	 * @param habilita
+ 	 * @throws SQLException
+ 	 */
+ 	public void habilitaOficina(int id, boolean habilita)throws SQLException{
+ 		Cuentas c = new Cuentas();
+ 		c.habilitaOficina(id, habilita);
+ 	}
+ 	
+ 	/**
+ 	 * Saber si una cuenta de grupo esta habilitada
+ 	 * @param id
+ 	 * @return
+ 	 * @throws SQLException
+ 	 */
+ 	public boolean OfEstaHabilitada(int id)throws SQLException{
+ 		Cuentas c = new Cuentas();
+ 		boolean esta = c.estaHabilitadaOf(id);
+		return esta;
+ 		
+ 	}
+ 	
+ 	public void resetPassOfi(int id){
+ 		Cuenta c = new Cuenta();
+ 		c.ResetPassOfi(id);
+ 	}
+ 	
  }
 	 
  

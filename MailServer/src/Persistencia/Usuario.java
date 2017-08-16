@@ -169,7 +169,14 @@ public class Usuario {
 		
 	     }
    
-  
+   public java.sql.ResultSet TraeOficina(int id) throws SQLException{
+		
+		  String seleccion = "Select * from Oficina where id_usuario ='"+id+"'";		
+		  java.sql.Statement ps = pruebaConn.getConexion().createStatement();
+		  java.sql.ResultSet rs = ps.executeQuery(seleccion);	
+		  return rs;
+		
+	     }
 	
 	
 }// fin clase Usuario

@@ -165,6 +165,16 @@ public class Cuenta {
      }catch (Exception e){}
 	
     }
+    
+    
+    public void ResetearPassOficina(int id){
+    	 try{
+    			java.sql.Statement stm = pruebaConn.getConexion().createStatement();
+    			stm.execute("UPDATE Cuenta SET password = '1234' where id_usuario = '"+id+"';");
+    	     }catch (Exception e){}
+    		
+    }
+	
 
 	
 }// fin clase Cuenta

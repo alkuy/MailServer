@@ -142,14 +142,15 @@ public class FrmNuevaCuenta extends JInternalFrame {
 		
 		rdbtnGrupoUOficina.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				txtCNdocumento.setEditable(false);
+				
+					txtCNdocumento.setEnabled(false);
 			}
 		});
 		
 		
 		rdbtnCNpersona.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				txtCNdocumento.setEditable(true);	
+				txtCNdocumento.setEnabled(true);	
 			}
 		});
 
