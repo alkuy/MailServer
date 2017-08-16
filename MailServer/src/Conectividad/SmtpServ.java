@@ -100,7 +100,7 @@ public class SmtpServ extends Thread{
 	    
 	    //Metodo para cargar cada mail que llega al servidor a la base de datos
 	    public void setMailsBD() throws IOException, MessagingException, UserException, InterruptedException, SQLException {
-	    	String NomUsu, NomRecp;
+	    	String NomUsu, NomRecp, DomUsu, DomRecp;
 	    	int UserIdE, UserIdR;   	
 	    	Random rnd = new Random();
 	        
@@ -108,9 +108,13 @@ public class SmtpServ extends Thread{
 	        MimeMessage m = messages[0];
  
 	        NomUsu = m.getFrom()[0].toString().substring(0, m.getFrom()[0].toString().indexOf("@"));
+	        DomUsu = m.getFrom()[0].toString().substring(0, m.getFrom()[0].toString().indexOf("@")+1);
+	        
 			NomRecp = m.getHeader("To")[0].toString().substring(0, m.getHeader("To")[0].toString().indexOf("@"));
-			UserIdE = FCLogica.IdUsuario(NomUsu);
-			UserIdR = FCLogica.IdUsuario(NomRecp);
+			DomRecp = m.getHeader("To")[0].toString().substring(0, m.getHeader("To")[0].toString().indexOf("@")+1);
+			
+			UserIdE = FCLogica.IdUsuario(NomUsu, DomUsu);
+			UserIdR = FCLogica.IdUsuario(NomRecp, DomRecp);
 			
 			FCLogica.CargaCorreoBD(m.getFrom()[0].toString(), UserIdE, m.getHeader("To")[0].toString(), UserIdR, m.getSubject(),  (int)(rnd.nextDouble() * 10000), m.getContent().toString());
 	    }
@@ -140,7 +144,7 @@ public class SmtpServ extends Thread{
 	            message.setSubject(mailSubjet);
 	            message.setText(mailText);
 	            
-	            DestPass = FCLogica.ObtenPass(NomDest);
+	            DestPass = FCLogica.ObtenPass(NomDest, DomDest);
 	            Usuario = mailServer.setUser(mailTo, DomDest, DestPass);
 	            
 	            //Almacenamos los mensaje en memoria para el INBOX de cada usuario
@@ -190,7 +194,7 @@ public class SmtpServ extends Thread{
 	    @Override
 		public void run(){
 
-	    	String NomUsu, NomRecp;
+	    	String NomUsu, NomRecp, DomUsu, DomRecp;
 	    	int UserIdE, UserIdR, cont, aux;   	
 	    	Random rnd = new Random();
 	    	MimeMessage[] messages;
@@ -206,9 +210,13 @@ public class SmtpServ extends Thread{
 		        		try {
 		        			
 		        			NomUsu = m.getFrom()[0].toString().substring(0, m.getFrom()[0].toString().indexOf("@"));
+		        			DomUsu = m.getFrom()[0].toString().substring(0, m.getFrom()[0].toString().indexOf("@")+1);
+		        			
 		        			NomRecp = m.getHeader("To")[0].toString().substring(0, m.getHeader("To")[0].toString().indexOf("@"));
-		        			UserIdE = FCLogica.IdUsuario(NomUsu);
-		        			UserIdR = FCLogica.IdUsuario(NomRecp);
+		        			DomRecp = m.getHeader("To")[0].toString().substring(0, m.getHeader("To")[0].toString().indexOf("@")+1);
+		        		
+		        			UserIdE = FCLogica.IdUsuario(NomUsu, DomUsu);
+		        			UserIdR = FCLogica.IdUsuario(NomRecp, DomRecp);
 		        		
 		        			System.out.println("Nuevo e-mail de " + m.getFrom()[0].toString() + " | " + "Para: " +  m.getHeader("To")[0].toString() + " | " + "Asunto: " +  m.getSubject());
 				

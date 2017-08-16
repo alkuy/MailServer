@@ -77,7 +77,8 @@ public class POP3Serv {
     		UserName = rs.getString("nom_usuario");
     		UserDom = rs.getString("nom_dominio");
     		UserId = rs.getInt("id_usuario");
-    		UserPass = FC.ObtenPass(UserName);
+    		UserPass = rs.getString("password");
+    		//UserPass = FC.ObtenPass(UserName);
     		UserAddress = UserName+"@"+UserDom;
     		POPServer.setUser(UserAddress, UserName, UserPass);
     	}
@@ -122,7 +123,7 @@ public class POP3Serv {
             message.setSubject(mailSubjet);
             message.setText(mailText);
             
-            DestPass = FC.ObtenPass(NomDest);
+            DestPass = FC.ObtenPass(NomDest, DomDest);
             //Usuario = managers.getUserManager().getUser(Usu);
             Usuario = POPServer.setUser(mailTo, Usu, DestPass);
             

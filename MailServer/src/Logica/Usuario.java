@@ -293,14 +293,8 @@ public class Usuario {
 	 * @return Password
 	 */
 	
-	public String ObtenerPass(String Usu) throws SQLException{
-		java.sql.ResultSet rs = BD.Devolver_ci2(Usu);
-		String pass = new String();
-		String CI;
-		rs.next();
-		CI = String.valueOf(rs.getInt(1));
-		int id = BD.Devolver_id(CI);
-		pass = BD.Devolver_passCon(id);
+	public String ObtenerPass(String Usu, String Dom) throws SQLException{
+		String pass = BD.DevPass(Usu, Dom);
 		return pass;
 	}
 	

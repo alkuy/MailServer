@@ -129,4 +129,9 @@ public class Cuenta {
 		BD.ResetPassOfi(id);
 	}
 	
+	public int devuelveIdUsuarioCuenta(String nom, String dom) throws SQLException{
+		int id = BD.devuelveIDUsuarioCuenta(nom, dom);
+		return id;
+	}
+	
 }

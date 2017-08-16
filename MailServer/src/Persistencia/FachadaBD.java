@@ -666,6 +666,32 @@ public class FachadaBD {
 		Cuenta c = new Cuenta();
 		c.ResetearPassOficina(id);
 	}
+	
+	
+	public String DevPass(String user, String dom) throws SQLException{
+		Cuenta c = new Cuenta();
+		java.sql.ResultSet rs;
+		rs = c.Select_Tabla_Cuenta(user, dom);
+		String pass = null;
+		while(rs.next()){
+			pass = rs.getString("password");
+		}
+		
+		return pass;
+		
+	}
+	
+	public int devuelveIDUsuarioCuenta(String nom, String dom) throws SQLException{
+		Cuenta c = new Cuenta();
+		java.sql.ResultSet rs;
+		rs = c.Select_Tabla_Cuenta(nom, dom);
+		int id=0;
+		while(rs.next()){
+			id=rs.getInt("id_usuario");
+		}
+		return id;
+		
+	}
 
 }// fin clase FachadaBD
 

@@ -189,6 +189,17 @@ public class Cuenta {
     	     }catch (Exception e){}
     		
     }
+    
+    public java.sql.ResultSet Select_Tabla_Cuenta (String nom, String dom) throws SQLException{
+    	String seleccion = "Select * from Cuenta where nom_usuario ='"+nom+"' and nom_dominio='"+dom+"'";
+		
+		java.sql.Statement ps = pruebaConn.getConexion().createStatement();
+		java.sql.ResultSet rs = ps.executeQuery(seleccion);
+		return rs;
+    	
+    }
+	
+
 	
 
 	

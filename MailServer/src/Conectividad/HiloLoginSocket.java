@@ -39,7 +39,7 @@ public class HiloLoginSocket extends Thread {
 	private Fachada FC = Fachada.getInstancia();
 	
 	
-	public  HiloLoginSocket(Socket S, int Id){
+	public HiloLoginSocket(Socket S, int Id){
 		this.socket = S;
 		this.IdSession = Id;
 		try {
@@ -65,10 +65,10 @@ public class HiloLoginSocket extends Thread {
 			NomDom = entrada.readUTF();
 			Pass = entrada.readUTF();
 			
-			ID = FC.IdUsuario(NomUsu);
+			ID = FC.IdUsuario(NomUsu, NomDom);
 
 			if (FC.VerificaCuenta(NomUsu, NomDom) && FC.desOhabCuenta(Integer.valueOf(ID), NomUsu, NomDom)){
-				P = FC.ObtenPass(NomUsu);
+				P = FC.ObtenPass(NomUsu, NomDom);
 				if (Pass.compareTo(P) == 0)
 					msg = "Valido";
 				else

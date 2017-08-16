@@ -233,9 +233,9 @@ public void altaDominio(String dominio, int prioridad){
 	 return id;
 	 }
  
- 	public String ObtenPass(String Usu) throws SQLException{
+ 	public String ObtenPass(String Usu, String dom) throws SQLException{
  		Usuario usuario = new Usuario();
- 		String pass = usuario.ObtenerPass(Usu);
+ 		String pass = usuario.ObtenerPass(Usu, dom);
  		return pass;
  	}
  	
@@ -294,8 +294,15 @@ public void altaDominio(String dominio, int prioridad){
  		hUsu.find(id).getCuentas().deshabCuenta(id, nom_us, nom_dom, habilitada);
  	}
  	
- 	public boolean desOhabCuenta(int id, String nom_us, String nom_dom){
- 		return hUsu.find(id).getCuentas().desOhabCuenta(id, nom_us, nom_dom);
+	public boolean desOhabCuenta(int id, String nom_us, String nom_dom) throws SQLException{
+ 		Usuarios u = new Usuarios();
+			if(u.esOficina(id)){
+				Cuentas c = new Cuentas();
+				return c.estaHabilitadaOf(id);
+			}else{
+				return hUsu.find(id).getCuentas().desOhabCuenta(id, nom_us, nom_dom);
+			}
+	
  	}
  	
  	public int pri_Dom(String Dom){
@@ -304,13 +311,9 @@ public void altaDominio(String dominio, int prioridad){
  		return pri;
  	}
  	
-	public int IdUsuario(String NomUsu) throws SQLException{
-		java.sql.ResultSet rs = BD.Devolver_ci2(NomUsu);
-		String CI;
-		rs.next();
-		CI = String.valueOf(rs.getInt(1));
-		int id = BD.Devolver_id(CI);
-		return id;
+ 	public int IdUsuario(String NomUsu, String DomUsu) throws SQLException{
+		Cuenta c = new Cuenta();
+		return c.devuelveIdUsuarioCuenta(NomUsu, DomUsu);
 	}
  	
  	/**
