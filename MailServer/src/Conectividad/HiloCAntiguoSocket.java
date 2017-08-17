@@ -34,17 +34,9 @@ public class HiloCAntiguoSocket extends Thread {
 	private int IdSession;
 	
 	private FachadaBD BD = FachadaBD.getInstancia();
-//	private GreenMail POPServer;
 	Fachada FC = Fachada.getInstancia();
 	
-//    public void setUp() {
-//        POPServer = new GreenMail(ServerSetupTest.POP3);
-//        POPServer.start();
-//    }
-    
-//    public void tearDown() {
-//        POPServer.stop();
-//    }
+
 	
 	public  HiloCAntiguoSocket(Socket S, int Id){
 		this.socket = S;

@@ -126,7 +126,6 @@ public class POP3Serv {
             DestPass = FC.ObtenPass(NomDest, DomDest);
             //Usuario = managers.getUserManager().getUser(Usu);
             Usuario = POPServer.setUser(mailTo, Usu, DestPass);
-            System.out.println(Usuario.getLogin()); 
             
             if (!SeEnvio){
             	//Almacenamos los mensaje en memoria para el INBOX de cada usuario

@@ -34,17 +34,8 @@ public class HiloUsuSocket extends Thread {
 	private int IdSession;
 	
 	private FachadaBD BD = FachadaBD.getInstancia();
-//	private GreenMail POPServer;
 	Fachada FC = Fachada.getInstancia();
 	
-//    public void setUp() {
-//        POPServer = new GreenMail(ServerSetupTest.POP3);
-//        POPServer.start();
-//    }
-    
-//    public void tearDown() {
-//        POPServer.stop();
-//    }
 	
 	public  HiloUsuSocket(Socket S, int Id){
 		this.socket = S;
@@ -55,47 +46,13 @@ public class HiloUsuSocket extends Thread {
 		} catch (Exception e){}
 	}
 	
+
 	public void Desconectar(){
 		try{
 			socket.close();
 		} catch (IOException e){}
 	}
 	
-//    public void getMailsBDUsu(String Usu) throws FolderException, Exception {
-//    	String mailFrom, mailTo, mailSubjet, mailText; 
-//    	String NomEmi, DomEmi, NomDest, DomDest, DestPass;
-//    	java.sql.ResultSet rs = FC.ObtieneCorreosBDUsu(Usu);
-//    	GreenMailUser Usuario;
-//    	Managers managers = new Managers();
-//    	
-//    	while(rs.next()){
-//    		
-//    		NomEmi = rs.getString("nom_usuario_emisor");
-//    		DomEmi = rs.getString("nom_dominio_emisor");
-//    		NomDest = rs.getString("nom_usuario_receptor");
-//    		DomDest = rs.getString("nom_dominio_receptor");
-//    		mailFrom = NomEmi+"@"+DomEmi;
-//    		mailTo = NomDest+"@"+DomDest;
-//    		mailSubjet = rs.getString("asunto");
-//    		mailText = rs.getString("texto");
-//    		
-//    		//Crea un mensaje con JavaMail
-//    		MimeMessage message = new MimeMessage((Session) null);
-//            message.setFrom(new InternetAddress(mailFrom));
-//            message.addRecipient(Message.RecipientType.TO, new InternetAddress(
-//            mailTo));
-//            message.setSubject(mailSubjet);
-//            message.setText(mailText);
-//            
-//            DestPass = FC.ObtenPass(NomDest);
-//            //Usuario = managers.getUserManager().getUser(Usu);
-//            Usuario = POPServer.setUser(Usu, DomDest, DestPass);
-//            
-//            //Almacenamos los mensaje en memoria para el INBOX de cada usuario
-//            //POPServer.getManagers().getImapHostManager().getInbox(Usuario).store(message);
-//            Usuario.deliver(message);
-//    	}
-//    }
 
 	@Override
 	public void run(){

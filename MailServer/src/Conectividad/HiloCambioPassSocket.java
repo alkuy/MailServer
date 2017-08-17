@@ -52,7 +52,7 @@ public class HiloCambioPassSocket extends Thread {
 			
 			
 			if (Signal.equals("OK")){
-				FC.cambiaPassCuenta(NomUsu, DomUsu, OldPass);
+				FC.cambiaPassCuenta(NomUsu, DomUsu, Pass);
 			}else
 				System.out.println("Error en Conexion");
 		}catch (Exception e){}

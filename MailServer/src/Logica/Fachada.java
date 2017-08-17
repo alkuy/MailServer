@@ -283,7 +283,6 @@ public void altaDominio(String dominio, int prioridad){
  		
 		
 		int id = this.IdUsuario(nom_us, nom_dom);
-		System.out.println(id);
  		hUsu.find(id).getCuentas().cambiaPass(nom_us, nom_dom, passNuevo);
  	}
  	
