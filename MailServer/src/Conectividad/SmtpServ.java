@@ -55,6 +55,7 @@ public class SmtpServ extends Thread{
 	 private static SmtpServ instancia;
 	 private int cantMails;
 	 private Fachada FCLogica = Fachada.getInstancia();
+	 private int stop = 0;
 	 
 	//Esta clase utiliza el patron Singleton
 		public static SmtpServ getInstancia() throws SQLException{
@@ -65,20 +66,27 @@ public class SmtpServ extends Thread{
 		}
 		
 		public SmtpServ() throws SQLException{
-			setUp();
+			//setUp();
 		}
 	 
 	    //@Before
 	    public void setUp() throws SQLException {
 	    	ServerSetup setup = new ServerSetup(3025, "localhost", "smtp");
 	        mailServer = new GreenMail(setup);
-	        mailServer.start();
-	        cargaCuenta();
+	        if(this.stop == 0){
+	        	 mailServer.start();
+	 	        cargaCuenta();
+	        }else{
+	        	mailServer.reset();
+	        	cargaCuenta();
+	        	this.stop = 0;
+	        }
 	    }
 	 
 	    //@After
 	    public void tearDown() {
 	        mailServer.stop();
+	        this.stop = 1;
 	    }
 	    
 	    //Esta funcion carga las cuentas de la BD a la API SMTP para que el cliente se pueda autenticar
@@ -155,41 +163,7 @@ public class SmtpServ extends Thread{
 	    	this.cantMails = messages.length;
 	    }
 	    
-//	    public void getMailsBDUsu(String Usu) throws FolderException, Exception {
-//	    	String mailFrom, mailTo, mailSubjet, mailText; 
-//	    	String NomEmi, DomEmi, NomDest, DomDest, DestPass;
-//	    	java.sql.ResultSet rs = FCLogica.ObtieneCorreosBDUsu(Usu);
-//	    	GreenMailUser Usuario;
-//	    	Managers managers = new Managers();
-//	    	
-//	    	while(rs.next()){
-//	    		
-//	    		NomEmi = rs.getString("nom_usuario_emisor");
-//	    		DomEmi = rs.getString("nom_dominio_emisor");
-//	    		NomDest = rs.getString("nom_usuario_receptor");
-//	    		DomDest = rs.getString("nom_dominio_receptor");
-//	    		mailFrom = NomEmi+"@"+DomEmi;
-//	    		mailTo = NomDest+"@"+DomDest;
-//	    		mailSubjet = rs.getString("asunto");
-//	    		mailText = rs.getString("texto");
-//	    		
-//	    		//Crea un mensaje con JavaMail
-//	    		MimeMessage message = new MimeMessage((Session) null);
-//	            message.setFrom(new InternetAddress(mailFrom));
-//	            message.addRecipient(Message.RecipientType.TO, new InternetAddress(
-//	            mailTo));
-//	            message.setSubject(mailSubjet);
-//	            message.setText(mailText);
-//	            
-//	            DestPass = FCLogica.ObtenPass(NomDest);
-//	            //Usuario = managers.getUserManager().getUser(Usu);
-//	            Usuario = mailServer.setUser(Usu, DomDest, DestPass);
-//	            
-//	            //Almacenamos los mensaje en memoria para el INBOX de cada usuario
-//	            mailServer.getManagers().getImapHostManager().getInbox(Usuario).store(message);
-//	            //Usuario.deliver(message);
-//	    	}
-//	    }
+
 	    
 	    @Override
 		public void run(){

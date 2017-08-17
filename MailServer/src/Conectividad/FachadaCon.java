@@ -23,14 +23,15 @@ public class FachadaCon {
 	// Incia el Servicio que escucha en un puerto TCP esperando el mail
 	public void InciaServ() throws SQLException, AddressException, MessagingException, UserException{
 		SmtpServ P = SmtpServ.getInstancia();
-//		P.getMailsBD();
-		P.start();
+		P.setUp();
+		if(!P.isAlive())
+			P.start();
+		
 	}
 	
 	public void DetenerServ() throws SQLException{
 		SmtpServ P = SmtpServ.getInstancia();
 		P.tearDown();
-
 	}
 	
 	public void InciaCli() throws SQLException, IOException, MessagingException, UserException, InterruptedException{
@@ -48,5 +49,15 @@ public class FachadaCon {
 	public void IniSocket() throws SQLException{
 		InfoSocket I = InfoSocket.getInstancia();
 		I.start();
+	}
+	
+	public void IniPOPServ() throws SQLException{
+		POP3Serv T = POP3Serv.getInstancia();
+		T.setUp();
+	}
+	
+	public void DetPOPServ() throws SQLException{
+		POP3Serv T = POP3Serv.getInstancia();
+		T.tearDown();
 	}
 }

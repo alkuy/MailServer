@@ -41,6 +41,7 @@ public class POP3Serv {
 	//private GreenMail mailServer;
 	private static POP3Serv instancia;
 	private GreenMail POPServer;
+	private int stop = 0;
 	Fachada FC = Fachada.getInstancia();
 	
 	//Esta clase utiliza el patron Singleton
@@ -51,19 +52,26 @@ public class POP3Serv {
 	}
 		
 	public POP3Serv() throws SQLException{
-		setUp();
+		//setUp();
 	}
 	
 	//@Before
     public void setUp() throws SQLException {
     	POPServer = new GreenMail(ServerSetupTest.POP3);
-        POPServer.start();
-        this.cargaCuentas();
+        if(this.stop == 0){
+        	 POPServer.start();
+             this.cargaCuentas();
+       }else{
+    	   POPServer.reset();
+    	   this.cargaCuentas();
+       		this.stop = 0;
+       }
     }
  
    //@After
     public void tearDown() {
     	POPServer.stop();
+    	this.stop = 1;
     }
     
     //Esta funcion carga las cuentas de la BD a la API SMTP para que el cliente se pueda autenticar

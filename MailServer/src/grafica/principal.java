@@ -138,7 +138,7 @@ public class principal extends JFrame {
 		JMenuItem mntmAdministradores = new JMenuItem("Administradores");
 		mnConfiguracion.add(mntmAdministradores);
 		
-		JMenuItem mntmPruebaServidor = new JMenuItem("PruebaServidor");
+		JMenuItem mntmPruebaServidor = new JMenuItem("EstadoServ");
 		mntmPruebaServidor.setBorder(null);
 		mntmPruebaServidor.setMaximumSize(new Dimension(145, 56));
 		mntmPruebaServidor.setPreferredSize(new Dimension(145, 24));

@@ -61,38 +61,58 @@ public class FrmPruebaServidor extends JInternalFrame {
 		
 		MessageConsole mc = new MessageConsole(MensajeServ);
 		mc.redirectOut();
-//		mc.redirectErr(Color.RED, null);
-
 		
-		JButton btnInciarServidor = new JButton("Inciar SMTP Serv");
-		btnInciarServidor.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				//FCCon.ComenzarServ();
-				//MensajeServ.append();
-				try {
-					FCCon.InciaServ();
-				} catch (SQLException | MessagingException | UserException e) {
-					// TODO Bloque catch generado automáticamente
-					e.printStackTrace();
-				}
-			}
-		});
-		btnInciarServidor.setBounds(339, 99, 145, 25);
-		getContentPane().add(btnInciarServidor);
-		
-		JButton btnNewButton_1 = new JButton("Detener SMTP Serv");
-		btnNewButton_1.addActionListener(new ActionListener() {
+		JToggleButton SMTP = new JToggleButton("Servicio SMTP");
+		SMTP.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e) {
-				try {
-					FCCon.DetenerServ();
-				} catch (SQLException e1) {
-					// TODO Bloque catch generado automáticamente
-					e1.printStackTrace();
+				if (SMTP.isSelected()){
+					try {
+						FCCon.InciaServ();
+						System.out.println("Servicio STMP Iniciado");
+					} catch (SQLException | MessagingException | UserException e1) {
+						// TODO Bloque catch generado automáticamente
+						e1.printStackTrace();
+					}
+				}else{
+					try {
+						FCCon.DetenerServ();
+						System.out.println("Servicio STMP Detenido");
+					} catch (SQLException e1) {
+						// TODO Bloque catch generado automáticamente
+						e1.printStackTrace();
+					}
 				}
+				
 			}
 		});
-		btnNewButton_1.setBounds(339, 158, 145, 25);
-		getContentPane().add(btnNewButton_1);
+		SMTP.setBounds(339, 89, 145, 25);
+		getContentPane().add(SMTP);
+		
+		JToggleButton POP3 = new JToggleButton("Servicio POP3");
+		POP3.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e) {
+				if (POP3.isSelected()){
+					try {
+						FCCon.IniPOPServ();
+						System.out.println("Servicio POP3 Iniciado");
+					} catch (SQLException e1) {
+						// TODO Bloque catch generado automáticamente
+						e1.printStackTrace();
+					}
+				}else{
+					try {
+						FCCon.DetPOPServ();
+						System.out.println("Servicio POP3 Detenido");
+					} catch (SQLException e1) {
+						// TODO Bloque catch generado automáticamente
+						e1.printStackTrace();
+					}
+				}
+				
+			}
+		});
+		POP3.setBounds(339, 136, 145, 25);
+		getContentPane().add(POP3);
 		
 
 		
