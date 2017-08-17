@@ -85,13 +85,13 @@ public class POP3Serv {
     }
     
     
-    public void getMailsBDUsu(String Usu) throws FolderException, Exception {
+    public void getMailsBDUsu(String Usu, String Dom) throws FolderException, Exception {
     	String mailFrom, mailTo, mailSubjet, mailText; 
     	String NomEmi, DomEmi, NomDest, DomDest, DestPass, fecha;
     	boolean Enviado = true;
     	boolean SeEnvio = false;
     	int IdConv;
-    	java.sql.ResultSet rs = FC.ObtieneCorreosBDUsu(Usu);
+    	java.sql.ResultSet rs = FC.ObtieneCorreosBDUsu(Usu, Dom);
     	GreenMailUser Usuario;
     	Managers managers = new Managers();
     	
@@ -126,6 +126,7 @@ public class POP3Serv {
             DestPass = FC.ObtenPass(NomDest, DomDest);
             //Usuario = managers.getUserManager().getUser(Usu);
             Usuario = POPServer.setUser(mailTo, Usu, DestPass);
+            System.out.println(Usuario.getLogin()); 
             
             if (!SeEnvio){
             	//Almacenamos los mensaje en memoria para el INBOX de cada usuario

@@ -165,8 +165,8 @@ public class Correo {
 		return rs;		
 	}
 	
-	public java.sql.ResultSet ObtenerCorreoDeBaseUsu(String Usu) throws SQLException{
-		java.sql.ResultSet rs = BD.ConTablaCorreoUsu(Usu);
+	public java.sql.ResultSet ObtenerCorreoDeBaseUsu(String Usu, String Dom) throws SQLException{
+		java.sql.ResultSet rs = BD.ConTablaCorreoUsu(Usu, Dom);
 		return rs;		
 	}
 	

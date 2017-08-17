@@ -300,9 +300,9 @@ public class FachadaBD {
 	 * @throws SQLException
 	*/
 	
-	public java.sql.ResultSet ConTablaCorreoUsu(String Usu) throws SQLException{
+	public java.sql.ResultSet ConTablaCorreoUsu(String Usu, String Dom) throws SQLException{
 		java.sql.ResultSet rs;
-		rs = this.correo.Select_tabla_Usuario(Usu);
+		rs = this.correo.Select_tabla_Usuario(Usu, Dom);
 		return rs;
 	}
 	

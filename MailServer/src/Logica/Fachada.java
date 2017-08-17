@@ -342,9 +342,9 @@ public void altaDominio(String dominio, int prioridad){
  		return rs;
  	}
  	
- 	public java.sql.ResultSet ObtieneCorreosBDUsu(String Usu) throws SQLException{
+ 	public java.sql.ResultSet ObtieneCorreosBDUsu(String Usu, String Dom) throws SQLException{
  		Correo C = new Correo("a", 1, "b", 2, "c", 4, false, "e");
- 		java.sql.ResultSet rs = C.ObtenerCorreoDeBaseUsu(Usu);
+ 		java.sql.ResultSet rs = C.ObtenerCorreoDeBaseUsu(Usu, Dom);
  		return rs;
  	}
  	

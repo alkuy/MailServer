@@ -119,9 +119,9 @@ public class Correo{
 	 * @throws SQLException
 	*/
 	
-	public java.sql.ResultSet Select_tabla_Usuario(String Usu) throws SQLException{
+	public java.sql.ResultSet Select_tabla_Usuario(String Usu, String Dom) throws SQLException{
 		
-		String seleccion = "select * from Correo where nom_usuario_receptor = '"+Usu+"'";
+		String seleccion = "select * from Correo where nom_usuario_receptor = '"+Usu+"' and nom_dominio_receptor = '"+Dom+"'";
 		
 		java.sql.Statement ps = pruebaConn.getConexion().createStatement();
 		java.sql.ResultSet rs = ps.executeQuery(seleccion);

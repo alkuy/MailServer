@@ -99,12 +99,13 @@ public class HiloUsuSocket extends Thread {
 
 	@Override
 	public void run(){
-		String NomUsu, Signal, msg;
+		String NomUsu, Signal, msg, DomUsu;
 		
 		try {
 			POP3Serv POP3 = POP3Serv.getInstancia();
 			NomUsu = entrada.readUTF();
-			POP3.getMailsBDUsu(NomUsu);
+			DomUsu = entrada.readUTF();
+			POP3.getMailsBDUsu(NomUsu, DomUsu);
 			msg = "Echo";
 			salida.writeUTF(msg);
 			Signal = entrada.readUTF();

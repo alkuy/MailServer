@@ -108,10 +108,10 @@ public class SmtpServ extends Thread{
 	        MimeMessage m = messages[0];
  
 	        NomUsu = m.getFrom()[0].toString().substring(0, m.getFrom()[0].toString().indexOf("@"));
-	        DomUsu = m.getFrom()[0].toString().substring(0, m.getFrom()[0].toString().indexOf("@")+1);
+	        DomUsu = m.getFrom()[0].toString().substring(m.getFrom()[0].toString().indexOf("@")+1);
 	        
 			NomRecp = m.getHeader("To")[0].toString().substring(0, m.getHeader("To")[0].toString().indexOf("@"));
-			DomRecp = m.getHeader("To")[0].toString().substring(0, m.getHeader("To")[0].toString().indexOf("@")+1);
+			DomRecp = m.getHeader("To")[0].toString().substring(m.getHeader("To")[0].toString().indexOf("@")+1);
 			
 			UserIdE = FCLogica.IdUsuario(NomUsu, DomUsu);
 			UserIdR = FCLogica.IdUsuario(NomRecp, DomRecp);
@@ -210,10 +210,10 @@ public class SmtpServ extends Thread{
 		        		try {
 		        			
 		        			NomUsu = m.getFrom()[0].toString().substring(0, m.getFrom()[0].toString().indexOf("@"));
-		        			DomUsu = m.getFrom()[0].toString().substring(0, m.getFrom()[0].toString().indexOf("@")+1);
+		        			DomUsu = m.getFrom()[0].toString().substring(m.getFrom()[0].toString().indexOf("@")+1);
 		        			
 		        			NomRecp = m.getHeader("To")[0].toString().substring(0, m.getHeader("To")[0].toString().indexOf("@"));
-		        			DomRecp = m.getHeader("To")[0].toString().substring(0, m.getHeader("To")[0].toString().indexOf("@")+1);
+		        			DomRecp = m.getHeader("To")[0].toString().substring(m.getHeader("To")[0].toString().indexOf("@")+1);
 		        		
 		        			UserIdE = FCLogica.IdUsuario(NomUsu, DomUsu);
 		        			UserIdR = FCLogica.IdUsuario(NomRecp, DomRecp);

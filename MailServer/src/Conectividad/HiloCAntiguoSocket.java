@@ -64,12 +64,13 @@ public class HiloCAntiguoSocket extends Thread {
 
 	@Override
 	public void run(){
-		String NomUsu, msg, fecha, Signal;
+		String NomUsu, msg, fecha, Signal, DomUsu;
 		boolean Enviado = false;
 		
 		try {
 			NomUsu = entrada.readUTF();
-			java.sql.ResultSet rs = FC.ObtieneCorreosBDUsu(NomUsu);
+			DomUsu = entrada.readUTF();
+			java.sql.ResultSet rs = FC.ObtieneCorreosBDUsu(NomUsu, DomUsu);
 			
 			while(rs.next()){
 				fecha = rs.getString("fecha");
@@ -84,7 +85,7 @@ public class HiloCAntiguoSocket extends Thread {
 			}
 			
 			POP3Serv POP3 = POP3Serv.getInstancia();
-			POP3.getMailsBDUsu(NomUsu);
+			POP3.getMailsBDUsu(NomUsu, DomUsu);
 			msg = "Echo";
 			salida.writeUTF(msg);
 			Signal = entrada.readUTF();
