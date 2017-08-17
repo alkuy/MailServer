@@ -241,10 +241,17 @@ public class FrmBuscaUsuario extends JInternalFrame {
 
 	        String estado = (String)table.getModel().getValueAt(row, 1);
 	        if ("false".equals(estado)){
-	        	setBackground(Color.GRAY);
-	        }else{
-	        	setBackground(Color.WHITE);
+	        	setBackground(Color.gray);
 	        }
+	        
+	        if (isSelected) {
+	        	Color azulcito = new Color(47,79,79);
+                this.setBackground(azulcito);
+                this.setForeground(Color.white);
+            } else {
+                this.setForeground(Color.black);
+            }
+	       
 	     
 	        return cellComponent;
 	    }

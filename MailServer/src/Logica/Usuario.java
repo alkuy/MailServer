@@ -71,8 +71,8 @@ public class Usuario {
 	public Usuario(int id_usuario, String nombre) {
 		this.id_usuario = id_usuario;
 		this.nombre = nombre;
-		//this.cuentas = new Cuentas(); // No comprendo bien que hacemos aca
-		//this.prefiles = new Perfiles(); // No entiendo para que una coleccion de perfiles dentro de usuario //ADRIAN
+		this.cuentas = new Cuentas();
+		//this.prefiles = new Perfiles(); // No preciso una coleccion de perfiles dentro de usuario //ADRIAN
 		BD.InsertOfi(id_usuario, nombre);
 		//BD.Insert_TPerfil(id_usuario, "usuario"); // VER si lo hacemos asi
 	}
@@ -309,6 +309,7 @@ public class Usuario {
 	public Usuario cargaDesdeBD(int id_usuario, String pass_admin, boolean habilitado) throws SQLException{
 		Usuario usu = new Usuario();
 		ResultSet rs = BD.ConFilaPer(id_usuario);
+		ResultSet rsofi = BD.ConFilaOfi(id_usuario);
 	
 		if(!pass_admin.equals(null)){
 			usu.pass_admin = pass_admin;
@@ -331,15 +332,22 @@ public class Usuario {
 				Cuentas auxCuentas = new Cuentas(usu.id_usuario);
 				usu.cuentas = auxCuentas;
 				
-			}
-			else{
+			}/*else{
 				rs = BD.ConFilaOfi(usu.id_usuario);
 				
 				usu.id_usuario = rs.getInt("id_usuario");
 				usu.nombre = rs.getString("nombre");
-			}
+			}*/
 		}
 		
+		while (rsofi.next()){
+			if(!rsofi.wasNull()){
+				usu.id_usuario = rsofi.getInt("id_usuario");
+				usu.nombre = rsofi.getString("nombre");
+				Cuentas auxCuentas = new Cuentas(usu.id_usuario);
+				usu.cuentas = auxCuentas;
+			}
+		}
 		return usu;
 	}
 	

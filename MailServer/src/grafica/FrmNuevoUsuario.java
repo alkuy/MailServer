@@ -259,7 +259,7 @@ public class FrmNuevoUsuario extends JInternalFrame {
 				if(verifica.existe_cedula(txtUNdocumento)){continua = false; break;}
 				
 				if (!verifica.cant_caracteres(txtUNcalle, 50, 0)){continua = false; break;}
-				if (!verifica.cant_caracteres(txtUNnroPuerta, 4, 0)){continua = false; break;}
+				if (!verifica.cant_caracteres(txtUNnroPuerta, 8, 0)){continua = false; break;}
 				if (!verifica.cant_caracteres(txtUNapto, 4, 0)){continua = false; break;}
 				if (!verifica.cant_caracteres(txtUNtelefono1, 10, 0)){
 					continua = false; break;
