@@ -2,11 +2,6 @@ package Logica;
 
 import java.util.ArrayList;
 
-/** Clase de ejemplo que muestra la sintaxis
- * elemental de un programa en java
- * @author 
- * @version 1.0
-*/ 
 
 public class Perfiles {
 	

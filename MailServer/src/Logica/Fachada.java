@@ -10,8 +10,7 @@ import javax.swing.table.DefaultTableModel;
 
 import Persistencia.FachadaBD;
 
-/** Clase de ejemplo que muestra la sintaxis
- * elemental de un programa en java
+/** Fachada de la capa logica
  * @author 
  * @version 1.0
 */ 
@@ -42,7 +41,18 @@ public class Fachada {
 	public Usuarios gethUsu() {
 		return hUsu;
 	}
-	
+	/**
+	 * Alta al usuario perona con todos ls datos. Inserta en memoria y base
+	 * @param doc
+	 * @param nom
+	 * @param ape
+	 * @param calle
+	 * @param nro_puerta
+	 * @param apto
+	 * @param numTel1
+	 * @param numTel2
+	 * @throws SQLException
+	 */
 	public void altaUsu(String doc, String nom, String ape, String calle, String nro_puerta, String apto, String numTel1, String numTel2) throws SQLException{
 		Usuario usu = new Usuario();
 		int id= usu.InstertaUserDevuelveId(null);
@@ -56,7 +66,13 @@ public class Fachada {
 		
 		hUsu.insert(NU);
 	}
-	
+	/**
+	 * Guarda telefono en memoria
+	 * @param auxTels
+	 * @param idUsu
+	 * @param numTel
+	 * @return
+	 */
 	public Telefonos altaTel(Telefonos auxTels, int idUsu, String numTel){
 //		Telefonos auxTels = new Telefonos();
 		Telefono auxTel = new Telefono(idUsu, numTel);
@@ -66,6 +82,12 @@ public class Fachada {
 		return auxTels;
 	}
 	
+	/**
+	 * Alta del usuario grupo u oficina
+	 * @param nom
+	 * @return id de usuario
+	 * @throws SQLException
+	 */
 	public int altaUsuGrupo(String nom) throws SQLException{
 		Usuario usu = new Usuario();
 		int id= usu.InstertaUserDevuelveId(null);
@@ -159,6 +181,11 @@ public class Fachada {
 		return rs;
 	}
 	
+	/**
+	 * Deuelve tabla con las cuentas
+	 * @return modeltable
+	 * @throws SQLException
+	 */
 	public DefaultTableModel DevCuentasCompleto() throws SQLException{
 		DefaultTableModel modelo;
 		Cuentas cuentas = new Cuentas();
@@ -174,7 +201,19 @@ public class Fachada {
 		return modelo;
 	}
 	
-	
+	/**
+	 * Da el alta a un usuario del tipo administrador en memoria y base
+	 * @param doc
+	 * @param nom
+	 * @param ape
+	 * @param pass_admin
+	 * @param calle
+	 * @param nro_puerta
+	 * @param apto
+	 * @param numTel1
+	 * @param numTel2
+	 * @throws SQLException
+	 */
 	public void altaUsuarioAdmin(String doc, String nom, String ape, String pass_admin, String calle, String nro_puerta, String apto, String numTel1, String numTel2) throws SQLException{
 		Usuario usu = new Usuario();
 		int id= usu.InstertaUserDevuelveId(pass_admin);
@@ -185,12 +224,12 @@ public class Fachada {
 		
 		hUsu.insert(NU);
 	}
-/*	public boolean ExisteUsuario(String cedula){
-		Usuarios usuarios = new Usuarios();
-		ArrayList<Usuario> users = usuarios. 
-		return false;
-	}*/
-	
+
+	/**
+	 * 
+	 * @return
+	 * @throws SQLException
+	 */
 	public DefaultTableModel DevUsuariosCompleto() throws SQLException{
 		DefaultTableModel modelo;
 		Usuarios usuarios = new Usuarios();
@@ -226,6 +265,11 @@ public void altaDominio(String dominio, int prioridad){
 		
 	}
  
+ 	/**
+ 	 * Trae el ide de usuario persona a partir de su cedula
+ 	 * @param cedula
+ 	 * @return id
+ 	 */
  	public int trae_id(String cedula){
 	 int id;
 	 Usuario usuario = new Usuario();
@@ -233,25 +277,55 @@ public void altaDominio(String dominio, int prioridad){
 	 return id;
 	 }
  
+ 	/**
+ 	 * Trae el word de la cuenta a partir del nombre de la cuenta nombre@dominio
+ 	 * @param nombre
+ 	 * @param dominio
+ 	 * @return Password
+ 	 * @throws SQLException
+ 	 */
  	public String ObtenPass(String Usu, String dom) throws SQLException{
  		Usuario usuario = new Usuario();
  		String pass = usuario.ObtenerPass(Usu, dom);
  		return pass;
  	}
  	
+ 	/**
+ 	 * Encuentra usuario en el diccionario a partir del ID de usuario
+ 	 * @param id_usuario
+ 	 * @return
+ 	 */
  	public Usuario findUsu(int id_usuario){
  		return hUsu.find(id_usuario);
  	}
  	
+ 	
  	public int getID(String ci){
  		return hUsu.getID(ci);
  	}
- 	
+ 	/**
+ 	 * Modificacion de usuario
+ 	 * @param id_usuario
+ 	 * @param ci
+ 	 * @param nombre
+ 	 * @param apellido
+ 	 * @param calle
+ 	 * @param nro
+ 	 * @param apto
+ 	 * @param habilitado
+ 	 */
  	public void modifyUsuario(int id_usuario, String ci, String nombre, String apellido, String calle, 
  			String nro, String apto, boolean habilitado){
  		hUsu.modify(id_usuario, ci, nombre, apellido, calle, nro, apto, habilitado);
  	}
  	
+ 	/**
+ 	 * Modificacion del telefono del usuario
+ 	 * @param id_usuario
+ 	 * @param oldTel
+ 	 * @param newTel
+ 	 * @param tel1o2
+ 	 */
  	public void modifyTelUsu(int id_usuario, String oldTel, String newTel, int tel1o2){
 		//Si el nuevo telefono es vacio entonces no se hace nada.
  		if(!newTel.isEmpty()){
@@ -266,19 +340,38 @@ public void altaDominio(String dominio, int prioridad){
 		}
 	}
  	
+ 	/**
+ 	 * Deviuelve telefono del usuario
+ 	 * @param id_usuario
+ 	 * @param x
+ 	 * @return
+ 	 */
  	public String retornarTelx(int id_usuario, int x){
  		Telefonos tels = new Telefonos();
  		tels = hUsu.find(id_usuario).getTels();
  		return tels.retornarTelx(tels.getSetTelefonos(), x);
  	}
  	
+ 	/**
+ 	 * Reseta el password de la cuenta dada
+ 	 * @param id
+ 	 * @param nom_us
+ 	 * @param nom_dom
+ 	 * @param pass
+ 	 */
  	public void resetPassCuenta(int id, String nom_us, String nom_dom, String pass){
  		//System.out.println(id);
  		hUsu.find(id).getCuentas().resetPass(id, nom_us, nom_dom, pass);
  	}
  	
  	
- 	
+ 	/**
+ 	 * Cambia el password de una cuenta dada
+ 	 * @param nom_us
+ 	 * @param nom_dom
+ 	 * @param passNuevo
+ 	 * @throws SQLException
+ 	 */
  	public void cambiaPassCuenta(String nom_us, String nom_dom,String passNuevo) throws SQLException{
  		
 		

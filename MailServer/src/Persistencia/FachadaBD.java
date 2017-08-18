@@ -662,12 +662,25 @@ public class FachadaBD {
 	}
 	
 	
+	/**
+	 * Metodo que resetea el password de un usuario 
+	 * oficina a partir de su id
+	 * @param id
+	 */
 	public void ResetPassOfi(int id){
 		Cuenta c = new Cuenta();
 		c.ResetearPassOficina(id);
 	}
 	
 	
+	/**
+	 * Devuelve el password actual de la cuenta a partir 
+	 * del nombre de la cuenta
+	 * @param user
+	 * @param dom
+	 * @return
+	 * @throws SQLException
+	 */
 	public String DevPass(String user, String dom) throws SQLException{
 		Cuenta c = new Cuenta();
 		java.sql.ResultSet rs;
@@ -681,6 +694,10 @@ public class FachadaBD {
 		
 	}
 	
+	/**
+	 * Deveulve el id de un usuario a partir de un nombre 
+	 * de cuenta
+	 */
 	public int devuelveIDUsuarioCuenta(String nom, String dom) throws SQLException{
 		Cuenta c = new Cuenta();
 		java.sql.ResultSet rs;

@@ -32,16 +32,7 @@ public class Cuenta {
 	 * */
 	public Cuenta(){
 		
-	}
-
-	/** Método constructor de la clase. */
-	/*
-	public Cuenta(String contraseña_cuenta, String dominio, Correos correos) {
-		this.contraseña_cuenta = contraseña_cuenta;
-		this.dominio = dominio;
-		this.correos = new Correos();
-	}*/
-	
+	}	
 	/** Método que retorna la contraseña de la cuenta de usuario.
 	 * @return Contraseña de la cuenta de usuario. */
 	public String getContraseña_cuenta() {
@@ -118,6 +109,9 @@ public class Cuenta {
 	}
 	
 
+	/**
+	 * Vacia los datos del objeto cuenta
+	 */
 	public void LimpiaCuenta(){
 		this.contraseña_cuenta = null;
 		this.dominio = null;
@@ -125,10 +119,22 @@ public class Cuenta {
 		this.nom_u = null;
 	}
 	
+	/**
+	 * Reseteo del passwor de oficina
+	 * Vuelve a ser 1234
+	 * @param id
+	 */
 	public void ResetPassOfi(int id){
 		BD.ResetPassOfi(id);
 	}
 	
+	/**
+	 * Devuelve el id de Usuario a partir del nombre de la cuenta
+	 * @param nom
+	 * @param dom
+	 * @return id de usuario (int)
+	 * @throws SQLException
+	 */
 	public int devuelveIdUsuarioCuenta(String nom, String dom) throws SQLException{
 		int id = BD.devuelveIDUsuarioCuenta(nom, dom);
 		return id;

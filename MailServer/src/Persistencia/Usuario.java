@@ -169,6 +169,13 @@ public class Usuario {
 		
 	     }
    
+   /**
+    * Trae el result Set de los usuarios que son oficina
+    * a partir del id de usuario
+    * @param id
+    * @return
+    * @throws SQLException
+    */
    public java.sql.ResultSet TraeOficina(int id) throws SQLException{
 		
 		  String seleccion = "Select * from Oficina where id_usuario ='"+id+"'";		

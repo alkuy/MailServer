@@ -5,8 +5,7 @@ import java.sql.SQLException;
 import javax.swing.table.DefaultTableModel;
 
 import Persistencia.FachadaBD;
-/** Clase de ejemplo que muestra la sintaxis
- * elemental de un programa en java
+/** Clase para el usuario
  * @author 
  * @version 1.0
 */ 

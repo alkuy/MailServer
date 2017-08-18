@@ -11,14 +11,6 @@ import javax.swing.table.DefaultTableModel;
 
 import Persistencia.FachadaBD;
 
-/** Clase de ejemplo que muestra la sintaxis
- * elemental de un programa en java
- * @author 
- * @version 1.0
- * 
-*/ 
-
-
 public class Cuentas {
 	
 	FachadaBD BD = FachadaBD.getInstancia();
@@ -115,7 +107,11 @@ public class Cuentas {
 		return set;
 		
 	}
-	
+	/**
+	 * Carha el Array list con las cuentas a partir del id de usuario
+	 * @param id_usuario
+	 * @return ArryList
+	 */
 	public ArrayList<Cuenta> cargaCuentasDeUsuariodesdeBD(int id_usuario){
 		ArrayList<Cuenta> set = new ArrayList<Cuenta>();
 		ResultSet rs = null;
@@ -169,6 +165,14 @@ public class Cuentas {
 		return modelo;
 	}
 
+	/**
+	 * Resetea el passwor de cuentas de personas
+	 * Vuelve a ser el numero de documento
+	 * @param id
+	 * @param nom_us
+	 * @param nom_dom
+	 * @param pass
+	 */
 	public void resetPass(int id, String nom_us, String nom_dom, String pass){
 		Iterator<Cuenta> iteCuentas = this.setCuentas.iterator();
 		while(iteCuentas.hasNext()){
@@ -180,6 +184,12 @@ public class Cuentas {
 		}
 	}
 	
+	/**
+	 * Cambia el password de la cuenta en la base y memoria
+	 * @param nom_us
+	 * @param nom_dom
+	 * @param pass
+	 */
 	public void cambiaPass(String nom_us, String nom_dom, String pass){
 		Iterator<Cuenta> iteCuentas = this.setCuentas.iterator();
 		while(iteCuentas.hasNext()){

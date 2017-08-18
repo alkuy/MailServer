@@ -2,18 +2,15 @@ package Logica;
 
 import java.util.Date;
 
-/** Clase de ejemplo que muestra la sintaxis
- * elemental de un programa en java
- * @author 
- * @version 1.0
-*/ 
+
 
 public class Auditoria {
 	
 	private String tipo;
 	private Date fecha;
 	
-	/** Método constructor de la clase. */
+	/**
+	 * Método constructor de la clase auditoria. */
 	public Auditoria(String tipo, Date fecha) {
 		this.tipo = tipo;
 		this.fecha = fecha;

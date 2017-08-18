@@ -13,10 +13,9 @@ import java.util.Calendar;
 import Persistencia.FachadaBD;
 
 
-/** Clase de ejemplo que muestra la sintaxis
- * elemental de un programa en java
- * @author 
- * @version 1.0
+/** Clase Logica Correo
+ *
+ *
 */ 
 
 @SuppressWarnings("unused")
@@ -150,6 +149,10 @@ public class Correo {
 		this.flag_respuesta = flag_respuesta;
 	}
 	
+	/**
+	 * Carga los correos en la base
+	 * @param Correo (objeto)
+	 */
 	public void CargarCorreoEnBase(Correo C){
 		String NomUsu, DomUsu, NomRecp, DomRecp;
 		NomUsu = C.CtaEmisor.substring(0, C.CtaEmisor.indexOf("@"));
@@ -160,22 +163,34 @@ public class Correo {
 		BD.InsertCorreo(NomUsu, DomUsu, NomRecp, DomRecp, C.fecha, C.IdEmisor, C.IdReceptor, C.asunto, C.Texto, C.IdCorreo);	
 	}
 	
+	/**
+	 * Trae los correos desde la base
+	 * @return Recordsest con correos
+	 * @throws SQLException
+	 */
 	public java.sql.ResultSet ObtenerCorreoDeBase() throws SQLException{
 		java.sql.ResultSet rs = BD.ConTablaCorreo();
 		return rs;		
 	}
 	
+	/**
+	 * Trae los correos desde la base
+	 * @return Recordsest con correos
+	 * @throws SQLException
+	 */
 	public java.sql.ResultSet ObtenerCorreoDeBaseUsu(String Usu, String Dom) throws SQLException{
 		java.sql.ResultSet rs = BD.ConTablaCorreoUsu(Usu, Dom);
 		return rs;		
 	}
 	
+	/**
+	 * Trae los correos enviados desde la base
+	 * @return Recordsest con correos
+	 * @throws SQLException
+	 */
 	public void Correo_Enviado(String fecha, boolean Enviado){
 		BD.Set_Enviado(fecha, Enviado);
 	}
 	
-	
-//	No va a contener los set porque en el srv no se van a cambiar los atributos,
-//	que se guarde como borrador va a ser tema del cte.
 
 }

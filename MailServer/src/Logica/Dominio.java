@@ -10,12 +10,6 @@ import javax.swing.table.DefaultTableModel;
 
 import Persistencia.FachadaBD;
 
-/** Clase de ejemplo que muestra la sintaxis
- * elemental de un programa en java
- * @author 
- * @version 1.0
-*/ 
-
 public class Dominio {
 	
 	private String nombre_dominio;
@@ -106,7 +100,11 @@ public class Dominio {
 		
 	}
 	
-	
+	/**
+	 * Tabla con los dominios
+	 * @return modeltable
+	 * @throws SQLException
+	 */
 	public DefaultTableModel DevTablaDom() throws SQLException{
 		
 		JTable tblMDominios;			
@@ -137,6 +135,11 @@ public class Dominio {
 		return modelo;
 	}
 
+	/**
+	 * Trae la prioridad del dominio que le pasemos
+	 * @param Dominio
+	 * @return prioridad (int)
+	 */
 	public int trae_prioridad(String Dominio){
 		java.sql.ResultSet rs;
 		int pri = 0;

@@ -181,7 +181,10 @@ public class Cuenta {
 	
     }
     
-    
+    /**
+     * Resetea el passwor de oficina
+     * @param id
+     */
     public void ResetearPassOficina(int id){
     	 try{
     			java.sql.Statement stm = pruebaConn.getConexion().createStatement();
@@ -189,7 +192,14 @@ public class Cuenta {
     	     }catch (Exception e){}
     		
     }
-    
+   
+    /**
+     * Trae desde cuentras segun nombre de cuenta nombre@dominio
+     * @param nom
+     * @param dom
+     * @return
+     * @throws SQLException
+     */
     public java.sql.ResultSet Select_Tabla_Cuenta (String nom, String dom) throws SQLException{
     	String seleccion = "Select * from Cuenta where nom_usuario ='"+nom+"' and nom_dominio='"+dom+"'";
 		
