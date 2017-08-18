@@ -140,19 +140,16 @@ public class Usuarios {
 		
 		Enumeration<Usuario> eUsu = hUsu.elements();
 		Usuario usu;
-		
+	
 		while(eUsu.hasMoreElements()){
 			usu = eUsu.nextElement();
 			boolean hab = usu.getHabilitado();
 			String habi = String.valueOf(hab);
-			//System.out.println(usu.getCi());
-			/*if(usu.getCi().equals(" ")){ //Para que no imprima usuario de grupo u oficina
-				System.out.println("Entra");
-			}*/
+		
 			String carga [] = {usu.getCi(), usu.getNombre()+" "+usu.getApellido(), habi};
-			
+	
 			if(usu.getPass_admin().equals("null")){ // para que no traiga los usuarios administradores
-				if(!carga[1].equals("null null")){ //Para evitar que imprima usuarios de Grupo u Oficina	
+				if(usu.getCi()!=null){ //Para evitar que imprima usuarios de Grupo u Oficina
 					modelo.addRow(carga);
 				}
 			}
