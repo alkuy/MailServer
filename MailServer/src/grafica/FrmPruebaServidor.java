@@ -30,6 +30,8 @@ import javax.swing.JToggleButton;
 
 public class FrmPruebaServidor extends JInternalFrame {
 	private FachadaCon FCCon = FachadaCon.getInstancia();
+	private static boolean smtp = false;
+	private static boolean pop = false;
 	
 	
 	/**
@@ -69,6 +71,7 @@ public class FrmPruebaServidor extends JInternalFrame {
 					try {
 						FCCon.InciaServ();
 						System.out.println("Servicio STMP Iniciado");
+						smtp = true;
 					} catch (SQLException | MessagingException | UserException e1) {
 						// TODO Bloque catch generado automáticamente
 						e1.printStackTrace();
@@ -77,6 +80,7 @@ public class FrmPruebaServidor extends JInternalFrame {
 					try {
 						FCCon.DetenerServ();
 						System.out.println("Servicio STMP Detenido");
+						smtp = false;
 					} catch (SQLException e1) {
 						// TODO Bloque catch generado automáticamente
 						e1.printStackTrace();
@@ -95,6 +99,7 @@ public class FrmPruebaServidor extends JInternalFrame {
 					try {
 						FCCon.IniPOPServ();
 						System.out.println("Servicio POP3 Iniciado");
+						pop = true;
 					} catch (SQLException e1) {
 						// TODO Bloque catch generado automáticamente
 						e1.printStackTrace();
@@ -103,6 +108,7 @@ public class FrmPruebaServidor extends JInternalFrame {
 					try {
 						FCCon.DetPOPServ();
 						System.out.println("Servicio POP3 Detenido");
+						pop = false;
 					} catch (SQLException e1) {
 						// TODO Bloque catch generado automáticamente
 						e1.printStackTrace();
@@ -115,7 +121,12 @@ public class FrmPruebaServidor extends JInternalFrame {
 		getContentPane().add(POP3);
 		
 
-		
+		if(smtp){
+			SMTP.setSelected(true);
+		}
+		if(pop){
+			POP3.setSelected(true);
+		}
 
 		
 		
